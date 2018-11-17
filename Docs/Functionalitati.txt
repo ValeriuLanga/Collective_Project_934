@@ -3,12 +3,12 @@ Functionalitati:
 	- categoria: chei tubulare, unelte electrice, masurare, consumabile
 	- tipul de folosire: hobby/ profesional
 	- perioada pentru care se poate imprumuta
-	- detalii de primire si stare retur
-	- detalii proprietar
+	- detalii de primire 
+	- detaliile proprietar
 	- review-uri persoane care au mai imprumutat
-	- locatie proprietar (? - pentru afisarea persoanelor mai apropiate)
 	- imagini cu unealta
 	- descriere tehnica: putere, dimensiune etc
+	
 2. Afisare anunturi
 	- posibilitate filtare anunturi pe categorie
 	- posibilitate cautare libera
@@ -16,8 +16,10 @@ Functionalitati:
 	- posibilitate share locatie utilizator (?)
 	- posibilitate afisare harta cu locurile din apropierea utilizatorului (?)
 	- afisare alte unelte ale utilizatorului
+	
 3.Notificari
 	- Notificare email cand o unealta specifica devine disponibila
+	
 4.Inregistrare contact
 	- Inregistare cont pe baza de invitatie
 	- Posibilitate setare locatie pe harta (?)
@@ -25,3 +27,10 @@ Functionalitati:
 	- Adaugare conditii de imprumut
 	- setarea cerintelor de retur al uneltei (curatenie, etc)
 	- Adaugare disponibilitate unealta
+
+5. User	
+	- cum functioneaza ideea de invite? 
+	- locatie proprietar (? - pentru afisarea persoanelor mai apropiate)
+	
+6. Review
+	- stare retur ???
