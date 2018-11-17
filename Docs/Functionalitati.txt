@@ -1,30 +1,27 @@
-Functionalitati: 
-1.Anunt 
-	- categoria: chei tubulare, unelte electrice, masurare, consumabile 
-	- tipul de folosire: hobby/ profesional 
-	- perioada
-pentru care se poate imprumuta 
-	- detalii de primire si stare retur 
-	- detalii proprietar 
-	- review-uri persoane care au mai imprumutat 
-	- locatie proprietar ? (pentru afisarea persoanelor mai apropiate) 
-	- imagini cu unealta 
-	- descriere tehnica: putere, dimensiune
-etc Afisare anunturi 
-	- posibilitate filtare anunturi pe categorie 
-	- posibilitate cautare libera 
-	- posibilitate filtrare dupa disponibilitate 
-	- posibilitate share locatie utilizator ? 
-	- posibilitate afisare harta cu locurile din apropierea utilizatorului ?
-	
-- afisare alte unelte ale utilizatorului 
-2.Notificari 
-	- Notificare email cand o unealta specifica devine disponibila 
-3.Inregistrare contact 
-	- Inregistare cont pe baza de invitatie 
-	- Posibilitate setare locatie pe harta ? 
+Functionalitati:
+1.Anunt
+	- categoria: chei tubulare, unelte electrice, masurare, consumabile
+	- tipul de folosire: hobby/ profesional
+	- perioada pentru care se poate imprumuta
+	- detalii de primire si stare retur
+	- detalii proprietar
+	- review-uri persoane care au mai imprumutat
+	- locatie proprietar (? - pentru afisarea persoanelor mai apropiate)
+	- imagini cu unealta
+	- descriere tehnica: putere, dimensiune etc
+2. Afisare anunturi
+	- posibilitate filtare anunturi pe categorie
+	- posibilitate cautare libera
+	- posibilitate filtrare dupa disponibilitate
+	- posibilitate share locatie utilizator (?)
+	- posibilitate afisare harta cu locurile din apropierea utilizatorului (?)
+	- afisare alte unelte ale utilizatorului
+3.Notificari
+	- Notificare email cand o unealta specifica devine disponibila
+4.Inregistrare contact
+	- Inregistare cont pe baza de invitatie
+	- Posibilitate setare locatie pe harta (?)
 	- Adaugare unelte propuse pentru imprumut
-
-	- Adaugare conditii de imprumut 
-	- setarea cerintelor de retur al uneltei (curatenie, etc) 
+	- Adaugare conditii de imprumut
+	- setarea cerintelor de retur al uneltei (curatenie, etc)
 	- Adaugare disponibilitate unealta
