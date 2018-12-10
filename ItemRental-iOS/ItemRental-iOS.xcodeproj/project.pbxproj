@@ -13,6 +13,7 @@
 		A11DDA7521BEFAB900FEC9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A11DDA7421BEFAB900FEC9F5 /* Assets.xcassets */; };
 		A11DDA7821BEFAB900FEC9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11DDA7621BEFAB900FEC9F5 /* LaunchScreen.storyboard */; };
 		A11DDA8121BF008F00FEC9F5 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11DDA8021BF008F00FEC9F5 /* ItemsViewController.swift */; };
+		A11DDA8421BF054A00FEC9F5 /* Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11DDA8321BF054A00FEC9F5 /* Padding.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A11DDA7721BEFAB900FEC9F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A11DDA7921BEFAB900FEC9F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11DDA8021BF008F00FEC9F5 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
+		A11DDA8321BF054A00FEC9F5 /* Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Padding.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				A11DDA7921BEFAB900FEC9F5 /* Info.plist */,
 				A11DDA7621BEFAB900FEC9F5 /* LaunchScreen.storyboard */,
 				A11DDA7F21BF007700FEC9F5 /* UI */,
+				A11DDA8221BF053F00FEC9F5 /* Utils */,
 				A11DDA6F21BEFAB800FEC9F5 /* ViewController.swift */,
 			);
 			path = "ItemRental-iOS";
@@ -85,6 +88,14 @@
 				A11DDA8021BF008F00FEC9F5 /* ItemsViewController.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		A11DDA8221BF053F00FEC9F5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A11DDA8321BF054A00FEC9F5 /* Padding.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C287C3290FEB8508F916A766 /* Pods */ = {
@@ -218,6 +229,7 @@
 				A11DDA7021BEFAB800FEC9F5 /* ViewController.swift in Sources */,
 				A11DDA8121BF008F00FEC9F5 /* ItemsViewController.swift in Sources */,
 				A11DDA6E21BEFAB800FEC9F5 /* AppDelegate.swift in Sources */,
+				A11DDA8421BF054A00FEC9F5 /* Padding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
