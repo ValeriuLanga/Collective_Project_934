@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>OLX</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="icon" type="image/png" href="/images/icons/icon-72x72.png" />
+  <link rel="stylesheet" type="text/css" href="/styles.css" />
+  <link rel="manifest" href="/manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="OLX">
+  <meta name="msapplication-TileImage" content="/src/images/icons/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#fff">
+  <meta name="theme-color" content="#3f51b5">
+  <style>
+    .App {
+      text-align: center;
+    }
+
+    .App-logo {
+      animation: App-logo-spin infinite 20s linear;
+      height: 80px;
+    }
+
+    .App-header {
+      background-color: #222;
+      height: 150px;
+      padding: 20px;
+      color: #fff;
+    }
+
+    .App-title {
+      font-size: 1.5em;
+    }
+
+    .App-intro {
+      font-size: large;
+    }
+
+    @keyframes App-logo-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(1turn);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="/bundle.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyB5NABy3RXBOf14ZJpngxx7CfhZF3EEvKE",
+      authDomain: "olxapp-1e846.firebaseapp.com",
+      databaseURL: "https://olxapp-1e846.firebaseio.com",
+      projectId: "olxapp-1e846",
+      storageBucket: "",
+      messagingSenderId: "552385731622"
+    };
+    firebase.initializeApp(config);
+
+    let messaging = firebase.messaging();
+
+    // Add the public key generated from the console here.
+    messaging.usePublicVapidKey("BEDz0g6bQEEvbHqcP9sWZlOnc-2CXg-EtIUOFo8_GXLboGmPiG0xkQcMC1A-QIZHAWUCzl3PcgTKOX2S4LkyWSE");
+
+    messaging
+      .requestPermission()
+      .then(function () {
+        console.log("Notification permission granted.");
+        // Retrieve an Instance ID token for use with FCM.
+        return messaging.getToken();
+      }).then(function (token) {
+        // Displaying user token
+        console.log('token >>>> ', token);
+      })
+      .catch(function (err) {
+        console.log("Unable to get permission to notify.", err);
+      });
+
+
+    messaging.onMessage(function (payload) {
+      console.log('onMessage', payload);
+    });
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function (reg) {
+          console.log('Successfully Register :^)', reg);
+
+          reg.pushManager.subscribe({
+            userVisibleOnly: true
+          }).then(function (subscription) {
+            console.log('subscription:', subscription.toJSON());
+            // GCM were used this endpoint
+            console.log('endpoint:', subscription.endpoint);
+          });
+
+        }).catch(function (error) {
+          console.log('SW Registration Failed: :^(', error);
+        });
+
+    }
+    var deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', function (e) {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+
+      showAddToHomeScreen();
+
+    });
+    function addToHomeScreen() {
+      var a2hsBtn = document.querySelector(".ad2hs-prompt");
+
+      // hide our user interface that shows our A2HS button
+      a2hsBtn.style.display = 'none';
+
+      // Show the prompt
+      deferredPrompt.prompt();
+
+      // Wait for the user to respond to the prompt
+      deferredPrompt.userChoice
+        .then(function (choiceResult) {
+
+
+
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+
+          deferredPrompt = null;
+
+        });
+    }
+  </script>
+</body>
+
+</html>
