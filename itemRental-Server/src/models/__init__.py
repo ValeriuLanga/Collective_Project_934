@@ -3,3 +3,6 @@ from flask_bcrypt import Bcrypt
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
+
+from .UserModel import UserModel, UserSchema
+from .LocationModel import LocationModel, LocationSchema

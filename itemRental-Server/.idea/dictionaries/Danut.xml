@@ -3,7 +3,12 @@
     <words>
       <w>bcrypt</w>
       <w>postgresql</w>
+      <w>rentable</w>
+      <w>rentableitem</w>
+      <w>rentableitems</w>
+      <w>reviewitems</w>
       <w>sqlalchemy</w>
+      <w>tablename</w>
     </words>
   </dictionary>
 </component>
