@@ -13,6 +13,7 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     let titleLabel = UILabel()
+    let ownerLabel = UILabel()
     
     // MARK: - Init
     
@@ -30,13 +31,30 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
     
     private func setupUI() {
         backgroundColor = .white
+        layer.cornerRadius = 15
         
+        setupTitleLabel()
+        setupOwnerLabel()
+    }
+    
+    private func setupTitleLabel() {
         titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
         titleLabel.textAlignment = .center
-        
+    
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Padding.p20)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupOwnerLabel() {
+        ownerLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        ownerLabel.textAlignment = .center
+        
+        addSubview(ownerLabel)
+        ownerLabel.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-Padding.p20)
             $0.centerX.equalToSuperview()
         }
     }

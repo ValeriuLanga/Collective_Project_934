@@ -57,5 +57,4 @@ final class ItemDetailsViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
     }
-    
 }

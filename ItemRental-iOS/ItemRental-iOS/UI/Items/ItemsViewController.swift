@@ -17,7 +17,6 @@ final class ItemsViewController: UIViewController {
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-//        layout.itemSize = CGSize(width: 250, height: 250)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
@@ -83,6 +82,7 @@ extension ItemsViewController: UICollectionViewDataSource {
         }
         
         cell.titleLabel.text = viewModel.items[indexPath.item].category
+        cell.ownerLabel.text = viewModel.items[indexPath.item].ownerName
         
         return cell
     }
