@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let viewModel = ItemsViewModel()
-        let vc = ItemsViewController(viewModel: viewModel)
-//        let vc = LoginViewController()
+//        let vc = ItemsViewController(viewModel: viewModel)
+        let vc = LoginViewController()
         
         window?.rootViewController = UINavigationController(rootViewController: vc)
         

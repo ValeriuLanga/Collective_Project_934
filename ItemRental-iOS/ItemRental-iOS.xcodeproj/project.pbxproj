@@ -24,6 +24,7 @@
 		A1C9224421D4F87A00B05352 /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224321D4F87A00B05352 /* ItemManager.swift */; };
 		A1C9224621D4F88400B05352 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224521D4F88400B05352 /* UserManager.swift */; };
 		A1C9224921D4F97A00B05352 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224821D4F97A00B05352 /* LoginViewController.swift */; };
+		A1C9224B21D52B7A00B05352 /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224A21D52B7A00B05352 /* Height.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		A1C9224321D4F87A00B05352 /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
 		A1C9224521D4F88400B05352 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A1C9224821D4F97A00B05352 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		A1C9224A21D52B7A00B05352 /* Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Height.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				A11DDA8321BF054A00FEC9F5 /* Padding.swift */,
+				A1C9224A21D52B7A00B05352 /* Height.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				A1C9223F21D4E8DB00B05352 /* RentableItem.swift in Sources */,
 				A1C9223821D4E7A800B05352 /* User.swift in Sources */,
 				A11DDA8421BF054A00FEC9F5 /* Padding.swift in Sources */,
+				A1C9224B21D52B7A00B05352 /* Height.swift in Sources */,
 				A1C9223521D4E6FD00B05352 /* ItemDetailsViewController.swift in Sources */,
 				A1C9224421D4F87A00B05352 /* ItemManager.swift in Sources */,
 				A1C9223221D4E62D00B05352 /* ItemsViewModel.swift in Sources */,
