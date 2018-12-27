@@ -12,23 +12,12 @@ import SnapKit
 final class ItemsViewController: UIViewController {
     // MARK: - Properties
     
-    var items = [
-                "Item1",
-                "Item2",
-                "Item3",
-                "Item4",
-                "Item5",
-                "Item6",
-                "Item7",
-                "Item8"
-                ]
-    
-    private let cellId = "cellId"
+    private let viewModel: ItemsViewModel
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 180, height: 250)
+//        layout.itemSize = CGSize(width: 250, height: 250)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
@@ -36,6 +25,20 @@ final class ItemsViewController: UIViewController {
         
         return collectionView
     }()
+    
+    private let cellId = "cellId"
+    
+    // MARK: - Init
+    
+    init(viewModel: ItemsViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Base class overrides
     
@@ -54,13 +57,14 @@ final class ItemsViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(ItemsCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.dataSource = self
-        
+        collectionView.delegate = self
+
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().offset(Padding.p20)
+            $0.top.leading.equalTo(view.safeAreaLayoutGuide).offset(Padding.p20)
             $0.bottom.trailing.equalToSuperview().offset(-Padding.p20)
         }
     }
@@ -70,15 +74,28 @@ final class ItemsViewController: UIViewController {
 
 extension ItemsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return viewModel.items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemsCollectionViewCell else {
+            return UICollectionViewCell()
+        }
         
-        cell.backgroundColor = .white
+        cell.titleLabel.text = viewModel.items[indexPath.item].category
         
         return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension ItemsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = viewModel.items[indexPath.item]
+        let itemDetailsViewController = ItemDetailsViewController(item: item)
+        
+        navigationController?.pushViewController(itemDetailsViewController, animated: true)
     }
 }
 
@@ -86,6 +103,6 @@ extension ItemsViewController: UICollectionViewDataSource {
 
 extension ItemsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 200)
+        return CGSize(width: 160, height: 250)
     }
 }

@@ -14,6 +14,13 @@
 		A11DDA7821BEFAB900FEC9F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11DDA7621BEFAB900FEC9F5 /* LaunchScreen.storyboard */; };
 		A11DDA8121BF008F00FEC9F5 /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11DDA8021BF008F00FEC9F5 /* ItemsViewController.swift */; };
 		A11DDA8421BF054A00FEC9F5 /* Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11DDA8321BF054A00FEC9F5 /* Padding.swift */; };
+		A1C9223021D4E50E00B05352 /* ItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9222F21D4E50E00B05352 /* ItemsCollectionViewCell.swift */; };
+		A1C9223221D4E62D00B05352 /* ItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9223121D4E62D00B05352 /* ItemsViewModel.swift */; };
+		A1C9223521D4E6FD00B05352 /* ItemDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9223421D4E6FD00B05352 /* ItemDetailsViewController.swift */; };
+		A1C9223821D4E7A800B05352 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9223721D4E7A800B05352 /* User.swift */; };
+		A1C9223A21D4E7F400B05352 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9223921D4E7F400B05352 /* Location.swift */; };
+		A1C9223D21D4E84C00B05352 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9223C21D4E84C00B05352 /* Review.swift */; };
+		A1C9223F21D4E8DB00B05352 /* RentableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9223E21D4E8DB00B05352 /* RentableItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +35,13 @@
 		A11DDA7921BEFAB900FEC9F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A11DDA8021BF008F00FEC9F5 /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		A11DDA8321BF054A00FEC9F5 /* Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Padding.swift; sourceTree = "<group>"; };
+		A1C9222F21D4E50E00B05352 /* ItemsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1C9223121D4E62D00B05352 /* ItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewModel.swift; sourceTree = "<group>"; };
+		A1C9223421D4E6FD00B05352 /* ItemDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsViewController.swift; sourceTree = "<group>"; };
+		A1C9223721D4E7A800B05352 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A1C9223921D4E7F400B05352 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		A1C9223C21D4E84C00B05352 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		A1C9223E21D4E8DB00B05352 /* RentableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentableItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +85,7 @@
 		A11DDA6C21BEFAB800FEC9F5 /* ItemRental-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A1C9223621D4E79900B05352 /* Business */,
 				A11DDA6D21BEFAB800FEC9F5 /* AppDelegate.swift */,
 				A11DDA7421BEFAB900FEC9F5 /* Assets.xcassets */,
 				A11DDA7921BEFAB900FEC9F5 /* Info.plist */,
@@ -85,7 +100,8 @@
 		A11DDA7F21BF007700FEC9F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A11DDA8021BF008F00FEC9F5 /* ItemsViewController.swift */,
+				A1C9223321D4E6E600B05352 /* ItemDetails */,
+				A1C9222E21D4E4F900B05352 /* Items */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -96,6 +112,43 @@
 				A11DDA8321BF054A00FEC9F5 /* Padding.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		A1C9222E21D4E4F900B05352 /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				A11DDA8021BF008F00FEC9F5 /* ItemsViewController.swift */,
+				A1C9222F21D4E50E00B05352 /* ItemsCollectionViewCell.swift */,
+				A1C9223121D4E62D00B05352 /* ItemsViewModel.swift */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
+		A1C9223321D4E6E600B05352 /* ItemDetails */ = {
+			isa = PBXGroup;
+			children = (
+				A1C9223421D4E6FD00B05352 /* ItemDetailsViewController.swift */,
+			);
+			path = ItemDetails;
+			sourceTree = "<group>";
+		};
+		A1C9223621D4E79900B05352 /* Business */ = {
+			isa = PBXGroup;
+			children = (
+				A1C9223B21D4E81D00B05352 /* DTOs */,
+			);
+			path = Business;
+			sourceTree = "<group>";
+		};
+		A1C9223B21D4E81D00B05352 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				A1C9223721D4E7A800B05352 /* User.swift */,
+				A1C9223921D4E7F400B05352 /* Location.swift */,
+				A1C9223C21D4E84C00B05352 /* Review.swift */,
+				A1C9223E21D4E8DB00B05352 /* RentableItem.swift */,
+			);
+			path = DTOs;
 			sourceTree = "<group>";
 		};
 		C287C3290FEB8508F916A766 /* Pods */ = {
@@ -229,7 +282,14 @@
 				A11DDA7021BEFAB800FEC9F5 /* ViewController.swift in Sources */,
 				A11DDA8121BF008F00FEC9F5 /* ItemsViewController.swift in Sources */,
 				A11DDA6E21BEFAB800FEC9F5 /* AppDelegate.swift in Sources */,
+				A1C9223021D4E50E00B05352 /* ItemsCollectionViewCell.swift in Sources */,
+				A1C9223A21D4E7F400B05352 /* Location.swift in Sources */,
+				A1C9223D21D4E84C00B05352 /* Review.swift in Sources */,
+				A1C9223F21D4E8DB00B05352 /* RentableItem.swift in Sources */,
+				A1C9223821D4E7A800B05352 /* User.swift in Sources */,
 				A11DDA8421BF054A00FEC9F5 /* Padding.swift in Sources */,
+				A1C9223521D4E6FD00B05352 /* ItemDetailsViewController.swift in Sources */,
+				A1C9223221D4E62D00B05352 /* ItemsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
