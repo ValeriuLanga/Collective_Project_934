@@ -43,7 +43,7 @@ final class LoginViewController: UIViewController {
         
         view.addSubview(userTextfield)
         userTextfield.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(-Padding.p40)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p240)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
             $0.height.equalTo(Height.h40)
@@ -98,6 +98,7 @@ final class LoginViewController: UIViewController {
     }
     
     @objc private func registerButtonTapped() {
-        print("register")
+        let registerViewController = RegisterViewController()
+        present(registerViewController, animated: true)
     }
 }

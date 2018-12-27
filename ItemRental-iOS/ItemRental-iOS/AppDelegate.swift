@@ -19,11 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-        let viewModel = ItemsViewModel()
+//        let viewModel = ItemsViewModel()
 //        let vc = ItemsViewController(viewModel: viewModel)
-        let vc = LoginViewController()
+//        window?.rootViewController = UINavigationController(rootViewController: vc)
         
-        window?.rootViewController = UINavigationController(rootViewController: vc)
+        let vc = LoginViewController()
+        window?.rootViewController = vc
         
         return true
     }
