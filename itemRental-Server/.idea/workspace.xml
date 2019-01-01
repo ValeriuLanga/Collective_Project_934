@@ -2,25 +2,71 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="38aeaae2-06bc-40a9-803e-1a71fff9ae97" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Danut.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/Danut.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/LocationModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/LocationModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/RentableItemModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/RentableItemModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/ReviewItemModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/ReviewItemModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/UserModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/UserModel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/LocationView.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/RentableItemView.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RentableItemView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ReviewItemView.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ReviewItemView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/UserView.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserView.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/java/proiectcolectiv/g934/itemrental/LoginActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/java/proiectcolectiv/g934/itemrental/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/java/proiectcolectiv/g934/itemrental/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12b16559-9de1-403a-a21e-682a6aa5d727/storage_v2/_src_/database/item_rental.0POv5g.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12b16559-9de1-403a-a21e-682a6aa5d727/storage_v2/_src_/database/item_rental.0POv5g/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12b16559-9de1-403a-a21e-682a6aa5d727/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/12b16559-9de1-403a-a21e-682a6aa5d727/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2dfaee27-818f-4d9f-9321-24fc9632c8ea/storage_v2/_src_/database/item_rental.0POv5g.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2dfaee27-818f-4d9f-9321-24fc9632c8ea/storage_v2/_src_/database/item_rental.0POv5g/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2dfaee27-818f-4d9f-9321-24fc9632c8ea/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/2dfaee27-818f-4d9f-9321-24fc9632c8ea/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/Danut.0AHsAw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/Danut.0AHsAw/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/blog_api_db.ANwecQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/blog_api_db.ANwecQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/item_rental.0POv5g.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/item_rental.0POv5g/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/44687719-8b74-4bec-8b4a-fd5be83bd320/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/information_schema.FNRwLQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/pg_temp_1.zkWuFg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/pg_toast.33HYYw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/pg_toast_temp_1.5ixBaA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/item_rental.0POv5g/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4a182825-0930-4aeb-b590-0aaace1d7f9a/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/item_rental.0POv5g.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/item_rental.0POv5g/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/information_schema.FNRwLQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/pg_catalog.0S1ZNQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/pg_temp_1.zkWuFg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/pg_toast.33HYYw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/pg_toast_temp_1.5ixBaA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b4b64df-e8b5-4a45-852b-8efe4df926f4/storage_v2/_src_/database/rental.JH1LyA/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/515c1efe-3576-4492-bb90-aa59a73e84b5/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/515c1efe-3576-4492-bb90-aa59a73e84b5/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f770b4fe-e5b8-484c-ac2c-dfcb251086ce/storage_v2/_src_/database/item_rental.0POv5g.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f770b4fe-e5b8-484c-ac2c-dfcb251086ce/storage_v2/_src_/database/item_rental.0POv5g/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f770b4fe-e5b8-484c-ac2c-dfcb251086ce/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/f770b4fe-e5b8-484c-ac2c-dfcb251086ce/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/Danut.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/itemRental-Server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -53,107 +99,28 @@
         <item name="postgres@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="postgres@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="item_rental: database" type="6d9b600a:PostgresImplModel$Database" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="postgres@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="item_rental: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="postgres@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="item_rental: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="postgres@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="item_rental: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="postgres@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="item_rental: database" type="6d9b600a:PostgresImplModel$Database" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
-        <item name="sequences" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
     </expand>
     <select />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1973867457">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="14" />
-          <entry key="project.open.time.0" value="2" />
-          <entry key="project.open.time.1" value="2" />
-          <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.2" value="5" />
-          <entry key="project.open.time.20" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.open.time.8" value="3" />
-          <entry key="project.opened" value="15" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="alembic_version" value="3" />
-          <entry key="blogposts" value="1" />
-          <entry key="location" value="12" />
-          <entry key="py" value="101" />
-          <entry key="rentableitem" value="11" />
-          <entry key="review" value="9" />
-          <entry key="sql" value="13" />
-          <entry key="user" value="9" />
-          <entry key="users" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Database Element" value="46" />
-          <entry key="Python" value="101" />
-          <entry key="Scratch" value="13" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="6143" />
-          <entry key="sql" value="62" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Python" value="6143" />
-          <entry key="Scratch" value="62" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
+            <state relative-caret-position="45">
               <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -166,8 +133,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/UserModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+            <state relative-caret-position="330">
+              <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
               <folding>
                 <element signature="e#0#66#0" expanded="true" />
               </folding>
@@ -178,8 +145,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/UserView.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="23" column="16" lean-forward="true" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+            <state relative-caret-position="285">
+              <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
               <folding>
                 <element signature="e#0#52#0" expanded="true" />
               </folding>
@@ -190,56 +157,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/RentableItemView.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
+            <state relative-caret-position="210">
               <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/location">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/alembic_version">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/review">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/rentableitem">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/user">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -278,16 +200,11 @@
         <option value="$PROJECT_DIR$/src/views/UserView.py" />
         <option value="$PROJECT_DIR$/src/views/RentableItemView.py" />
         <option value="$PROJECT_DIR$/src/models/UserModel.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -338,7 +255,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -397,14 +314,27 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545220449097</updated>
+      <workItem from="1546347430935" duration="646000" />
     </task>
     <servers />
   </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="646000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20067114" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2026862" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Concurrent Activities Diagram" order="0" weight="0.32998565" />
@@ -414,19 +344,19 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Run" order="6" sideWeight="0.49597314" visible="true" weight="0.35744682" />
-      <window_info anchor="bottom" id="TODO" order="7" />
+      <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.4993895" weight="0.32959184" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50402683" side_tool="true" visible="true" weight="0.35744682" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.4993895" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Database Changes" order="10" sideWeight="0.4993895" weight="0.32959184" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50061053" side_tool="true" visible="true" weight="0.32959184" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32907802" />
-      <window_info anchor="bottom" id="Python Console" order="13" weight="0.32624114" />
+      <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.4993895" weight="0.3255102" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" />
-      <window_info active="true" anchor="right" id="Database" order="4" visible="true" weight="0.3409396" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.34065935" />
     </layout>
     <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18993288" />
@@ -457,9 +387,6 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -472,143 +399,42 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/orm/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="109" selection-start-line="109" selection-end-line="109" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/orm/relationships.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="1658" selection-start-line="1658" selection-end-line="1658" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/orm/unitofwork.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/orm/instrumentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6596">
-          <caret line="390" selection-start-line="390" selection-end-line="390" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/flask_sqlalchemy/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="72" selection-start-line="72" selection-end-line="72" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/dialects/postgresql/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="1730" selection-start-line="1730" selection-end-line="1730" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/sql/visitors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/sql/compiler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="244" selection-start-line="244" selection-end-line="244" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/orm/relationships.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/orm/unitofwork.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/orm/instrumentation.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/flask_sqlalchemy/__init__.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/dialects/postgresql/base.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/sql/visitors.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sqlalchemy/sql/compiler.py" />
     <entry file="das://4a182825-0930-4aeb-b590-0aaace1d7f9a/database/item_rental/schema/public/table/user" />
     <entry file="das://4a182825-0930-4aeb-b590-0aaace1d7f9a/database/item_rental/schema/public/table/review" />
     <entry file="das://4a182825-0930-4aeb-b590-0aaace1d7f9a/database/item_rental/schema/public/table/location" />
     <entry file="das://4a182825-0930-4aeb-b590-0aaace1d7f9a/database/item_rental/schema/public/table/rentableitem" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2dfaee27-818f-4d9f-9321-24fc9632c8ea/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/2dfaee27-818f-4d9f-9321-24fc9632c8ea/console.sql" />
     <entry file="das://2dfaee27-818f-4d9f-9321-24fc9632c8ea/database/item_rental/schema/public/table/location" />
     <entry file="das://2dfaee27-818f-4d9f-9321-24fc9632c8ea/database/item_rental/schema/public/table/review" />
     <entry file="das://2dfaee27-818f-4d9f-9321-24fc9632c8ea/database/item_rental/schema/public/table/user" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="1798" selection-start-line="1798" selection-end-line="1798" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/flask/app.py" />
     <entry file="das://2dfaee27-818f-4d9f-9321-24fc9632c8ea/database/item_rental/schema/public/table/rentableitem" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f770b4fe-e5b8-484c-ac2c-dfcb251086ce/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f770b4fe-e5b8-484c-ac2c-dfcb251086ce/console.sql" />
     <entry file="das://f770b4fe-e5b8-484c-ac2c-dfcb251086ce/database/item_rental/schema/public/table/review" />
     <entry file="das://f770b4fe-e5b8-484c-ac2c-dfcb251086ce/database/item_rental/schema/public/table/rentableitem" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/12b16559-9de1-403a-a21e-682a6aa5d727/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/12b16559-9de1-403a-a21e-682a6aa5d727/console.sql" />
     <entry file="das://12b16559-9de1-403a-a21e-682a6aa5d727/database/item_rental/schema/public/table/location" />
     <entry file="das://12b16559-9de1-403a-a21e-682a6aa5d727/database/item_rental/schema/public/table/review" />
     <entry file="das://12b16559-9de1-403a-a21e-682a6aa5d727/database/item_rental/schema/public/table/user" />
     <entry file="das://12b16559-9de1-403a-a21e-682a6aa5d727/database/item_rental/schema/public/table/rentableitem" />
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/blog_api_db/schema/public/table/alembic_version">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/blog_api_db/schema/public/table/blogposts">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/blog_api_db/schema/public/table/users">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_3.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/blog_api_db/schema/public/table/alembic_version" />
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/blog_api_db/schema/public/table/blogposts" />
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/blog_api_db/schema/public/table/users" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console.sql" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_3.sql" />
     <entry file="file://$PROJECT_DIR$/run.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_2.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" selection-start-column="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_1.sql">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/marshmallow/schema.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10744">
-          <caret line="656" selection-start-line="656" selection-end-line="656" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_2.sql" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_1.sql" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/marshmallow/schema.py" />
     <entry file="file://$PROJECT_DIR$/src/models/ReviewItemModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -631,13 +457,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_4.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="14" selection-start-column="14" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/44687719-8b74-4bec-8b4a-fd5be83bd320/console_4.sql" />
     <entry file="file://$PROJECT_DIR$/src/models/RentableItemModel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -667,9 +487,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/user" />
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/review" />
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/rentableitem" />
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/location" />
+    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/alembic_version" />
     <entry file="file://$PROJECT_DIR$/src/models/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
+        <state relative-caret-position="45">
           <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -680,9 +505,29 @@
     <entry file="file://$PROJECT_DIR$/src/views/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/UserModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/UserView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="23" column="16" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/RentableItemView.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
+        <state relative-caret-position="210">
           <caret line="19" column="47" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -690,58 +535,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/UserView.py">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="23" column="16" lean-forward="true" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/UserModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="25" column="18" lean-forward="true" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/review">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/rentableitem">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/location">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://44687719-8b74-4bec-8b4a-fd5be83bd320/database/item_rental/schema/public/table/alembic_version">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
+        <state relative-caret-position="135">
+          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
         </state>
       </provider>
     </entry>
