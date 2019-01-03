@@ -94,7 +94,10 @@ final class LoginViewController: UIViewController {
     }
     
     @objc private func loginButtonTapped() {
-        print("login")
+        let viewModel = ItemsViewModel()
+        let itemsViewController = ItemsViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: itemsViewController)
+        present(navigationController, animated: true)
     }
     
     @objc private func registerButtonTapped() {
