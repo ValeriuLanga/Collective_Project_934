@@ -1,0 +1,278 @@
+{
+	"info": {
+		"_postman_id": "ea02aa83-000c-44f9-bc54-5bb509a2fb5d",
+		"name": "ItemRental",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"admin\",\n\t\"password\": \"parola\",\n\t\"email\": \"danut@\",\n\t\"rating\": \"10\",\n\t\"phone\": \"0753793688\",\n\t\"location\":\n\t\t{\n\t\t\t\"city\": \"piatra neamt\",\n\t\t\t\"street\": \"florilor\",\n\t\t\t\"coordX\": \"11111.11123\",\n\t\t\t\"coordY\": \"112312.1233\"\n\t\t}\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				},
+				"description": "REGISTER USER"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"admin\",\n\t\"password\": \"parola\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/users/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"login"
+					]
+				},
+				"description": "user log in"
+			},
+			"response": []
+		},
+		{
+			"name": "create review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"text\": \"bad choice\",\n\t\"rating\": \"50\",\n\t\"owner_name\": \"admin\",\n\t\"rentableitem_id\": \"1\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/reviews/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"reviews",
+						""
+					]
+				},
+				"description": "create review"
+			},
+			"response": []
+		},
+		{
+			"name": "create a rentable item",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"category\": \"category1\",\n\t\"usage_type\": \"usage1\",\n\t\"receiving_details\": \"details\",\n\t\"item_description\": \"description\",\n\t\"owner_name\": \"admin\",\n\t\"start_date\": \"Dec 22 2018  1:33PM\",\n\t\"end_date\": \"Aug 13 2019  2:33AM\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"rentableitems",
+						""
+					]
+				},
+				"description": "Add rentableitem to db"
+			},
+			"response": []
+		},
+		{
+			"name": "get all rentable items of a user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/users/rentableitems/admin",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"rentableitems",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all reviews of a user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/users/reviews/admin",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"reviews",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all reviews of a rentable item",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/reviews/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"rentableitems",
+						"reviews",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all rentable items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/users/rentableitems/admin",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"rentableitems",
+						"admin"
+					]
+				},
+				"description": "Get all rentable items"
+			},
+			"response": []
+		}
+	]
+}
