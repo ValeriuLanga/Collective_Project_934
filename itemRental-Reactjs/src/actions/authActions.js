@@ -3,9 +3,10 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER, CLEAR_CURRENT_PROFILE } from "./types";
+import {URL_SERVER} from "../utils/constants";
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-  var url = "https://olx-backend.herokuapp.com/users/register";
+  var url = URL_SERVER + "/users";
 
   fetch(url, {
     method: "POST",
@@ -26,7 +27,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
-  var url = "https://olx-backend.herokuapp.com/users/login";
+  var url = URL_SERVER + "/users/login"; // URL
   fetch(url, {
     method: "POST",
     body: JSON.stringify(userData),
