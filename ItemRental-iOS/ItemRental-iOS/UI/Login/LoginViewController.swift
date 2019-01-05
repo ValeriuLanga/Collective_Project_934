@@ -12,6 +12,8 @@ import SnapKit
 final class LoginViewController: UIViewController {
     // MARK: - Properties
     
+    private let userManager = UserManager()
+    
     private let userTextfield = UITextField()
     private let passwordTextfield = UITextField()
     private let loginButton = UIButton()
@@ -93,11 +95,39 @@ final class LoginViewController: UIViewController {
         }
     }
     
-    @objc private func loginButtonTapped() {
+    private func didLogin() {
         let viewModel = ItemsViewModel()
         let itemsViewController = ItemsViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: itemsViewController)
         present(navigationController, animated: true)
+    }
+    
+    private func presentAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true)
+    }
+    
+    @objc private func loginButtonTapped() {
+        let user = userTextfield.text!
+        let password = passwordTextfield.text!
+        
+        guard user != "",
+            password != "" else {
+                presentAlert(message: "All fields must be completed!")
+                return
+        }
+        
+//        userManager.login(user: user, password: password) { [weak self](data, error) in
+//            guard data != nil else {
+//                DispatchQueue.main.async {
+//                    self?.presentAlert(message: "Login failed!")
+//                }
+//                return
+//            }
+//            self?.didLogin()
+//        }
+        didLogin()
     }
     
     @objc private func registerButtonTapped() {

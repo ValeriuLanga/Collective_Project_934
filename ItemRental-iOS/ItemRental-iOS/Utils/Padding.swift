@@ -11,6 +11,7 @@ import UIKit
 struct Padding {
     static let p10: CGFloat = 10
     static let p20: CGFloat = 20
+    static let p30: CGFloat = 30
     static let p40: CGFloat = 40
     static let p240: CGFloat = 240
 }

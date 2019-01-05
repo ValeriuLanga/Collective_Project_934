@@ -17,6 +17,15 @@ final class ItemDetailsViewController: UIViewController {
     private let item: RentableItem
     
     private let ownerLabel = UILabel()
+    private let categoryLabel = UILabel()
+    private let usageTypeLabel = UILabel()
+    private let receivingDetailsLabel = UILabel()
+    private let itemDescriptionLabel = UILabel()
+    private let startDateLabel = UILabel()
+    private let endDateLabel = UILabel()
+    
+    private let rentButton = UIButton()
+    private let reviewButton = UIButton()
     
     // MARK: - Init
     
@@ -44,6 +53,15 @@ final class ItemDetailsViewController: UIViewController {
         view.backgroundColor = .gray
         
         setupOwnerLabel()
+        setupCategoryLabel()
+        setupUsageTypeLabel()
+        setupReceivingDetailsLabel()
+        setupItemDescriptionLabel()
+        setupStartDateLabel()
+        setupEndDateLabel()
+        
+        setupRentButton()
+        setupReviewButton()
     }
     
     private func setupOwnerLabel() {
@@ -56,5 +74,114 @@ final class ItemDetailsViewController: UIViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p20)
             $0.centerX.equalToSuperview()
         }
+    }
+    
+    private func setupCategoryLabel() {
+        categoryLabel.textAlignment = .center
+        categoryLabel.font = UIFont.systemFont(ofSize: 20)
+        categoryLabel.text = item.category
+        
+        view.addSubview(categoryLabel)
+        categoryLabel.snp.makeConstraints {
+            $0.top.equalTo(ownerLabel.snp.bottom).offset(Padding.p40)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+        }
+    }
+    
+    private func setupUsageTypeLabel() {
+        usageTypeLabel.textAlignment = .center
+        usageTypeLabel.font = UIFont.systemFont(ofSize: 20)
+        usageTypeLabel.text = item.usageType
+        
+        view.addSubview(usageTypeLabel)
+        usageTypeLabel.snp.makeConstraints {
+            $0.top.equalTo(categoryLabel.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+        }
+    }
+    
+    private func setupReceivingDetailsLabel() {
+        receivingDetailsLabel.textAlignment = .center
+        receivingDetailsLabel.font = UIFont.systemFont(ofSize: 20)
+        receivingDetailsLabel.text = item.receivingDetails
+        
+        view.addSubview(receivingDetailsLabel)
+        receivingDetailsLabel.snp.makeConstraints {
+            $0.top.equalTo(usageTypeLabel.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+        }
+    }
+    
+    private func setupItemDescriptionLabel() {
+        itemDescriptionLabel.textAlignment = .center
+        itemDescriptionLabel.font = UIFont.systemFont(ofSize: 20)
+        itemDescriptionLabel.text = item.itemDescription
+        
+        view.addSubview(itemDescriptionLabel)
+        itemDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(receivingDetailsLabel.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+        }
+    }
+    
+    private func setupStartDateLabel() {
+        startDateLabel.textAlignment = .center
+        startDateLabel.font = UIFont.systemFont(ofSize: 20)
+        startDateLabel.text = item.startDate
+        
+        view.addSubview(startDateLabel)
+        startDateLabel.snp.makeConstraints {
+            $0.top.equalTo(itemDescriptionLabel.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+        }
+    }
+    
+    private func setupEndDateLabel() {
+        endDateLabel.textAlignment = .center
+        endDateLabel.font = UIFont.systemFont(ofSize: 20)
+        endDateLabel.text = item.endDate
+        
+        view.addSubview(endDateLabel)
+        endDateLabel.snp.makeConstraints {
+            $0.top.equalTo(startDateLabel.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+        }
+    }
+    
+    private func setupRentButton() {
+        rentButton.setTitle("Rent", for: .normal)
+        rentButton.backgroundColor = .orange
+        rentButton.layer.cornerRadius = 10
+        rentButton.addTarget(self, action: #selector(rentButtonTapped), for: .touchUpInside)
+        
+        view.addSubview(rentButton)
+        rentButton.snp.makeConstraints {
+            $0.top.equalTo(endDateLabel.snp.bottom).offset(Padding.p30)
+            $0.leading.equalToSuperview().offset(Padding.p40)
+            $0.trailing.equalToSuperview().offset(-Padding.p40)
+        }
+    }
+    
+    private func setupReviewButton() {
+        reviewButton.setTitle("Review", for: .normal)
+        reviewButton.backgroundColor = .orange
+        reviewButton.layer.cornerRadius = 10
+        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+        
+        view.addSubview(reviewButton)
+        reviewButton.snp.makeConstraints {
+            $0.top.equalTo(rentButton.snp.bottom).offset(Padding.p10)
+            $0.leading.equalToSuperview().offset(Padding.p40)
+            $0.trailing.equalToSuperview().offset(-Padding.p40)
+        }
+    }
+    
+    @objc private func rentButtonTapped() {
+        print("rent")
+    }
+    
+    @objc private func reviewButtonTapped() {
+        let reviewViewController = ReviewViewController()
+        navigationController?.pushViewController(reviewViewController, animated: true)
     }
 }

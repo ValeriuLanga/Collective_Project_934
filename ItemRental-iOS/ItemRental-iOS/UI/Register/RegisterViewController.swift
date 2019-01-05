@@ -12,6 +12,8 @@ import SnapKit
 final class RegisterViewController: UIViewController {
     // MARK: - Properties
     
+    private let userManager = UserManager()
+    
     private let titleLabel = UILabel()
     private let nameTextfield = UITextField()
     private let passwordTextfield = UITextField()
