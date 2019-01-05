@@ -9,7 +9,7 @@
 import Foundation
 
 struct Review {
-//    let postedDate: String
+    let postedDate: String?
     let text: String
     let rating: Int
     let ownerName: String

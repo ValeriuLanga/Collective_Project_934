@@ -15,6 +15,7 @@ final class ItemDetailsViewController: UIViewController {
     // MARK: - Properties
     
     private let item: RentableItem
+    private let reviewManager = ReviewManager()
     
     private let ownerLabel = UILabel()
     private let categoryLabel = UILabel()
@@ -26,6 +27,9 @@ final class ItemDetailsViewController: UIViewController {
     
     private let rentButton = UIButton()
     private let reviewButton = UIButton()
+    
+    private let reviewSection = UITableView()
+    private let cellId = "cellId"
     
     // MARK: - Init
     
@@ -183,5 +187,35 @@ final class ItemDetailsViewController: UIViewController {
     @objc private func reviewButtonTapped() {
         let reviewViewController = ReviewViewController()
         navigationController?.pushViewController(reviewViewController, animated: true)
+    }
+    
+    private func setupReviewSection() {
+        reviewSection.dataSource = self
+        reviewSection.alwaysBounceVertical = true
+        reviewSection.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        reviewSection.backgroundColor = .white
+        
+        view.addSubview(reviewSection)
+        reviewSection.snp.makeConstraints {
+            $0.top.equalTo(reviewButton.snp.bottom).offset(Padding.p30)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+            $0.trailing.equalToSuperview().offset(-Padding.p20)
+        }
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension ItemDetailsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviewManager.reviews.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId) else {
+            return UITableViewCell()
+        }
+        cell.textLabel?.text = reviewManager.reviews[indexPath.row].text
+        return cell
     }
 }

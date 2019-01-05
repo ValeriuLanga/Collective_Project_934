@@ -12,6 +12,7 @@ import SnapKit
 final class ItemsViewController: UIViewController {
     // MARK: - Properties
     
+    private let userName: String
     private let viewModel: ItemsViewModel
     
     private let collectionView: UICollectionView = {
@@ -29,7 +30,8 @@ final class ItemsViewController: UIViewController {
     
     // MARK: - Init
     
-    init(viewModel: ItemsViewModel) {
+    init(userName: String, viewModel: ItemsViewModel) {
+        self.userName = userName
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
@@ -53,6 +55,7 @@ final class ItemsViewController: UIViewController {
         view.backgroundColor = .gray
         
         setupCollectionView()
+        setupAddButton()
     }
     
     private func setupCollectionView() {
@@ -66,6 +69,17 @@ final class ItemsViewController: UIViewController {
             $0.top.leading.equalTo(view.safeAreaLayoutGuide).offset(Padding.p20)
             $0.bottom.trailing.equalToSuperview().offset(-Padding.p20)
         }
+    }
+    
+    private func setupAddButton() {
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
+    }
+    
+    @objc private func addButtonTapped() {
+        let addItemViewController = AddItemViewController()
+        addItemViewController.delegate = self
+        navigationController?.pushViewController(addItemViewController, animated: true)
     }
 }
 
@@ -104,5 +118,14 @@ extension ItemsViewController: UICollectionViewDelegate {
 extension ItemsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 160, height: 250)
+    }
+}
+
+// MARK: - AddItemDelegate
+
+extension ItemsViewController: AddItemDelegate {
+    func didAddItem(_ item: RentableItem) {
+        viewModel.items.append(item)
+        collectionView.reloadData()
     }
 }

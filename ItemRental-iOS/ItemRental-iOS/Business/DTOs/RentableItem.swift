@@ -9,7 +9,7 @@
 import Foundation
 
 struct RentableItem {
-//    let id: Int
+//    let id: Int?
     let category: String
     let usageType: String
     let receivingDetails: String
