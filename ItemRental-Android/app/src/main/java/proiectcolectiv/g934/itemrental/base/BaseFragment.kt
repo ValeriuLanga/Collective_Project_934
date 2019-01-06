@@ -1,7 +1,7 @@
 package proiectcolectiv.g934.itemrental.base
 
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
