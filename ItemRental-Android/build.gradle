@@ -4,6 +4,15 @@ buildscript {
     // Kotlin
     ext.kotlin_version = '1.3.11'
 
+    // AndroidX
+    ext.androidx_version = '1.0.0'
+
+    // Constraint Layout
+    ext.constaint_layout_version = '1.1.3'
+
+    // Material Design
+    ext.material_design_version = '1.0.0'
+
     // Dagger 2
     ext.dagger2_version = '2.15'
 
@@ -11,7 +20,7 @@ buildscript {
     ext.timber_version = '4.7.1'
 
     // Lifecycle & ViewModel
-    ext.lifecycle_version = '1.1.1'
+    ext.lifecycle_version = '2.0.0'
 
     // Retrofit
     ext.retrofit_version = '2.4.0'
