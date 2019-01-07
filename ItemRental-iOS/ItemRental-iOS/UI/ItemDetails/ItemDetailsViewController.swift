@@ -14,6 +14,8 @@ import SnapKit
 final class ItemDetailsViewController: UIViewController {
     // MARK: - Properties
     
+    private let scrollView = UIScrollView()
+    
     private let item: RentableItem
     private let reviewManager = ReviewManager()
     
@@ -56,6 +58,8 @@ final class ItemDetailsViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .gray
         
+        setupScrollView()
+        
         setupOwnerLabel()
         setupCategoryLabel()
         setupUsageTypeLabel()
@@ -66,6 +70,14 @@ final class ItemDetailsViewController: UIViewController {
         
         setupRentButton()
         setupReviewButton()
+    }
+    
+    private func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+            
+        }
     }
     
     private func setupOwnerLabel() {
@@ -193,7 +205,7 @@ final class ItemDetailsViewController: UIViewController {
         reviewSection.dataSource = self
         reviewSection.alwaysBounceVertical = true
         reviewSection.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-        reviewSection.backgroundColor = .white
+        reviewSection.backgroundColor = .blue
         
         view.addSubview(reviewSection)
         reviewSection.snp.makeConstraints {
