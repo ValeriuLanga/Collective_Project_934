@@ -100,14 +100,10 @@ final class LoginViewController: UIViewController {
         let viewModel = ItemsViewModel()
         let itemsViewController = ItemsViewController(userName: user, viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: itemsViewController)
-        present(navigationController, animated: true)
+        DispatchQueue.main.async {
+            self.present(navigationController, animated: true)
+        }
     }
-    
-//    private func presentAlert(message: String) {
-//        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-//        present(alert, animated: true)
-//    }
     
     @objc private func loginButtonTapped() {
         let user = userTextfield.text!
@@ -119,16 +115,15 @@ final class LoginViewController: UIViewController {
                 return
         }
         
-//        userManager.login(user: user, password: password) { [weak self](data, error) in
-//            guard data != nil else {
-//                DispatchQueue.main.async {
-//                    self?.presentAlert(message: "Login failed!")
-//                }
-//                return
-//            }
-//            self?.didLogin()
-//        }
-        didLogin(user: user)
+        userManager.login(user: user, password: password) { [weak self](data, error) in
+            guard data != nil else {
+                DispatchQueue.main.async {
+                    self?.presentAlert(message: "Login failed!")
+                }
+                return
+            }
+            self?.didLogin(user: user)
+        }
     }
     
     @objc private func registerButtonTapped() {

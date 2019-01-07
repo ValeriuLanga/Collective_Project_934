@@ -211,7 +211,41 @@ final class RegisterViewController: UIViewController {
     }
     
     @objc private func registerButtonTapped() {
-        print("register")
+        let name = nameTextfield.text!
+        let password = passwordTextfield.text!
+        let email = emailTextfield.text!
+        let phone = phoneTextfield.text!
+        let city = cityTextfield.text!
+        let street = streetTextfield.text!
+        guard let latitude = Double(latitudeTextfield.text!),
+            let longitude = Double(longitudeTextfield.text!),
+            let rating = Int(ratingTextfield.text!) else {
+                return
+        }
+        
+        
+        guard name != "",
+            password != "",
+            email != "",
+            phone != "",
+            city != "",
+            street != "" else {
+                presentAlert(message: "All fields must be completed!")
+                return
+        }
+    
+        let location = Location(city: city, street: street, latitude: Double(latitude), longitude: Double(longitude))
+        let user = User(name: name, password: password, email: email, rating: rating, phone: phone, location: location)
+        
+        userManager.register(user: user) { [weak self](data, error) in
+            guard data != nil else {
+                DispatchQueue.main.async {
+                    self?.presentAlert(message: "Register failed!")
+                }
+                return
+            }
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc private func cancelButtonTapped() {
