@@ -97,8 +97,10 @@ final class LoginViewController: UIViewController {
     
     // TODO: - Change this once the api is integrated
     private func didLogin(user: String) {
+        UserDefaults.standard.set(user, forKey: "user")
+        
         let viewModel = ItemsViewModel()
-        let itemsViewController = ItemsViewController(userName: user, viewModel: viewModel)
+        let itemsViewController = ItemsViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: itemsViewController)
         DispatchQueue.main.async {
             self.present(navigationController, animated: true)

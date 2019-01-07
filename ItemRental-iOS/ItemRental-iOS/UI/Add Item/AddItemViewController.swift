@@ -17,6 +17,7 @@ final class AddItemViewController: UIViewController {
     // MARK: - Properties
     
     weak var delegate: AddItemDelegate?
+    private let manager = ItemManager()
     
     private let categoryTextfield = UITextField()
     private let usageTypeTextfield = UITextField()
@@ -149,13 +150,28 @@ final class AddItemViewController: UIViewController {
                 receivingDetails != "",
                 itemDescription != "",
                 startDate != "",
-            endDate != "" else {
+                endDate != "" else {
                 presentAlert(message: "All fields must be completed!")
                 return
         }
         
-        let item = RentableItem(category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, ownerName: "owner", startDate: startDate, endDate: endDate)
-        delegate?.didAddItem(item)
-        navigationController?.popViewController(animated: true)
+        guard let userName = UserDefaults.standard.string(forKey: "user") else {
+            return
+        }
+        let item = RentableItem(category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, ownerName: userName, startDate: startDate, endDate: endDate)
+        
+        manager.addItem(item: item) { [weak self](data, error) in
+            guard error == nil else {
+                DispatchQueue.main.async {
+                    self?.presentAlert(message: "Item could not be added!")
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.delegate?.didAddItem(item)
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }

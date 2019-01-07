@@ -60,8 +60,6 @@ struct UserManager {
         request.httpMethod = "POST"
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.httpBody = jsonData
-//        let loginParameters = "name=\(user)&password=\(password)"
-//        request.httpBody = loginParameters.data(using: .utf8)
         
         process(request: request, completion: completion)
     }
@@ -83,12 +81,6 @@ struct UserManager {
             guard response.statusCode == 200 else {
                 print("failed request 2")
                 completion(nil, UserManagerError.failedRequest)
-                return
-            }
-            
-            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
-                print("invalid response aici")
-                completion(nil, UserManagerError.invalidResponse)
                 return
             }
 

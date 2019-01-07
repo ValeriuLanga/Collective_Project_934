@@ -12,7 +12,6 @@ import SnapKit
 final class ItemsViewController: UIViewController {
     // MARK: - Properties
     
-    private let userName: String
     private let viewModel: ItemsViewModel
     
     private let collectionView: UICollectionView = {
@@ -30,11 +29,12 @@ final class ItemsViewController: UIViewController {
     
     // MARK: - Init
     
-    init(userName: String, viewModel: ItemsViewModel) {
-        self.userName = userName
+    init(viewModel: ItemsViewModel) {
         self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
+        
+        self.viewModel.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,6 +56,7 @@ final class ItemsViewController: UIViewController {
         
         setupCollectionView()
         setupAddButton()
+        setupLogoutButton()
     }
     
     private func setupCollectionView() {
@@ -76,10 +77,19 @@ final class ItemsViewController: UIViewController {
         navigationItem.rightBarButtonItem = addButton
     }
     
+    private func setupLogoutButton() {
+        let button = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(logoutButtonTapped))
+        navigationItem.leftBarButtonItem = button
+    }
+    
     @objc private func addButtonTapped() {
         let addItemViewController = AddItemViewController()
         addItemViewController.delegate = self
         navigationController?.pushViewController(addItemViewController, animated: true)
+    }
+    
+    @objc private func logoutButtonTapped() {
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -126,6 +136,14 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
 extension ItemsViewController: AddItemDelegate {
     func didAddItem(_ item: RentableItem) {
         viewModel.items.append(item)
+        collectionView.reloadData()
+    }
+}
+
+// MARK: - ItemsViewDelegate
+
+extension ItemsViewController: ItemsViewDelegate {
+    func didUpdateItems() {
         collectionView.reloadData()
     }
 }
