@@ -95,7 +95,6 @@ final class LoginViewController: UIViewController {
         }
     }
     
-    // TODO: - Change this once the api is integrated
     private func didLogin(user: String) {
         UserDefaults.standard.set(user, forKey: "user")
         
