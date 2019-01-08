@@ -6,4 +6,8 @@
     <string name="button_log_in">LOG IN</string>
     <string name="register_message">Don\'t have an account?</string>
     <string name="welcome_message">Welcome to Item Rental</string>
+
+    <!-- Empty Layout -->
+    <string name="error_retry">Retry</string>
+    <string name="no_results">No results</string>
 </resources>
