@@ -134,9 +134,8 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - AddItemDelegate
 
 extension ItemsViewController: AddItemDelegate {
-    func didAddItem(_ item: RentableItem) {
-        viewModel.items.append(item)
-        collectionView.reloadData()
+    func didAddItem() {
+        viewModel.fetchItems()
     }
 }
 

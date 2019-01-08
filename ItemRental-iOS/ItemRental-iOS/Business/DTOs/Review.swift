@@ -14,4 +14,12 @@ struct Review {
     let rating: Int
     let ownerName: String
     let rentableItemId: Int
+    
+    init(postedDate: String? = nil, text: String, rating: Int, ownerName: String, rentableItemId: Int) {
+        self.postedDate = postedDate
+        self.text = text
+        self.rating = rating
+        self.ownerName = ownerName
+        self.rentableItemId = rentableItemId
+    }
 }

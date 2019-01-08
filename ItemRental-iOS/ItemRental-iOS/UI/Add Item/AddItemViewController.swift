@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol AddItemDelegate: class {
-    func didAddItem(_ item: RentableItem)
+    func didAddItem()
 }
 
 final class AddItemViewController: UIViewController {
@@ -169,7 +169,7 @@ final class AddItemViewController: UIViewController {
             }
             
             DispatchQueue.main.async {
-                self?.delegate?.didAddItem(item)
+                self?.delegate?.didAddItem()
                 self?.navigationController?.popViewController(animated: true)
             }
         }

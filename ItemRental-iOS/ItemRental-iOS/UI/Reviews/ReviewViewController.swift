@@ -9,11 +9,32 @@
 import UIKit
 import SnapKit
 
+protocol PostReviewDelegate: class {
+    func didPost()
+}
+
 final class ReviewViewController: UIViewController {
     // MARK: - Properties
     
+    weak var delegate: PostReviewDelegate?
+    
+    private let item: RentableItem
+    private let manager = ReviewManager()
+    
     private let reviewSection = UITextView()
     private let postButton = UIButton()
+    
+    // MARK: - Init
+    
+    init(item: RentableItem) {
+        self.item = item
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Base class overrides
     
@@ -64,6 +85,26 @@ final class ReviewViewController: UIViewController {
     }
     
     @objc private func postButtonTapped() {
-        print("post")
+        let text = reviewSection.text!
+        
+        guard text != "" else {
+            presentAlert(message: "Review section should contain a proper review!")
+            return
+        }
+        
+        let review = Review(text: text, rating: 0, ownerName: UserDefaults.standard.string(forKey: "user")!, rentableItemId: item.id!)
+        
+        manager.createReview(review: review){ [weak self](data, error) in
+            guard data != nil else {
+                DispatchQueue.main.async {
+                    self?.presentAlert(message: "Review could not be posted!")
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                self?.delegate?.didPost()
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
     }
 }

@@ -25,12 +25,14 @@
 		A1C9224621D4F88400B05352 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224521D4F88400B05352 /* UserManager.swift */; };
 		A1C9224921D4F97A00B05352 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224821D4F97A00B05352 /* LoginViewController.swift */; };
 		A1C9224B21D52B7A00B05352 /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224A21D52B7A00B05352 /* Height.swift */; };
-		A1C9224D21D52CF900B05352 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224C21D52CF900B05352 /* AuthenticationManager.swift */; };
 		A1C9225021D52F8B00B05352 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9224F21D52F8B00B05352 /* RegisterViewController.swift */; };
 		A1C9225321E024BC00B05352 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9225221E024BC00B05352 /* ReviewViewController.swift */; };
 		A1C9225521E0328E00B05352 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9225421E0328E00B05352 /* ReviewManager.swift */; };
 		A1C9225821E0DA5800B05352 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9225721E0DA5800B05352 /* AddItemViewController.swift */; };
 		A1C9225B21E0E07300B05352 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9225A21E0E07300B05352 /* UIViewController+Extensions.swift */; };
+		A1C9225D21E4F3A800B05352 /* ReviewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9225C21E4F3A800B05352 /* ReviewsViewModel.swift */; };
+		A1C9226021E4FF2700B05352 /* ReviewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9225F21E4FF2700B05352 /* ReviewsViewController.swift */; };
+		A1C9226221E50D5900B05352 /* ReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9226121E50D5900B05352 /* ReviewCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,12 +58,14 @@
 		A1C9224521D4F88400B05352 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A1C9224821D4F97A00B05352 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A1C9224A21D52B7A00B05352 /* Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Height.swift; sourceTree = "<group>"; };
-		A1C9224C21D52CF900B05352 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		A1C9224F21D52F8B00B05352 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A1C9225221E024BC00B05352 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		A1C9225421E0328E00B05352 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		A1C9225721E0DA5800B05352 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		A1C9225A21E0E07300B05352 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		A1C9225C21E4F3A800B05352 /* ReviewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewModel.swift; sourceTree = "<group>"; };
+		A1C9225F21E4FF2700B05352 /* ReviewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsViewController.swift; sourceTree = "<group>"; };
+		A1C9226121E50D5900B05352 /* ReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,7 +187,6 @@
 			children = (
 				A1C9224321D4F87A00B05352 /* ItemManager.swift */,
 				A1C9224521D4F88400B05352 /* UserManager.swift */,
-				A1C9224C21D52CF900B05352 /* AuthenticationManager.swift */,
 				A1C9225421E0328E00B05352 /* ReviewManager.swift */,
 			);
 			path = Managers;
@@ -208,7 +211,10 @@
 		A1C9225121E0249500B05352 /* Reviews */ = {
 			isa = PBXGroup;
 			children = (
+				A1C9225C21E4F3A800B05352 /* ReviewsViewModel.swift */,
 				A1C9225221E024BC00B05352 /* ReviewViewController.swift */,
+				A1C9225F21E4FF2700B05352 /* ReviewsViewController.swift */,
+				A1C9226121E50D5900B05352 /* ReviewCollectionViewCell.swift */,
 			);
 			path = Reviews;
 			sourceTree = "<group>";
@@ -358,13 +364,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1C9224921D4F97A00B05352 /* LoginViewController.swift in Sources */,
-				A1C9224D21D52CF900B05352 /* AuthenticationManager.swift in Sources */,
+				A1C9226021E4FF2700B05352 /* ReviewsViewController.swift in Sources */,
 				A11DDA7021BEFAB800FEC9F5 /* ViewController.swift in Sources */,
 				A11DDA8121BF008F00FEC9F5 /* ItemsViewController.swift in Sources */,
 				A1C9225321E024BC00B05352 /* ReviewViewController.swift in Sources */,
 				A1C9225821E0DA5800B05352 /* AddItemViewController.swift in Sources */,
 				A11DDA6E21BEFAB800FEC9F5 /* AppDelegate.swift in Sources */,
 				A1C9224621D4F88400B05352 /* UserManager.swift in Sources */,
+				A1C9225D21E4F3A800B05352 /* ReviewsViewModel.swift in Sources */,
+				A1C9226221E50D5900B05352 /* ReviewCollectionViewCell.swift in Sources */,
 				A1C9223021D4E50E00B05352 /* ItemsCollectionViewCell.swift in Sources */,
 				A1C9223A21D4E7F400B05352 /* Location.swift in Sources */,
 				A1C9225B21E0E07300B05352 /* UIViewController+Extensions.swift in Sources */,

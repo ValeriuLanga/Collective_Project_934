@@ -18,6 +18,7 @@ struct ItemManager {
     // MARK: - Properties
     
     typealias ItemDataCompletion = (Data?, ItemManagerError?) -> Void
+    typealias ReviewDataCompletion = (Data?, ItemManagerError?) -> Void
     
     private let apiURL = "http://127.0.0.1:5000/api/v1/rentableitems"
     
@@ -25,6 +26,18 @@ struct ItemManager {
     
     func getItems(completion: @escaping ItemDataCompletion) {
         let url = URL(string: apiURL)!
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            self.didFetchItems(data: data, response: response, error: error, completion: { (data, error) in
+                DispatchQueue.main.async {
+                    completion(data, error)
+                }
+            })
+        }.resume()
+    }
+    
+    func getReviewsOfItem(id: Int, completion: @escaping ReviewDataCompletion) {
+        let url = URL(string: apiURL + "/reviews/\(id)")!
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             self.didFetchItems(data: data, response: response, error: error, completion: { (data, error) in

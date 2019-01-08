@@ -18,6 +18,8 @@ struct UserManager {
     // MARK: - Properties
     
     typealias UserDataCompletion = (Data?, UserManagerError?) -> Void
+    typealias ItemDataCompletion = (Data?, UserManagerError?) -> Void
+    typealias ReviewDataCompletion = (Data?, UserManagerError?) -> Void
     
     private let apiURL = "http://127.0.0.1:5000/api/v1/users/"
     
@@ -87,5 +89,73 @@ struct UserManager {
             completion(data, nil)
             
             }.resume()
+    }
+    
+    func getItemsOfUser(name: String, completion: @escaping ItemDataCompletion) {
+        let url = URL(string: apiURL + "rentableitems/\(name)")!
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            self.didFetchItems(data: data, response: response, error: error, completion: { (data, error) in
+                DispatchQueue.main.async {
+                    completion(data, error)
+                }
+            })
+        }.resume()
+    }
+    
+    func getReviewsOfUser(name: String, completion: @escaping ReviewDataCompletion) {
+        let url = URL(string: apiURL + "reviews/\(name)")!
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            self.didFetchReviews(data: data, response: response, error: error, completion: { (data, error) in
+                DispatchQueue.main.async {
+                    completion(data, error)
+                }
+            })
+            }.resume()
+    }
+    
+    private func didFetchItems(data: Data?, response: URLResponse?, error: Error?, completion: ItemDataCompletion) {
+        guard error == nil else {
+            print("failed request aici")
+            completion(nil, .failedRequest)
+            return
+        }
+        
+        guard let data = data, let response = response as? HTTPURLResponse else {
+            print("unkown error")
+            completion(nil, .unknown)
+            return
+        }
+        
+        guard response.statusCode == 200 else {
+            print("failed request")
+            completion(nil, .failedRequest)
+            return
+        }
+        
+        completion(data, nil)
+    }
+    
+    private func didFetchReviews(data: Data?, response: URLResponse?, error: Error?, completion: ReviewDataCompletion) {
+        guard error == nil else {
+            print("failed request aici")
+            completion(nil, .failedRequest)
+            return
+        }
+        
+        guard let data = data, let response = response as? HTTPURLResponse else {
+            print("unkown error")
+            completion(nil, .unknown)
+            return
+        }
+        
+        guard response.statusCode == 200 else {
+            print("failed request")
+            completion(nil, .failedRequest)
+            return
+        }
+        
+        completion(data, nil)
     }
 }

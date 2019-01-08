@@ -179,7 +179,7 @@ final class ItemDetailsViewController: UIViewController {
     }
     
     private func setupReviewButton() {
-        reviewButton.setTitle("Review", for: .normal)
+        reviewButton.setTitle("See Reviews", for: .normal)
         reviewButton.backgroundColor = .orange
         reviewButton.layer.cornerRadius = 10
         reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
@@ -197,8 +197,12 @@ final class ItemDetailsViewController: UIViewController {
     }
     
     @objc private func reviewButtonTapped() {
-        let reviewViewController = ReviewViewController()
-        navigationController?.pushViewController(reviewViewController, animated: true)
+        guard let itemId = item.id else {
+            return
+        }
+        let viewModel = ReviewsViewModel(itemId: itemId)
+        let reviewsViewController = ReviewsViewController(item: item, viewModel: viewModel)
+        navigationController?.pushViewController(reviewsViewController, animated: true)
     }
     
     private func setupReviewSection() {
