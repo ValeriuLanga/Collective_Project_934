@@ -78,7 +78,7 @@ class InputAdornments extends React.Component {
                     coordY: -1
                 }
             };
-            let url = URL_SERVER + "/users";
+            let url = URL_SERVER + "/users/";
             console.log(data, url);
             fetch(url, {
                 method: "POST", // or 'PUT'
@@ -108,8 +108,8 @@ class InputAdornments extends React.Component {
                             <h1>Register Here</h1>
                             <form onSubmit={this._handleSubmit}>
                                 <FormControl fullWidth className={classes.margin}>
-                                    <InputLabel htmlFor="adornment-password">
-                                        Full Name
+                                    <InputLabel htmlFor="adornment-username">
+                                        User Name
                                     </InputLabel>
                                     <Input
                                         id="name"

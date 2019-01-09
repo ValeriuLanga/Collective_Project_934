@@ -38,17 +38,22 @@ export const loginUser = userData => dispatch => {
     .then(res => res.json())
     .then(response => {
       // Save to localStorage
-      const { token } = response;
+      // const { token } = response;
       // Set token to ls
-      if (token) {
-        localStorage.setItem("jwtToken", token);
-        // Set token to Auth header
-        setAuthToken(token);
-        // Decode token to get user data
-        const decoded = jwt_decode(token);
-        // Set current user
-        dispatch(setCurrentUser(decoded));
-      }
+      // if (token) {
+      //   localStorage.setItem("jwtToken", token);
+      //   // Set token to Auth header
+      //   setAuthToken(token);
+      //   // Decode token to get user data
+      //   const decoded = jwt_decode(token);
+      //   // Set current user
+      //   dispatch(setCurrentUser(decoded));
+      // }
+
+        const { password } = response;
+        localStorage.setItem("password", password);
+        setAuthToken(password);
+        dispatch(setCurrentUser(password))
     })
     .catch(err => {
       dispatch({
