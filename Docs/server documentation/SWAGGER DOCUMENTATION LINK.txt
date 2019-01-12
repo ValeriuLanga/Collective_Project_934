@@ -1,0 +1,1 @@
+https://app.swaggerhub.com/apis/divig/item_rental/1.0.0#/

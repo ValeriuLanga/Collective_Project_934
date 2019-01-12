@@ -6,7 +6,7 @@ from .views.RentableItemView import rentableitem_api as rentableitem_blueprint
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path='')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost:5432/item_rental'
     bcrypt.init_app(app)
     db.init_app(app)
