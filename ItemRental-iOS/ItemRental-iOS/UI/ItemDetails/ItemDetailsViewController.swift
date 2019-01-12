@@ -14,10 +14,8 @@ import SnapKit
 final class ItemDetailsViewController: UIViewController {
     // MARK: - Properties
     
-    private let scrollView = UIScrollView()
-    
     private let item: RentableItem
-    private let reviewManager = ReviewManager()
+    private let viewModel: ItemsViewModel
     
     private let ownerLabel = UILabel()
     private let categoryLabel = UILabel()
@@ -29,16 +27,30 @@ final class ItemDetailsViewController: UIViewController {
     
     private let rentButton = UIButton()
     private let reviewButton = UIButton()
+    private let otherItemsLabel = UILabel()
     
-    private let reviewSection = UITableView()
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        
+        return collectionView
+    }()
+    
     private let cellId = "cellId"
     
     // MARK: - Init
     
     init(item: RentableItem) {
         self.item = item
+        viewModel = ItemsViewModel(user: item.ownerName)
         
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.delegate = self
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -58,8 +70,6 @@ final class ItemDetailsViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .gray
         
-        setupScrollView()
-        
         setupOwnerLabel()
         setupCategoryLabel()
         setupUsageTypeLabel()
@@ -70,14 +80,8 @@ final class ItemDetailsViewController: UIViewController {
         
         setupRentButton()
         setupReviewButton()
-    }
-    
-    private func setupScrollView() {
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
-            
-        }
+        setupOtherItemsLabel()
+        setupCollectionView()
     }
     
     private func setupOwnerLabel() {
@@ -99,7 +103,7 @@ final class ItemDetailsViewController: UIViewController {
         
         view.addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints {
-            $0.top.equalTo(ownerLabel.snp.bottom).offset(Padding.p40)
+            $0.top.equalTo(ownerLabel.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p20)
         }
     }
@@ -172,9 +176,9 @@ final class ItemDetailsViewController: UIViewController {
         
         view.addSubview(rentButton)
         rentButton.snp.makeConstraints {
-            $0.top.equalTo(endDateLabel.snp.bottom).offset(Padding.p30)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.top.equalTo(endDateLabel.snp.bottom).offset(Padding.p20)
+            $0.width.equalTo(Height.h300)
+            $0.centerX.equalToSuperview()
         }
     }
     
@@ -187,8 +191,37 @@ final class ItemDetailsViewController: UIViewController {
         view.addSubview(reviewButton)
         reviewButton.snp.makeConstraints {
             $0.top.equalTo(rentButton.snp.bottom).offset(Padding.p10)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.width.equalTo(Height.h300)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupOtherItemsLabel() {
+        otherItemsLabel.text = "Other Items from this user"
+        otherItemsLabel.textAlignment = .center
+        otherItemsLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        otherItemsLabel.layer.cornerRadius = 10
+        
+        view.addSubview(otherItemsLabel)
+        otherItemsLabel.snp.makeConstraints {
+            $0.top.equalTo(reviewButton.snp.bottom).offset(Padding.p20)
+            $0.width.equalTo(Height.h300)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupCollectionView() {
+        collectionView.register(ItemsCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+
+        view.addSubview(collectionView)
+        
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(otherItemsLabel.snp.bottom).offset(Padding.p10)
+            $0.leading.equalToSuperview().offset(Padding.p10)
+            $0.trailing.equalToSuperview().offset(-Padding.p10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -204,34 +237,50 @@ final class ItemDetailsViewController: UIViewController {
         let reviewsViewController = ReviewsViewController(item: item, viewModel: viewModel)
         navigationController?.pushViewController(reviewsViewController, animated: true)
     }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension ItemDetailsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel.items.count
+    }
     
-    private func setupReviewSection() {
-        reviewSection.dataSource = self
-        reviewSection.alwaysBounceVertical = true
-        reviewSection.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-        reviewSection.backgroundColor = .blue
-        
-        view.addSubview(reviewSection)
-        reviewSection.snp.makeConstraints {
-            $0.top.equalTo(reviewButton.snp.bottom).offset(Padding.p30)
-            $0.leading.equalToSuperview().offset(Padding.p20)
-            $0.trailing.equalToSuperview().offset(-Padding.p20)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemsCollectionViewCell else {
+            return UICollectionViewCell()
         }
+        
+        cell.titleLabel.text = viewModel.items[indexPath.item].category
+        cell.ownerLabel.text = viewModel.items[indexPath.item].ownerName
+        
+        return cell
     }
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UICollectionViewDelegate
 
-extension ItemDetailsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reviewManager.reviews.count
+extension ItemDetailsViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = viewModel.items[indexPath.item]
+        let itemDetailsViewController = ItemDetailsViewController(item: item)
+        
+        navigationController?.pushViewController(itemDetailsViewController, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellId) else {
-            return UITableViewCell()
-        }
-        cell.textLabel?.text = reviewManager.reviews[indexPath.row].text
-        return cell
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension ItemDetailsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 140, height: 210)
+    }
+}
+
+// MARK: - ItemsViewDelegate
+
+extension ItemDetailsViewController: ItemsViewDelegate {
+    func didUpdateItems() {
+        collectionView.reloadData()
     }
 }

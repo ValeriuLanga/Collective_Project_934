@@ -19,9 +19,14 @@ final class ItemsViewModel {
     weak var delegate: ItemsViewDelegate?
     
     private let itemManager = ItemManager()
+    private let userManager = UserManager()
     
-    init() {
-        fetchItems()
+    init(user: String? = nil) {
+        guard let user = user else {
+            fetchItems()
+            return
+        }
+        fetchItemsOf(user: user)
     }
     
     func fetchItems() {
@@ -32,6 +37,21 @@ final class ItemsViewModel {
                 return
             }
 
+            self.format(data: data)
+            DispatchQueue.main.async {
+                self.delegate?.didUpdateItems()
+            }
+        }
+    }
+    
+    func fetchItemsOf(user: String) {
+        items = []
+        
+        userManager.getItemsOfUser(name: user) { (data, error) in
+            guard let data = data else {
+                return
+            }
+            
             self.format(data: data)
             DispatchQueue.main.async {
                 self.delegate?.didUpdateItems()
