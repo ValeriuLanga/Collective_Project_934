@@ -4,11 +4,12 @@ import {
   POST_AD,
   IS_LOADING,
   GET_ADS,
+  GET_OWN_ADS,
   UPDATE_AD,
   DELETE_AD
 } from "./types";
 
-import { URL_SERVER } from "../utils/constants";
+import { URL_SERVER, USERS, RENTABLE_ITEMS } from "../utils/constants";
 // Register User
 export const postAd = (formData, history) => dispatch => {
   fetch("https://olx-backend.herokuapp.com/ads", {
@@ -35,13 +36,35 @@ export const postAd = (formData, history) => dispatch => {
 
 export const getAds = () => dispatch => {
   dispatch(isLoading());
-  var url = URL_SERVER + "/rentableitems";
+  var url = `${URL_SERVER}/${RENTABLE_ITEMS}`;
   fetch(url)
     .then(res => res.json())
     .then(response => {
       dispatch({
         type: GET_ADS,
-        payload: response['rentableitems']
+        payload: response.rentableitems
+      });
+    })
+    .catch(error => {
+      if (error) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: error
+        });
+      }
+    });
+};
+
+export const getOwnAds = (uname) => dispatch => {
+  console.log("Fetching ads for user", uname);
+  dispatch(isLoading());
+  var url = `${URL_SERVER}/${USERS}/${RENTABLE_ITEMS}/${uname}`;
+  fetch(url)
+    .then(res => res.json())
+    .then(response => {
+      dispatch({
+        type: GET_OWN_ADS,
+        payload: response.rentableitems
       });
     })
     .catch(error => {

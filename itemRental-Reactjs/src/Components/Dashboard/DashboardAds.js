@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
 
 import AddItem from "../Ads/AddItem";
-import { getAds } from "../../actions/ads";
+import { getOwnAds } from "../../actions/ads";
 
 const styles = theme => ({
   root: {
@@ -51,14 +51,13 @@ const styles = theme => ({
 
 class AdsCategory extends React.Component {
   componentDidMount() {
-    this.props.dispatch(getAds());
+    const { user } = this.props;
+    this.props.dispatch(getOwnAds(user));
   }
 
   render() {
     const { ads, classes, user } = this.props;
-    let filteredAds = ads.ads.filter(item => {
-      return user.email === item.email;
-    });
+    let filteredAds = ads.ads;
     let postContent;
     if (ads.isLoading) {
       postContent = (
