@@ -7,6 +7,8 @@ import {
   UPDATE_AD,
   DELETE_AD
 } from "./types";
+
+import { URL_SERVER } from "../utils/constants";
 // Register User
 export const postAd = (formData, history) => dispatch => {
   fetch("https://olx-backend.herokuapp.com/ads", {
@@ -33,7 +35,8 @@ export const postAd = (formData, history) => dispatch => {
 
 export const getAds = () => dispatch => {
   dispatch(isLoading());
-  fetch("https://olx-backend.herokuapp.com/ads")
+  var url = URL_SERVER + "/rentableitems";
+  fetch(url)
     .then(res => res.json())
     .then(response => {
       dispatch({

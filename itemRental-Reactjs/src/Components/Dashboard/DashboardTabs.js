@@ -28,12 +28,11 @@ export default class IconLabelTabs extends React.Component {
             <Tabs
               value={this.state.value}
               onChange={this.handleChange}
-              fullWidth
+              variant="fullWidth"
               indicatorColor="primary"
               textColor="primary"
             >
               <Tab icon={<ListAlt />} label="ADS" />
-              <Tab icon={<ChatOutlined />} label="CHATS" />
               <Tab icon={<FavoriteIcon />} label="FAVORITES" />
             </Tabs>
           </Paper>

@@ -14,6 +14,7 @@ import NoSsr from "@material-ui/core/NoSsr";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
+import Grid from "@material-ui/core/Grid";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 
 import { getAds } from "../../actions/ads";
@@ -62,12 +63,10 @@ const styles = theme => ({
     height: theme.spacing.unit * 2
   },
   container: {
-    display: "flex",
     flexWrap: "wrap",
     maxWidth: 1080,
     justifyContent: "center",
     margin: "0 auto",
-    backgroundColor: "#B0CFDa"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -286,40 +285,48 @@ class TextFieldMargins extends React.Component {
       <div className={classes.container}>
         <div className="searchContainer">
           <form onSubmit={this._handleSubmit}>
-            <NoSsr>
-              <Select
-                classes={classes}
-                styles={selectStyles}
-                options={citylist}
-                components={components}
-                value={this.state.single}
-                className={classes.textField}
-                onChange={this.handleCityChange("single")}
-                placeholder="Search a city"
-              />
-            </NoSsr>
-            <NoSsr>
-              <Select
-                classes={classes}
-                styles={selectStyles}
-                options={this.state.ads && this.state.ads}
-                components={components}
-                value={this.state.ad}
-                className={classes.textField}
-                onChange={this.handleChange("ad")}
-                placeholder="Search an Ad"
-              />
-            </NoSsr>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              style={{ backgroundColor: "#FF7700" }}
-              type="submit"
-            >
-              Search
-              <Search className={classes.leftIcon} />
-            </Button>
+          <Grid container spacing={24}>
+            <Grid item md>
+              <NoSsr>
+                <Select
+                  classes={classes}
+                  styles={selectStyles}
+                  options={citylist}
+                  components={components}
+                  value={this.state.single}
+                  className={classes.textField}
+                  onChange={this.handleCityChange("single")}
+                  placeholder="Search a city"
+                />
+              </NoSsr>
+              </Grid>
+              <Grid item md>
+                <NoSsr>
+                  <Select
+                    classes={classes}
+                    styles={selectStyles}
+                    options={this.state.ads && this.state.ads}
+                    components={components}
+                    value={this.state.ad}
+                    className={classes.textField}
+                    onChange={this.handleChange("ad")}
+                    placeholder="Search an Ad"
+                  />
+                </NoSsr>
+              </Grid>
+              <Grid item md="2">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  style={{ backgroundColor: "#FF7700", marginTop: "25px" }}
+                  type="submit"
+                >
+                  Search
+                  <Search className={classes.leftIcon} />
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </div>
       </div>

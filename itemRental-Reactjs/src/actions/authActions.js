@@ -3,7 +3,7 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER, CLEAR_CURRENT_PROFILE } from "./types";
-import {URL_SERVER} from "../utils/constants";
+import { URL_SERVER } from "../utils/constants";
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   var url = URL_SERVER + "/users";

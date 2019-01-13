@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { DashboardOutlined as Dashboard } from "@material-ui/icons";
 
 import { CloudUploadOutlined as CloudUploadIcon } from "@material-ui/icons";
@@ -216,12 +217,13 @@ class PersistentDrawer extends React.Component {
                 [classes.appBarShift]: open,
                 [classes[`appBarShift-${anchor}`]]: open
               })}
+              color="default"
             >
               <Toolbar
                 disableGutters={!open}
                 style={{
                   justifyContent: "space-between",
-                  backgroundColor: "white"
+                  backgroundColor: "white",
                 }}
               >
                 <div className={classes.mobileOnly}>
@@ -253,6 +255,7 @@ class PersistentDrawer extends React.Component {
                     </div>
                   </Drawer>
                 </div>
+
                 <header className={classes.logoAndTagline}>
                   <div
                     style={{
@@ -268,7 +271,7 @@ class PersistentDrawer extends React.Component {
                         style={{ textDecoration: "none", color: "#000" }}
                       >
                         {" "}
-                        Pakistan's Largest Marketplace
+                        RentX
                       </Link>
                     </span>
                   </div>
@@ -289,7 +292,7 @@ class PersistentDrawer extends React.Component {
                     component={Link}
                     to={"/dashboard"}
                   >
-                    My Account
+                    Dashboard
                     <Dashboard className={classes.rightIcon} />
                   </Button>
                   <Button
@@ -300,7 +303,7 @@ class PersistentDrawer extends React.Component {
                     to={"/submitad"}
                     style={{ backgroundColor: "#FF7700" }}
                   >
-                    Post a Free Ad
+                    Post Ad
                     <CloudUploadIcon className={classes.rightIcon} />
                   </Button>
                 </div>

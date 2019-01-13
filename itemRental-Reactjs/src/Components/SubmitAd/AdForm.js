@@ -48,7 +48,10 @@ const styles = theme => ({
     formControl: {
         margin: theme.spacing.unit,
         minWidth: 120
-    }
+    },
+    paddingTopSelect: {
+        padding: "30px 0px 0px 0px",
+    },
 });
 
 class InputAdornments extends React.Component {
@@ -244,9 +247,9 @@ class InputAdornments extends React.Component {
                                     fullWidth
                                     className={classNames(classes.margin, classes.textField)}
                                 >
-                                    <InputLabel htmlFor="adornment-password">Start Date</InputLabel><br/>
+                                    <InputLabel>Start Date</InputLabel><br/>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <Grid container className={classes.grid} justify="space-around">
+                                        <Grid container className={classes.grid} justify="space-around" style={{paddingTop: "20px"}}>
                                             <DatePicker
                                                 margin="normal"
                                                 label="Date picker"
@@ -267,9 +270,9 @@ class InputAdornments extends React.Component {
                                     fullWidth
                                     className={classNames(classes.margin, classes.textField)}
                                 >
-                                    <InputLabel htmlFor="adornment-password">End Date</InputLabel><br/>
+                                    <InputLabel>End Date</InputLabel><br/>
                                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <Grid container className={classes.grid} justify="space-around">
+                                        <Grid container className={classes.grid} justify="space-around" style={{paddingTop: "20px"}}>
                                             <DatePicker
                                                 margin="normal"
                                                 label="Date picker"

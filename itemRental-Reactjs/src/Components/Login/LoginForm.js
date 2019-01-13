@@ -73,10 +73,10 @@ class InputAdornments extends React.Component {
                 <Grid item xs={12} sm={4}>
                     <Paper className={classes.paper}>
                         <div className={classes.root}>
-                            <h1>Login Here</h1>
+                            <h1>Login</h1>
                             <form onSubmit={this._handleSubmit}>
                                 <FormControl fullWidth className={classes.margin}>
-                                    <InputLabel htmlFor="adornment-password">User</InputLabel>
+                                    <InputLabel htmlFor="adornment-name">User</InputLabel>
                                     <Input
                                         id="name"
                                         type="text"
@@ -103,6 +103,7 @@ class InputAdornments extends React.Component {
                                     color="primary"
                                     className={classes.button}
                                     type="submit"
+                                    style={{marginTop: "20px", marginLeft: "10px"}}
                                 >
                                     Login
                                 </Button>
@@ -110,7 +111,7 @@ class InputAdornments extends React.Component {
                                     <p style={{color: "red"}}>{this.state.error}</p>
                                 )}
                             </form>
-                            <Link to="/register" style={{marginTop: "20px"}}>
+                            <Link to="/register" style={{marginTop: "20px", marginLeft: "10px"}}>
                                 Don't have an account? register here!
                             </Link>
                         </div>
