@@ -265,8 +265,8 @@ class PersistentDrawer extends React.Component {
                       float: "left"
                     }}
                   >
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <span className={classes.tagline}>
+                    <img src="/images/icons/icon-72x72.png" className="App-logo" alt="logo" style={{ marginTop: 5 }} />
+                    <span className={classes.tagline} style={{ paddingLeft: 20 }}>
                       <Link
                         to="/"
                         style={{ textDecoration: "none", color: "#000" }}

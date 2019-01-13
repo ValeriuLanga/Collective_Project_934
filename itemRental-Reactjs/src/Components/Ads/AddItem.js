@@ -92,6 +92,7 @@ class AdItem extends React.Component {
             className={classes.media}
             image={this.props.file}
             title={this.props.name}
+            onError={(e)=>{e.target.onerror = null; e.target.src="/images/no_image.png"}}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">

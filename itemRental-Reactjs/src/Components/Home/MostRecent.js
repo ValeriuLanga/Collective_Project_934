@@ -9,6 +9,8 @@ import AddItem from "../Ads/AddItem";
 import Header from "../Header/MainHeader";
 import { getAds } from "../../actions/ads";
 
+import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
+
 const styles = theme => ({
   root: {
     display: "flex",
@@ -27,7 +29,8 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     maxWidth: "1080px",
-    margin: "0 auto"
+    margin: "0 auto",
+    paddingBottom: 50
   },
   paper: {
     padding: "20px 10px 35px 10px",
@@ -64,21 +67,23 @@ class MostRecent extends React.Component {
         </div>
       );
     } else {
-      /*postContent = ads.ads.slice(0, 11).map(item => {
+      postContent = ads.ads.slice(0, 11).map(item => {
         return (
-          <Grid item md={4} key={item._id}>
+          <Grid item md={4} key={item.id}>
             <AddItem
-              file={`https://olx-backend.herokuapp.com/${item.file}`}
+              file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
               title={item.title}
               price={item.price}
-              key={item._id}
-              to={item._id}
-              avatar={user.avatar}
-              favorite={item.favorite}
+              key={item.id}
+              to={item.id}
+              name={item.owner_name}
+              rating={item.rating}
+              category={item.category}
+              description={item.item_description}
             />
           </Grid>
         );
-      });*/
+      });
     }
     if (!ads.isLoading && ads.ads.length === 0) {
       postContent = (

@@ -31,7 +31,7 @@ function SimpleAppBar(props) {
         <Toolbar>
           <Grid container className={classes.container}>
             <Grid item>
-              <img src={logo} className="App-logo" alt="logo" />
+              <img src="/images/icons/icon-72x72.png" className="App-logo" alt="logo" />
             </Grid>
             <Grid item>
             </Grid>
