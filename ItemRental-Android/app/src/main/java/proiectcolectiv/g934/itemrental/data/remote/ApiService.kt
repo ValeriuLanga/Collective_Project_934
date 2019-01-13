@@ -54,6 +54,7 @@ interface ApiService {
         @Part imageMultipart: MultipartBody.Part
     ): Flowable<Response<String>>
 
+    @Streaming
     @GET("$RENTABLEITEMS_DOWNLOADIMAGE/{rentableitem_id}")
     fun getRentableItemImage(@Path("rentableitem_id") itemId: Int): Flowable<Response<ResponseBody>>
 }

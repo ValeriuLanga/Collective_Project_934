@@ -28,7 +28,7 @@ class LoginActivity : BaseActivity<LoginViewModel, LoginViewModelFactory>() {
         setContentView(R.layout.activity_login)
 
         register_button.setOnClickListener {
-            viewModel.downloadImageFromServer(this)
+            viewModel.downloadImageFromServer()
         }
     }
 
