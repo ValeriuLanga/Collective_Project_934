@@ -85,7 +85,7 @@ def uploadimage(rentableitem_id):
         file.save(os.path.join(os.getcwd(), 'photos', filename))
         return custom_response("upload succes", 200)
     else:
-        return custom_response("this rentable item has already a photo", 200)
+        return custom_response("this rentable item has already a photo", 404)
 
 
 @rentableitem_api.route('/downloadimage/<int:rentableitem_id>', methods=['GET'])
