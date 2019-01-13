@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ItemRental</string>
+    <string name="app_name">RentX</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="button_register">REGISTER</string>

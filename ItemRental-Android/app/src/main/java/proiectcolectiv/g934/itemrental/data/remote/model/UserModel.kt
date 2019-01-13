@@ -19,5 +19,8 @@ data class UserModel(
     var phone: String,
 
     @SerializedName("location")
-    var location: LocationModel
+    var location: LocationModel,
+
+    @SerializedName("error")
+    var error: String?
 )

@@ -1,4 +1,4 @@
-package proiectcolectiv.g934.itemrental.data.remote
+package proiectcolectiv.g934.itemrental.data.remote.repo
 
 import android.content.Context
 import android.os.Environment
@@ -7,6 +7,8 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import proiectcolectiv.g934.itemrental.data.remote.ApiErrorConverter
+import proiectcolectiv.g934.itemrental.data.remote.ApiService
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat

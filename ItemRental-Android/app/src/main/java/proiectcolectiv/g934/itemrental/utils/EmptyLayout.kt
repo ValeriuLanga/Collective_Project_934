@@ -41,7 +41,7 @@ class EmptyLayout @JvmOverloads constructor(
         visibility = View.GONE
     }
 
-    fun setError(error: String) {
+    fun setError(error: String?) {
         emptyLayoutErrorTextView.text = error
     }
 

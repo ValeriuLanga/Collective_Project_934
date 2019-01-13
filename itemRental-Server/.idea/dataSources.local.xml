@@ -2,11 +2,12 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="postgres@localhost" uuid="4233dae1-69cc-4f0e-acc2-6f3cb4fe285e">
-      <database-info product="PostgreSQL" version="11.1" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2" dbms="POSTGRES" exact-version="11.1" exact-driver-version="42.2">
+      <database-info product="PostgreSQL" version="11.1" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2" family="POSTGRES" exact-version="11.1">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
+      <user-name>postgres</user-name>
       <introspection-schemas>@:@|item_rental:public</introspection-schemas>
     </data-source>
   </component>

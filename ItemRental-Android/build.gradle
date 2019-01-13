@@ -33,6 +33,9 @@ buildscript {
     // OkHttp
     ext.okhttp_version = '3.10.0'
 
+    // Navigation Component
+    ext.nav_version = '1.0.0-alpha09'
+
     repositories {
         google()
         jcenter()
