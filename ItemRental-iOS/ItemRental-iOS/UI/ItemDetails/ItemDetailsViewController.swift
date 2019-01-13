@@ -253,7 +253,10 @@ final class ItemDetailsViewController: UIViewController {
             guard let _ = data else {
                 return
             }
-            self.delegate?.didRent()
+            DispatchQueue.main.async {
+                self.delegate?.didRent()
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         print("rent")
     }

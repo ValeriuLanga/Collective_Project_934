@@ -151,6 +151,5 @@ extension ItemsViewController: ItemsViewDelegate {
 extension ItemsViewController: ItemDetailsDelegate {
     func didRent() {
         viewModel.fetchItems()
-        navigationController?.popToViewController(self, animated: true)
     }
 }
