@@ -93,7 +93,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"text\": \"bad choice\",\n\t\"rating\": \"50\",\n\t\"owner_name\": \"daniel\",\n\t\"rentableitem_id\": \"7\"\n}"
+					"raw": "{\n\t\"text\": \"bad choice\",\n\t\"rating\": \"50\",\n\t\"owner_name\": \"daniel\",\n\t\"rentableitem_id\": \"16\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/v1/reviews/",
@@ -130,7 +130,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"category\": \"category1\",\n\t\"usage_type\": \"usage1\",\n\t\"receiving_details\": \"details\",\n\t\"item_description\": \"description\",\n\t\"owner_name\": \"daniel\",\n\t\"title\": \"motofireastrau\",\n\t\"start_date\": \"Dec 22 2018 1:33PM\",\n\t\"end_date\": \"Aug 13 2019 2:33AM\"\n}"
+					"raw": "{\n\t\"category\": \"category1\",\n\t\"usage_type\": \"usage1\",\n\t\"receiving_details\": \"details\",\n\t\"item_description\": \"description\",\n\t\"owner_name\": \"daniel\",\n\t\"price\": 100,\n\t\"title\": \"motofireastrau\",\n\t\"start_date\": \"Dec 22 2018 1:33PM\",\n\t\"end_date\": \"Aug 13 2019 2:33AM\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/",
@@ -169,7 +169,7 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/uploadimage/7",
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/uploadimage/18",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -183,7 +183,7 @@
 						"v1",
 						"rentableitems",
 						"uploadimage",
-						"7"
+						"18"
 					]
 				}
 			},
@@ -318,7 +318,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/downloadimage/7",
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/downloadimage/18",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -332,7 +332,7 @@
 						"v1",
 						"rentableitems",
 						"downloadimage",
-						"7"
+						"18"
 					]
 				}
 			},
@@ -348,7 +348,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/rent/15",
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/rent/17",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -362,7 +362,7 @@
 						"v1",
 						"rentableitems",
 						"rent",
-						"15"
+						"17"
 					]
 				}
 			},
@@ -408,7 +408,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/delete/13",
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/delete/16",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -422,7 +422,7 @@
 						"v1",
 						"rentableitems",
 						"delete",
-						"13"
+						"16"
 					]
 				}
 			},
