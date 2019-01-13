@@ -7,18 +7,22 @@ class RentableItemModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String)
+    title = db.Column(db.String)
     usage_type = db.Column(db.String)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     receiving_details = db.Column(db.String)
     item_description = db.Column(db.String)
     owner_name = db.Column(db.String)
+    photo_name = db.Column(db.String)
+    rented = db.Column(db.Boolean)
     owner = db.relationship("UserModel", back_populates="rentableitems")
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     reviews = db.relationship("ReviewItemModel", back_populates="rentableitem")
 
     def __init__(self, data):
         self.category = data.get("category")
+        self.title = data.get("title")
         self.usage_type = data.get("usage_type")
         self.receiving_details = data.get("receiving_details")
         self.item_description = data.get("item_description")
@@ -50,6 +54,8 @@ class RentableItemSchema(Schema):
     end_date = fields.DateTime('%b %d %Y %I:%M%p')
     receiving_details = fields.String()
     item_description = fields.String()
+    rented = fields.Boolean()
+    title = fields.String()
     owner_name = fields.String()
 
 

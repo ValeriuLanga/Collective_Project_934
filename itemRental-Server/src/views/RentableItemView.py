@@ -1,7 +1,9 @@
-import marshmallow
-from flask import request, json, Response, Blueprint
+import os
 
-from src.models import UserModel
+import marshmallow
+from flask import request, json, Response, Blueprint, send_file
+
+from src.models import UserModel, db
 from src.models.RentableItemModel import RentableItemSchema, RentableItemModel, RentableItems, RentableItemsSchema
 from src.models.ReviewItemModel import ReviewItems, ReviewItemsSchema
 
@@ -30,10 +32,65 @@ def create():
     rentableitem.owner_id = user_in_db.id
     rentableitem.owner = user_in_db
     rentableitem.owner_name = user_in_db.name
+    rentableitem.rented = False
     rentableitem.save()
 
     ser_rentableitem = rentableitem_schema.dump(rentableitem)
     return custom_response(ser_rentableitem, 200)
+
+
+@rentableitem_api.route('/delete/<int:rentableitem_id>', methods=['DELETE'])
+def delete(rentableitem_id):
+
+    rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
+    if not rentableitem:
+        return custom_response({'error': 'rentable item not found'}, 404)
+    rentableitem.delete()
+    return custom_response("delete succes", 200)
+
+
+@rentableitem_api.route('/rent/<int:rentableitem_id>', methods=['PUT'])
+def rent_item(rentableitem_id):
+    rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
+    if not rentableitem:
+        return custom_response({'error': 'rentable item not found'}, 404)
+    rentableitem.rented = True
+    db.session.commit()
+    return custom_response("rent succes", 200)
+
+
+@rentableitem_api.route('/return/<int:rentableitem_id>', methods=['PUT'])
+def return_item(rentableitem_id):
+    rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
+    if not rentableitem:
+        return custom_response({'error': 'rentable item not found'}, 404)
+    rentableitem.rented = False
+    db.session.commit()
+    return custom_response("return succes", 200)
+
+
+@rentableitem_api.route('/uploadimage/<int:rentableitem_id>', methods=['POST'])
+def uploadimage(rentableitem_id):
+    rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
+    if not rentableitem:
+        return custom_response({'error': 'rentable item not found'}, 404)
+    file = request.files['pic']
+    filename = file.filename
+    if rentableitem.photo_name is None or rentableitem.photo_name == '':
+        rentableitem.photo_name = filename
+        db.session.commit()
+        file.save(os.path.join(os.getcwd() + '\\' + 'photos', filename))
+        return custom_response("upload succes", 200)
+    else:
+        return custom_response("this rentable item has already a photo", 200)
+
+
+@rentableitem_api.route('/downloadimage/<int:rentableitem_id>', methods=['GET'])
+def downloadimage(rentableitem_id):
+    rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
+    if not rentableitem:
+        return custom_response({'error': 'rentable item not found'}, 404)
+    return send_file(os.getcwd() + '\\' + 'photos' + '\\' + rentableitem.photo_name)
 
 
 @rentableitem_api.route('/<int:rentableitem_id>', methods=['GET'])
