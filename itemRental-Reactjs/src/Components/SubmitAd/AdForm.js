@@ -11,9 +11,10 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 import moment from 'moment'
 import DateFnsUtils from '@date-io/date-fns';
-import {MuiPickersUtilsProvider, TimePicker, DatePicker} from 'material-ui-pickers';
+import {MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker} from 'material-ui-pickers';
 import ReactDropzone from "react-dropzone";
 // import axios from "axios";
 // import { Link } from "react-router-dom";
@@ -28,9 +29,6 @@ const styles = theme => ({
     },
     withoutLabel: {
         marginTop: theme.spacing.unit * 3
-    },
-    textField: {
-        flexBasis: 150
     },
     container: {
         display: "flex",
@@ -47,7 +45,8 @@ const styles = theme => ({
     },
     formControl: {
         margin: theme.spacing.unit,
-        minWidth: 120
+        minWidth: 120,
+        width: "100%"
     },
     paddingTopSelect: {
         padding: "30px 0px 0px 0px",
@@ -76,11 +75,6 @@ class InputAdornments extends React.Component {
     handleChange = prop => event => {
         this.setState({[prop]: event.target.value});
     };
-    handleDateChange = date => {
-        this.setState({start_date: date});
-
-    };
-
 
     onPreviewDrop = files => {
         this.setState({
@@ -121,17 +115,7 @@ class InputAdornments extends React.Component {
             formData.append("city", state.city);
             formData.append("phone", state.phone);
             formData.append("file", state.files[0]);
-            // let data = {
-            //   title: state.title,
-            //   category: state.category,
-            //   description: state.description,
-            //   price: state.price,
-            //   address: state.Addresname,
-            //   name: state.name,
-            //   email: state.email,
-            //   phone: state.phone,
-            //   file: state.files[0]
-            // };
+
             this.props.onSubmit(formData);
             console.log(formData);
         }
@@ -141,250 +125,159 @@ class InputAdornments extends React.Component {
         const {classes} = this.props;
 
         return (
-            <Grid className={classes.container} container>
-                <Grid item xs={12} sm={2}/>
-                <Grid item xs={12} sm={8}>
-                    <Paper className={classes.paper}>
-                        <div className={classes.root}>
-                            <h1>Submit an Ad</h1>
+            <div className={classes.container}>
+                <Paper className={classes.paper}>
+                    <div className={classes.root}>
+                    <Typography variant="h3" gutterBottom align="center" style={{width: "100%"}}>
+                        Submit an Ad
+                    </Typography>
+                        <form onSubmit={this._handleSubmit} style={{width: "100%"}}>
+                            <FormControl fullWidth className={classes.margin}>
+                                <InputLabel htmlFor="adornment-password">Title</InputLabel>
+                                <Input
+                                    id="title"
+                                    type="text"
+                                    value={this.state.title}
+                                    onChange={this.handleChange("title")}
+                                />
+                            </FormControl>
+                            <Grid container spacing={24}>
+                                <Grid item md={6}>
+                                    <FormControl className={classes.formControl}>
+                                        <InputLabel htmlFor="demo-controlled-open-select">
+                                            Category
+                                        </InputLabel>
+                                        <Select
+                                            value={this.state.category}
+                                            onChange={this.handleChange("category")}
+                                            inputProps={{
+                                                name: "category",
+                                                id: "demo-controlled-open-select"
+                                            }}
+                                        >
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={"pets"}>Pets</MenuItem>
+                                            <MenuItem value={"cars"}>Cars</MenuItem>
+                                            <MenuItem value={"property"}>Property</MenuItem>
+                                            <MenuItem value={"bikes"}>Bikes</MenuItem>
+                                            <MenuItem value={"electronics"}>Electronics</MenuItem>
+                                            <MenuItem value={"mobiles"}>Mobiles</MenuItem>
+                                            <MenuItem value={"furniture"}>Furniture</MenuItem>
+                                            <MenuItem value={"books"}>Books</MenuItem>
+                                            <MenuItem value={"services"}>Services</MenuItem>
+                                            <MenuItem value={"fashion"}>Fashion</MenuItem>
+                                            <MenuItem value={"agriculture"}>Agriculture</MenuItem>
+                                            <MenuItem value={"sports"}>Sports</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item md={6}>
+                                    <FormControl className={classes.formControl}>
+                                        <InputLabel htmlFor="demo-controlled-open-select">
+                                            Usage type
+                                        </InputLabel>
+                                        <Select
+                                            value={this.state.usage_type}
+                                            onChange={this.handleChange("usage_type")}
+                                            inputProps={{
+                                                name: "usage_type",
+                                                id: "demo-controlled-open-select-1"
+                                            }}
+                                        >
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={"pets"}>Pets</MenuItem>
+                                            <MenuItem value={"cars"}>Cars</MenuItem>
+                                            <MenuItem value={"property"}>Property</MenuItem>
+                                            <MenuItem value={"bikes"}>Bikes</MenuItem>
+                                            <MenuItem value={"electronics"}>Electronics</MenuItem>
+                                            <MenuItem value={"mobiles"}>Mobiles</MenuItem>
+                                            <MenuItem value={"furniture"}>Furniture</MenuItem>
+                                            <MenuItem value={"books"}>Books</MenuItem>
+                                            <MenuItem value={"services"}>Services</MenuItem>
+                                            <MenuItem value={"fashion"}>Fashion</MenuItem>
+                                            <MenuItem value={"agriculture"}>Agriculture</MenuItem>
+                                            <MenuItem value={"sports"}>Sports</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+                            </Grid>
+                            <FormControl
+                                fullWidth
+                                className={classNames(classes.margin, classes.textField)}
+                            >
+                                <TextField
+                                    id="description"
+                                    label="Description"
+                                    multiline
+                                    rowsMax="4"
+                                    className={classes.textField}
+                                    margin="normal"
+                                    value={this.state.description}
+                                    onChange={this.handleChange("description")}
+                                />
+                            </FormControl>
+                            <FormControl
+                                fullWidth
+                                className={classNames(classes.margin, classes.textField)}
+                            >
+                                <InputLabel htmlFor="adornment-password">Price</InputLabel>
+                                <Input
+                                    id="price"
+                                    type="number"
+                                    value={this.state.price}
+                                    onChange={this.handleChange("price")}
+                                />
+                            </FormControl>
 
-                            <form onSubmit={this._handleSubmit}>
-                                <FormControl fullWidth className={classes.margin}>
-                                    <InputLabel htmlFor="adornment-password">Title</InputLabel>
-                                    <Input
-                                        id="title"
-                                        type="text"
-                                        value={this.state.title}
-                                        onChange={this.handleChange("title")}
-                                    />
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="demo-controlled-open-select">
-                                        Category
-                                    </InputLabel>
-                                    <Select
-                                        value={this.state.category}
-                                        onChange={this.handleChange("category")}
-                                        inputProps={{
-                                            name: "category",
-                                            id: "demo-controlled-open-select"
-                                        }}
+                            <Grid container spacing={24}>
+                                <Grid item md={6}>
+                                    <FormControl
+                                        fullWidth
+                                        className={classNames(classes.margin, classes.textField)}
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={"pets"}>Pets</MenuItem>
-                                        <MenuItem value={"cars"}>Cars</MenuItem>
-                                        <MenuItem value={"property"}>Property</MenuItem>
-                                        <MenuItem value={"bikes"}>Bikes</MenuItem>
-                                        <MenuItem value={"electronics"}>Electronics</MenuItem>
-                                        <MenuItem value={"mobiles"}>Mobiles</MenuItem>
-                                        <MenuItem value={"furniture"}>Furniture</MenuItem>
-                                        <MenuItem value={"books"}>Books</MenuItem>
-                                        <MenuItem value={"services"}>Services</MenuItem>
-                                        <MenuItem value={"fashion"}>Fashion</MenuItem>
-                                        <MenuItem value={"agriculture"}>Agriculture</MenuItem>
-                                        <MenuItem value={"sports"}>Sports</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className={classes.formControl}>
-                                    <InputLabel htmlFor="demo-controlled-open-select">
-                                        Usage type
-                                    </InputLabel>
-                                    <Select
-                                        value={this.state.usage_type}
-                                        onChange={this.handleChange("usage_type")}
-                                        inputProps={{
-                                            name: "usage_type",
-                                            id: "demo-controlled-open-select-1"
-                                        }}
+                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                            <DateTimePicker 
+                                                margin="normal"
+                                                label="Start Date"
+                                                value={this.state.start_date}
+                                                onChange={this.handleChange("start_date")}
+                                            />
+                                        </MuiPickersUtilsProvider>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item md={6}>
+                                    <FormControl
+                                        fullWidth
+                                        className={classNames(classes.margin, classes.textField)}
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={"pets"}>Pets</MenuItem>
-                                        <MenuItem value={"cars"}>Cars</MenuItem>
-                                        <MenuItem value={"property"}>Property</MenuItem>
-                                        <MenuItem value={"bikes"}>Bikes</MenuItem>
-                                        <MenuItem value={"electronics"}>Electronics</MenuItem>
-                                        <MenuItem value={"mobiles"}>Mobiles</MenuItem>
-                                        <MenuItem value={"furniture"}>Furniture</MenuItem>
-                                        <MenuItem value={"books"}>Books</MenuItem>
-                                        <MenuItem value={"services"}>Services</MenuItem>
-                                        <MenuItem value={"fashion"}>Fashion</MenuItem>
-                                        <MenuItem value={"agriculture"}>Agriculture</MenuItem>
-                                        <MenuItem value={"sports"}>Sports</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl
-                                    fullWidth
-                                    className={classNames(classes.margin, classes.textField)}
-                                >
-                                    <TextField
-                                        id="description"
-                                        label="Description"
-                                        multiline
-                                        rows="4"
-                                        className={classes.textField}
-                                        margin="normal"
-                                        value={this.state.description}
-                                        onChange={this.handleChange("description")}
-                                    />
-                                </FormControl>
-                                <FormControl
-                                    fullWidth
-                                    className={classNames(classes.margin, classes.textField)}
-                                >
-                                    <InputLabel htmlFor="adornment-password">Price</InputLabel>
-                                    <Input
-                                        id="price"
-                                        type="number"
-                                        value={this.state.price}
-                                        onChange={this.handleChange("price")}
-                                    />
-                                </FormControl>
-                                <FormControl
-                                    fullWidth
-                                    className={classNames(classes.margin, classes.textField)}
-                                >
-                                    <InputLabel>Start Date</InputLabel><br/>
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <Grid container className={classes.grid} justify="space-around" style={{paddingTop: "20px"}}>
-                                            <DatePicker
+                                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                            <DateTimePicker 
                                                 margin="normal"
-                                                label="Date picker"
-                                                value={this.state.start_date}
-                                                onChange={this.handleDateChange}
-                                            />
-                                            <TimePicker
-                                                margin="normal"
-                                                label="Time picker"
-                                                value={this.state.start_date}
-                                                onChange={this.handleDateChange}
-                                            />
-                                        </Grid>
-                                    </MuiPickersUtilsProvider>
-                                </FormControl>
-                                <Divider/>
-                                <FormControl
-                                    fullWidth
-                                    className={classNames(classes.margin, classes.textField)}
-                                >
-                                    <InputLabel>End Date</InputLabel><br/>
-                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                        <Grid container className={classes.grid} justify="space-around" style={{paddingTop: "20px"}}>
-                                            <DatePicker
-                                                margin="normal"
-                                                label="Date picker"
+                                                label="End Date"
                                                 value={this.state.end_date}
-                                                onChange={this.handleDateChange}
+                                                onChange={this.handleChange("end_date")}
                                             />
-                                            <TimePicker
-                                                margin="normal"
-                                                label="Time picker"
-                                                value={this.state.end_date}
-                                                onChange={this.handleDateChange}
-                                            />
-                                        </Grid>
-                                    </MuiPickersUtilsProvider>
-                                </FormControl>
-                                {/*<Divider/>*/}
-                                {/*<h5>Address Details</h5>*/}
-                                {/*<FormControl*/}
-                                {/*fullWidth*/}
-                                {/*className={classNames(classes.margin, classes.textField)}*/}
-                                {/*>*/}
-                                {/*<InputLabel htmlFor="adornment-password">Name</InputLabel>*/}
-                                {/*<Input*/}
-                                {/*id="name"*/}
-                                {/*type="text"*/}
-                                {/*value={this.state.name}*/}
-                                {/*onChange={this.handleChange("name")}*/}
-                                {/*/>*/}
-                                {/*</FormControl>*/}
-                                {/*<FormControl*/}
-                                {/*fullWidth*/}
-                                {/*className={classNames(classes.margin, classes.textField)}*/}
-                                {/*>*/}
-                                {/*<InputLabel htmlFor="adornment-password">Address</InputLabel>*/}
-                                {/*<Input*/}
-                                {/*id="address"*/}
-                                {/*type="text"*/}
-                                {/*value={this.state.address}*/}
-                                {/*onChange={this.handleChange("address")}*/}
-                                {/*/>*/}
-                                {/*</FormControl>*/}
-                                {/*<FormControl*/}
-                                {/*fullWidth*/}
-                                {/*className={classNames(classes.margin, classes.textField)}*/}
-                                {/*>*/}
-                                {/*<InputLabel htmlFor="adornment-password">Phone</InputLabel>*/}
-                                {/*<Input*/}
-                                {/*id="phone"*/}
-                                {/*type="tel"*/}
-                                {/*value={this.state.phone}*/}
-                                {/*onChange={this.handleChange("phone")}*/}
-                                {/*/>*/}
-                                {/*</FormControl>*/}
-                                {/*<FormControl*/}
-                                {/*fullWidth*/}
-                                {/*className={classNames(classes.margin, classes.textField)}*/}
-                                {/*>*/}
-                                {/*<InputLabel htmlFor="adornment-password">Email</InputLabel>*/}
-                                {/*<Input*/}
-                                {/*id="email"*/}
-                                {/*type="email"*/}
-                                {/*value={this.state.email}*/}
-                                {/*onChange={this.handleChange("email")}*/}
-                                {/*/>*/}
-                                {/*</FormControl>*/}
-                                {/*<FormControl*/}
-                                {/*fullWidth*/}
-                                {/*className={classNames(classes.margin, classes.textField)}*/}
-                                {/*>*/}
-                                {/*<InputLabel htmlFor="adornment-password">City</InputLabel>*/}
-                                {/*<Input*/}
-                                {/*id="city"*/}
-                                {/*type="text"*/}
-                                {/*value={this.state.city}*/}
-                                {/*onChange={this.handleChange("city")}*/}
-                                {/*/>*/}
-                                {/*</FormControl>*/}
-                                {/*<Divider/>*/}
-                                {/*<h5>Add Image</h5>*/}
-                                {/*<FormControl*/}
-                                {/*fullWidth*/}
-                                {/*className={classNames(classes.margin, classes.textField)}*/}
-                                {/*>*/}
-                                {/*<ReactDropzone accept="image/*" onDrop={this.onPreviewDrop}>*/}
-                                {/*Drop an image, get a preview!*/}
-                                {/*</ReactDropzone>*/}
-                                {/*</FormControl>*/}
-                                {/*{this.state.files.length > 0 && <h3>Previews</h3>}{" "}*/}
-                                {/*{this.state.files.map(file => (*/}
-                                {/*<img*/}
-                                {/*src={file.preview}*/}
-                                {/*key={file.preview}*/}
-                                {/*alt="Preview"*/}
-                                {/*width="100px"*/}
-                                {/*style={{padding: "20px", marginBottom: "20px"}}*/}
-                                {/*/>*/}
-                                {/*))}*/}
-                                {this.state.error && <p>{this.state.error}</p>}
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.button}
-                                    type="submit"
-                                >
-                                    Register
-                                </Button>
-                            </form>
-                        </div>
-                    </Paper>
-                </Grid>
-                <Grid xs={12} sm={2} item/>
-            </Grid>
+                                        </MuiPickersUtilsProvider>
+                                    </FormControl>
+                                </Grid>
+                            </Grid>
+                            {this.state.error && <p>{this.state.error}</p>}
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                type="submit"
+                            >
+                                Register
+                            </Button>
+                        </form>
+                    </div>
+                </Paper>
+            </div>
         );
     }
 }

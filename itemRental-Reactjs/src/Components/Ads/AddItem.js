@@ -84,12 +84,12 @@ class AdItem extends React.Component {
     );*/
     return (
       <Card className={classes.card}>
-        <CardActionArea>
+        <CardActionArea component={Link}
+                to={`/listings/${this.props.to}`}>
           <CardMedia
             component="img"
             alt={this.props.name}
             className={classes.media}
-            height="140"
             image={this.props.file}
             title={this.props.name}
           />
@@ -97,14 +97,9 @@ class AdItem extends React.Component {
             <Typography gutterBottom variant="h5" component="h2">
               {this.props.title}
             </Typography>
-              <List dense="true">
-                <ListItem>
-                  <ListItemText
-                    primary="Category"
-                    secondary={this.props.category}
-                  />
-                </ListItem>
-              </List>
+            <Typography variant="overline" gutterBottom>
+              {this.props.description}
+            </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
