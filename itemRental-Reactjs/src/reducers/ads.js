@@ -3,7 +3,9 @@ import {
   GET_ADS,
   IS_LOADING,
   UPDATE_AD,
-  DELETE_AD
+  DELETE_AD,
+  GET_OWN_ADS,
+  GET_AD
 } from "../actions/types";
 
 // Ads Reducer
@@ -26,7 +28,18 @@ export default (state = initialState, action) => {
         isLoading: false,
         ads: action.payload
       };
-
+    case GET_OWN_ADS:
+      return {
+        ...state,
+        isLoading: false,
+        ads: action.payload
+      };
+    case GET_AD:
+      return {
+        ...state,
+        isLoading: false,
+        ad: action.payload
+      };
     case POST_AD:
       return {
         ...state,

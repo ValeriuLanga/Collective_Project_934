@@ -14,7 +14,10 @@ import { PhoneAndroidOutlined } from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 import img from "../../assets/images/car.png";
 import Header from "../Header/MainHeader";
-import { getAds } from "../../actions/ads";
+import { getAd } from "../../actions/ads";
+import { CircularProgress } from "@material-ui/core";
+
+import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
 
 const styles = theme => ({
   root: {
@@ -47,28 +50,26 @@ const styles = theme => ({
 
 class AdPage extends React.Component {
   componentDidMount() {
-    this.props.dispatch(getAds());
+    const { id } = this.props.match.params;
+    this.props.dispatch(getAd(id));
   }
+
   render() {
     const { classes, user, ads } = this.props;
-
-    const { id } = this.props.match.params;
-
-    let filteredAds = ads.ads.filter(item => {
-      return id === item._id;
-    });
-    let content = filteredAds.map(item => {
-      return (
+    const item = ads.ad;
+    return (
+      <div className={classes.root}>
+        <Header />
         <Grid
           className={classes.container}
           container
           spacing={8}
-          key={item._id}
+          key={item.id}
         >
           <Grid item md={8} sm={12}>
             <Paper className={classes.paper}>
               <img
-                src={`https://olx-backend.herokuapp.com/${item.file}`}
+                src={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
                 alt="Ad thumbnail"
                 className={classes.responsiveimg}
               />
@@ -77,17 +78,6 @@ class AdPage extends React.Component {
               <p>Description : {item.description}</p>
               <Typography>City: {item.city}</Typography>
               <Typography>Address: {item.address}</Typography>
-
-              <Tooltip title="Add To Favorites">
-                <Button
-                  variant="fab"
-                  color="secondary"
-                  aria-label="Add"
-                  className={classes.button}
-                >
-                  <AddIcon />
-                </Button>
-              </Tooltip>
             </Paper>
           </Grid>
           <Grid item md={4} sm={12}>
@@ -101,12 +91,7 @@ class AdPage extends React.Component {
                   padding: "0 15px"
                 }}
               >
-                <Avatar
-                  alt="Remy Sharp"
-                  src={user.avatar}
-                  className={classes.avatar}
-                />
-                <h3 style={{ marginLeft: "1rem" }}>Mohsin Latif</h3>
+                <h3 style={{ marginLeft: "1rem" }}>{item.owner_name}</h3>
               </div>
               <ListItem button>
                 <ListItemIcon>
@@ -120,23 +105,17 @@ class AdPage extends React.Component {
             </Paper>
           </Grid>
         </Grid>
-      );
-    });
-    console.log(content);
-
-    return (
-      <div>
-        <Header />
-        {content}
-      </div>
+        </div>
     );
   }
+
 }
 
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
-    ads: state.ads
+    ads: state.ads,
+    ad: state.ad
   };
 };
 

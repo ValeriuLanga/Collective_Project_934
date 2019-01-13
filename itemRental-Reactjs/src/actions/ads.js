@@ -6,7 +6,8 @@ import {
   GET_ADS,
   GET_OWN_ADS,
   UPDATE_AD,
-  DELETE_AD
+  DELETE_AD,
+  GET_AD
 } from "./types";
 
 import { URL_SERVER, USERS, RENTABLE_ITEMS } from "../utils/constants";
@@ -139,8 +140,30 @@ export const deleteAd = (formData, history, _id) => dispatch => {
     });
 };
 
-// If Loading ads
+export const getAd = (adId) => dispatch => {
+  console.log("Fetching ad with id", adId);
+  dispatch(isLoading());
+  var url = `${URL_SERVER}/${RENTABLE_ITEMS}/${adId}`;
+  fetch(url)
+    .then(res => res.json())
+    .then(response => {
+      dispatch({
+        type: GET_AD,
+        payload: response
+      });
+    })
+    .catch(error => {
+      if (error) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: error
+        });
+      }
+    });
+};
 
+
+// If Loading ads
 export const isLoading = () => {
   return {
     type: IS_LOADING
