@@ -5,7 +5,7 @@ from flask import request, json, Response, Blueprint, send_file
 
 from src.models import UserModel, db
 from src.models.RentableItemModel import RentableItemSchema, RentableItemModel, RentableItems, RentableItemsSchema
-from src.models.ReviewItemModel import ReviewItems, ReviewItemsSchema
+from src.models.ReviewItemModel import ReviewItems, ReviewItemsSchema, ReviewItemModel
 
 rentableitem_api = Blueprint('rentableitem', __name__)
 rentableitem_schema = RentableItemSchema()
@@ -45,6 +45,9 @@ def delete(rentableitem_id):
     rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
     if not rentableitem:
         return custom_response({'error': 'rentable item not found'}, 404)
+    reviews_to_be_deleted = ReviewItemModel.get_all_reviews_with_rentableitem_id(rentableitem.id)
+    for r in reviews_to_be_deleted:
+        r.delete()
     rentableitem.delete()
     return custom_response("delete succes", 200)
 
@@ -79,7 +82,7 @@ def uploadimage(rentableitem_id):
     if rentableitem.photo_name is None or rentableitem.photo_name == '':
         rentableitem.photo_name = filename
         db.session.commit()
-        file.save(os.path.join(os.getcwd() + '\\' + 'photos', filename))
+        file.save(os.path.join(os.getcwd(), 'photos', filename))
         return custom_response("upload succes", 200)
     else:
         return custom_response("this rentable item has already a photo", 200)
@@ -90,7 +93,7 @@ def downloadimage(rentableitem_id):
     rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
     if not rentableitem:
         return custom_response({'error': 'rentable item not found'}, 404)
-    return send_file(os.getcwd() + '\\' + 'photos' + '\\' + rentableitem.photo_name)
+    return send_file(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name), as_attachment=True)
 
 
 @rentableitem_api.route('/<int:rentableitem_id>', methods=['GET'])
