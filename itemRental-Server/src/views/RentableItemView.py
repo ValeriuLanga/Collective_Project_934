@@ -93,7 +93,7 @@ def downloadimage(rentableitem_id):
     rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
     if not rentableitem:
         return custom_response({'error': 'rentable item not found'}, 404)
-    return send_file(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name))
+    return send_file(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name), as_attachment=True)
 
 
 @rentableitem_api.route('/<int:rentableitem_id>', methods=['GET'])
