@@ -10,6 +10,7 @@ import Foundation
 
 struct RentableItem {
     let id: Int?
+    let title: String
     let category: String
     let usageType: String
     let receivingDetails: String
@@ -17,16 +18,20 @@ struct RentableItem {
     let ownerName: String
     let startDate: String
     let endDate: String
+    var rented: Bool
     
     init(id: Int? = nil,
+         title: String,
          category: String,
          usageType: String,
          receivingDetails: String,
          itemDescription: String,
          ownerName: String,
          startDate: String,
-         endDate: String) {
+         endDate: String,
+         rented: Bool) {
         self.id = id
+        self.title = title
         self.category = category
         self.usageType = usageType
         self.receivingDetails = receivingDetails
@@ -34,5 +39,6 @@ struct RentableItem {
         self.ownerName = ownerName
         self.startDate = startDate
         self.endDate = endDate
+        self.rented = rented
     }
 }

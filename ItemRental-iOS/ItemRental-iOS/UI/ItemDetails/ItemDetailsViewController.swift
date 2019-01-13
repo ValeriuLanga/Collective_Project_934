@@ -9,15 +9,22 @@
 import UIKit
 import SnapKit
 
-// TODO: - Work in progress
+protocol ItemDetailsDelegate: class {
+    func didRent()
+}
 
 final class ItemDetailsViewController: UIViewController {
     // MARK: - Properties
     
+    weak var delegate: ItemDetailsDelegate?
+    
     private let item: RentableItem
     private let viewModel: ItemsViewModel
     
+    private let manager = ItemManager()
+    
     private let ownerLabel = UILabel()
+    private let titleLabel = UILabel()
     private let categoryLabel = UILabel()
     private let usageTypeLabel = UILabel()
     private let receivingDetailsLabel = UILabel()
@@ -71,6 +78,7 @@ final class ItemDetailsViewController: UIViewController {
         view.backgroundColor = .gray
         
         setupOwnerLabel()
+        setupTitleLabel()
         setupCategoryLabel()
         setupUsageTypeLabel()
         setupReceivingDetailsLabel()
@@ -96,6 +104,18 @@ final class ItemDetailsViewController: UIViewController {
         }
     }
     
+    private func setupTitleLabel() {
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        titleLabel.text = item.title
+        
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(ownerLabel.snp.bottom).offset(Padding.p10)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+        }
+    }
+    
     private func setupCategoryLabel() {
         categoryLabel.textAlignment = .center
         categoryLabel.font = UIFont.systemFont(ofSize: 20)
@@ -103,7 +123,7 @@ final class ItemDetailsViewController: UIViewController {
         
         view.addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints {
-            $0.top.equalTo(ownerLabel.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p20)
         }
     }
@@ -226,6 +246,15 @@ final class ItemDetailsViewController: UIViewController {
     }
     
     @objc private func rentButtonTapped() {
+        guard let itemId = item.id else {
+            return
+        }
+        manager.rent(itemId: itemId) { (data, error) in
+            guard let _ = data else {
+                return
+            }
+            self.delegate?.didRent()
+        }
         print("rent")
     }
     
@@ -251,7 +280,7 @@ extension ItemDetailsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.titleLabel.text = viewModel.items[indexPath.item].category
+        cell.titleLabel.text = viewModel.items[indexPath.item].title
         cell.ownerLabel.text = viewModel.items[indexPath.item].ownerName
         
         return cell
@@ -273,7 +302,7 @@ extension ItemDetailsViewController: UICollectionViewDelegate {
 
 extension ItemDetailsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 140, height: 210)
+        return CGSize(width: 130, height: 180)
     }
 }
 

@@ -105,7 +105,7 @@ extension ItemsViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        cell.titleLabel.text = viewModel.items[indexPath.item].category
+        cell.titleLabel.text = viewModel.items[indexPath.item].title
         cell.ownerLabel.text = viewModel.items[indexPath.item].ownerName
         
         return cell
@@ -118,6 +118,7 @@ extension ItemsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.items[indexPath.item]
         let itemDetailsViewController = ItemDetailsViewController(item: item)
+        itemDetailsViewController.delegate = self
         
         navigationController?.pushViewController(itemDetailsViewController, animated: true)
     }
@@ -144,5 +145,12 @@ extension ItemsViewController: AddItemDelegate {
 extension ItemsViewController: ItemsViewDelegate {
     func didUpdateItems() {
         collectionView.reloadData()
+    }
+}
+
+extension ItemsViewController: ItemDetailsDelegate {
+    func didRent() {
+        viewModel.fetchItems()
+        navigationController?.popToViewController(self, animated: true)
     }
 }

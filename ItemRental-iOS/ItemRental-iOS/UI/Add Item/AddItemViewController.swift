@@ -19,6 +19,7 @@ final class AddItemViewController: UIViewController {
     weak var delegate: AddItemDelegate?
     private let manager = ItemManager()
     
+    private let titleTextfield = UITextField()
     private let categoryTextfield = UITextField()
     private let usageTypeTextfield = UITextField()
     private let receivingDetailsTextfield = UITextField()
@@ -40,6 +41,7 @@ final class AddItemViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .gray
         
+        setupTitleTextfield()
         setupCategoryTextfield()
         setupUsageTypeTextfield()
         setupReceivingDetailsTextfield()
@@ -49,13 +51,25 @@ final class AddItemViewController: UIViewController {
         setupAddButton()
     }
     
+    private func setupTitleTextfield() {
+        titleTextfield.borderStyle = .roundedRect
+        titleTextfield.placeholder = "Title"
+        
+        view.addSubview(titleTextfield)
+        titleTextfield.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p40)
+            $0.leading.equalToSuperview().offset(Padding.p40)
+            $0.trailing.equalToSuperview().offset(-Padding.p40)
+        }
+    }
+    
     private func setupCategoryTextfield() {
         categoryTextfield.borderStyle = .roundedRect
         categoryTextfield.placeholder = "Category"
         
         view.addSubview(categoryTextfield)
         categoryTextfield.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p40)
+            $0.top.equalTo(titleTextfield.snp.bottom).offset(Padding.p10)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
         }
@@ -136,7 +150,8 @@ final class AddItemViewController: UIViewController {
     }
     
     @objc private func addButtonTapped() {        
-        guard let category = categoryTextfield.text,
+        guard let title = titleTextfield.text,
+                let category = categoryTextfield.text,
                 let usageType = usageTypeTextfield.text,
                 let receivingDetails = receivingDetailsTextfield.text,
                 let itemDescription = itemDescriptionTextfield.text,
@@ -145,7 +160,8 @@ final class AddItemViewController: UIViewController {
                     return
         }
 
-        guard category != "",
+        guard title != "",
+                category != "",
                 usageType != "",
                 receivingDetails != "",
                 itemDescription != "",
@@ -158,7 +174,7 @@ final class AddItemViewController: UIViewController {
         guard let userName = UserDefaults.standard.string(forKey: "user") else {
             return
         }
-        let item = RentableItem(category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, ownerName: userName, startDate: startDate, endDate: endDate)
+        let item = RentableItem(title: title, category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, ownerName: userName, startDate: startDate, endDate: endDate, rented: false)
         
         manager.addItem(item: item) { [weak self](data, error) in
             guard error == nil else {

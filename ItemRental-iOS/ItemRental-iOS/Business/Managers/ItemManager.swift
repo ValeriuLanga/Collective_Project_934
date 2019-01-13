@@ -24,6 +24,14 @@ struct ItemManager {
     
     // MARK: - Functions
     
+    func rent(itemId: Int, completion: @escaping ItemDataCompletion) {
+        let url = URL(string: apiURL + "/rent/\(itemId)")!
+        let request = NSMutableURLRequest(url: url)
+        request.httpMethod = "PUT"
+        
+        process(request: request, completion: completion)
+    }
+    
     func getItems(completion: @escaping ItemDataCompletion) {
         let url = URL(string: apiURL)!
         
@@ -49,7 +57,8 @@ struct ItemManager {
     }
     
     func addItem(item: RentableItem, completion: @escaping ItemDataCompletion) {
-        let json: [String: Any] = ["category": item.category,
+        let json: [String: Any] = ["title": item.title,
+                                   "category": item.category,
                                    "usage_type": item.usageType,
                                    "receiving_details": item.receivingDetails,
                                    "item_description": item.itemDescription,
