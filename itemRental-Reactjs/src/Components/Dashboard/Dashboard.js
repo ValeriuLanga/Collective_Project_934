@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../Header/MainHeader.js";
-import Tabs from "./DashboardTabs";
 import { withStyles } from "@material-ui/core/styles";
 import { getAds } from "../../actions/ads";
+import DashboardAds from "./DashboardAds";
 
 const styles = theme => ({
   container: {
@@ -31,7 +31,9 @@ class Dashboard extends Component {
         <Header />
         <div className={classes.container}>
           <br />
-          <Tabs />
+          <div styel={{ marginTop: "50px" }}>
+            <DashboardAds />
+          </div>
         </div>
       </div>
     );

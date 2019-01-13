@@ -19,8 +19,21 @@ ReactDOM.render(
   document.getElementById("app")
 );
 
+if (localStorage.user) {
+  try{
+    const user = JSON.parse(localStorage.user);
+    setAuthToken(user.password);
+    store.dispatch(setCurrentUser(user.name));
+  } catch(error) {
+    console.error(error);
+    // expected output: ReferenceError: nonExistentFunction is not defined
+    // Note - error messages will vary depending on browser
+  }
+}
+
+
 // Check for token
-if (localStorage.jwtToken) {
+/*if (localStorage.jwtToken) {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);
   // Decode token and get user info and exp
@@ -38,4 +51,4 @@ if (localStorage.jwtToken) {
     // Redirect to login
     window.location.href = "/login";
   }
-}
+}*/

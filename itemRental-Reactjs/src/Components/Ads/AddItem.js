@@ -5,10 +5,21 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { FavoriteBorderOutlined, Favorite } from "@material-ui/icons";
 import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Tooltip from "@material-ui/core/Tooltip";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { putAd } from "../../actions/ads";
+
+import { URL_SERVER } from "../../utils/constants";
+import StarIcon from "@material-ui/icons/Star";
 
 const styles = theme => ({
   root: {
@@ -31,7 +42,7 @@ const styles = theme => ({
     margin: "0 auto"
   },
   paper: {
-    padding: "20px 10px 35px 10px",
+    padding: "20px 10px 2px 10px",
     margin: "20px auto 20px"
   },
   responsiveimg: {
@@ -52,23 +63,9 @@ class AdItem extends React.Component {
     favorite: true
   };
 
-  _handleFavoriteClick = (id, avatar, favorite) => {
-    this.props.dispatch(
-      putAd(
-        {
-          favorite: !favorite,
-          fEmail: this.props.user.email
-        },
-        id,
-        avatar,
-        this.props.user.email
-      )
-    );
-  };
-
   render() {
     const { classes } = this.props;
-    return (
+    /*return (
       <Paper className={classes.paper}>
         <img
           src={this.props.file}
@@ -78,31 +75,49 @@ class AdItem extends React.Component {
         <Link to={`/listings/${this.props.to}`} className={classes.link}>
           <h3>{this.props.title}</h3>
         </Link>
-        <Typography color="primary">{this.props.city}</Typography>
+        <Typography color="primary">{this.props.name}</Typography>
         <p color="primary" className={classes.price}>
-          Rs
+          Lei
           {this.props.price}
         </p>
-        <Tooltip title="Add To Favorites and Save Offline">
-          <Button
-            variant="fab"
-            color="secondary"
-            aria-label="Add"
-            className={classes.button}
-            onClick={() =>
-              this._handleFavoriteClick(
-                this.props.to,
-                this.props.avatar,
-                this.props.favorite
-              )
-            }
-          >
-            {this.props.favorite && <Favorite />}
-            {!this.props.favorite && <FavoriteBorderOutlined />}
-          </Button>
-        </Tooltip>
       </Paper>
-    );
+    );*/
+    return (
+      <Card className={classes.card}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt={this.props.name}
+            className={classes.media}
+            height="140"
+            image={this.props.file}
+            title={this.props.name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {this.props.title}
+            </Typography>
+              <List dense="true">
+                <ListItem>
+                  <ListItemText
+                    primary="Category"
+                    secondary={this.props.category}
+                  />
+                </ListItem>
+              </List>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Typography component="p" className={classes.price}>
+            {this.props.price} Lei
+          </Typography>
+          <Button size="small" color="primary" component={Link}
+                to={`/listings/${this.props.to}`}>
+            View Product
+          </Button>
+        </CardActions>
+      </Card>
+    )
   }
 }
 

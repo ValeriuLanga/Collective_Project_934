@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import { CircularProgress } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
@@ -54,6 +56,8 @@ class AdsCategory extends React.Component {
     this.props.dispatch(getAds());
   }
 
+  goHome = () => this.props.location.pathname = "/";
+
   render() {
     const { ads, classes, user } = this.props;
     const { category } = this.props.match.params;
@@ -87,15 +91,28 @@ class AdsCategory extends React.Component {
     if (!ads.isLoading && filteredAds.length === 0) {
       postContent = (
         <div className={classes.root}>
-          <h2>
-            <em>
-              "No Ads related to this category. Please check something else"{" "}
-            </em>
-            <br />
-            <Link to="/">Go to Home Page</Link>
-            <br />
-            <Link to="/submitad">Create New Ad</Link>
-          </h2>
+          <Grid container spacing={8} className={classes.container}>
+            <Grid item xs={12}>
+              <h2>
+                <em>
+                  <Typography color="primary">
+                  No ads to show in this category
+                  </Typography>
+                </em>
+              </h2>
+            </Grid>
+            <Grid item xs={12}>
+              <Button 
+                variant="contained" 
+                size="large" 
+                color="primary" 
+                className={classes.button} 
+                component={Link}
+                to="/">
+                  BACK TO HOME
+              </Button>
+            </Grid>
+          </Grid>
         </div>
       );
     }

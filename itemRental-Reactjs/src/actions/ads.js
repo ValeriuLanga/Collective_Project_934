@@ -41,7 +41,7 @@ export const getAds = () => dispatch => {
     .then(response => {
       dispatch({
         type: GET_ADS,
-        payload: response
+        payload: response['rentableitems']
       });
     })
     .catch(error => {

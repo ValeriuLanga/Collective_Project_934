@@ -5,6 +5,8 @@ import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
+import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
+
 import AddItem from "../Ads/AddItem";
 import { getAds } from "../../actions/ads";
 
@@ -65,15 +67,16 @@ class AdsCategory extends React.Component {
     } else {
       postContent = filteredAds.map(item => {
         return (
-          <Grid item md={4} key={item._id}>
+          <Grid item md={4} key={item.id}>
             <AddItem
-              file={`https://olx-backend.herokuapp.com/${item.file}`}
+              file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
               title={item.title}
               price={item.price}
-              key={item._id}
-              to={item._id}
-              avatar={user.avatar}
-              favorite={item.favorite}
+              key={item.id}
+              to={item.id}
+              name={item.owner_name}
+              rating={item.rating}
+              category={item.category}
             />
           </Grid>
         );
@@ -84,7 +87,7 @@ class AdsCategory extends React.Component {
         <div className={classes.root}>
           <h2>
             <em>
-              "No Ads related to this category. Please check something else"{" "}
+              No ads to show
             </em>
             <br />
             <Link to="/">Go to Home Page</Link>

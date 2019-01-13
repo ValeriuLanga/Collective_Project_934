@@ -286,7 +286,7 @@ class TextFieldMargins extends React.Component {
         <div className="searchContainer">
           <form onSubmit={this._handleSubmit}>
           <Grid container spacing={24}>
-            <Grid item md>
+            <Grid item md xs={12}>
               <NoSsr>
                 <Select
                   classes={classes}
@@ -300,7 +300,7 @@ class TextFieldMargins extends React.Component {
                 />
               </NoSsr>
               </Grid>
-              <Grid item md>
+              <Grid item md xs={12}>
                 <NoSsr>
                   <Select
                     classes={classes}
@@ -314,7 +314,7 @@ class TextFieldMargins extends React.Component {
                   />
                 </NoSsr>
               </Grid>
-              <Grid item md="2">
+              <Grid item md={2} xs={12}>
                 <Button
                   variant="contained"
                   color="primary"
