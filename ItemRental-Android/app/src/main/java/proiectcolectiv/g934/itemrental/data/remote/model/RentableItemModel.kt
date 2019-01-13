@@ -25,5 +25,7 @@ data class RentableItemModel(
     var startDate: String,
 
     @SerializedName("end_date")
-    var endDate: String
+    var endDate: String,
+
+    var imagePath: String
 )
