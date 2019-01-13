@@ -12,6 +12,7 @@ class RentableItemModel(db.Model):
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     receiving_details = db.Column(db.String)
+    price = db.Column(db.Integer)
     item_description = db.Column(db.String)
     owner_name = db.Column(db.String)
     photo_name = db.Column(db.String)
@@ -23,6 +24,7 @@ class RentableItemModel(db.Model):
     def __init__(self, data):
         self.category = data.get("category")
         self.title = data.get("title")
+        self.price = data.get("price")
         self.usage_type = data.get("usage_type")
         self.receiving_details = data.get("receiving_details")
         self.item_description = data.get("item_description")
@@ -55,6 +57,7 @@ class RentableItemSchema(Schema):
     receiving_details = fields.String()
     item_description = fields.String()
     rented = fields.Boolean()
+    price = fields.Integer()
     title = fields.String()
     owner_name = fields.String()
 
