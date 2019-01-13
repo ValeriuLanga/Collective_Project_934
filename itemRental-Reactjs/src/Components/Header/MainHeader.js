@@ -56,7 +56,6 @@ const styles = theme => ({
     display: "flex",
     width: "100%"
   },
-
   appBar: {
     position: "absolute",
     transition: theme.transitions.create(["margin", "width"], {
@@ -288,7 +287,7 @@ class PersistentDrawer extends React.Component {
                   <Button
                     variant="contained"
                     color="default"
-                    style={{ color: "#2965BE" }}
+                    style={{ color: "#2965BE", backgroundColor: "#fafafa" }}
                     className={classes.button}
                     component={Link}
                     to={"/dashboard"}

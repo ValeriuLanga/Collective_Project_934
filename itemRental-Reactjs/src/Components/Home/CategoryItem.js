@@ -16,7 +16,7 @@ const styles = theme => ({
     justifyContent: "center",
     AlignItems: "center",
     padding: "40px 0px",
-    backgroundColor: "#ffe9d6"
+    backgroundColor: "#fafafa"
   },
   link: {
     color: "#000",

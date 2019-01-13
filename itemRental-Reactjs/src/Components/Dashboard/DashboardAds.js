@@ -115,6 +115,9 @@ class AdsCategory extends React.Component {
     }
     return (
       <div>
+        <Typography variant="h4" gutterBottom align="center" style={{width: "100%"}}>
+          Your Posts
+        </Typography>
         <div>
           <Grid container spacing={8} className={classes.container}>
             {postContent}
