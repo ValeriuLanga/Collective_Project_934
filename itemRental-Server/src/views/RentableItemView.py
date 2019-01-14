@@ -85,7 +85,13 @@ def uploadimage(rentableitem_id):
         file.save(os.path.join(os.getcwd(), 'photos', filename))
         return custom_response("upload succes", 200)
     else:
-        return custom_response("this rentable item has already a photo", 404)
+        if os.path.isfile(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name)) is True:
+            return custom_response("this rentable item has already a photo", 404)
+        else:
+            rentableitem.photo_name = filename
+            db.session.commit()
+            file.save(os.path.join(os.getcwd(), 'photos', filename))
+            return custom_response("upload succes", 200)
 
 
 @rentableitem_api.route('/downloadimage/<int:rentableitem_id>', methods=['GET'])
@@ -93,6 +99,12 @@ def downloadimage(rentableitem_id):
     rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
     if not rentableitem:
         return custom_response({'error': 'rentable item not found'}, 404)
+    if rentableitem.photo_name is None or rentableitem.photo_name == '':
+        return custom_response({'error': 'rentable item does not have a photo'}, 404)
+    if os.path.isfile(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name)) is False:
+        rentableitem.photo_name = ''
+        db.session.commit()
+        return custom_response({'error': 'rentable item does not have a photo'}, 404)
     return send_file(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name), as_attachment=True)
 
 
