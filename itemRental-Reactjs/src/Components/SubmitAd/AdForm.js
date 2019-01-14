@@ -56,68 +56,81 @@ const styles = theme => ({
 class InputAdornments extends React.Component {
     state = {
         title: "",
+        receiving_details: "",
         category: "",
         usage_type: "",
-        name: "",
         description: "",
         price: 0,
         start_date: moment(new Date()).format('LLL'),
         end_date: moment(new Date()).add(1, 'days').format('LLL'),
-        address: "",
-        phone: 0,
-        email: "",
-        city: "",
-        files: [],
+        files: "",
         imagePreviewUrl: "",
         error: ""
     };
 
+
     handleChange = prop => event => {
         this.setState({[prop]: event.target.value});
+    };
+    handleChangePickers = prop => event => {
+        this.setState({[prop]: event});
     };
 
     onPreviewDrop = files => {
         this.setState({
-            files: this.state.files.concat(files)
+            files: files[0]
         });
     };
 
     _handleSubmit = e => {
-        console.log(this.state.start_date, moment(this.state.start_date).format('MMM DD YYYY h:mma'))
+        const {name} = JSON.parse(localStorage.user);
         e.preventDefault();
 
 
         const state = this.state;
-        if (
-            !state.title ||
+        if (!state.title ||
             !state.description ||
             !state.price ||
-            !state.city ||
-            !state.address ||
-            !state.phone
+            !state.receiving_details ||
+            !state.category ||
+            !state.usage_type
         ) {
             this.setState({
                 error: "Please fill all the feilds!"
             });
-        } else {
+        } else if (!moment(state.end_date).isAfter(state.start_date)) {
+            this.setState({
+                error: "End date cannot be before start date!"
+            });
+        } else if( parseInt(state.price) <= 0){
+            this.setState({
+                error: "Price cannot be 0 or below!"
+            });
+        } else{
             this.setState({
                 error: ""
             });
-            var formData = new FormData();
-            formData.append("title", state.title);
-            formData.append("category", state.category);
-            formData.append("usage_type", state.usage_type);
-            formData.append("description", state.description);
-            formData.append("address", state.address);
-            formData.append("price", state.price);
-            formData.append("name", state.name);
-            formData.append("email", state.email);
-            formData.append("city", state.city);
-            formData.append("phone", state.phone);
-            formData.append("file", state.files[0]);
+            const start_date = moment(state.start_date).format('MMM DD YYYY h:mma');
+            const end_date = moment(state.end_date).format('MMM DD YYYY h:mma');
 
-            this.props.onSubmit(formData);
-            console.log(formData);
+            let data = {
+                category: state.category,
+                usage_type: state.usage_type,
+                receiving_details: state.receiving_details,
+                item_description: state.description,
+                owner_name: name,
+                title: state.title,
+                price: parseInt(state.price),
+                start_date: start_date,
+                end_date: end_date,
+            };
+            let formData = new FormData();
+            formData.append("pic", state.files);
+
+            console.log(this.state.files)
+
+            this.props.onSubmit(data, formData);
+            console.log(data);
         }
     };
 
@@ -128,9 +141,9 @@ class InputAdornments extends React.Component {
             <div className={classes.container}>
                 <Paper className={classes.paper}>
                     <div className={classes.root}>
-                    <Typography variant="h3" gutterBottom align="center" style={{width: "100%"}}>
-                        Submit an Ad
-                    </Typography>
+                        <Typography variant="h3" gutterBottom align="center" style={{width: "100%"}}>
+                            Submit an Ad
+                        </Typography>
                         <form onSubmit={this._handleSubmit} style={{width: "100%"}}>
                             <FormControl fullWidth className={classes.margin}>
                                 <InputLabel htmlFor="adornment-password">Title</InputLabel>
@@ -139,6 +152,15 @@ class InputAdornments extends React.Component {
                                     type="text"
                                     value={this.state.title}
                                     onChange={this.handleChange("title")}
+                                />
+                            </FormControl>
+                            <FormControl fullWidth className={classes.margin}>
+                                <InputLabel htmlFor="adornment-password">Receiving details</InputLabel>
+                                <Input
+                                    id="receiving_details"
+                                    type="text"
+                                    value={this.state.receiving_details}
+                                    onChange={this.handleChange("receiving_details")}
                                 />
                             </FormControl>
                             <Grid container spacing={24}>
@@ -158,18 +180,12 @@ class InputAdornments extends React.Component {
                                             <MenuItem value="">
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value={"pets"}>Pets</MenuItem>
-                                            <MenuItem value={"cars"}>Cars</MenuItem>
-                                            <MenuItem value={"property"}>Property</MenuItem>
-                                            <MenuItem value={"bikes"}>Bikes</MenuItem>
-                                            <MenuItem value={"electronics"}>Electronics</MenuItem>
-                                            <MenuItem value={"mobiles"}>Mobiles</MenuItem>
-                                            <MenuItem value={"furniture"}>Furniture</MenuItem>
-                                            <MenuItem value={"books"}>Books</MenuItem>
-                                            <MenuItem value={"services"}>Services</MenuItem>
-                                            <MenuItem value={"fashion"}>Fashion</MenuItem>
-                                            <MenuItem value={"agriculture"}>Agriculture</MenuItem>
-                                            <MenuItem value={"sports"}>Sports</MenuItem>
+                                            <MenuItem value={"Film and Photography"}>Film & Photography</MenuItem>
+                                            <MenuItem value={"Projectors and Screens"}>Projectors & Screens</MenuItem>
+                                            <MenuItem value={"Drones"}>Drones</MenuItem>
+                                            <MenuItem value={"DJ Equipment"}>DJ Equipment</MenuItem>
+                                            <MenuItem value={"Sports"}>Sports</MenuItem>
+                                            <MenuItem value={"Musical Instruments"}>Musical Instruments</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>
@@ -240,11 +256,11 @@ class InputAdornments extends React.Component {
                                         className={classNames(classes.margin, classes.textField)}
                                     >
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                            <DateTimePicker 
+                                            <DateTimePicker
                                                 margin="normal"
                                                 label="Start Date"
                                                 value={this.state.start_date}
-                                                onChange={this.handleChange("start_date")}
+                                                onChange={this.handleChangePickers("start_date")}
                                             />
                                         </MuiPickersUtilsProvider>
                                     </FormControl>
@@ -255,25 +271,64 @@ class InputAdornments extends React.Component {
                                         className={classNames(classes.margin, classes.textField)}
                                     >
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                            <DateTimePicker 
+                                            <DateTimePicker
                                                 margin="normal"
                                                 label="End Date"
                                                 value={this.state.end_date}
-                                                onChange={this.handleChange("end_date")}
+                                                onChange={this.handleChangePickers("end_date")}
                                             />
                                         </MuiPickersUtilsProvider>
                                     </FormControl>
                                 </Grid>
                             </Grid>
+                                <Grid container spacing={24}>
+                                    <Grid item md={6}>
+                                        <FormControl
+                                            fullWidth
+                                            className={classNames(classes.margin, classes.textField)}
+                                        >
+                                        <ReactDropzone accept="image/*" onDrop={this.onPreviewDrop}>
+                                            Drop an image!
+                                        </ReactDropzone>
+
+                            </FormControl>
+
+                        </Grid>
+                                    <Grid item md={6}>
+                                        <FormControl
+                                            fullWidth
+                                            className={classNames(classes.margin, classes.textField)}
+                                        >
+
+                                        {/*{this.state.files !== "" && <h4>Preview</h4>}*/}
+                                        {this.state.files !== ""  &&
+                                        <img
+                                            src={this.state.files.preview}
+                                            key={this.state.files.preview}
+                                            alt="Preview"
+                                            width="100px"
+                                            style={{padding: "20px", marginBottom: "20px"}}
+                                        />}
+                                    </FormControl>
+                                    </Grid>
+                                </Grid>
+
+
                             {this.state.error && <p>{this.state.error}</p>}
+                            <FormControl
+                                fullWidth
+                                className={classNames(classes.margin, classes.textField)}
+                            >
                             <Button
                                 variant="contained"
                                 color="primary"
                                 className={classes.button}
                                 type="submit"
+                                style={{ backgroundColor: "#FF7700" }}
                             >
-                                Register
+                                POST
                             </Button>
+                            </FormControl>
                         </form>
                     </div>
                 </Paper>

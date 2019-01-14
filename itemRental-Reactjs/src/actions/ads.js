@@ -10,12 +10,17 @@ import {
   GET_AD
 } from "./types";
 
-import { URL_SERVER, USERS, RENTABLE_ITEMS } from "../utils/constants";
+import { URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, } from "../utils/constants";
 // Register User
-export const postAd = (formData, history) => dispatch => {
-  fetch("https://olx-backend.herokuapp.com/ads", {
+export const postAd = (formData, history, file) => dispatch => {
+
+  fetch(URL_SERVER + "/" + RENTABLE_ITEMS + "/", {
     method: "POST",
-    body: formData
+    body: JSON.stringify(formData),
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+      }
   })
     .then(res => res.json())
     .then(response => {
@@ -23,7 +28,22 @@ export const postAd = (formData, history) => dispatch => {
         type: POST_AD,
         payload: response
       });
-      history.push("/dashboard");
+        const {id} = response;
+        fetch(URL_SERVER + "/" + RENTABLE_ITEMS + "/" + RENTABLE_UPLOAD_IMAGE + "/" + id, {
+            method: "POST",
+            body: file
+        }).then(res => res.json())
+            .then(response => {
+                history.push("/dashboard");
+            })
+            .catch(error => {
+                if (error) {
+                    dispatch({
+                        type: GET_ERRORS,
+                        payload: error
+                    });
+                }
+            });
     })
     .catch(error => {
       if (error) {
