@@ -49,7 +49,7 @@
                 android:id="@+id/userEditText"
                 android:layout_width="256dp"
                 android:layout_height="40dp"
-                android:hint="@string/user"
+                android:hint="@string/username"
                 android:inputType="text"
                 android:maxLines="1"
                 android:textAlignment="center" />
