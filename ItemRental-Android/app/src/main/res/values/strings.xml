@@ -1,9 +1,18 @@
 <resources>
     <string name="app_name">ItemRental</string>
-    <string name="username">Username</string>
+    <string name="user">User</string>
+    <string name="name">Username</string>
     <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="create_account_message">Create an account:</string>
+    <string name="email">E-mail</string>
+    <string name="phone_number">Phone Number</string>
     <string name="button_register">REGISTER</string>
+    <string name="button_cancel">CANCEL</string>
     <string name="button_log_in">LOG IN</string>
     <string name="register_message">Don\'t have an account?</string>
     <string name="welcome_message">Welcome to Item Rental</string>
+    <string name="separator">»</string>
+    <string name="city">City</string>
+    <string name="street">Street</string>
 </resources>

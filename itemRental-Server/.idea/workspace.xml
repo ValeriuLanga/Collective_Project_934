@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6517f2af-d868-47b0-ac42-e35066544ca0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/drawable/ic_user.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/layout/activity_register.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/layout/item_rentableitem.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/java/proiectcolectiv/g934/itemrental/page/login/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/java/proiectcolectiv/g934/itemrental/page/login/LoginActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/layout/activity_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/itemRental-Server.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ItemRental-Android/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -251,17 +248,17 @@
       <workItem from="1546773947273" duration="159000" />
       <workItem from="1546774121861" duration="114000" />
       <workItem from="1546774295851" duration="43000" />
+      <workItem from="1546872386214" duration="234000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7842000" />
+    <option name="totallyTimeSpent" value="8076000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1953602" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1978022" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
