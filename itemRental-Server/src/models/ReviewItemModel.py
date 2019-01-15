@@ -26,6 +26,10 @@ class ReviewItemModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
+    @staticmethod
+    def get_all_reviews_with_rentableitem_id(value):
+        return ReviewItemModel.query.filter_by(rentableitem_id=value).all()
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()

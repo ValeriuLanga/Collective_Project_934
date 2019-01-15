@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,10 +20,10 @@
             android:layout_height="64dp"
             android:layout_marginTop="10dp"
             android:src="@mipmap/ic_logo_foreground"
+            app:layout_constraintEnd_toStartOf="@id/createAccountTextView"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/createAccountTextView"
             tools:ignore="ContentDescription" />
 
         <TextView
@@ -159,19 +158,16 @@
             android:text="@string/button_register"
             app:layout_constraintEnd_toEndOf="@id/streetInput"
             app:layout_constraintStart_toStartOf="@id/streetInput"
-
             app:layout_constraintTop_toBottomOf="@id/streetInput" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/cancelButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/button_cancel"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
             app:layout_constraintEnd_toEndOf="@id/registerButton"
             app:layout_constraintStart_toStartOf="@id/registerButton"
             app:layout_constraintTop_toBottomOf="@id/registerButton" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </ScrollView>

@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"admin\",\n\t\"password\": \"parola\",\n\t\"email\": \"danut@\",\n\t\"rating\": \"10\",\n\t\"phone\": \"0753793688\",\n\t\"location\":\n\t\t{\n\t\t\t\"city\": \"piatra neamt\",\n\t\t\t\"street\": \"florilor\",\n\t\t\t\"coordX\": \"11111.11123\",\n\t\t\t\"coordY\": \"112312.1233\"\n\t\t}\n}"
+					"raw": "{\n\t\"name\": \"daniel\",\n\t\"password\": \"parola\",\n\t\"email\": \"danut@\",\n\t\"rating\": 10,\n\t\"phone\": \"0753793688\",\n\t\"location\":\n\t\t{\n\t\t\t\"city\": \"piatra neamt\",\n\t\t\t\"street\": \"florilor\",\n\t\t\t\"coordX\": \"11111.11123\",\n\t\t\t\"coordY\": \"112312.1233\"\n\t\t}\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/v1/users/",
@@ -93,7 +93,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"text\": \"bad choice\",\n\t\"rating\": \"50\",\n\t\"owner_name\": \"admin\",\n\t\"rentableitem_id\": \"1\"\n}"
+					"raw": "{\n\t\"text\": \"bad choice\",\n\t\"rating\": \"50\",\n\t\"owner_name\": \"daniel\",\n\t\"rentableitem_id\": \"16\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/v1/reviews/",
@@ -130,7 +130,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"category\": \"category1\",\n\t\"usage_type\": \"usage1\",\n\t\"receiving_details\": \"details\",\n\t\"item_description\": \"description\",\n\t\"owner_name\": \"admin\",\n\t\"start_date\": \"Dec 22 2018  1:33PM\",\n\t\"end_date\": \"Aug 13 2019  2:33AM\"\n}"
+					"raw": "{\n\t\"category\": \"category1\",\n\t\"usage_type\": \"usage1\",\n\t\"receiving_details\": \"details\",\n\t\"item_description\": \"description\",\n\t\"owner_name\": \"daniel\",\n\t\"price\": 100,\n\t\"title\": \"motofireastrau\",\n\t\"start_date\": \"Dec 22 2018 1:33PM\",\n\t\"end_date\": \"Aug 13 2019 2:33AM\"\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/",
@@ -154,16 +154,22 @@
 			"response": []
 		},
 		{
-			"name": "get all rentable items of a user",
+			"name": "upload photo",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": ""
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pic",
+							"type": "file",
+							"src": ""
+						}
+					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/users/rentableitems/admin",
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/uploadimage/18",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -175,9 +181,9 @@
 					"path": [
 						"api",
 						"v1",
-						"users",
 						"rentableitems",
-						"admin"
+						"uploadimage",
+						"18"
 					]
 				}
 			},
@@ -193,7 +199,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/users/reviews/admin",
+					"raw": "http://127.0.0.1:5000/api/v1/users/reviews/daniel",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -207,7 +213,7 @@
 						"v1",
 						"users",
 						"reviews",
-						"admin"
+						"daniel"
 					]
 				}
 			},
@@ -223,7 +229,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/reviews/1",
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/reviews/7",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -237,7 +243,7 @@
 						"v1",
 						"rentableitems",
 						"reviews",
-						"1"
+						"7"
 					]
 				}
 			},
@@ -253,7 +259,36 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/v1/users/rentableitems/admin",
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"rentableitems"
+					]
+				},
+				"description": "Get all rentable items"
+			},
+			"response": []
+		},
+		{
+			"name": "get all rentable items of a user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/users/rentableitems/daniel",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -267,10 +302,129 @@
 						"v1",
 						"users",
 						"rentableitems",
-						"admin"
+						"daniel"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "download photo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
 				},
-				"description": "Get all rentable items"
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/downloadimage/18",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"rentableitems",
+						"downloadimage",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rent item",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/rent/17",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"rentableitems",
+						"rent",
+						"17"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "return item",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/return/15",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"rentableitems",
+						"return",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete item",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/v1/rentableitems/delete/16",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"rentableitems",
+						"delete",
+						"16"
+					]
+				}
 			},
 			"response": []
 		}

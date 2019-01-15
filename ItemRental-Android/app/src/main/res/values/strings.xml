@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">ItemRental</string>
+    <string name="app_name">RentX</string>
     <string name="user">User</string>
-    <string name="name">Username</string>
+    <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="create_account_message">Create an account:</string>
@@ -12,6 +12,10 @@
     <string name="button_log_in">LOG IN</string>
     <string name="register_message">Don\'t have an account?</string>
     <string name="welcome_message">Welcome to Item Rental</string>
+
+    <!-- Empty Layout -->
+    <string name="error_retry">Retry</string>
+    <string name="no_results">No results</string>
     <string name="separator">»</string>
     <string name="city">City</string>
     <string name="street">Street</string>
