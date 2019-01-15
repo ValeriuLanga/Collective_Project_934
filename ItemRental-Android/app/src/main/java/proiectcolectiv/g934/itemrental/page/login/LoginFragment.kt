@@ -5,14 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.transition.TransitionInflater
 import kotlinx.android.synthetic.main.fragment_login.*
 import proiectcolectiv.g934.itemrental.R
 import proiectcolectiv.g934.itemrental.base.BaseFragment
 import proiectcolectiv.g934.itemrental.data.remote.ApiErrorThrowable
-import proiectcolectiv.g934.itemrental.utils.LoginTextChangedListener
+import proiectcolectiv.g934.itemrental.utils.EmptyTextChangedListener
 import proiectcolectiv.g934.itemrental.utils.Outcome
 import proiectcolectiv.g934.itemrental.utils.observeNonNull
+import proiectcolectiv.g934.itemrental.utils.showToast
 
 class LoginFragment : BaseFragment<LoginViewModel, LoginViewModelFactory>() {
 
@@ -22,8 +25,11 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewModelFactory>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-                TransitionInflater.from(activity).inflateTransition(android.R.transition.move).apply { duration = 500 }
+        TransitionInflater.from(activity).inflateTransition(android.R.transition.move).apply {
+            duration = 300
+            this@LoginFragment.sharedElementEnterTransition = this
+            this@LoginFragment.sharedElementReturnTransition = this
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,48 +39,56 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewModelFactory>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListeners()
+        setupObservers()
     }
 
     private fun setupListeners() {
-        username_edit_text.addTextChangedListener(LoginTextChangedListener(username_input))
-        password_edit_text.addTextChangedListener(LoginTextChangedListener(password_input))
-        log_in_button.setOnClickListener {
-            if (username_input.error.isNullOrEmpty() && password_input.error.isNullOrEmpty()
-                && !username_edit_text.text.isNullOrEmpty() && !password_edit_text.text.isNullOrEmpty()
-            ) {
-                viewModel.loginUser(username_edit_text.text!!.toString(), password_edit_text.text!!.toString())
+        usernameEditText.addTextChangedListener(EmptyTextChangedListener(usernameInput))
+        passwordEditText.addTextChangedListener(EmptyTextChangedListener(passwordInput))
+        logInButton.setOnClickListener {
+            if (!usernameEditText.text.isNullOrEmpty() && !passwordEditText.text.isNullOrEmpty()) {
+                viewModel.loginUser(usernameEditText.text!!.toString(), passwordEditText.text!!.toString())
             } else {
-                Toast.makeText(activity, "Fields cannot be empty!", Toast.LENGTH_SHORT).show()
-            }
-        }
-        viewModel.loginLiveData.observeNonNull(this) {
-            when (it) {
-                is Outcome.Progress -> if (it.loading) showLoading() else hideLoading()
-                is Outcome.Success -> {
-                    Toast.makeText(activity, "Login successful!", Toast.LENGTH_LONG).show()
-                    hideLoading()
-                }
-                is Outcome.Failure -> {
-                    if (it.error is ApiErrorThrowable) showError(it.error.errorResponse.error)
-                    else showError(it.error.localizedMessage)
-                }
+                activity.showToast(getString(R.string.fields_cannot_be_empty))
             }
         }
         loginEmptyLayout.setRetryClickListener(View.OnClickListener {
-            viewModel.loginUser(username_edit_text.text!!.toString(), password_edit_text.text!!.toString())
+            viewModel.loginUser(usernameEditText.text!!.toString(), passwordEditText.text!!.toString())
         })
+        registerButton.setOnClickListener {
+            val extras = FragmentNavigatorExtras(splashImage to ViewCompat.getTransitionName(splashImage)!!)
+            navController.navigate(R.id.action_loginFragment_to_registerFragment, null, null, extras)
+        }
+    }
+
+    private fun setupObservers() {
+        viewModel.loginLiveData.observeNonNull(this) { singleEvent ->
+            singleEvent.getContentIfNotHandled()?.let {
+                when (it) {
+                    is Outcome.Progress -> if (it.loading) showLoading() else hideLoading()
+                    is Outcome.Success -> {
+                        Toast.makeText(activity, "Login successful!", Toast.LENGTH_LONG).show()
+                        hideLoading()
+                    }
+                    is Outcome.Failure -> {
+                        if (it.error is ApiErrorThrowable) showError(it.error.errorResponse.error)
+                        else showError(it.error.localizedMessage)
+                    }
+                }
+            }
+        }
     }
 
     private fun showLoading() {
         loginEmptyLayout.showLoading()
-        log_in_button.visibility = View.INVISIBLE
-        register_layout.visibility = View.INVISIBLE
+        logInButton.visibility = View.INVISIBLE
+        registerLayout.visibility = View.INVISIBLE
     }
 
     private fun hideLoading() {
         loginEmptyLayout.hide()
-        log_in_button.visibility = View.VISIBLE
-        register_layout.visibility = View.VISIBLE
+        logInButton.visibility = View.VISIBLE
+        registerLayout.visibility = View.VISIBLE
     }
 
     private fun showError(error: String?) {

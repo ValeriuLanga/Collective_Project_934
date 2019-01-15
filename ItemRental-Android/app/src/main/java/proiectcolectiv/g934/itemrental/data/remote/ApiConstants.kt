@@ -5,7 +5,7 @@ object ApiConstants {
     const val BASE_URL = "http://192.168.100.4:5000/api/v1/"
 
     object Users {
-        const val USERS = "users"
+        const val USERS = "users/"
         const val USERS_LOGIN = "users/login"
         const val USERS_REVIEWS = "users/reviews"
         const val USERS_RENTABLE = "users/rentableitems"

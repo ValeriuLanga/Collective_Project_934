@@ -18,5 +18,5 @@ class LoginModule {
         userRepo: UserRepo,
         @Named(AppPrefsConstants.USER_PREF) userPref: StringPreference,
         gson: Gson
-    ): LoginViewModelFactory = LoginViewModelFactory(userRepo, userPref, gson)
+    ) = LoginViewModelFactory(userRepo, userPref, gson)
 }

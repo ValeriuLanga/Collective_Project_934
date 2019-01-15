@@ -17,8 +17,11 @@
     <string name="street">Street</string>
     <string name="button_register">Register</string>
     <string name="button_cancel">Cancel</string>
+    <string name="register_successful">Register successful! Now you can login.</string>
+    <string name="not_valid_email">Not a valid email address!</string>
 
     <!-- Empty Layout -->
     <string name="error_retry">Retry</string>
     <string name="no_results">No results</string>
+    <string name="fields_cannot_be_empty">Fields cannot be empty!</string>
 </resources>

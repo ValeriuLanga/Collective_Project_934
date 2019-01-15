@@ -8,30 +8,31 @@ import proiectcolectiv.g934.itemrental.data.local.prefs.StringPreference
 import proiectcolectiv.g934.itemrental.data.remote.model.UserModel
 import proiectcolectiv.g934.itemrental.data.remote.repo.UserRepo
 import proiectcolectiv.g934.itemrental.utils.Outcome
+import proiectcolectiv.g934.itemrental.utils.SingleEvent
 
 class LoginViewModel(
-    private val userRepo: UserRepo,
-    private val userPref: StringPreference,
-    private val gson: Gson
+        private val userRepo: UserRepo,
+        private val userPref: StringPreference,
+        private val gson: Gson
 ) : BaseViewModel() {
 
-    val loginLiveData: MutableLiveData<Outcome<UserModel>> = MutableLiveData()
+    val loginLiveData: MutableLiveData<SingleEvent<Outcome<UserModel>>> = MutableLiveData()
 
     fun loginUser(username: String, password: String) {
-        loginLiveData.value = Outcome.loading(true)
+        loginLiveData.value = SingleEvent(Outcome.loading(true))
         addDisposable(
-            userRepo.loginUser(username, password)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::userLoginSuccess, this::userLoginError)
+                userRepo.loginUser(username, password)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(this::userLoginSuccess, this::userLoginError)
         )
     }
 
     private fun userLoginSuccess(userModel: UserModel) {
         userPref.set(gson.toJson(userModel))
-        loginLiveData.value = Outcome.success(userModel)
+        loginLiveData.value = SingleEvent(Outcome.success(userModel))
     }
 
     private fun userLoginError(throwable: Throwable) {
-        loginLiveData.value = Outcome.failure(throwable)
+        loginLiveData.value = SingleEvent(Outcome.failure(throwable))
     }
 }

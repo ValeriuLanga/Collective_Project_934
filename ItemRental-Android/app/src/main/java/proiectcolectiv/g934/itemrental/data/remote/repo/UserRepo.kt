@@ -13,10 +13,13 @@ class UserRepo @Inject constructor() {
     @Inject
     lateinit var apiService: ApiService
 
-    fun loginUser(username: String, password: String): Flowable<UserModel> {
-        val userLoginModel = UserLoginModel(username, password)
-        return apiService.loginUser(userLoginModel)
-            .subscribeOn(Schedulers.io())
-            .flatMap(ApiErrorConverter())
-    }
+    fun loginUser(username: String, password: String): Flowable<UserModel> =
+            apiService.loginUser(UserLoginModel(username, password))
+                    .subscribeOn(Schedulers.io())
+                    .flatMap(ApiErrorConverter())
+
+    fun registerUser(userModel: UserModel): Flowable<UserModel> =
+            apiService.registerUser(userModel)
+                    .subscribeOn(Schedulers.io())
+                    .flatMap(ApiErrorConverter())
 }

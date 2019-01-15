@@ -9,5 +9,5 @@ class MainModule {
 
     @Provides
     @ActivityScope
-    internal fun provideMainViewModelFactory(): MainViewModelFactory = MainViewModelFactory()
+    internal fun provideMainViewModelFactory() = MainViewModelFactory()
 }
