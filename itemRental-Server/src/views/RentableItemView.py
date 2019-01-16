@@ -29,6 +29,10 @@ def create():
         message = {'error': 'User does not exists exist, please supply another name'}
         return custom_response(message, 400)
 
+    if rentableitem.category not in RentableItemModel.categoryTypes:
+        message = {'error': 'Category does not exists exist, please supply another category'}
+        return custom_response(message, 400)
+
     rentableitem.owner_id = user_in_db.id
     rentableitem.owner = user_in_db
     rentableitem.owner_name = user_in_db.name
@@ -124,6 +128,13 @@ def get_all():
     ri = RentableItems(rentableitems)
     ser_rentableitems = rentableitems_schema.dump(ri)
     response = custom_response(ser_rentableitems, 200)
+    return response
+
+
+@rentableitem_api.route('/categories', methods=['GET'])
+def get_categories():
+    categories = RentableItemModel.categoryTypes
+    response = custom_response({'categories': categories}, 200)
     return response
 
 
