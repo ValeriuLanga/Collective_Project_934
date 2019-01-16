@@ -1,31 +1,38 @@
 package proiectcolectiv.g934.itemrental.data.remote.model
 
+import android.graphics.Bitmap
 import com.google.gson.annotations.SerializedName
 
 data class RentableItemModel(
-    @SerializedName("id")
-    var itemId: Int = 0,
+        @SerializedName("id")
+        val itemId: Int = 0,
 
-    @SerializedName("category")
-    var category: String,
+        @SerializedName("category")
+        val category: String,
 
-    @SerializedName("usage_type")
-    var usageType: String,
+        @SerializedName("usage_type")
+        val usageType: String,
 
-    @SerializedName("receiving_details")
-    var receivingDetails: String,
+        @SerializedName("receiving_details")
+        val receivingDetails: String,
 
-    @SerializedName("item_description")
-    var itemDescription: String,
+        @SerializedName("item_description")
+        val itemDescription: String,
 
-    @SerializedName("owner_name")
-    var ownerName: String,
+        @SerializedName("price")
+        val price: Int,
 
-    @SerializedName("start_date")
-    var startDate: String,
+        @SerializedName("owner_name")
+        val ownerName: String,
 
-    @SerializedName("end_date")
-    var endDate: String,
+        @SerializedName("title")
+        val title: String,
 
-    var imagePath: String
+        @SerializedName("start_date")
+        val startDate: String,
+
+        @SerializedName("end_date")
+        val endDate: String,
+
+        var image: Bitmap? = null
 )

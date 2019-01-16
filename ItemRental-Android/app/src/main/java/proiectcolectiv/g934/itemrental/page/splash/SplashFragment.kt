@@ -5,7 +5,6 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
@@ -31,16 +30,14 @@ class SplashFragment : DaggerFragment() {
         handleApplicationStartup()
     }
 
-    private fun handleApplicationStartup() {
+    private fun handleApplicationStartup() = Handler().postDelayed({
         if (userPref.isSet()) {
-            Toast.makeText(activity, "User already logged in. Restart the app to log again.", Toast.LENGTH_LONG).show()
-            userPref.delete()
+            NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_splashFragment_to_listFragment)
         } else {
-            Handler().postDelayed({
-                val extras = FragmentNavigatorExtras(splashImage to ViewCompat.getTransitionName(splashImage)!!)
-                NavHostFragment.findNavController(this)
+            val extras = FragmentNavigatorExtras(splashImage to ViewCompat.getTransitionName(splashImage)!!)
+            NavHostFragment.findNavController(this)
                     .navigate(R.id.action_splashFragment_to_loginFragment, null, null, extras)
-            }, 1000)
         }
-    }
+    }, 1000)
 }

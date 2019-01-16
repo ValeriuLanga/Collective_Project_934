@@ -3,6 +3,8 @@ package proiectcolectiv.g934.itemrental.page.main
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import proiectcolectiv.g934.itemrental.di.scope.FragmentScope
+import proiectcolectiv.g934.itemrental.page.list.ListFragment
+import proiectcolectiv.g934.itemrental.page.list.ListModule
 import proiectcolectiv.g934.itemrental.page.login.LoginFragment
 import proiectcolectiv.g934.itemrental.page.login.LoginModule
 import proiectcolectiv.g934.itemrental.page.register.RegisterFragment
@@ -23,4 +25,8 @@ abstract class MainFragmentProvider {
     @FragmentScope
     @ContributesAndroidInjector(modules = [RegisterModule::class])
     abstract fun provideRegisterFragment(): RegisterFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [ListModule::class])
+    abstract fun provideListFragment(): ListFragment
 }

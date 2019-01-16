@@ -24,4 +24,7 @@
     <string name="error_retry">Retry</string>
     <string name="no_results">No results</string>
     <string name="fields_cannot_be_empty">Fields cannot be empty!</string>
+
+    <!-- Rentable Item List -->
+    <string name="category_separation">%s » %s</string>
 </resources>

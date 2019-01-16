@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.transition.TransitionInflater
@@ -66,10 +65,7 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewModelFactory>() {
             singleEvent.getContentIfNotHandled()?.let {
                 when (it) {
                     is Outcome.Progress -> if (it.loading) showLoading() else hideLoading()
-                    is Outcome.Success -> {
-                        Toast.makeText(activity, "Login successful!", Toast.LENGTH_LONG).show()
-                        hideLoading()
-                    }
+                    is Outcome.Success -> navController.navigate(R.id.action_loginFragment_to_listFragment)
                     is Outcome.Failure -> {
                         if (it.error is ApiErrorThrowable) showError(it.error.errorResponse.error)
                         else showError(it.error.localizedMessage)
