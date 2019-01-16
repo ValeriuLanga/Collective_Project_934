@@ -53,6 +53,9 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>() {
         listSwipeRefreshLayout.setOnRefreshListener {
             viewModel.getRentableItemsFromServer()
         }
+        listEmptyLayout.setRetryClickListener(View.OnClickListener {
+            viewModel.getRentableItemsFromServer()
+        })
     }
 
     private fun setupObservers() {

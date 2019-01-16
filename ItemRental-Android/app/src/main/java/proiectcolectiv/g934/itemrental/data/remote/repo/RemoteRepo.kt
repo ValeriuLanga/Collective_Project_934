@@ -45,5 +45,6 @@ class RemoteRepo @Inject constructor() {
                     rentableItem.image = bitmap
                     rentableItem
                 }
+                .onErrorReturnItem(rentableItem)
     }
 }

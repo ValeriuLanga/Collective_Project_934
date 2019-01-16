@@ -32,7 +32,11 @@ class ListAdapter(private val context: Context) : RecyclerView.Adapter<ListAdapt
             itemNameTextView.text = title
             userTextView.text = ownerName
             categoryTextView.text = context.getString(R.string.category_separation, category, usageType)
-            itemImage.setImageBitmap(image)
+            if (image != null) {
+                itemImage.setImageBitmap(image)
+            } else {
+                itemImage.setImageDrawable(context.getDrawable(R.mipmap.ic_logo_foreground))
+            }
         }
     }
 }
