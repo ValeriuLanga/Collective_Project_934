@@ -19,9 +19,6 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.dispatch(getAds());
-  }
 
   render() {
     const { classes } = this.props;

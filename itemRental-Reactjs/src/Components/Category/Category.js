@@ -76,7 +76,7 @@ class AdsCategory extends React.Component {
         return (
           <Grid item md={4} key={item._id}>
             <AddItem
-              file={`https://olx-backend.herokuapp.com/${item.file}`}
+              file={`/${item.file}`}
               title={item.title}
               price={item.price}
               key={item._id}

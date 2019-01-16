@@ -101,7 +101,7 @@ export const getOwnAds = (uname) => dispatch => {
 // UPDATE_AD
 export const putAd = (data, _id, avatar, fEmail) => dispatch => {
   console.log(data);
-  fetch(`https://olx-backend.herokuapp.com/ads/${_id}`, {
+  fetch(`${URL_SERVER}/${_id}`, {
     method: "PUT",
     body: JSON.stringify(data), // data can be `string` or {object}!
     headers: {
@@ -119,7 +119,7 @@ export const putAd = (data, _id, avatar, fEmail) => dispatch => {
         caches.open(`${response._id}`).then(cache => {
           return cache.addAll([
             `/listings/${response._id}`,
-            `https://olx-backend.herokuapp.com/${response.file}`,
+            `${URL_SERVER}/${response.file}`,
             `${avatar}`
           ]);
         });
@@ -138,7 +138,7 @@ export const putAd = (data, _id, avatar, fEmail) => dispatch => {
 
 //DELETE_AD
 export const deleteAd = (formData, history, _id) => dispatch => {
-  fetch(`https://olx-backend.herokuapp.com/ads/${_id}`, {
+  fetch(`${URL_SERVER}/${_id}`, {
     method: "DELETE",
     body: formData
   })

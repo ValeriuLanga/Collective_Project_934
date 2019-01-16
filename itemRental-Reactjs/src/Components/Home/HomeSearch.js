@@ -18,6 +18,7 @@ import Grid from "@material-ui/core/Grid";
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 
 import { getAds } from "../../actions/ads";
+import {URL_SERVER} from "../../utils/constants";
 
 const styles = theme => ({
   root: {
@@ -208,7 +209,6 @@ const components = {
 class TextFieldMargins extends React.Component {
   componentDidMount() {
     this.props.dispatch(getAds());
-
     setTimeout(() => {
       if (this.props.ads.ads.length >= 1) {
         this.props.ads.ads.map(item => {
@@ -216,7 +216,7 @@ class TextFieldMargins extends React.Component {
             caches.open(`${item._id}`).then(cache => {
               return cache.addAll([
                 `/listings/${item._id}`,
-                `https://olx-backend.herokuapp.com/${item.file}`,
+                `${URL_SERVER}/${item.file}`,
                 `${this.props.user.avatar}`
               ]);
             });
