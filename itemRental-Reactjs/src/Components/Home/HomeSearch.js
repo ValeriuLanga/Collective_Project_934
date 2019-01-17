@@ -68,6 +68,8 @@ const styles = theme => ({
     maxWidth: 1080,
     justifyContent: "center",
     margin: "0 auto",
+    maxHeight: 93,
+    zIndex: 100
   },
   textField: {
     marginLeft: theme.spacing.unit,
