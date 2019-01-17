@@ -1,3 +1,5 @@
+from enum import Enum
+
 from . import db
 from marshmallow import fields, Schema
 
@@ -5,8 +7,10 @@ from marshmallow import fields, Schema
 class RentableItemModel(db.Model):
     __tablename__ = 'rentableitem'
 
+    categoryTypes = ['Film & Photography', 'Projectors and Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical']
+
     id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String)
+    category = db.Column(db.Enum('Film & Photography', 'Projectors and Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical', name='types'))
     title = db.Column(db.String)
     usage_type = db.Column(db.String)
     start_date = db.Column(db.DateTime)
