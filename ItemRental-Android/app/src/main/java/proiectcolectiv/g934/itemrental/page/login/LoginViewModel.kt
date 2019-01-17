@@ -23,16 +23,12 @@ class LoginViewModel(
         addDisposable(
                 userRepo.loginUser(username, password)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::userLoginSuccess, this::userLoginError)
+                        .subscribe({
+                            userPref.set(gson.toJson(it))
+                            loginLiveData.value = SingleEvent(Outcome.success(it))
+                        }, {
+                            loginLiveData.value = SingleEvent(Outcome.failure(it))
+                        })
         )
-    }
-
-    private fun userLoginSuccess(userModel: UserModel) {
-        userPref.set(gson.toJson(userModel))
-        loginLiveData.value = SingleEvent(Outcome.success(userModel))
-    }
-
-    private fun userLoginError(throwable: Throwable) {
-        loginLiveData.value = SingleEvent(Outcome.failure(throwable))
     }
 }

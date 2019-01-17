@@ -16,15 +16,11 @@ class ListViewModel(private val remoteRepo: RemoteRepo) : BaseViewModel() {
         addDisposable(
                 remoteRepo.getAllRentableItems()
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::getItemsSuccess, this::getItemsError)
+                        .subscribe({
+                            rentableItemsLiveData.value = Outcome.success(it)
+                        }, {
+                            rentableItemsLiveData.value = Outcome.failure(it)
+                        })
         )
-    }
-
-    private fun getItemsSuccess(itemList: List<RentableItemModel>) {
-        rentableItemsLiveData.value = Outcome.success(itemList)
-    }
-
-    private fun getItemsError(throwable: Throwable) {
-        rentableItemsLiveData.value = Outcome.failure(throwable)
     }
 }

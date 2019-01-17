@@ -28,7 +28,7 @@ class LogoutDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         context?.let { it ->
             logoutDialog = Dialog(it)
-            logoutDialog.setContentView(View.inflate(activity, R.layout.dialog_logout, null))
+            logoutDialog.setContentView(View.inflate(it, R.layout.dialog_logout, null))
         }
         return logoutDialog
     }

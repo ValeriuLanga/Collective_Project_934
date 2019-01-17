@@ -34,5 +34,6 @@ data class RentableItemModel(
         @SerializedName("end_date")
         val endDate: String = "",
 
+        @Transient
         var image: Bitmap? = null
 )

@@ -17,15 +17,11 @@ class RegisterViewModel(private val userRepo: UserRepo) : BaseViewModel() {
         addDisposable(
                 userRepo.registerUser(userModel)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(this::registerUserSuccess, this::registerUserError)
+                        .subscribe({
+                            registerLiveData.value = SingleEvent(Outcome.success(it))
+                        }, {
+                            registerLiveData.value = SingleEvent(Outcome.failure(it))
+                        })
         )
-    }
-
-    private fun registerUserSuccess(userModel: UserModel) {
-        registerLiveData.value = SingleEvent(Outcome.success(userModel))
-    }
-
-    private fun registerUserError(throwable: Throwable) {
-        registerLiveData.value = SingleEvent(Outcome.failure(throwable))
     }
 }

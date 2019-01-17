@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -151,15 +152,59 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addEndDateInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addPriceInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addEndDateEditText"
+                    android:layout_width="256dp"
+                    android:layout_height="wrap_content"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/end_date" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/addImage"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_choose_image"
+                app:layout_constraintEnd_toEndOf="@id/addEndDateInput"
+                app:layout_constraintStart_toStartOf="@id/addEndDateInput"
+                app:layout_constraintTop_toBottomOf="@id/addEndDateInput"
+                tools:ignore="ContentDescription" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addAddButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:text="@string/add"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/addPriceInput"
                 app:layout_constraintStart_toStartOf="@id/addPriceInput"
-                app:layout_constraintTop_toBottomOf="@id/addPriceInput" />
+                app:layout_constraintTop_toBottomOf="@id/addImage"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <proiectcolectiv.g934.itemrental.utils.EmptyLayout
+                android:id="@+id/addEmptyLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/addAddButton"
+                app:layout_constraintEnd_toEndOf="@id/addAddButton"
+                app:layout_constraintStart_toStartOf="@id/addAddButton"
+                app:layout_constraintTop_toTopOf="@id/addAddButton" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

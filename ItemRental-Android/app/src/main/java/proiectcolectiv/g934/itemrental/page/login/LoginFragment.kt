@@ -91,38 +91,4 @@ class LoginFragment : BaseFragment<LoginViewModel, LoginViewModelFactory>() {
         loginEmptyLayout.setError(error)
         loginEmptyLayout.showError()
     }
-
-
-//    private var mCurrentPhotoPath: String = ""
-//
-//    private fun createImageFile(): File {
-//        // Create an image file name
-//        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())
-//        val storageDir: File? = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-//        return File.createTempFile(
-//            "JPEG_${timeStamp}_", /* prefix */
-//            ".jpg", /* suffix */
-//            storageDir /* directory */
-//        ).apply {
-//            // Save a file: path for use with ACTION_VIEW intents
-//            mCurrentPhotoPath = absolutePath
-//        }
-//    }
-//
-//    private fun dispatchTakePictureIntent() {
-//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-//            takePictureIntent.resolveActivity(activity.packageManager)?.also {
-//                val photoFile: File? = createImageFile()
-//                photoFile?.also { file ->
-//                    val photoURI: Uri = FileProvider.getUriForFile(
-//                        activity,
-//                        "com.example.android.fileprovider",
-//                        file
-//                    )
-//                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-//                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-//                }
-//            }
-//        }
-//    }
 }

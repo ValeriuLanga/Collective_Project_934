@@ -14,6 +14,8 @@ import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class RemoteRepo @Inject constructor() {
@@ -41,20 +43,17 @@ class RemoteRepo @Inject constructor() {
     private fun uploadImageToServer(itemId: Int, bitmap: Bitmap?): Flowable<String> {
         if (bitmap == null)
             return Flowable.just("Image missing from local source")
-
-        val file = File(context.cacheDir, "TempPhotoUpload")
+        val filePath = "JPEG_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())}_.jpg"
+        val file = File(context.cacheDir, filePath)
         file.createNewFile()
-
         val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, byteArrayOutputStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
         val bitmapData = byteArrayOutputStream.toByteArray()
-
         FileOutputStream(file).apply {
             write(bitmapData)
             flush()
             close()
         }
-
         val multipartBody =
                 MultipartBody.Part.createFormData("pic", file.name, RequestBody.create(MediaType.parse("image/jpeg"), file))
         return apiService.postRentableItemImage(itemId, multipartBody)
