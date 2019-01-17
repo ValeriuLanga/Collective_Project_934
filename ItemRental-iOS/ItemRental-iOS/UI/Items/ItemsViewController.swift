@@ -62,7 +62,9 @@ final class ItemsViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "rentx-logo")
+        let imageView = UIImageView(image: UIImage(named: "rentx-logo"))
+        imageView.contentMode = .scaleAspectFit
+        navigationItem.titleView = imageView
     }
     
     private func setupCollectionView() {
