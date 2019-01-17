@@ -30,7 +30,7 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
     // MARK: - Private Functions
     
     private func setupUI() {
-        backgroundColor = .white
+        backgroundColor = .gray
         layer.cornerRadius = 15
         
         setupTitleLabel()

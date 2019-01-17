@@ -52,11 +52,17 @@ final class ItemsViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setupUI() {
-        view.backgroundColor = .gray
+//        view.backgroundColor = .gray
+        view.backgroundColor = .white
         
+        setupNavigationBar()
         setupCollectionView()
         setupAddButton()
         setupLogoutButton()
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "rentx-logo")
     }
     
     private func setupCollectionView() {

@@ -75,7 +75,8 @@ final class ItemDetailsViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setupUI() {
-        view.backgroundColor = .gray
+//        view.backgroundColor = .gray
+        view.backgroundColor = .white
         
         setupOwnerLabel()
         setupTitleLabel()

@@ -40,7 +40,8 @@ final class RegisterViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setupUI() {
-        view.backgroundColor = .gray
+//        view.backgroundColor = .gray
+        view.backgroundColor = .white
         
         setupNameTextfield()
         setupPasswordTextfield()

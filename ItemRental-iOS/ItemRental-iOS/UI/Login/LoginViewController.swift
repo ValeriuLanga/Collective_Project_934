@@ -13,7 +13,8 @@ final class LoginViewController: UIViewController {
     // MARK: - Properties
     
     private let userManager = UserManager()
-    
+
+    private let logoImageView = UIImageView()
     private let userTextfield = UITextField()
     private let passwordTextfield = UITextField()
     private let loginButton = UIButton()
@@ -30,12 +31,24 @@ final class LoginViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setupUI() {
-        view.backgroundColor = .gray
+        view.backgroundColor = .white
         
+        setupImageView()
         setupUserTextfield()
         setupPasswordTextfield()
         setupLoginButton()
         setupRegisterButton()
+    }
+    
+    private func setupImageView() {
+        logoImageView.image = UIImage(named: "rentx-logo")
+        
+        view.addSubview(logoImageView)
+        logoImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaInsets).offset(Padding.p200)
+            $0.centerX.equalToSuperview()
+            $0.height.width.equalTo(Height.h200)
+        }
     }
     
     private func setupUserTextfield() {
@@ -45,7 +58,7 @@ final class LoginViewController: UIViewController {
         
         view.addSubview(userTextfield)
         userTextfield.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p240)
+            $0.top.equalTo(logoImageView.snp.bottom).offset(Padding.p40)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
             $0.height.equalTo(Height.h40)
