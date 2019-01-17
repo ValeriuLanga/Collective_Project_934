@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Category.swift">
+   </FileRef>
+   <FileRef
       location = "group:ItemRental-iOS.xcodeproj">
    </FileRef>
    <FileRef
