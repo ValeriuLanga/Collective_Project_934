@@ -10,5 +10,5 @@ class RegisterModule {
 
     @Provides
     @FragmentScope
-    fun provideViewModelFactory(userRepo: UserRepo) = RegisterViewModelFactory(userRepo)
+    internal fun provideViewModelFactory(userRepo: UserRepo) = RegisterViewModelFactory(userRepo)
 }

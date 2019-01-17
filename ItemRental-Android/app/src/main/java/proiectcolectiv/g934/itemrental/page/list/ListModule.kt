@@ -10,5 +10,5 @@ class ListModule {
 
     @Provides
     @FragmentScope
-    fun provideViewModelFactory(remoteRepo: RemoteRepo) = ListViewModelFactory(remoteRepo)
+    internal fun provideViewModelFactory(remoteRepo: RemoteRepo) = ListViewModelFactory(remoteRepo)
 }

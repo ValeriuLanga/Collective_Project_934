@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="categories_array">
+        <item>Film &amp; Photography</item>
+        <item>Projectors and Screens</item>
+        <item>Drones</item>
+        <item>DJ Equipment</item>
+        <item>Sports</item>
+        <item>Musical</item>
+    </string-array>
+</resources>

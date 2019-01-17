@@ -14,9 +14,9 @@ class LoginModule {
 
     @Provides
     @FragmentScope
-    fun provideViewModelFactory(
-        userRepo: UserRepo,
-        @Named(AppPrefsConstants.USER_PREF) userPref: StringPreference,
-        gson: Gson
+    internal fun provideViewModelFactory(
+            userRepo: UserRepo,
+            @Named(AppPrefsConstants.USER_PREF) userPref: StringPreference,
+            gson: Gson
     ) = LoginViewModelFactory(userRepo, userPref, gson)
 }

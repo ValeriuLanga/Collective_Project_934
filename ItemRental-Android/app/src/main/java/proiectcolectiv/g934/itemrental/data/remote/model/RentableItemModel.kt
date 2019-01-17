@@ -14,7 +14,7 @@ data class RentableItemModel(
         val usageType: String,
 
         @SerializedName("receiving_details")
-        val receivingDetails: String,
+        val receivingDetails: String = "",
 
         @SerializedName("item_description")
         val itemDescription: String,
@@ -29,10 +29,10 @@ data class RentableItemModel(
         val title: String,
 
         @SerializedName("start_date")
-        val startDate: String,
+        val startDate: String = "",
 
         @SerializedName("end_date")
-        val endDate: String,
+        val endDate: String = "",
 
         var image: Bitmap? = null
 )

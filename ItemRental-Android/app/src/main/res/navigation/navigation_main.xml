@@ -43,5 +43,12 @@
             app:launchSingleTop="true"
             app:popUpTo="@+id/navigation_main"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_listFragment_to_addFragment"
+            app:destination="@id/addFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="proiectcolectiv.g934.itemrental.page.add.AddFragment"
+        android:label="AddFragment" />
 </navigation>

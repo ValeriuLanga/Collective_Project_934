@@ -9,6 +9,11 @@
     <string name="register_message">Don\'t have an account?</string>
     <string name="welcome_message">Welcome to Item Rental</string>
 
+    <!-- Logout -->
+    <string name="logout_question">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
     <!-- Register -->
     <string name="create_account_message">Create an account:</string>
     <string name="email">E-mail</string>
@@ -27,4 +32,12 @@
 
     <!-- Rentable Item List -->
     <string name="category_separation">%s » %s</string>
+
+    <!-- Add -->
+    <string name="title">Title</string>
+    <string name="category">Category : </string>
+    <string name="usage_type">Usage Type</string>
+    <string name="description">Item Description</string>
+    <string name="price">Price</string>
+    <string name="add">Add</string>
 </resources>

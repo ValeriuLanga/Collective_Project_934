@@ -11,12 +11,14 @@ import proiectcolectiv.g934.itemrental.base.BaseFragment
 import proiectcolectiv.g934.itemrental.data.local.prefs.AppPrefsConstants
 import proiectcolectiv.g934.itemrental.data.local.prefs.StringPreference
 import proiectcolectiv.g934.itemrental.data.remote.ApiErrorThrowable
+import proiectcolectiv.g934.itemrental.page.dialogs.LogoutDialogFragment
+import proiectcolectiv.g934.itemrental.page.dialogs.LogoutDialogListener
 import proiectcolectiv.g934.itemrental.utils.Outcome
 import proiectcolectiv.g934.itemrental.utils.observeNonNull
 import javax.inject.Inject
 import javax.inject.Named
 
-class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>() {
+class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>(), LogoutDialogListener {
 
     override fun getViewModelClass() = ListViewModel::class.java
 
@@ -37,6 +39,11 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>() {
         viewModel.getRentableItemsFromServer()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getRentableItemsFromServer()
+    }
+
     private fun setupRecyclerView() {
         adapter = ListAdapter(activity)
         listRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -45,9 +52,8 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>() {
 
     private fun setupListeners() {
         listLogoutButton.setOnClickListener {
-            if (::userPref.isInitialized) {
-                userPref.delete()
-                navController.navigate(R.id.action_listFragment_to_splashFragment)
+            fragmentManager?.let { fm ->
+                LogoutDialogFragment.createLogoutDialogFragment(fm, this)
             }
         }
         listSwipeRefreshLayout.setOnRefreshListener {
@@ -56,6 +62,16 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>() {
         listEmptyLayout.setRetryClickListener(View.OnClickListener {
             viewModel.getRentableItemsFromServer()
         })
+        listAddButton.setOnClickListener {
+            navController.navigate(R.id.action_listFragment_to_addFragment)
+        }
+    }
+
+    override fun logoutConfirmed() {
+        if (::userPref.isInitialized) {
+            userPref.delete()
+            navController.navigate(R.id.action_listFragment_to_splashFragment)
+        }
     }
 
     private fun setupObservers() {
