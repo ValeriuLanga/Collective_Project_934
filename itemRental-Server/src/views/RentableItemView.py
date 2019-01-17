@@ -5,7 +5,7 @@ from flask import request, json, Response, Blueprint, send_file
 
 from src.models import UserModel, db
 from src.models.RentableItemModel import RentableItemSchema, RentableItemModel, RentableItems, RentableItemsSchema
-from src.models.ReviewItemModel import ReviewItems, ReviewItemsSchema
+from src.models.ReviewItemModel import ReviewItems, ReviewItemsSchema, ReviewItemModel
 
 rentableitem_api = Blueprint('rentableitem', __name__)
 rentableitem_schema = RentableItemSchema()
@@ -29,6 +29,10 @@ def create():
         message = {'error': 'User does not exists exist, please supply another name'}
         return custom_response(message, 400)
 
+    if rentableitem.category not in RentableItemModel.categoryTypes:
+        message = {'error': 'Category does not exists exist, please supply another category'}
+        return custom_response(message, 400)
+
     rentableitem.owner_id = user_in_db.id
     rentableitem.owner = user_in_db
     rentableitem.owner_name = user_in_db.name
@@ -45,6 +49,9 @@ def delete(rentableitem_id):
     rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
     if not rentableitem:
         return custom_response({'error': 'rentable item not found'}, 404)
+    reviews_to_be_deleted = ReviewItemModel.get_all_reviews_with_rentableitem_id(rentableitem.id)
+    for r in reviews_to_be_deleted:
+        r.delete()
     rentableitem.delete()
     return custom_response("delete succes", 200)
 
@@ -79,10 +86,16 @@ def uploadimage(rentableitem_id):
     if rentableitem.photo_name is None or rentableitem.photo_name == '':
         rentableitem.photo_name = filename
         db.session.commit()
-        file.save(os.path.join(os.getcwd() + '\\' + 'photos', filename))
+        file.save(os.path.join(os.getcwd(), 'photos', filename))
         return custom_response("upload succes", 200)
     else:
-        return custom_response("this rentable item has already a photo", 200)
+        if os.path.isfile(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name)) is True:
+            return custom_response("this rentable item has already a photo", 404)
+        else:
+            rentableitem.photo_name = filename
+            db.session.commit()
+            file.save(os.path.join(os.getcwd(), 'photos', filename))
+            return custom_response("upload succes", 200)
 
 
 @rentableitem_api.route('/downloadimage/<int:rentableitem_id>', methods=['GET'])
@@ -90,7 +103,13 @@ def downloadimage(rentableitem_id):
     rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
     if not rentableitem:
         return custom_response({'error': 'rentable item not found'}, 404)
-    return send_file(os.getcwd() + '\\' + 'photos' + '\\' + rentableitem.photo_name)
+    if rentableitem.photo_name is None or rentableitem.photo_name == '':
+        return custom_response({'error': 'rentable item does not have a photo'}, 404)
+    if os.path.isfile(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name)) is False:
+        rentableitem.photo_name = ''
+        db.session.commit()
+        return custom_response({'error': 'rentable item does not have a photo'}, 404)
+    return send_file(os.path.join(os.getcwd(), 'photos', rentableitem.photo_name), as_attachment=True)
 
 
 @rentableitem_api.route('/<int:rentableitem_id>', methods=['GET'])
@@ -109,6 +128,13 @@ def get_all():
     ri = RentableItems(rentableitems)
     ser_rentableitems = rentableitems_schema.dump(ri)
     response = custom_response(ser_rentableitems, 200)
+    return response
+
+
+@rentableitem_api.route('/categories', methods=['GET'])
+def get_categories():
+    categories = RentableItemModel.categoryTypes
+    response = custom_response({'categories': categories}, 200)
     return response
 
 

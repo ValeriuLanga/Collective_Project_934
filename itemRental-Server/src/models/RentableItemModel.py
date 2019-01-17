@@ -1,3 +1,5 @@
+from enum import Enum
+
 from . import db
 from marshmallow import fields, Schema
 
@@ -5,13 +7,16 @@ from marshmallow import fields, Schema
 class RentableItemModel(db.Model):
     __tablename__ = 'rentableitem'
 
+    categoryTypes = ['Film & Photography', 'Projectors and Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical']
+
     id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String)
+    category = db.Column(db.Enum('Film & Photography', 'Projectors and Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical', name='types'))
     title = db.Column(db.String)
     usage_type = db.Column(db.String)
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime)
     receiving_details = db.Column(db.String)
+    price = db.Column(db.Integer)
     item_description = db.Column(db.String)
     owner_name = db.Column(db.String)
     photo_name = db.Column(db.String)
@@ -23,6 +28,7 @@ class RentableItemModel(db.Model):
     def __init__(self, data):
         self.category = data.get("category")
         self.title = data.get("title")
+        self.price = data.get("price")
         self.usage_type = data.get("usage_type")
         self.receiving_details = data.get("receiving_details")
         self.item_description = data.get("item_description")
@@ -55,6 +61,7 @@ class RentableItemSchema(Schema):
     receiving_details = fields.String()
     item_description = fields.String()
     rented = fields.Boolean()
+    price = fields.Integer()
     title = fields.String()
     owner_name = fields.String()
 
