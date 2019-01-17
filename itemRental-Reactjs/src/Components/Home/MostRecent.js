@@ -4,9 +4,9 @@ import Grid from "@material-ui/core/Grid";
 import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
-import AddItem from "../Ads/AddItem";
-import Header from "../Header/MainHeader";
+import AdItem from "../Ads/AdItem";
 import { getAds } from "../../actions/ads";
 
 import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
@@ -70,7 +70,7 @@ class MostRecent extends React.Component {
       postContent = ads.ads.slice(0, 11).map(item => {
         return (
           <Grid item md={4} key={item.id}>
-            <AddItem
+            <AdItem
               file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
               title={item.title}
               price={item.price}
@@ -98,7 +98,9 @@ class MostRecent extends React.Component {
     }
     return (
       <div>
-        <h1 style={{ textAlign: "center" }}>Most Recent Ads</h1>
+        <Typography style={{ textAlign: "center" }} variant="h4" gutterBottom>
+          Recent Ads
+        </Typography>
         <Grid container spacing={8} className={classes.container}>
           {postContent}
         </Grid>

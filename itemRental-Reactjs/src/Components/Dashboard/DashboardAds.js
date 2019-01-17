@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
 
-import AddItem from "../Ads/AddItem";
+import AdItem from "../Ads/AdItem";
 import { getOwnAds } from "../../actions/ads";
 
 const styles = theme => ({
@@ -69,7 +69,7 @@ class AdsCategory extends React.Component {
       postContent = filteredAds.map(item => {
         return (
           <Grid item md={4} key={item.id}>
-            <AddItem
+            <AdItem
               file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
               title={item.title}
               price={item.price}

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../Header/MainHeader.js";
 import { withStyles } from "@material-ui/core/styles";
-import { getAds } from "../../actions/ads";
 import DashboardAds from "./DashboardAds";
 
 const styles = theme => ({

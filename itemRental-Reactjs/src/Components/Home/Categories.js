@@ -82,6 +82,7 @@ function FullWidthGrid(props) {
               width={category.width}
               title={category.title}
               caturl={category.caturl}
+              key={category.title}
             />
           </Grid>
         ))}

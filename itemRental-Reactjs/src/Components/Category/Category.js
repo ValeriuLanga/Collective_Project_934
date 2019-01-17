@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-import AddItem from "../Ads/AddItem";
+import AdItem from "../Ads/AdItem";
 import Header from "../Header/MainHeader";
 import { getAds } from "../../actions/ads";
 
@@ -75,7 +75,7 @@ class AdsCategory extends React.Component {
       postContent = filteredAds.map(item => {
         return (
           <Grid item md={4} key={item._id}>
-            <AddItem
+            <AdItem
               file={`/${item.file}`}
               title={item.title}
               price={item.price}
