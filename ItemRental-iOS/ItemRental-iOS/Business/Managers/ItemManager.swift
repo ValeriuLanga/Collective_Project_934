@@ -67,7 +67,8 @@ struct ItemManager {
                                    "end_date": item.endDate]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
-        let url = URL(string: apiURL + "/")!
+//        let url = URL(string: apiURL + "/")!
+        let url = URL(string: apiURL)!
         let request = NSMutableURLRequest(url: url)
         
         request.httpMethod = "POST"
