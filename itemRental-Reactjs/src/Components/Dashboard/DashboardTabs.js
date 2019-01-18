@@ -47,7 +47,7 @@ class IconLabelTabs extends React.Component {
 
         return (
             <div className={classes.middle}>
-                <AppBar position="static" >
+                <AppBar position="static" elevation={1}>
                     <Tabs 
                         value={value} 
                         className={classes.tabs} 

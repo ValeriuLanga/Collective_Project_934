@@ -67,7 +67,7 @@ class MostRecent extends React.Component {
         </div>
       );
     } else {
-      postContent = ads.ads.slice(0, 11).map(item => {
+      postContent = ads.ads.slice(0, 3).map(item => {
         return (
           <Grid item md={4} key={item.id}>
             <AdItem
@@ -98,10 +98,12 @@ class MostRecent extends React.Component {
     }
     return (
       <div>
-        <Typography style={{ textAlign: "center" }} variant="h4" gutterBottom>
-          Recent Ads
-        </Typography>
-        <Grid container spacing={8} className={classes.container}>
+        <Grid container spacing={24} className={classes.container}>
+          <Grid xs={12} item>
+            <Typography style={{ textAlign: "center" }} variant="h4" gutterBottom>
+              Recent Ads
+            </Typography>
+          </Grid>
           {postContent}
         </Grid>
       </div>
