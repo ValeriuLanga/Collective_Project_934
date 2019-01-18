@@ -13,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
 import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.fragment_add.*
 import proiectcolectiv.g934.itemrental.R
@@ -26,11 +25,12 @@ import proiectcolectiv.g934.itemrental.utils.Outcome
 import proiectcolectiv.g934.itemrental.utils.observeNonNull
 import proiectcolectiv.g934.itemrental.utils.showToast
 import java.io.File
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), DatePickerDialog.OnDateSetListener, ChooseImageDialogListener {
+class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseImageDialogListener {
 
     override fun getViewModelClass() = AddViewModel::class.java
 
@@ -80,6 +80,7 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), DatePick
             !addUsageTypeEditText.text.isNullOrEmpty() &&
             !addDescriptionEditText.text.isNullOrEmpty() &&
             !addPriceEditText.text.isNullOrEmpty() &&
+            !addStartDateEditText.text.isNullOrEmpty() &&
             !addEndDateEditText.text.isNullOrEmpty()
 
     private fun tryAddItem() {
@@ -90,8 +91,9 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), DatePick
                     addUsageTypeEditText.text!!.toString(),
                     addDescriptionEditText.text!!.toString(),
                     addPriceEditText.text!!.toString().toInt(),
+                    addStartDateEditText.text!!.toString(),
                     addEndDateEditText.text!!.toString(),
-                    imageChosenBitmap!!
+                    currentPhotoPath!!
             )
         } else if (imageChosenBitmap == null) {
             activity.showToast(getString(R.string.choose_or_take_photo))
@@ -116,7 +118,19 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), DatePick
                 calendarSelected.time = dateSelected
                 datePickerDialog = DatePickerDialog(activity, null, calendarSelected[Calendar.YEAR], calendarSelected[Calendar.MONTH], calendarSelected[Calendar.DAY_OF_MONTH])
             }
-            datePickerDialog.setOnDateSetListener(this)
+            datePickerDialog.setOnDateSetListener(endDateSetListener)
+            datePickerDialog.show()
+        }
+        addStartDateEditText.setOnClickListener {
+            if (addStartDateEditText.text.isNullOrEmpty()) {
+                datePickerDialog = DatePickerDialog(activity)
+            } else {
+                val dateSelected = SimpleDateFormat("MMM dd yyyy KK:mma", Locale.getDefault()).parse(addStartDateEditText.text.toString())
+                val calendarSelected = Calendar.getInstance()
+                calendarSelected.time = dateSelected
+                datePickerDialog = DatePickerDialog(activity, null, calendarSelected[Calendar.YEAR], calendarSelected[Calendar.MONTH], calendarSelected[Calendar.DAY_OF_MONTH])
+            }
+            datePickerDialog.setOnDateSetListener(startDateSetListener)
             datePickerDialog.show()
         }
         addImage.setOnClickListener {
@@ -142,7 +156,18 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), DatePick
         }
     }
 
-    override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
+    private val startDateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+        val timeChoosen = Calendar.getInstance()
+        timeChoosen.set(year, month, dayOfMonth)
+        val dateTimeChosen = timeChoosen.time
+        if (timeChoosen.after(Calendar.getInstance())) {
+            addStartDateEditText.setText(SimpleDateFormat("MMM dd yyyy hh:mma", Locale.getDefault()).format(dateTimeChosen))
+        } else {
+            activity.showToast(getString(R.string.incorrect_start_date))
+        }
+    }
+
+    private val endDateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
         val timeChoosen = Calendar.getInstance()
         timeChoosen.set(year, month, dayOfMonth)
         val dateTimeChosen = timeChoosen.time
@@ -203,9 +228,15 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), DatePick
                 if (resultCode == RESULT_OK) {
                     data?.data?.let {
                         val inputStream = activity.contentResolver.openInputStream(it)
-                        imageChosenBitmap = BitmapFactory.decodeStream(inputStream)
-                        addImage.setImageBitmap(imageChosenBitmap)
-                        addImage.rotation = 0F
+                        inputStream?.let { stream ->
+                            val photoFile = createImageFile()
+                            val fileOutputStream = FileOutputStream(photoFile)
+                            fileOutputStream.write(stream.readBytes()).also { fileOutputStream.close() }
+                            currentPhotoPath = photoFile.absolutePath
+                            imageChosenBitmap = BitmapFactory.decodeFile(currentPhotoPath)
+                            addImage.setImageBitmap(imageChosenBitmap)
+                            addImage.rotation = 0F
+                        }
                     }
                 }
             }

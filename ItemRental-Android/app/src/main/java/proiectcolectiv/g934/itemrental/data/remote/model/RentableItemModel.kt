@@ -35,5 +35,5 @@ data class RentableItemModel(
         val endDate: String = "",
 
         @Transient
-        var image: Bitmap? = null
+        var imagePath: String? = null
 )

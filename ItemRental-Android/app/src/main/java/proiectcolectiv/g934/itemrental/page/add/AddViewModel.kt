@@ -1,6 +1,5 @@
 package proiectcolectiv.g934.itemrental.page.add
 
-import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,8 +9,6 @@ import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
 import proiectcolectiv.g934.itemrental.data.remote.model.UserModel
 import proiectcolectiv.g934.itemrental.data.remote.repo.RemoteRepo
 import proiectcolectiv.g934.itemrental.utils.Outcome
-import java.text.SimpleDateFormat
-import java.util.*
 
 class AddViewModel(private val userPref: StringPreference,
                    private val gson: Gson,
@@ -19,10 +16,8 @@ class AddViewModel(private val userPref: StringPreference,
 
     val addItemLiveData: MutableLiveData<Outcome<String>> = MutableLiveData()
 
-    fun addItem(title: String, category: String, usageType: String, description: String, price: Int, endDate: String, imageBitmap: Bitmap) {
+    fun addItem(title: String, category: String, usageType: String, description: String, price: Int, startDate: String, endDate: String, imagePath: String) {
         addItemLiveData.value = Outcome.loading(true)
-        val currentTime = Calendar.getInstance().time
-        val simpleDateFormat = SimpleDateFormat("MMM dd yyyy hh:mma", Locale.getDefault())
         val rentableItem = RentableItemModel(
                 category = category,
                 title = title,
@@ -30,9 +25,9 @@ class AddViewModel(private val userPref: StringPreference,
                 itemDescription = description,
                 price = price,
                 ownerName = gson.fromJson(userPref.get(), UserModel::class.java).userName,
-                startDate = simpleDateFormat.format(currentTime),
+                startDate = startDate,
                 endDate = endDate,
-                image = imageBitmap
+                imagePath = imagePath
         )
         addDisposable(
                 remoteRepo.uploadRentableItem(rentableItem)

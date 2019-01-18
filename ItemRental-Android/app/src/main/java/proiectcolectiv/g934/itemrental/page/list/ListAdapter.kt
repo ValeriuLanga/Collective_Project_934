@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_rentableitem.*
 import proiectcolectiv.g934.itemrental.R
@@ -26,17 +27,21 @@ class ListAdapter(private val context: Context) : RecyclerView.Adapter<ListAdapt
         notifyDataSetChanged()
     }
 
-    inner class ListViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    inner class ListViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
+            LayoutContainer {
 
         fun bind(rentableItemModel: RentableItemModel) = with(rentableItemModel) {
             itemNameTextView.text = title
             userTextView.text = ownerName
             categoryTextView.text = context.getString(R.string.category_separation, category, usageType)
-            if (image != null) {
-                itemImage.setImageBitmap(image)
-            } else {
+            if (imagePath == null) {
                 itemImage.setImageDrawable(context.getDrawable(R.mipmap.ic_logo_foreground))
+            } else {
+                Glide.with(itemImage)
+                        .load(imagePath)
+                        .into(itemImage)
             }
+            Unit
         }
     }
 }

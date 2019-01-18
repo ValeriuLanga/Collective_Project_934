@@ -36,6 +36,9 @@ buildscript {
     // Navigation Component
     ext.nav_version = '1.0.0-alpha09'
 
+    // Glide
+    ext.glide_version = '4.8.0'
+
     repositories {
         google()
         jcenter()

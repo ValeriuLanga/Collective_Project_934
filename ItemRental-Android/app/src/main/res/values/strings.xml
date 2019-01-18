@@ -38,12 +38,14 @@
     <string name="category">Category : </string>
     <string name="usage_type">Usage Type</string>
     <string name="description">Item Description</string>
-    <string name="price">Price</string>
+    <string name="price">Price</string>\
+    <string name="start_date">Rental Start Date</string>
     <string name="end_date">Rental End Date</string>
     <string name="add">Add</string>
     <string name="choose_image_source">Choose an image source</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="choose_or_take_photo">You have to choose or take a photo!</string>
-    <string name="incorrect_end_date">End date cannot be before current date!</string>
+    <string name="incorrect_start_date">Start date cannot be before current date or after end date!</string>
+    <string name="incorrect_end_date">End date cannot be before current date or before start date!</string>
 </resources>

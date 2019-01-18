@@ -2,7 +2,7 @@ package proiectcolectiv.g934.itemrental.data.remote
 
 object ApiConstants {
 
-    const val BASE_URL = "http://192.168.100.4:5000/api/v1/"
+    const val BASE_URL = "http://192.168.0.199:5000/api/v1/"
 
     object Users {
         const val USERS = "users/"

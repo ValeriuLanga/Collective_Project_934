@@ -2,7 +2,7 @@ package proiectcolectiv.g934.itemrental.data.remote.repo
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.os.Environment
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType
@@ -31,29 +31,28 @@ class RemoteRepo @Inject constructor() {
             .flatMap(ApiErrorConverter())
             .map { it -> it.rentableItems }
             .flatMapIterable { it -> it }
-            .flatMap { downloadImageForItem(it) }
+            .flatMap {
+                val picturesDirectory = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                picturesDirectory?.let {file ->
+                    val files = file.listFiles()
+                    for (f in files) {
+                        f.delete()
+                    }
+                }
+                downloadImageForItem(it)
+            }
             .toList()
             .toFlowable()
 
     fun uploadRentableItem(rentableItem: RentableItemModel): Flowable<String> = apiService.postRentableItem(rentableItem)
             .subscribeOn(Schedulers.io())
             .flatMap(ApiErrorConverter())
-            .flatMap { uploadImageToServer(it.itemId, rentableItem.image) }
+            .flatMap { uploadImageToServer(it.itemId, rentableItem.imagePath) }
 
-    private fun uploadImageToServer(itemId: Int, bitmap: Bitmap?): Flowable<String> {
-        if (bitmap == null)
+    private fun uploadImageToServer(itemId: Int, imagePath: String?): Flowable<String> {
+        if (imagePath == null)
             return Flowable.just("Image missing from local source")
-        val filePath = "JPEG_${SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(Date())}_.jpg"
-        val file = File(context.cacheDir, filePath)
-        file.createNewFile()
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
-        val bitmapData = byteArrayOutputStream.toByteArray()
-        FileOutputStream(file).apply {
-            write(bitmapData)
-            flush()
-            close()
-        }
+        val file = File(imagePath)
         val multipartBody =
                 MultipartBody.Part.createFormData("pic", file.name, RequestBody.create(MediaType.parse("image/jpeg"), file))
         return apiService.postRentableItemImage(itemId, multipartBody)
@@ -67,8 +66,12 @@ class RemoteRepo @Inject constructor() {
                 .flatMap(ApiErrorConverter())
                 .map {
                     val inputStream = it.byteStream()
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    rentableItem.image = bitmap
+                    val filePath = "${context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/${rentableItem.title}_${rentableItem.itemId}_.jpg"
+                    val file = File(filePath)
+                    val fileOutputStream = FileOutputStream(file)
+                    fileOutputStream.write(inputStream.readBytes())
+                    fileOutputStream.close()
+                    rentableItem.imagePath = file.absolutePath
                     rentableItem
                 }
                 .onErrorReturnItem(rentableItem)
