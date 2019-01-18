@@ -40,4 +40,9 @@
     <string name="description">Item Description</string>
     <string name="price">Price</string>
     <string name="add">Add</string>
+
+    <!-- Details -->
+    <string name="button_rent">Rent</string>
+    <string name="button_see_reviews">See reviews</string>
+    <string name="other_items_message">Other items from this user:</string>
 </resources>

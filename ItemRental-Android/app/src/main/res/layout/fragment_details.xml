@@ -27,6 +27,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/detailsCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -71,8 +72,8 @@
                 android:id="@+id/itemCategoryTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
                 android:text="Tools >> Harvesting"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/itemTitle"
                 app:layout_constraintTop_toBottomOf="@id/itemTitle" />
 
@@ -80,12 +81,12 @@
                 android:id="@+id/itemDescriptionTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:hint="@string/description"
                 android:maxLength="200"
-                android:textColor="@color/black"
                 android:maxLines="10"
                 android:text="It is a broom for outside use; a horticultural implement consisting of a toothed bar fixed transversely to a handle, or tines fixed to a handle, and used to collect leaves, hay, grass, etc., and in gardening, for loosening the soil, light weeding and levelling, removing dead grass from lawns, and generally for purposes performed in agriculture by the harrow."
+                android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="@id/itemPrice"
                 app:layout_constraintStart_toStartOf="@id/itemCategoryTextView"
                 app:layout_constraintTop_toBottomOf="@id/itemCategoryTextView" />
@@ -94,21 +95,22 @@
                 android:id="@+id/toRentIcon"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:src="@drawable/ic_to_rent"
                 android:tint="@color/colorPrimaryDark"
                 tools:ignore="ContentDescription"
+                tools:layout_editor_absoluteY="204dp"
                 app:layout_constraintStart_toStartOf="@id/itemDescriptionTextView"
-                app:layout_constraintTop_toBottomOf="@id/itemDescriptionTextView" />
+                app:layout_constraintTop_toBottomOf="@id/itemDescriptionTextView"/>
 
             <TextView
                 android:id="@+id/itemStartTimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:text="Dec 22, 2018"
                 app:layout_constraintStart_toEndOf="@id/toRentIcon"
-                app:layout_constraintTop_toTopOf="@id/toRentIcon"
-                android:text="Dec 22, 2018" />
+                app:layout_constraintTop_toTopOf="@id/toRentIcon" />
 
             <ImageView
                 android:id="@+id/toReceiveIcon"
@@ -116,21 +118,63 @@
                 android:layout_height="20dp"
                 android:src="@drawable/ic_to_receive"
                 android:tint="@color/colorPrimaryDark"
-                tools:ignore="ContentDescription"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/itemEndTimeTextView"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/itemEndTimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
+                android:text="Aug 13, 2019"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/toReceiveIcon"
-                android:text="Aug 13, 2019" />
+                app:layout_constraintTop_toTopOf="@id/toReceiveIcon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:text="@string/button_rent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailsCardView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/seeReviewsButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/registerTextView"
+        android:text="@string/button_see_reviews"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rentButton" />
+
+
+    <TextView
+        android:id="@+id/otherItemsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/other_items_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/seeReviewsButton" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/otherItemsTextView"
+        tools:listitem="@layout/item_rentableitem_details" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
