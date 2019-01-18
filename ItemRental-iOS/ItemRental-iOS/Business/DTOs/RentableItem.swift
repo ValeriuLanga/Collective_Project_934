@@ -6,7 +6,11 @@
 //  Copyright © 2018 Stefan Lupascu. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+protocol RentableItemImageDelegate: class {
+    func didGet(image: UIImage)
+}
 
 struct RentableItem {
     let id: Int?
@@ -15,10 +19,19 @@ struct RentableItem {
     let usageType: String
     let receivingDetails: String
     let itemDescription: String
+    let price: Int
     let ownerName: String
     let startDate: String
     let endDate: String
     var rented: Bool
+    var image: UIImage? {
+        didSet {
+            guard let image = image else { return }
+            delegate?.didGet(image: image)
+        }
+    }
+    
+    weak var delegate: RentableItemImageDelegate?
     
     init(id: Int? = nil,
          title: String,
@@ -26,19 +39,23 @@ struct RentableItem {
          usageType: String,
          receivingDetails: String,
          itemDescription: String,
+         price: Int,
          ownerName: String,
          startDate: String,
          endDate: String,
-         rented: Bool) {
+         rented: Bool,
+         image: UIImage? = nil) {
         self.id = id
         self.title = title
         self.category = category
         self.usageType = usageType
         self.receivingDetails = receivingDetails
         self.itemDescription = itemDescription
+        self.price = price
         self.ownerName = ownerName
         self.startDate = startDate
         self.endDate = endDate
         self.rented = rented
+        self.image = image
     }
 }

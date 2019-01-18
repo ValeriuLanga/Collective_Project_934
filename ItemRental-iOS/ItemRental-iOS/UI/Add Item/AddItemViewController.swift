@@ -18,28 +18,47 @@ final class AddItemViewController: UIViewController {
     
     weak var delegate: AddItemDelegate?
     private let manager = ItemManager()
+    private let photosManager: PhotosManager
+    private let presenter: CameraPresenter
     
     private let titleTextfield = UITextField()
     private let categoryTextfield = UITextField()
     private let usageTypeTextfield = UITextField()
     private let receivingDetailsTextfield = UITextField()
     private let itemDescriptionTextfield = UITextField()
+    private let priceTextfield = UITextField()
     private let startDateTextfield = UITextField()
     private let endDateTextfield = UITextField()
+    private let imageView = UIButton()
     private let addButton = UIButton()
+    
+    private let imagePicker = UIImagePickerController()
+    private var image: UIImage?
+    
+    // MARK: - Init
+    
+    init(photosManager: PhotosManager) {
+        self.photosManager = photosManager
+        self.presenter = CameraPresenter(cameraUseCase: photosManager, galleryUseCase: photosManager)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Base class overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        presenter.cameraView = self
+        presenter.galleryView = self
         setupUI()
     }
     
     // MARK: - Private Functions
     
     private func setupUI() {
-//        view.backgroundColor = .gray
         view.backgroundColor = .white
         
         setupTitleTextfield()
@@ -47,8 +66,10 @@ final class AddItemViewController: UIViewController {
         setupUsageTypeTextfield()
         setupReceivingDetailsTextfield()
         setupItemDescriptionTextfield()
+        setupPriceTextfield()
         setupStartDateTextfield()
         setupEndDateTextfield()
+        setupImageView()
         setupAddButton()
     }
     
@@ -112,13 +133,25 @@ final class AddItemViewController: UIViewController {
         }
     }
     
+    private func setupPriceTextfield() {
+        priceTextfield.borderStyle = .roundedRect
+        priceTextfield.placeholder = "Price"
+        
+        view.addSubview(priceTextfield)
+        priceTextfield.snp.makeConstraints {
+            $0.top.equalTo(itemDescriptionTextfield.snp.bottom).offset(Padding.p10)
+            $0.leading.equalToSuperview().offset(Padding.p40)
+            $0.trailing.equalToSuperview().offset(-Padding.p40)
+        }
+    }
+    
     private func setupStartDateTextfield() {
         startDateTextfield.borderStyle = .roundedRect
         startDateTextfield.placeholder = "Aug 12 2013 4:20PM"
         
         view.addSubview(startDateTextfield)
         startDateTextfield.snp.makeConstraints {
-            $0.top.equalTo(itemDescriptionTextfield.snp.bottom).offset(Padding.p10)
+            $0.top.equalTo(priceTextfield.snp.bottom).offset(Padding.p10)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
         }
@@ -136,6 +169,21 @@ final class AddItemViewController: UIViewController {
         }
     }
     
+    private func setupImageView() {
+        imageView.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
+        imageView.imageView?.contentMode = .scaleAspectFit
+        imageView.setImage(UIImage(named: "plus"), for: .normal)
+        imageView.adjustsImageWhenHighlighted = false
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.top.equalTo(endDateTextfield.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p40)
+            $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.height.equalTo(120)
+        }
+    }
+    
     private func setupAddButton() {
         addButton.setTitle("Add", for: .normal)
         addButton.backgroundColor = .orange
@@ -144,9 +192,11 @@ final class AddItemViewController: UIViewController {
         
         view.addSubview(addButton)
         addButton.snp.makeConstraints {
-            $0.top.equalTo(endDateTextfield.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(imageView.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.bottom.lessThanOrEqualToSuperview().inset(Padding.p40)
+//            $0.height.equalTo(titleTextfield)
         }
     }
     
@@ -156,6 +206,7 @@ final class AddItemViewController: UIViewController {
                 let usageType = usageTypeTextfield.text,
                 let receivingDetails = receivingDetailsTextfield.text,
                 let itemDescription = itemDescriptionTextfield.text,
+                let priceString = priceTextfield.text,
                 let startDate = startDateTextfield.text,
                 let endDate = endDateTextfield.text else {
                     return
@@ -166,29 +217,157 @@ final class AddItemViewController: UIViewController {
                 usageType != "",
                 receivingDetails != "",
                 itemDescription != "",
+                let price = Int(priceString),
                 startDate != "",
                 endDate != "" else {
                 presentAlert(message: "All fields must be completed!")
                 return
         }
         
+        guard let image = image else {
+            presentAlert(message: "Please provide an image")
+            return
+        }
+        
         guard let userName = UserDefaults.standard.string(forKey: "user") else {
             return
         }
-        let item = RentableItem(title: title, category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, ownerName: userName, startDate: startDate, endDate: endDate, rented: false)
+        let item = RentableItem(title: title, category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: userName, startDate: startDate, endDate: endDate, rented: false)
         
-        manager.addItem(item: item) { [weak self](data, error) in
+        manager.addItem(item: item) { [weak self] (data, error) in
+            guard let self = self else { return }
+            
             guard error == nil else {
                 DispatchQueue.main.async {
-                    self?.presentAlert(message: "Item could not be added!")
+                    self.presentAlert(message: "Item could not be added!")
                 }
                 return
             }
             
+            guard let data = data else {
+                    print("invalid response")
+                    return
+            }
+            
+            guard let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] else {
+                print("invalid response")
+                return
+            }
+            
+            guard let id = json?["id"] as? Int else {
+                print("invalid response")
+                return
+            }
+            
+            self.photosManager.upload(image: image, id: id) { (data, error) in
+                guard error == nil else {
+                    DispatchQueue.main.async {
+                        self.presentAlert(message: "Photo could not be uploaded!")
+                    }
+                    return
+                }
+            }
+            
             DispatchQueue.main.async {
-                self?.delegate?.didAddItem()
-                self?.navigationController?.popViewController(animated: true)
+                self.delegate?.didAddItem()
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }
+    
+    @objc private func selectPhoto() {
+        imagePicker.delegate = self
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+            self?.openCamera()
+        })
+        
+        alert.addAction(UIAlertAction(title: "Photos", style: .default) { [weak self] _ in
+            self?.openGallery()
+        })
+        
+        alert.popoverPresentationController?.sourceView = imageView
+        alert.popoverPresentationController?.sourceRect = imageView.bounds
+        alert.popoverPresentationController?.permittedArrowDirections = .up
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - Internal Methods
+    
+    func showCamera() {
+        imagePicker.sourceType = .camera
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func showGallery() {
+        imagePicker.sourceType = .photoLibrary
+        self.present(imagePicker, animated: true, completion: nil)
+    }
 }
+
+extension AddItemViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        guard let photo = info[.originalImage] as? UIImage else {
+            assertionFailure("Sanity check")
+            dismiss(animated: true)
+            return
+        }
+        imageView.setImage(photo, for: .normal)
+        image = photo
+        
+        dismiss(animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+}
+
+// MARK: - CameraViewProtocol
+
+extension AddItemViewController: CameraViewProtocol {
+    func promptAlertToAllowCameraAccessViaSetting() {
+        let alert = UIAlertController(title: "Photo Library and Camera functionalities are disabled", message: "Please change settings", preferredStyle: .alert)
+        guard let bundleId = Bundle.main.bundleIdentifier else { return }
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            guard let url = URL(string: UIApplication.openSettingsURLString + bundleId) else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func openCamera() {
+        presenter.updateCameraAuthorization()
+    }
+    
+    func shouldPresentCamera() {
+        showCamera()
+    }
+}
+
+// MARK: - GalleryViewProtocol
+
+extension AddItemViewController: GalleryViewProtocol {
+    func openGallery() {
+        presenter.updateGalleryAuthorization()
+    }
+    
+    func shouldPresentGallery() {
+        showGallery()
+    }
+}
+
+

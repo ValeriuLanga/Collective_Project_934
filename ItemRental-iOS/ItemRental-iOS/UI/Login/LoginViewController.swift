@@ -111,7 +111,7 @@ final class LoginViewController: UIViewController {
     private func didLogin(user: String) {
         UserDefaults.standard.set(user, forKey: "user")
         
-        let viewModel = ItemsViewModel()
+        let viewModel = ItemsViewModel(photosManager: PhotosManager(cameraPlugin: CameraPlugin()))
         let itemsViewController = ItemsViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: itemsViewController)
         DispatchQueue.main.async {

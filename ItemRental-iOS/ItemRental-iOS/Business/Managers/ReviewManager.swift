@@ -8,16 +8,8 @@
 
 import Foundation
 
-enum ReviewManagerError {
-    case unknown
-    case failedRequest
-    case invalidResponse
-}
-
 struct ReviewManager {
     // MARK: - Properties
-    
-    typealias ReviewDataCompletion = (Data?, ReviewManagerError?) -> Void
     
     private let apiURL = "http://127.0.0.1:5000/api/v1/reviews/"
     
@@ -25,7 +17,7 @@ struct ReviewManager {
     
     // MARK: - Functions
     
-    func createReview(review: Review, completion: @escaping ReviewDataCompletion) {
+    func createReview(review: Review, completion: @escaping RequestDataCompletion) {
         let json: [String: Any] = ["text": review.text,
                                    "rating": review.rating,
                                    "owner_name": review.ownerName,
@@ -42,7 +34,7 @@ struct ReviewManager {
         process(request: request, completion: completion)
     }
     
-    private func process(request: NSMutableURLRequest, completion: @escaping ReviewDataCompletion) {
+    private func process(request: NSMutableURLRequest, completion: @escaping RequestDataCompletion) {
         URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             guard error == nil else {
                 print("failed request 1")

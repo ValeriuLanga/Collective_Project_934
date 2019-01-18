@@ -21,8 +21,10 @@ final class ItemsViewModel {
     
     private let itemManager = ItemManager()
     private let userManager = UserManager()
+    private let photosManager: PhotosManager
     
-    init(user: String? = nil) {
+    init(user: String? = nil, photosManager: PhotosManager) {
+        self.photosManager = photosManager
         guard let user = user else {
             fetchItems()
             return
@@ -39,9 +41,6 @@ final class ItemsViewModel {
             }
 
             self.format(data: data)
-            DispatchQueue.main.async {
-                self.delegate?.didUpdateItems()
-            }
         }
     }
     
@@ -54,9 +53,6 @@ final class ItemsViewModel {
             }
             
             self.format(data: data)
-            DispatchQueue.main.async {
-                self.delegate?.didUpdateItems()
-            }
         }
     }
     
@@ -78,6 +74,7 @@ final class ItemsViewModel {
                 let id = item["id"] as? Int,
                     let receivingDetails = item["receiving_details"] as? String,
                     let itemDescription = item["item_description"] as? String,
+                    let price = item["price"] as? Int,
                     let ownerName = item["owner_name"] as? String,
                     let rented = item["rented"] as? Bool,
                     let startDate = item["start_date"] as? String,
@@ -85,13 +82,19 @@ final class ItemsViewModel {
                 return
             }
     
-            let item = RentableItem(id: id, title: title, category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, ownerName: ownerName, startDate: startDate, endDate: endDate, rented: rented)
+            var rentableItem = RentableItem(id: id, title: title, category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: ownerName, startDate: startDate, endDate: endDate, rented: rented)
         
+//            photosManager.getImage(for: id) { (image) in
+//                rentableItem.image = image
+//            }
+            
             if !rented {
-                items.append(item)
+                self.items.append(rentableItem)
             } else {
-                rentedItems.append(item)
+                self.rentedItems.append(rentableItem)
             }
         }
+        
+        self.delegate?.didUpdateItems()
     }
 }

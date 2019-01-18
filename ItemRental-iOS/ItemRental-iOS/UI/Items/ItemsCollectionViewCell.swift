@@ -13,6 +13,7 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
     let titleLabel = UILabel()
+    let imageView = UIImageView()
     let ownerLabel = UILabel()
     
     // MARK: - Init
@@ -35,6 +36,7 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
         
         setupTitleLabel()
         setupOwnerLabel()
+        setupImageView()
     }
     
     private func setupTitleLabel() {
@@ -48,6 +50,17 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func setupImageView() {
+        imageView.contentMode = .scaleAspectFit
+        
+        addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom).inset(-Padding.p20)
+            $0.leading.trailing.equalToSuperview().inset(Padding.p10)
+            $0.bottom.equalTo(ownerLabel.snp.top).inset(-Padding.p20)
+        }
+    }
+    
     private func setupOwnerLabel() {
         ownerLabel.font = UIFont.boldSystemFont(ofSize: 22)
         ownerLabel.textAlignment = .center
@@ -57,5 +70,15 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().offset(-Padding.p20)
             $0.centerX.equalToSuperview()
         }
+    }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
+}
+
+extension ItemsCollectionViewCell: RentableItemImageDelegate {
+    func didGet(image: UIImage) {
+        imageView.image = image
     }
 }

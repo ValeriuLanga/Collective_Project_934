@@ -13,17 +13,8 @@ final class ItemsViewController: UIViewController {
     // MARK: - Properties
     
     private let viewModel: ItemsViewModel
-    
-    private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = false
-        
-        return collectionView
-    }()
+    private let photosManager = PhotosManager(cameraPlugin: CameraPlugin())
+    private let collectionView: UICollectionView
     
     private let cellId = "cellId"
     
@@ -31,6 +22,13 @@ final class ItemsViewController: UIViewController {
     
     init(viewModel: ItemsViewModel) {
         self.viewModel = viewModel
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
         
         super.init(nibName: nil, bundle: nil)
         
@@ -91,7 +89,7 @@ final class ItemsViewController: UIViewController {
     }
     
     @objc private func addButtonTapped() {
-        let addItemViewController = AddItemViewController()
+        let addItemViewController = AddItemViewController(photosManager: photosManager)
         addItemViewController.delegate = self
         navigationController?.pushViewController(addItemViewController, animated: true)
     }
@@ -112,9 +110,10 @@ extension ItemsViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? ItemsCollectionViewCell else {
             return UICollectionViewCell()
         }
-        
+    
         cell.titleLabel.text = viewModel.items[indexPath.item].title
         cell.ownerLabel.text = viewModel.items[indexPath.item].ownerName
+        viewModel.items[indexPath.item].delegate = cell
         
         return cell
     }

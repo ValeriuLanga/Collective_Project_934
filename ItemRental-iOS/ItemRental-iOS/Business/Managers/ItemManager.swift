@@ -8,31 +8,22 @@
 
 import Foundation
 
-enum ItemManagerError {
-    case unknown
-    case failedRequest
-    case invalidResponse
-}
-
 struct ItemManager {
     // MARK: - Properties
     
-    typealias ItemDataCompletion = (Data?, ItemManagerError?) -> Void
-    typealias ReviewDataCompletion = (Data?, ItemManagerError?) -> Void
-    
-    private let apiURL = "http://127.0.0.1:5000/api/v1/rentableitems"
+    private let apiURL = "http://127.0.0.1:5000/api/v1/rentableitems/"
     
     // MARK: - Functions
     
-    func rent(itemId: Int, completion: @escaping ItemDataCompletion) {
-        let url = URL(string: apiURL + "/rent/\(itemId)")!
+    func rent(itemId: Int, completion: @escaping RequestDataCompletion) {
+        let url = URL(string: apiURL + "rent/\(itemId)")!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "PUT"
         
         process(request: request, completion: completion)
     }
     
-    func getItems(completion: @escaping ItemDataCompletion) {
+    func getItems(completion: @escaping RequestDataCompletion) {
         let url = URL(string: apiURL)!
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -44,7 +35,7 @@ struct ItemManager {
         }.resume()
     }
     
-    func getReviewsOfItem(id: Int, completion: @escaping ReviewDataCompletion) {
+    func getReviewsOfItem(id: Int, completion: @escaping RequestDataCompletion) {
         let url = URL(string: apiURL + "/reviews/\(id)")!
         
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -56,11 +47,12 @@ struct ItemManager {
         }.resume()
     }
     
-    func addItem(item: RentableItem, completion: @escaping ItemDataCompletion) {
+    func addItem(item: RentableItem, completion: @escaping RequestDataCompletion) {
         let json: [String: Any] = ["title": item.title,
                                    "category": item.category,
                                    "usage_type": item.usageType,
                                    "receiving_details": item.receivingDetails,
+                                   "price": item.price,
                                    "item_description": item.itemDescription,
                                    "owner_name": item.ownerName,
                                    "start_date": item.startDate,
@@ -78,7 +70,7 @@ struct ItemManager {
         process(request: request, completion: completion)
     }
     
-    private func didFetchItems(data: Data?, response: URLResponse?, error: Error?, completion: ItemDataCompletion) {
+    private func didFetchItems(data: Data?, response: URLResponse?, error: Error?, completion: RequestDataCompletion) {
         guard error == nil else {
             print("failed request aici")
             completion(nil, .failedRequest)
@@ -100,23 +92,23 @@ struct ItemManager {
         completion(data, nil)
     }
     
-    private func process(request: NSMutableURLRequest, completion: @escaping ItemDataCompletion) {
+    private func process(request: NSMutableURLRequest, completion: @escaping RequestDataCompletion) {
         URLSession.shared.dataTask(with: request as URLRequest) { data, response, error in
             guard error == nil else {
                 print("failed request 1")
-                completion(nil, ItemManagerError.failedRequest)
+                completion(nil, .failedRequest)
                 return
             }
             
             guard let data = data, let response = response as? HTTPURLResponse else {
                 print("unkown")
-                completion(nil, ItemManagerError.unknown)
+                completion(nil, .unknown)
                 return
             }
             
             guard response.statusCode == 200 else {
                 print("failed request 2")
-                completion(nil, ItemManagerError.failedRequest)
+                completion(nil, .failedRequest)
                 return
             }
             

@@ -53,7 +53,7 @@ final class ItemDetailsViewController: UIViewController {
     
     init(item: RentableItem) {
         self.item = item
-        viewModel = ItemsViewModel(user: item.ownerName)
+        viewModel = ItemsViewModel(user: item.ownerName, photosManager: PhotosManager(cameraPlugin: CameraPlugin()))
         
         super.init(nibName: nil, bundle: nil)
         
