@@ -45,7 +45,7 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>(), Logout
     }
 
     private fun setupRecyclerView() {
-        adapter = ListAdapter(activity, this)
+        adapter = ListAdapter(this)
         listRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         listRecyclerView.adapter = adapter
     }

@@ -2,6 +2,7 @@ package proiectcolectiv.g934.itemrental.data.remote.repo
 
 import android.content.Context
 import android.os.Environment
+import com.bumptech.glide.Glide
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType
@@ -34,6 +35,7 @@ class RemoteRepo @Inject constructor() {
                         f.delete()
                     }
                 }
+                Glide.get(context).clearDiskCache()
                 it
             }
             .flatMap {

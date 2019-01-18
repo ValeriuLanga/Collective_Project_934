@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.content.FileProvider
+import com.savvi.rangedatepicker.CalendarPickerView
 import kotlinx.android.synthetic.main.fragment_add.*
 import proiectcolectiv.g934.itemrental.R
 import proiectcolectiv.g934.itemrental.base.BaseFragment
@@ -29,7 +30,6 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseImageDialogListener {
 
     override fun getViewModelClass() = AddViewModel::class.java
@@ -42,8 +42,8 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
     private var imageChosenBitmap: Bitmap? = null
     private var currentPhotoPath: String? = null
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onDestroy() {
+        super.onDestroy()
         val picturesDirectory = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         picturesDirectory?.let {
             val files = it.listFiles()
@@ -62,13 +62,21 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
         setupListeners()
         setupSpinner()
         setupObservers()
+        val fromDateChoose = Calendar.getInstance()
+        val toDateChoose = Calendar.getInstance().also { it.add(Calendar.MONTH, 6) }
+        addCalendarPickerView.init(fromDateChoose.time, toDateChoose.time)
+                .inMode(CalendarPickerView.SelectionMode.RANGE)
     }
 
     private fun setupSpinner() {
         addTitleEditText.addTextChangedListener(EmptyTextChangedListener(addTitleInput))
         addDescriptionEditText.addTextChangedListener(EmptyTextChangedListener(addDescriptionInput))
         addPriceEditText.addTextChangedListener(EmptyTextChangedListener(addPriceInput))
-        ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, resources.getStringArray(R.array.categories_array))
+        ArrayAdapter<String>(
+                activity,
+                android.R.layout.simple_spinner_item,
+                resources.getStringArray(R.array.categories_array)
+        )
                 .also { adapter ->
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                     addCategorySpinner.adapter = adapter
@@ -78,18 +86,19 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
     private fun textFieldsNotEmpty() = !addTitleEditText.text.isNullOrEmpty() &&
             !addDescriptionEditText.text.isNullOrEmpty() &&
             !addPriceEditText.text.isNullOrEmpty() &&
-            !addStartDateEditText.text.isNullOrEmpty() &&
-            !addEndDateEditText.text.isNullOrEmpty()
+            addCalendarPickerView.selectedDates.size >= 2
 
     private fun tryAddItem() {
         if (textFieldsNotEmpty() && imageChosenBitmap != null) {
+            val dates = addCalendarPickerView.selectedDates
+            val simpleDateFormat = SimpleDateFormat("MMM dd yyyy", Locale.getDefault())
             viewModel.addItem(
                     addTitleEditText.text!!.toString(),
                     addCategorySpinner.selectedItem.toString(),
                     addDescriptionEditText.text!!.toString(),
                     addPriceEditText.text!!.toString().toInt(),
-                    addStartDateEditText.text!!.toString(),
-                    addEndDateEditText.text!!.toString(),
+                    simpleDateFormat.format(dates[0]),
+                    simpleDateFormat.format(dates.last()),
                     currentPhotoPath!!
             )
         } else if (imageChosenBitmap == null) {
@@ -105,30 +114,6 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
         }
         addAddButton.setOnClickListener {
             tryAddItem()
-        }
-        addEndDateEditText.setOnClickListener {
-            if (addEndDateEditText.text.isNullOrEmpty()) {
-                datePickerDialog = DatePickerDialog(activity)
-            } else {
-                val dateSelected = SimpleDateFormat("MMM dd yyyy KK:mma", Locale.getDefault()).parse(addEndDateEditText.text.toString())
-                val calendarSelected = Calendar.getInstance()
-                calendarSelected.time = dateSelected
-                datePickerDialog = DatePickerDialog(activity, null, calendarSelected[Calendar.YEAR], calendarSelected[Calendar.MONTH], calendarSelected[Calendar.DAY_OF_MONTH])
-            }
-            datePickerDialog.setOnDateSetListener(endDateSetListener)
-            datePickerDialog.show()
-        }
-        addStartDateEditText.setOnClickListener {
-            if (addStartDateEditText.text.isNullOrEmpty()) {
-                datePickerDialog = DatePickerDialog(activity)
-            } else {
-                val dateSelected = SimpleDateFormat("MMM dd yyyy KK:mma", Locale.getDefault()).parse(addStartDateEditText.text.toString())
-                val calendarSelected = Calendar.getInstance()
-                calendarSelected.time = dateSelected
-                datePickerDialog = DatePickerDialog(activity, null, calendarSelected[Calendar.YEAR], calendarSelected[Calendar.MONTH], calendarSelected[Calendar.DAY_OF_MONTH])
-            }
-            datePickerDialog.setOnDateSetListener(startDateSetListener)
-            datePickerDialog.show()
         }
         addImage.setOnClickListener {
             fragmentManager?.let { fm ->
@@ -150,28 +135,6 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
                     else showError(it.error.localizedMessage)
                 }
             }
-        }
-    }
-
-    private val startDateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-        val timeChoosen = Calendar.getInstance()
-        timeChoosen.set(year, month, dayOfMonth)
-        val dateTimeChosen = timeChoosen.time
-        if (timeChoosen.after(Calendar.getInstance())) {
-            addStartDateEditText.setText(SimpleDateFormat("MMM dd yyyy hh:mma", Locale.getDefault()).format(dateTimeChosen))
-        } else {
-            activity.showToast(getString(R.string.incorrect_start_date))
-        }
-    }
-
-    private val endDateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-        val timeChoosen = Calendar.getInstance()
-        timeChoosen.set(year, month, dayOfMonth)
-        val dateTimeChosen = timeChoosen.time
-        if (timeChoosen.after(Calendar.getInstance())) {
-            addEndDateEditText.setText(SimpleDateFormat("MMM dd yyyy hh:mma", Locale.getDefault()).format(dateTimeChosen))
-        } else {
-            activity.showToast(getString(R.string.incorrect_end_date))
         }
     }
 

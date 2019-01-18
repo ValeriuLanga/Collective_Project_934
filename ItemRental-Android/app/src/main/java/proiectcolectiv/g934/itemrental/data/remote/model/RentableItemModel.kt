@@ -27,11 +27,14 @@ data class RentableItemModel(
         @SerializedName("title")
         val title: String,
 
-        @SerializedName("start_date")
+        @SerializedName("available_start_date")
         val startDate: String = "",
 
-        @SerializedName("end_date")
+        @SerializedName("available_end_date")
         val endDate: String = "",
+
+        @SerializedName("rent_periods")
+        val rentPeriods: List<RentPeriodModel> = listOf(),
 
         @Transient
         var imagePath: String? = null

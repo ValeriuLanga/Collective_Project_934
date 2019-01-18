@@ -50,9 +50,13 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
     }
 
     private fun setupFields() = rentalItem?.run {
-        Glide.with(this@DetailsFragment)
-                .load(imagePath)
-                .into(detailsImage)
+        if (imagePath == null) {
+            Glide.with(this@DetailsFragment)
+                    .load(activity.getDrawable(R.mipmap.ic_logo_foreground))
+                    .into(detailsImage)
+            detailsImage.isClickable = false
+        }
+        else Glide.with(this@DetailsFragment).load(imagePath).into(detailsImage)
         itemTitle.text = title
         itemCategoryTextView.text = category
         itemPrice.text = getString(R.string.price_lei, price)

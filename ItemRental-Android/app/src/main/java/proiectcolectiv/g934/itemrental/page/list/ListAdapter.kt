@@ -1,6 +1,5 @@
 package proiectcolectiv.g934.itemrental.page.list
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import proiectcolectiv.g934.itemrental.R
 import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
 
 class ListAdapter(
-        private val context: Context,
         private val rentableItemClickedListener: RentableItemClickedListener
 ) : RecyclerView.Adapter<ListAdapter.ListViewHolder>() {
 
@@ -43,14 +41,7 @@ class ListAdapter(
             itemNameTextView.text = title
             userTextView.text = ownerName
             categoryTextView.text = category
-            if (imagePath == null) {
-                itemImage.setImageDrawable(context.getDrawable(R.mipmap.ic_logo_foreground))
-            } else {
-                Glide.with(itemImage)
-                        .load(imagePath)
-                        .into(itemImage)
-            }
-            Unit
+            if (imagePath != null) Glide.with(itemImage).load(imagePath).into(itemImage)
         }
     }
 

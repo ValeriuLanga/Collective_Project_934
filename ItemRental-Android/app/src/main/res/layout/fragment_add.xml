@@ -135,43 +135,28 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addStartDateInput"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/addRentalPeriodText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addPriceInput">
+                android:textSize="16sp"
+                android:paddingStart="5dp"
+                android:text="@string/rental_period"
+                app:layout_constraintTop_toBottomOf="@id/addPriceInput"
+                app:layout_constraintStart_toStartOf="@id/addPriceInput"
+                app:layout_constraintEnd_toEndOf="@id/addPriceInput"
+                tools:ignore="RtlSymmetry" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/addStartDateEditText"
-                    android:layout_width="256dp"
-                    android:layout_height="wrap_content"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:hint="@string/start_date" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addEndDateInput"
-                android:layout_width="wrap_content"
+            <com.savvi.rangedatepicker.CalendarPickerView
+                android:id="@+id/addCalendarPickerView"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addStartDateInput">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/addEndDateEditText"
-                    android:layout_width="256dp"
-                    android:layout_height="wrap_content"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:hint="@string/end_date" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:nestedScrollingEnabled="true"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="@id/addRentalPeriodText"
+                app:layout_constraintStart_toStartOf="@id/addRentalPeriodText"
+                app:layout_constraintTop_toBottomOf="@id/addRentalPeriodText" />
 
             <ImageView
                 android:id="@+id/addImage"
@@ -180,9 +165,9 @@
                 android:layout_marginTop="40dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_choose_image"
-                app:layout_constraintEnd_toEndOf="@id/addEndDateInput"
-                app:layout_constraintStart_toStartOf="@id/addEndDateInput"
-                app:layout_constraintTop_toBottomOf="@id/addEndDateInput"
+                app:layout_constraintEnd_toEndOf="@id/addCalendarPickerView"
+                app:layout_constraintStart_toStartOf="@id/addCalendarPickerView"
+                app:layout_constraintTop_toBottomOf="@id/addCalendarPickerView"
                 tools:ignore="ContentDescription" />
 
             <com.google.android.material.button.MaterialButton
