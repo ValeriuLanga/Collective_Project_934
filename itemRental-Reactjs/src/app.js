@@ -12,6 +12,7 @@ import {
   clearCurrentProfile
 } from "./actions/authActions";
 import setAuthToken from "./utils/setAuthToken";
+import 'typeface-roboto';
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -5,50 +5,48 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Icon from '@material-ui/core/Icon';
+import orange from "@material-ui/core/colors/orange";
+
 import { Link } from "react-router-dom";
-import CardMedia from '@material-ui/core/CardMedia';
-import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
 
-
-import {getOwnAds, getOwnReviews} from "../../actions/ads";
+import { getOwnReviews } from "../../actions/ads";
 import ReviewItem from "../Reviews/ReviewItem";
+
+import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
 
 const styles = theme => ({
     root: {
         display: "flex",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
     },
     margin: {
-        margin: theme.spacing.unit
+        margin: theme.spacing.unit,
     },
     withoutLabel: {
-        marginTop: theme.spacing.unit * 3
+        marginTop: theme.spacing.unit * 3,
     },
     textField: {
-        flexBasis: 200
+        flexBasis: 200,
     },
     container: {
         display: "flex",
         justifyContent: "flex-start",
         maxWidth: "1080px",
-        margin: "0 auto"
+        margin: "0 auto",
     },
     paper: {
         padding: "20px 10px 35px 10px",
-        margin: "20px auto 20px"
+        margin: "20px auto 20px",
     },
     responsiveimg: {
-        maxWidth: "100%"
+        maxWidth: "100%",
     },
     link: {
-        textDecoration: "none"
+        textDecoration: "none",
     },
-    price: {
-        color: "#ff7700",
-        fontWeight: "700",
-        padding: "3px"
-    }
+    starIcon: {
+        color: orange[700],
+    },
 });
 
 class DashboardReview extends React.Component {
@@ -58,11 +56,10 @@ class DashboardReview extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         const { ads, classes, user } = this.props;
-        console.log(ads);
         let filteredAds = ads.reviews;
         let postContent;
+
         if (ads.isLoading) {
             postContent = (
                 <div className={classes.root}>
@@ -71,14 +68,11 @@ class DashboardReview extends React.Component {
             );
         } else {
             postContent = filteredAds.map(item => {
-                let stars ="";
-                for(let i = 0; i < item.rating; i++)
-                    stars += "⭐";
                 return (
-                    <Grid item key={item.posted_date}>
+                    <Grid item key={item.posted_date} xs={12}>
                         <ReviewItem
                             file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.rentableitem_id}`}
-                            title={stars}
+                            rating={item.rating}
                             key={item.posted_date}
                             to={"asd"}
                             posted_date={item.posted_date}

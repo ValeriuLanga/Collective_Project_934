@@ -1,15 +1,14 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { ListAlt } from "@material-ui/icons";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import { ChatOutlined } from "@material-ui/icons";
 import DashboardReview from "./DashboardReview";
 import DashboardAds from "./DashboardAds"
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import orange from '@material-ui/core/colors/orange'
 
 
 function TabContainer(props) {
@@ -26,8 +25,12 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     middle: {
-        justifyContent: "center"
-    }
+        justifyContent: "center",
+    },
+    tabs: {
+        color: orange[500], 
+        backgroundColor: theme.palette.background.paper,
+    },
 });
 
 class IconLabelTabs extends React.Component {
@@ -45,7 +48,12 @@ class IconLabelTabs extends React.Component {
         return (
             <div className={classes.middle}>
                 <AppBar position="static" >
-                    <Tabs value={value} onChange={this.handleChange} >
+                    <Tabs 
+                        value={value} 
+                        className={classes.tabs} 
+                        onChange={this.handleChange} 
+                        centered
+                    >
                         <Tab icon={<ListAlt />} label="Your Ads" />
                         <Tab icon={<ChatOutlined />} label="Your Reviews" />
                     </Tabs>
