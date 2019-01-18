@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../Header/MainHeader.js";
 import { withStyles } from "@material-ui/core/styles";
-import DashboardAds from "./DashboardAds";
+import Tabs from "./DashboardTabs";
 
 const styles = theme => ({
   container: {
-    display: "flex",
     justifyContent: "center",
-    maxWidth: "1080px",
+    width: "1000px",
     margin: "0 auto"
   },
   root: {
@@ -18,18 +17,19 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
+  componentDidMount(){
+
+  }
 
   render() {
     const { classes } = this.props;
+
 
     return (
       <div>
         <Header />
         <div className={classes.container}>
-          <br />
-          <div styel={{ marginTop: "50px" }}>
-            <DashboardAds />
-          </div>
+            <Tabs />
         </div>
       </div>
     );

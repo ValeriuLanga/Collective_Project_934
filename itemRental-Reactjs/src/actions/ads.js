@@ -7,10 +7,10 @@ import {
   GET_OWN_ADS,
   UPDATE_AD,
   DELETE_AD,
-  GET_AD
+  GET_AD, GET_OWN_REVIEWS
 } from "./types";
 
-import { URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, } from "../utils/constants";
+import { URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, REVIEWS } from "../utils/constants";
 // Register User
 export const postAd = (formData, history, file) => dispatch => {
 
@@ -96,6 +96,28 @@ export const getOwnAds = (uname) => dispatch => {
         });
       }
     });
+};
+
+export const getOwnReviews = (uname) => dispatch => {
+    console.log("Fetching reviews made by user", uname);
+    dispatch(isLoading());
+    var url = `${URL_SERVER}/${USERS}/${REVIEWS}/${uname}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(response => {
+            dispatch({
+                type: GET_OWN_REVIEWS,
+                payload: response.reviewitems
+            });
+        })
+        .catch(error => {
+            if (error) {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: error
+                });
+            }
+        });
 };
 
 // UPDATE_AD

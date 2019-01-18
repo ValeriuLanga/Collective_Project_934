@@ -5,13 +5,15 @@ import {
   UPDATE_AD,
   DELETE_AD,
   GET_OWN_ADS,
-  GET_AD
+  GET_AD,
+  GET_OWN_REVIEWS
 } from "../actions/types";
 
 // Ads Reducer
 const initialState = {
   ads: [],
   ad: {},
+    reviews: [],
   isLoading: false
 };
 
@@ -33,6 +35,12 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         ads: action.payload
+      };
+    case GET_OWN_REVIEWS:
+       return {
+        ...state,
+        isLoading: false,
+        reviews: action.payload
       };
     case GET_AD:
       return {
