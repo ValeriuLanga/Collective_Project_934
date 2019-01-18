@@ -1,5 +1,6 @@
 package proiectcolectiv.g934.itemrental
 
+import com.facebook.drawee.backends.pipeline.Fresco
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import proiectcolectiv.g934.itemrental.di.DaggerAppComponent
@@ -14,6 +15,7 @@ class ItemRentalApplication : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(timber)
+        Fresco.initialize(this)
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {

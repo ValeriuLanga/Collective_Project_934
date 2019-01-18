@@ -1,7 +1,6 @@
 package proiectcolectiv.g934.itemrental.data.remote.repo
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.os.Environment
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
@@ -11,11 +10,8 @@ import okhttp3.RequestBody
 import proiectcolectiv.g934.itemrental.data.remote.ApiErrorConverter
 import proiectcolectiv.g934.itemrental.data.remote.ApiService
 import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 class RemoteRepo @Inject constructor() {
@@ -30,24 +26,27 @@ class RemoteRepo @Inject constructor() {
             .subscribeOn(Schedulers.io())
             .flatMap(ApiErrorConverter())
             .map { it -> it.rentableItems }
-            .flatMapIterable { it -> it }
-            .flatMap {
+            .flatMapIterable { it ->
                 val picturesDirectory = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                picturesDirectory?.let {file ->
+                picturesDirectory?.let { file ->
                     val files = file.listFiles()
                     for (f in files) {
                         f.delete()
                     }
                 }
+                it
+            }
+            .flatMap {
                 downloadImageForItem(it)
             }
             .toList()
             .toFlowable()
 
-    fun uploadRentableItem(rentableItem: RentableItemModel): Flowable<String> = apiService.postRentableItem(rentableItem)
-            .subscribeOn(Schedulers.io())
-            .flatMap(ApiErrorConverter())
-            .flatMap { uploadImageToServer(it.itemId, rentableItem.imagePath) }
+    fun uploadRentableItem(rentableItem: RentableItemModel): Flowable<String> =
+            apiService.postRentableItem(rentableItem)
+                    .subscribeOn(Schedulers.io())
+                    .flatMap(ApiErrorConverter())
+                    .flatMap { uploadImageToServer(it.itemId, rentableItem.imagePath) }
 
     private fun uploadImageToServer(itemId: Int, imagePath: String?): Flowable<String> {
         if (imagePath == null)
@@ -66,7 +65,8 @@ class RemoteRepo @Inject constructor() {
                 .flatMap(ApiErrorConverter())
                 .map {
                     val inputStream = it.byteStream()
-                    val filePath = "${context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/${rentableItem.title}_${rentableItem.itemId}_.jpg"
+                    val filePath =
+                            "${context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)}/${rentableItem.title}_${rentableItem.itemId}_.jpg"
                     val file = File(filePath)
                     val fileOutputStream = FileOutputStream(file)
                     fileOutputStream.write(inputStream.readBytes())
@@ -76,4 +76,14 @@ class RemoteRepo @Inject constructor() {
                 }
                 .onErrorReturnItem(rentableItem)
     }
+
+    fun getUserRentableItems(userName: String): Flowable<List<RentableItemModel>> =
+            apiService.getUserRentableItems(userName)
+                    .subscribeOn(Schedulers.io())
+                    .flatMap(ApiErrorConverter())
+                    .map { it -> it.rentableItems }
+                    .flatMapIterable { it -> it }
+                    .flatMap { downloadImageForItem(it) }
+                    .toList()
+                    .toFlowable()
 }

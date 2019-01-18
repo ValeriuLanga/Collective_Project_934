@@ -1,17 +1,16 @@
 package proiectcolectiv.g934.itemrental.data.remote.model
 
-import android.graphics.Bitmap
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class RentableItemModel(
         @SerializedName("id")
         val itemId: Int = 0,
 
         @SerializedName("category")
         val category: String,
-
-        @SerializedName("usage_type")
-        val usageType: String,
 
         @SerializedName("receiving_details")
         val receivingDetails: String = "",
@@ -36,4 +35,4 @@ data class RentableItemModel(
 
         @Transient
         var imagePath: String? = null
-)
+) : Parcelable

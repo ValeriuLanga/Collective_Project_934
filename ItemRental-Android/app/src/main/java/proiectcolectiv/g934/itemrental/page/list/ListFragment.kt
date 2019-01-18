@@ -11,6 +11,7 @@ import proiectcolectiv.g934.itemrental.base.BaseFragment
 import proiectcolectiv.g934.itemrental.data.local.prefs.AppPrefsConstants
 import proiectcolectiv.g934.itemrental.data.local.prefs.StringPreference
 import proiectcolectiv.g934.itemrental.data.remote.ApiErrorThrowable
+import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
 import proiectcolectiv.g934.itemrental.page.dialogs.LogoutDialogFragment
 import proiectcolectiv.g934.itemrental.page.dialogs.LogoutDialogListener
 import proiectcolectiv.g934.itemrental.utils.Outcome
@@ -18,14 +19,14 @@ import proiectcolectiv.g934.itemrental.utils.observeNonNull
 import javax.inject.Inject
 import javax.inject.Named
 
-class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>(), LogoutDialogListener {
+class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>(), LogoutDialogListener, ListAdapter.RentableItemClickedListener {
 
     override fun getViewModelClass() = ListViewModel::class.java
 
     @field:[Inject Named(AppPrefsConstants.USER_PREF)]
     lateinit var userPref: StringPreference
 
-    lateinit var adapter: ListAdapter
+    private lateinit var adapter: ListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_list, container, false)
@@ -36,7 +37,6 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>(), Logout
         setupRecyclerView()
         setupListeners()
         setupObservers()
-        viewModel.getRentableItemsFromServer()
     }
 
     override fun onResume() {
@@ -45,7 +45,7 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>(), Logout
     }
 
     private fun setupRecyclerView() {
-        adapter = ListAdapter(activity)
+        adapter = ListAdapter(activity, this)
         listRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         listRecyclerView.adapter = adapter
     }
@@ -65,6 +65,10 @@ class ListFragment : BaseFragment<ListViewModel, ListViewModelFactory>(), Logout
         listAddButton.setOnClickListener {
             navController.navigate(R.id.action_listFragment_to_addFragment)
         }
+    }
+
+    override fun onRentableItemClicked(rentableItemModel: RentableItemModel) {
+        navController.navigate(R.id.action_listFragment_to_detailsFragment, Bundle().also { it.putParcelable("rentableItem", rentableItemModel) })
     }
 
     override fun logoutConfirmed() {

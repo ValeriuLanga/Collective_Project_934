@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.main.empty_layout.view.*
 import proiectcolectiv.g934.itemrental.R
 
 class EmptyLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleRes: Int = 0
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleRes: Int = 0
 ) : FrameLayout(context, attrs, defStyleRes) {
 
     init {
@@ -25,9 +25,10 @@ class EmptyLayout @JvmOverloads constructor(
         emptyLayoutEmptyTextView.visibility = View.GONE
     }
 
-    fun showEmpty() {
+    fun showEmpty(emptyText: String) {
         emptyLayoutProgressBar.visibility = View.GONE
-        emptyLayoutTryAgainLayout.visibility = View.VISIBLE
+        emptyLayoutTryAgainLayout.visibility = View.GONE
+        emptyLayoutEmptyTextView.text = emptyText
         emptyLayoutEmptyTextView.visibility = View.VISIBLE
     }
 
@@ -46,8 +47,8 @@ class EmptyLayout @JvmOverloads constructor(
     }
 
     fun isErrorVisible() =
-        !emptyLayoutEmptyTextView.text.isNullOrEmpty() && emptyLayoutErrorTextView.visibility == View.VISIBLE
+            !emptyLayoutEmptyTextView.text.isNullOrEmpty() && emptyLayoutErrorTextView.visibility == View.VISIBLE
 
     fun setRetryClickListener(retryClickListener: View.OnClickListener) =
-        emptyLayoutTryAgainButton.setOnClickListener(retryClickListener)
+            emptyLayoutTryAgainButton.setOnClickListener(retryClickListener)
 }

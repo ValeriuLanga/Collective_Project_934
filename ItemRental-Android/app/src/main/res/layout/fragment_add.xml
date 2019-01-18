@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/addBackButton"
                     android:layout_width="?android:attr/actionBarSize"
                     android:layout_height="0dp"
@@ -30,9 +30,10 @@
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_logo_foreground"
@@ -40,7 +41,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -97,32 +99,13 @@
                 app:layout_constraintTop_toBottomOf="@id/addTitleInput" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addUsageTypeInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addCategorySpinner">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/addUsageTypeEditText"
-                    android:layout_width="256dp"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/usage_type"
-                    android:inputType="textCapSentences"
-                    android:maxLength="20"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/addDescriptionInput"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/addUsageTypeInput">
+                app:layout_constraintTop_toBottomOf="@id/addCategorySpinner">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/addDescriptionEditText"

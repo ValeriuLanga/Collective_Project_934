@@ -66,7 +66,6 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
 
     private fun setupSpinner() {
         addTitleEditText.addTextChangedListener(EmptyTextChangedListener(addTitleInput))
-        addUsageTypeEditText.addTextChangedListener(EmptyTextChangedListener(addUsageTypeInput))
         addDescriptionEditText.addTextChangedListener(EmptyTextChangedListener(addDescriptionInput))
         addPriceEditText.addTextChangedListener(EmptyTextChangedListener(addPriceInput))
         ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, resources.getStringArray(R.array.categories_array))
@@ -77,7 +76,6 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
     }
 
     private fun textFieldsNotEmpty() = !addTitleEditText.text.isNullOrEmpty() &&
-            !addUsageTypeEditText.text.isNullOrEmpty() &&
             !addDescriptionEditText.text.isNullOrEmpty() &&
             !addPriceEditText.text.isNullOrEmpty() &&
             !addStartDateEditText.text.isNullOrEmpty() &&
@@ -88,7 +86,6 @@ class AddFragment : BaseFragment<AddViewModel, AddViewModelProvider>(), ChooseIm
             viewModel.addItem(
                     addTitleEditText.text!!.toString(),
                     addCategorySpinner.selectedItem.toString(),
-                    addUsageTypeEditText.text!!.toString(),
                     addDescriptionEditText.text!!.toString(),
                     addPriceEditText.text!!.toString().toInt(),
                     addStartDateEditText.text!!.toString(),

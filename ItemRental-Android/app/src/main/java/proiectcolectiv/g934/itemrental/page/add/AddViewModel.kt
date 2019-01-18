@@ -16,12 +16,11 @@ class AddViewModel(private val userPref: StringPreference,
 
     val addItemLiveData: MutableLiveData<Outcome<String>> = MutableLiveData()
 
-    fun addItem(title: String, category: String, usageType: String, description: String, price: Int, startDate: String, endDate: String, imagePath: String) {
+    fun addItem(title: String, category: String, description: String, price: Int, startDate: String, endDate: String, imagePath: String) {
         addItemLiveData.value = Outcome.loading(true)
         val rentableItem = RentableItemModel(
                 category = category,
                 title = title,
-                usageType = usageType,
                 itemDescription = description,
                 price = price,
                 ownerName = gson.fromJson(userPref.get(), UserModel::class.java).userName,

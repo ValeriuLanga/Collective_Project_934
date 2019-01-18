@@ -46,9 +46,23 @@
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="proiectcolectiv.g934.itemrental.page.add.AddFragment"
         android:label="AddFragment" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="proiectcolectiv.g934.itemrental.page.details.DetailsFragment"
+        android:label="DetailsFragment" >
+        <argument
+            android:name="rentableItem"
+            app:argType="proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel" />
+        <action
+            android:id="@+id/action_detailsFragment_self"
+            app:destination="@id/detailsFragment" />
+    </fragment>
 </navigation>
