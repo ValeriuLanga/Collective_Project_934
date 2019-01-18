@@ -8,44 +8,50 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import orange from '@material-ui/core/colors/orange';
+import indigo from '@material-ui/core/colors/indigo';
+
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 const styles = theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
   },
   margin: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   withoutLabel: {
-    marginTop: theme.spacing.unit * 3
+    marginTop: theme.spacing.unit * 3,
   },
   textField: {
-    flexBasis: 200
+    flexBasis: 200,
   },
   container: {
     display: "flex",
     justifyContent: "center",
     maxWidth: "1080px",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   paper: {
     padding: "20px 10px 2px 10px",
-    margin: "20px auto 20px"
+    margin: "20px auto 20px",
   },
   responsiveimg: {
-    maxWidth: "100%"
+    maxWidth: "100%",
   },
   link: {
-    textDecoration: "none"
+    textDecoration: "none",
   },
   price: {
-    color: "#ff7700",
+    color: orange[500],
     fontWeight: "700",
-    padding: "3px"
-  }
+    padding: "3px",
+  },
+  button: {
+    color: indigo[500],
+  },
 });
 
 class AdItem extends React.Component {
@@ -80,7 +86,7 @@ class AdItem extends React.Component {
           <Typography component="p" className={classes.price}>
             {this.props.price} Lei
           </Typography>
-          <Button size="small" color="primary" component={Link}
+          <Button className={classes.button} size="small" color="primary" component={Link}
                 to={`/listings/${this.props.to}`}>
             View Product
           </Button>

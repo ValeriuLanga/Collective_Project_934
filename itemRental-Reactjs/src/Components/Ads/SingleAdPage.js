@@ -9,6 +9,7 @@ import { getAd } from "../../actions/ads";
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import orange from '@material-ui/core/colors/orange';
 
 import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
 
@@ -33,11 +34,20 @@ const styles = theme => ({
     margin: "0 auto"
   },
   paper: {
-    padding: "20px 10px 35px 10px",
-    margin: "20px auto 20px"
+    /*padding: "20px 10px 35px 10px",
+    margin: "20px auto 20px"*/
+    padding: theme.spacing.unit * 2,
   },
   responsiveimg: {
     maxWidth: "100%"
+  },
+  button: {
+    backgroundColor: orange[500], 
+    width: "100%", 
+    marginTop: 15,
+    '&:hover': {
+      backgroundColor: orange[700],
+    },
   }
 });
 
@@ -75,8 +85,8 @@ class AdPage extends React.Component {
             <Typography style={{ textAlign: "center" }} variant="h4" gutterBottom>
               {item.title}
             </Typography>
-            <Paper elevation={1}>
-              <Typography style={{ textAlign: "center" }} variant="h5" gutterBottom style={{width: 100}}>
+            <Paper elevation={1} className={classes.paper}>
+              <Typography style={{ textAlign: "center" }} variant="h5" gutterBottom>
                 When do you want it?
               </Typography>
               <Divider variant="middle" />
@@ -85,9 +95,8 @@ class AdPage extends React.Component {
                 color="primary"
                 className={classes.button}
                 type="submit"
-                style={{ backgroundColor: "#FF7700" }}
                 >
-                POST
+                RENT
               </Button>
             </Paper>
           </Grid>

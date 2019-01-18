@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+
 import {withStyles} from "@material-ui/core/styles";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -10,14 +11,14 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
-import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-import moment from 'moment'
-import DateFnsUtils from '@date-io/date-fns';
+import orange from '@material-ui/core/colors/orange';
+
 import {MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker} from 'material-ui-pickers';
 import ReactDropzone from "react-dropzone";
-// import axios from "axios";
-// import { Link } from "react-router-dom";
+import DateFnsUtils from '@date-io/date-fns';
+
+import moment from 'moment'
 
 const styles = theme => ({
     root: {
@@ -50,6 +51,14 @@ const styles = theme => ({
     },
     paddingTopSelect: {
         padding: "30px 0px 0px 0px",
+    },
+    button: {
+        backgroundColor: orange[500], 
+        width: "100%", 
+        marginTop: 15,
+        '&:hover': {
+            backgroundColor: orange[700],
+        },
     },
 });
 
@@ -324,7 +333,6 @@ class InputAdornments extends React.Component {
                                 color="primary"
                                 className={classes.button}
                                 type="submit"
-                                style={{ backgroundColor: "#FF7700" }}
                             >
                                 POST
                             </Button>

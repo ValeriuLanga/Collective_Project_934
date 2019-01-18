@@ -15,6 +15,8 @@ import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
+import orange from '@material-ui/core/colors/orange';
+
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 
 import { getAds } from "../../actions/ads";
@@ -33,7 +35,8 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap",
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+    zIndex: 100
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
@@ -69,19 +72,24 @@ const styles = theme => ({
     justifyContent: "center",
     margin: "0 auto",
     maxHeight: 93,
-    zIndex: 100
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     paddingTop: 20,
-    width: "100%"
+    width: "100%",
+    zIndex: 100
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    marginTop: "25px",
+    backgroundColor: orange[500], 
+    '&:hover': {
+      backgroundColor: orange[700],
+    },
   },
   leftIcon: {
-    marginRight: theme.spacing.unit
+    marginLeft: theme.spacing.unit
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
@@ -321,7 +329,6 @@ class TextFieldMargins extends React.Component {
                   variant="contained"
                   color="primary"
                   className={classes.button}
-                  style={{ backgroundColor: "#FF7700", marginTop: "25px" }}
                   type="submit"
                 >
                   Search

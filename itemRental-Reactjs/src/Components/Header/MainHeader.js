@@ -13,6 +13,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import orange from '@material-ui/core/colors/orange';
+import indigo from '@material-ui/core/colors/indigo';
+
 import { DashboardOutlined as Dashboard } from "@material-ui/icons";
 
 import { CloudUploadOutlined as CloudUploadIcon } from "@material-ui/icons";
@@ -146,6 +149,21 @@ const styles = theme => ({
     tagline: {
       fontSize: "1rem"
     }
+  },
+  postAdButton: {
+    margin: theme.spacing.unit,
+    backgroundColor: orange[500],
+    '&:hover': {
+      backgroundColor: orange[700],
+    },
+  },
+  dashboardButton: {
+    margin: theme.spacing.unit,
+    color: indigo[500],
+    backgroundColor: indigo[50],
+    '&:hover': {
+      backgroundColor: indigo[100],
+    },
   }
 });
 
@@ -287,8 +305,7 @@ class PersistentDrawer extends React.Component {
                   <Button
                     variant="contained"
                     color="default"
-                    style={{ color: "#2965BE", backgroundColor: "#fafafa" }}
-                    className={classes.button}
+                    className={classes.dashboardButton}
                     component={Link}
                     to={"/dashboard"}
                   >
@@ -298,10 +315,9 @@ class PersistentDrawer extends React.Component {
                   <Button
                     variant="contained"
                     color="primary"
-                    className={classes.button}
+                    className={classes.postAdButton}
                     component={Link}
                     to={"/submitad"}
-                    style={{ backgroundColor: "#FF7700" }}
                   >
                     Post Ad
                     <CloudUploadIcon className={classes.rightIcon} />

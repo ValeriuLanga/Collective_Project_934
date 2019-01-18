@@ -20,7 +20,7 @@ const styles = theme => ({
     color: theme.palette.text.secondary
   },
   container: {
-    zIndex: -1
+    zIndex: 0
   }
 });
 
