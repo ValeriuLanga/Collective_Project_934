@@ -7,7 +7,7 @@ import Tabs from "./DashboardTabs";
 const styles = theme => ({
   container: {
     justifyContent: "center",
-    width: "1000px",
+    width: "1080px",
     margin: "0 auto"
   },
   root: {
@@ -23,7 +23,6 @@ class Dashboard extends Component {
 
   render() {
     const { classes } = this.props;
-
 
     return (
       <div>

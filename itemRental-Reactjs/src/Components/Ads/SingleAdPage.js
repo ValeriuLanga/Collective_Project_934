@@ -11,9 +11,12 @@ import LeftSideAdPage from "./LeftSideAdPage";
 import RightSideAdPage from "./RightSideAdPage";
 
 const styles = theme => ({
-  root: {
+  container: {
     display: "flex",
-    flexWrap: "wrap"
+    justifyContent: "center",
+    maxWidth: "1080px",
+    margin: "0 auto",
+    width: "1080px",
   },
   margin: {
     margin: theme.spacing.unit
@@ -23,12 +26,6 @@ const styles = theme => ({
   },
   textField: {
     flexBasis: 200
-  },
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    maxWidth: "1080px",
-    margin: "0 auto"
   },
   paper: {
     /*padding: "20px 10px 35px 10px",
@@ -79,7 +76,7 @@ class AdPage extends React.Component {
     const { classes, user, ads } = this.props;
     const item = ads.ad;
     return (
-      <div className={classes.root}>
+      <div>
         <Header />
         <Grid
           className={classes.container}

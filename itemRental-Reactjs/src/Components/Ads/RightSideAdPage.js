@@ -11,7 +11,7 @@ import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import orange from '@material-ui/core/colors/orange';
 
-import {MuiPickersUtilsProvider, DateTimePicker} from 'material-ui-pickers';
+import { MuiPickersUtilsProvider, DateTimePicker } from 'material-ui-pickers';
 
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment'
@@ -92,13 +92,13 @@ class RightSideAdPage extends React.Component {
                 <Divider variant="middle" style={{ marginTop: 20, marginBottom: 20 }}/>
                 <Grid container justify="center" alignItems="center" spacing={24} className={classes.smartPricing}>
                     <Typography style={{ textAlign: "center"}} variant="h5" gutterBottom className={classes.smartPricingItem}>
-                        35 lei<br/>day
+                        {price} lei<br/>day
                     </Typography>
                     <Typography style={{ textAlign: "center"}} variant="h5" gutterBottom className={classes.smartPricingItem}>
-                        35 lei<br/>week
+                        {price * 7} lei<br/>week
                     </Typography>
                     <Typography style={{ textAlign: "center"}} variant="h5" gutterBottom className={classes.smartPricingItem}>
-                        35 lei<br/>month
+                        {price * 30} lei<br/>month
                     </Typography>
                 </Grid>
                 <Paper elevation={1} className={classes.paper}>
@@ -116,7 +116,7 @@ class RightSideAdPage extends React.Component {
                             <DateTimePicker
                                 margin="normal"
                                 label="Start Date"
-                                value={this.state.end_date}
+                                value={this.state.start_date}
                                 onChange={this.handleChangePickers("start_date")}
                             />
                             </MuiPickersUtilsProvider>

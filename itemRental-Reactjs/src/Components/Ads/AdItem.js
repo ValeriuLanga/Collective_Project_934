@@ -19,6 +19,12 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap",
   },
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    maxWidth: "1080px",
+    margin: "0 auto",
+  },
   margin: {
     margin: theme.spacing.unit,
   },
@@ -27,12 +33,6 @@ const styles = theme => ({
   },
   textField: {
     flexBasis: 200,
-  },
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    maxWidth: "1080px",
-    margin: "0 auto",
   },
   paper: {
     padding: "20px 10px 2px 10px",

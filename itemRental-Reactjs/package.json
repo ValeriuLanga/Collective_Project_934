@@ -37,7 +37,7 @@
     "install-prompt-banner": "^0.0.6",
     "jwt-decode": "^2.2.0",
     "material-ui-pickers": "^2.1.1",
-    "material-ui-rating": "^2.0.0",
+    "material-ui-rating": "^2.0.0-beta.2",
     "moment": "^2.23.0",
     "node-sass": "4.5.3",
     "normalize.css": "8.0.0",
