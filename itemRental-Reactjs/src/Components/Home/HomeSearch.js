@@ -306,7 +306,7 @@ class TextFieldMargins extends React.Component {
                   value={this.state.single}
                   className={classes.textField}
                   onChange={this.handleCityChange("single")}
-                  placeholder="Search a city"
+                  placeholder="Search a county"
                 />
               </NoSsr>
               </Grid>
