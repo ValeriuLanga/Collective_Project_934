@@ -9,7 +9,8 @@ import logo from "../../logo.svg";
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginTop: 50
   },
   container: {
     maxWidth: "1080px",

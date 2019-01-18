@@ -11,6 +11,9 @@ const styles = theme => ({
   responsiveimg: {
     maxWidth: "100%"
   },
+  noDisplayDivider: {
+    backgroundColor: 0
+  },
 });
 
 class LeftSideAdPage extends React.Component {
@@ -23,7 +26,7 @@ class LeftSideAdPage extends React.Component {
                     alt="Ad thumbnail"
                     className={classes.responsiveimg}
                 />
-                <Divider variant="middle" style={{ marginTop: 20, marginBottom: 20 }}/>
+                <Divider style={{ marginTop: 20, marginBottom: 20 }}/>
                 
                 <Typography style={{ textAlign: "left"}} variant="h6" gutterBottom>
                     What's the item?

@@ -36,7 +36,7 @@ const categories = [
     url: '/images/categories/screen_projectors.jpg',
     title: 'Projectors & Screens',
     width: '100%',
-    caturl: '/category/Projectors%20%26%20Screens',
+    caturl: '/category/Projectors%20and%20Screens',
   },
   {
     url: '/images/categories/drones.jpg',

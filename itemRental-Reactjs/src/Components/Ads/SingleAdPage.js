@@ -3,12 +3,19 @@ import React from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
-import Header from "../Header/MainHeader";
-import { getAd } from "../../actions/ads";
+import Typography from "@material-ui/core/Typography";
+import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
+
 import orange from '@material-ui/core/colors/orange';
 
-import LeftSideAdPage from "./LeftSideAdPage";
-import RightSideAdPage from "./RightSideAdPage";
+import LeftSideAdPage from "./LeftSideAd";
+import RightSideAdPage from "./RightSideAd";
+import ReviewsAd from "./ReviewsAd";
+import Header from "../Header/MainHeader";
+import Footer from "../Footer/Footer";
+
+import { getAd } from "../../actions/ads";
 
 const styles = theme => ({
   container: {
@@ -37,11 +44,11 @@ const styles = theme => ({
     maxWidth: "100%"
   },
   button: {
-    backgroundColor: orange[500], 
+    color: orange[500], 
     width: "100%", 
     marginTop: 15,
     '&:hover': {
-      backgroundColor: orange[700],
+      backgroundColor: orange[50],
     },
   },
   orangeAvatar: {
@@ -62,7 +69,10 @@ const styles = theme => ({
   },
   smartPricingItem: {
     paddingRight: theme.spacing.unit * 2,
-    color: orange[500]
+    color: orange[500],
+  },
+  noDisplayDivider: {
+    backgroundColor: "white",
   },
 });
 
@@ -95,16 +105,23 @@ class AdPage extends React.Component {
               category={item.category}
               usage_type={item.usage_type}
             />
+            <Divider style={{ marginTop: 20, marginBottom: 20 }} className={classes.noDisplayDivider}/>
+            <Typography style={{ textAlign: "left"}} variant="h6" gutterBottom>
+              Reviews for the product
+            </Typography>
+            <ReviewsAd id={item.id} />
+            <Button className={classes.button}>Add Review</Button>
           </Grid>
           <Grid item md={6} sm={12}>
             <RightSideAdPage 
               id={item.id}
               title={item.title}
               price={item.price}
-              author={item.author}
+              author={item.owner_name}
             />
           </Grid>
         </Grid>
+        <Footer />
         </div>
     );
   }

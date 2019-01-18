@@ -11,7 +11,9 @@ import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import orange from '@material-ui/core/colors/orange';
 
-import { MuiPickersUtilsProvider, DateTimePicker } from 'material-ui-pickers';
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
+
+import getInitials from "../../utils/getInitials";
 
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment'
@@ -69,6 +71,9 @@ const styles = theme => ({
     paddingRight: theme.spacing.unit * 2,
     color: orange[500]
   },
+  noDisplayDivider: {
+    backgroundColor: 0
+  },
 });
 
 
@@ -83,13 +88,13 @@ class RightSideAdPage extends React.Component {
     };
 
     render() {
-        const { classes, id, author, price, title } = this.props;
+        const { classes, id, author, price, title, rent_start_date, rent_end_date } = this.props;
         return (
             <div>
                 <Typography style={{ textAlign: "center" }} variant="h4" gutterBottom>
                     {title}
                 </Typography>
-                <Divider variant="middle" style={{ marginTop: 20, marginBottom: 20 }}/>
+                <Divider className={classes.noDisplayDivider} variant="middle" style={{ marginTop: 20, marginBottom: 20 }}/>
                 <Grid container justify="center" alignItems="center" spacing={24} className={classes.smartPricing}>
                     <Typography style={{ textAlign: "center"}} variant="h5" gutterBottom className={classes.smartPricingItem}>
                         {price} lei<br/>day
@@ -113,7 +118,7 @@ class RightSideAdPage extends React.Component {
                     >
                         <Grid item md={6} sm={12}> 
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <DateTimePicker
+                            <DatePicker
                                 margin="normal"
                                 label="Start Date"
                                 value={this.state.start_date}
@@ -123,16 +128,16 @@ class RightSideAdPage extends React.Component {
                         </Grid>
                         <Grid item md={6} sm={12}> 
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <DateTimePicker
+                            <DatePicker
                                 margin="normal"
                                 label="End Date"
                                 value={this.state.end_date}
                                 onChange={this.handleChangePickers("end_date")}
+                                minDate={this.state.start_date}
                             />
                             </MuiPickersUtilsProvider>
                         </Grid>
                     </Grid>
-                    <Divider variant="middle" />
                     <Button
                         variant="contained"
                         color="primary"
@@ -145,13 +150,13 @@ class RightSideAdPage extends React.Component {
                 <Grid container justify="flex-start" alignItems="center">
                     <Grid item md={4} sm={12}> 
                         <Typography style={{ textAlign: "left", paddingTop: 5 }} variant="h6" gutterBottom>
-                        Who's the lender?
+                            Who's the lender?
                         </Typography>
                     </Grid>
                     <Grid item md={8} sm={12}> 
                         <Chip
-                            avatar={<Avatar className={classes.orangeAvatar}>KK</Avatar>}
-                            label="Krisztian Kristo"
+                            avatar={<Avatar className={classes.orangeAvatar}>{getInitials(author)}</Avatar>}
+                            label={author}
                             className={classes.chip}
                             variant="outlined"
                         />
