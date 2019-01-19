@@ -7,7 +7,7 @@ import {
   GET_OWN_ADS,
   UPDATE_AD,
   DELETE_AD,
-  GET_AD, GET_OWN_REVIEWS
+  GET_AD, GET_OWN_REVIEWS, GET_REVIEWS_ADD
 } from "./types";
 
 import { URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, REVIEWS } from "../utils/constants";
@@ -107,6 +107,27 @@ export const getOwnReviews = (uname) => dispatch => {
         .then(response => {
             dispatch({
                 type: GET_OWN_REVIEWS,
+                payload: response.reviewitems
+            });
+        })
+        .catch(error => {
+            if (error) {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: error
+                });
+            }
+        });
+};
+
+export const getReviewsAdd = (id) => dispatch => {
+    dispatch(isLoading());
+    let url = `${URL_SERVER}/${RENTABLE_ITEMS}/${REVIEWS}/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(response => {
+            dispatch({
+                type: GET_REVIEWS_ADD,
                 payload: response.reviewitems
             });
         })

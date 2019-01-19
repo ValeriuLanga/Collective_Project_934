@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
-
+import {getAd, getReviewsAdd} from "../../actions/ads";
 import orange from '@material-ui/core/colors/orange';
 
 import LeftSideAdPage from "./LeftSideAd";
@@ -15,7 +15,6 @@ import ReviewsAd from "./ReviewsAd";
 import Header from "../Header/MainHeader";
 import Footer from "../Footer/Footer";
 
-import { getAd } from "../../actions/ads";
 
 const styles = theme => ({
   container: {
@@ -80,11 +79,14 @@ class AdPage extends React.Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.dispatch(getAd(id));
+    this.props.dispatch(getReviewsAdd(id));
   }
 
   render() {
     const { classes, user, ads } = this.props;
     const item = ads.ad;
+    const reviews = ads.reviews;
+    console.log(reviews);
     return (
       <div>
         <Header />
@@ -109,7 +111,7 @@ class AdPage extends React.Component {
             <Typography style={{ textAlign: "left"}} variant="h6" gutterBottom>
               Reviews for the product
             </Typography>
-            <ReviewsAd id={item.id} />
+            <ReviewsAd id={item.id} reviews={reviews}/>
             <Button className={classes.button}>Add Review</Button>
           </Grid>
           <Grid item md={6} sm={12}>

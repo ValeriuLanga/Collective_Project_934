@@ -44,40 +44,10 @@ const styles = theme => ({
   },
 });
 
-const reviews = [
-    {
-        "owner_name": "krisztian",
-        "posted_date": "Jan 18 2019 10:21AM",
-        "rating": 5,
-        "rentableitem_id": "3",
-        "text": "nice doggo man 5/5"
-      },
-      {
-        "owner_name": "iulian",
-        "posted_date": "Jan 18 2019 10:23AM",
-        "rating": 5,
-        "rentableitem_id": "3",
-        "text": "nice doggo man 5/5"
-      },
-      {
-        "owner_name": "iulian",
-        "posted_date": "Jan 18 2019 11:57AM",
-        "rating": 5,
-        "rentableitem_id": "3",
-        "text": "nice doggo man 5/5"
-      },
-      {
-        "owner_name": "iulian",
-        "posted_date": "Jan 18 2019 12:41PM",
-        "rating": 5,
-        "rentableitem_id": "3",
-        "text": "nice doggo man 5/5. i love it so much and he also likes boops"
-      }
-]
 
 class ReviewsAd extends React.Component {
     render() {
-        const { classes } = this.props;
+        const { classes, reviews  } = this.props;
         return (
             <List className={classes.root}>
                 {reviews.map(review => (
