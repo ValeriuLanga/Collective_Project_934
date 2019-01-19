@@ -33,7 +33,7 @@
     <!-- Rentable Item List -->
     <string name="category_separation">%s » %s</string>
 
-    <!-- Add -->
+    <!-- Add Rentable Item -->
     <string name="title">Title</string>
     <string name="category">Category : </string>
     <string name="usage_type">Usage Type</string>
@@ -45,4 +45,8 @@
     <string name="button_rent">Rent</string>
     <string name="button_see_reviews">See reviews</string>
     <string name="other_items_message">Other items from this user:</string>
+
+    <!-- Add Review -->
+    <string name="add_review">Add your review</string>
+
 </resources>
