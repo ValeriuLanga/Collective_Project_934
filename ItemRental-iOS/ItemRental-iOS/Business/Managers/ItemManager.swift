@@ -36,7 +36,7 @@ struct ItemManager {
     }
     
     func getReviewsOfItem(id: Int, completion: @escaping RequestDataCompletion) {
-        let url = URL(string: apiURL + "/reviews/\(id)")!
+        let url = URL(string: apiURL + "reviews/\(id)")!
         
         URLSession.shared.dataTask(with: url) { data, response, error in
             self.didFetchItems(data: data, response: response, error: error, completion: { (data, error) in
@@ -50,7 +50,6 @@ struct ItemManager {
     func addItem(item: RentableItem, completion: @escaping RequestDataCompletion) {
         let json: [String: Any] = ["title": item.title,
                                    "category": item.category,
-                                   "usage_type": item.usageType,
                                    "receiving_details": item.receivingDetails,
                                    "price": item.price,
                                    "item_description": item.itemDescription,

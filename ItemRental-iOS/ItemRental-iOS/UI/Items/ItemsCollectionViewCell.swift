@@ -12,8 +12,11 @@ import SnapKit
 final class ItemsCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     
+    let container = UIView()
     let titleLabel = UILabel()
     let imageView = UIImageView()
+    let ownerView = UIView()
+    let icon = UIImageView()
     let ownerLabel = UILabel()
     
     // MARK: - Init
@@ -31,19 +34,31 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
     // MARK: - Private Functions
     
     private func setupUI() {
-        backgroundColor = .gray
-        layer.cornerRadius = 15
+//        backgroundColor = .white
+        
+        container.backgroundColor = .white
+        
+        addSubview(container)
+        container.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(Padding.p10)
+            $0.leading.trailing.equalToSuperview().inset(Padding.p20)
+        }
+//        container.layer.cornerRadius = 15
+        container.applyShadow()
         
         setupTitleLabel()
+        setupOwnerView()
+        setupIcon()
         setupOwnerLabel()
         setupImageView()
     }
     
     private func setupTitleLabel() {
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel.textColor = .orange
         titleLabel.textAlignment = .center
     
-        addSubview(titleLabel)
+        container.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Padding.p20)
             $0.centerX.equalToSuperview()
@@ -53,22 +68,43 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
     private func setupImageView() {
         imageView.contentMode = .scaleAspectFit
         
-        addSubview(imageView)
+        container.addSubview(imageView)
         imageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).inset(-Padding.p20)
-            $0.leading.trailing.equalToSuperview().inset(Padding.p10)
+            $0.leading.trailing.equalToSuperview().inset(Padding.p20)
             $0.bottom.equalTo(ownerLabel.snp.top).inset(-Padding.p20)
         }
     }
     
-    private func setupOwnerLabel() {
-        ownerLabel.font = UIFont.boldSystemFont(ofSize: 22)
-        ownerLabel.textAlignment = .center
-        
-        addSubview(ownerLabel)
-        ownerLabel.snp.makeConstraints {
+    private func setupOwnerView() {
+        container.addSubview(ownerView)
+        ownerView.snp.makeConstraints {
             $0.bottom.equalToSuperview().offset(-Padding.p20)
             $0.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupIcon() {
+        icon.image = UIImage(named: "icon")
+        
+        ownerView.addSubview(icon)
+        icon.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.height.equalTo(20)
+            $0.leading.equalToSuperview()
+        }
+    }
+    
+    private func setupOwnerLabel() {
+        ownerLabel.font = UIFont.systemFont(ofSize: 16)
+        ownerLabel.textColor = .lightGray
+        ownerLabel.textAlignment = .center
+        
+        ownerView.addSubview(ownerLabel)
+        ownerLabel.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(icon.snp.trailing)
+            $0.trailing.equalToSuperview()
         }
     }
     

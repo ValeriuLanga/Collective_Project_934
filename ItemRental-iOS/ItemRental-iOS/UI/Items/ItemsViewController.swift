@@ -15,6 +15,7 @@ final class ItemsViewController: UIViewController {
     private let viewModel: ItemsViewModel
     private let photosManager = PhotosManager(cameraPlugin: CameraPlugin())
     private let collectionView: UICollectionView
+    private var spinner = UIView()
     
     private let cellId = "cellId"
     
@@ -43,18 +44,38 @@ final class ItemsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        displaySpinner()
+
         setupUI()
     }
     
     // MARK: - Private Functions
     
+    private func displaySpinner() {
+        spinner = UIView(frame: view.bounds)
+        spinner.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.startAnimating()
+        indicator.center = spinner.center
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.spinner.addSubview(indicator)
+            self.view.addSubview(self.spinner)
+        }
+    }
+    
+    private func removeSpinner() {
+        DispatchQueue.main.async { [weak self] in
+            self?.spinner.removeFromSuperview()
+        }
+    }
+    
     private func setupUI() {
-//        view.backgroundColor = .gray
         view.backgroundColor = .white
         
         setupNavigationBar()
-        setupCollectionView()
+//        setupCollectionView()
         setupAddButton()
         setupLogoutButton()
     }
@@ -71,10 +92,9 @@ final class ItemsViewController: UIViewController {
         collectionView.delegate = self
 
         view.addSubview(collectionView)
-        
-        collectionView.snp.makeConstraints {
-            $0.top.leading.equalTo(view.safeAreaLayoutGuide).offset(Padding.p20)
-            $0.bottom.trailing.equalToSuperview().offset(-Padding.p20)
+        collectionView.snp.remakeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -113,7 +133,7 @@ extension ItemsViewController: UICollectionViewDataSource {
     
         cell.titleLabel.text = viewModel.items[indexPath.item].title
         cell.ownerLabel.text = viewModel.items[indexPath.item].ownerName
-        viewModel.items[indexPath.item].delegate = cell
+        cell.imageView.image = viewModel.items[indexPath.item].image
         
         return cell
     }
@@ -135,7 +155,7 @@ extension ItemsViewController: UICollectionViewDelegate {
 
 extension ItemsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 160, height: 250)
+        return CGSize(width: 182, height: 250)
     }
 }
 
@@ -151,7 +171,9 @@ extension ItemsViewController: AddItemDelegate {
 
 extension ItemsViewController: ItemsViewDelegate {
     func didUpdateItems() {
+        setupCollectionView()
         collectionView.reloadData()
+        removeSpinner()
     }
 }
 

@@ -59,8 +59,10 @@ final class ReviewViewController: UIViewController {
         reviewSection.isEditable = true
         reviewSection.adjustsFontForContentSizeCategory = true
         reviewSection.isSelectable = true
-        reviewSection.layer.cornerRadius = 10
         reviewSection.font = UIFont.systemFont(ofSize: 20)
+        reviewSection.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        reviewSection.layer.borderWidth = 1.0
+        reviewSection.layer.cornerRadius = 5
         
         view.addSubview(reviewSection)
         reviewSection.snp.makeConstraints {

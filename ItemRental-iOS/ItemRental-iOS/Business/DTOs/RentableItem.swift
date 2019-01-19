@@ -16,7 +16,6 @@ struct RentableItem {
     let id: Int?
     let title: String
     let category: String
-    let usageType: String
     let receivingDetails: String
     let itemDescription: String
     let price: Int
@@ -36,7 +35,6 @@ struct RentableItem {
     init(id: Int? = nil,
          title: String,
          category: String,
-         usageType: String,
          receivingDetails: String,
          itemDescription: String,
          price: Int,
@@ -48,7 +46,6 @@ struct RentableItem {
         self.id = id
         self.title = title
         self.category = category
-        self.usageType = usageType
         self.receivingDetails = receivingDetails
         self.itemDescription = itemDescription
         self.price = price

@@ -26,11 +26,11 @@ final class ItemDetailsViewController: UIViewController {
     private let ownerLabel = UILabel()
     private let titleLabel = UILabel()
     private let categoryLabel = UILabel()
-    private let usageTypeLabel = UILabel()
     private let receivingDetailsLabel = UILabel()
     private let itemDescriptionLabel = UILabel()
     private let startDateLabel = UILabel()
     private let endDateLabel = UILabel()
+    private let imageView = UIImageView()
     
     private let rentButton = UIButton()
     private let reviewButton = UIButton()
@@ -81,16 +81,16 @@ final class ItemDetailsViewController: UIViewController {
         setupOwnerLabel()
         setupTitleLabel()
         setupCategoryLabel()
-        setupUsageTypeLabel()
         setupReceivingDetailsLabel()
         setupItemDescriptionLabel()
         setupStartDateLabel()
         setupEndDateLabel()
+        setupImageView()
         
         setupRentButton()
         setupReviewButton()
-        setupOtherItemsLabel()
-        setupCollectionView()
+//        setupOtherItemsLabel()
+//        setupCollectionView()
     }
     
     private func setupOwnerLabel() {
@@ -129,18 +129,6 @@ final class ItemDetailsViewController: UIViewController {
         }
     }
     
-    private func setupUsageTypeLabel() {
-        usageTypeLabel.textAlignment = .center
-        usageTypeLabel.font = UIFont.systemFont(ofSize: 20)
-        usageTypeLabel.text = item.usageType
-        
-        view.addSubview(usageTypeLabel)
-        usageTypeLabel.snp.makeConstraints {
-            $0.top.equalTo(categoryLabel.snp.bottom).offset(Padding.p20)
-            $0.leading.equalToSuperview().offset(Padding.p20)
-        }
-    }
-    
     private func setupReceivingDetailsLabel() {
         receivingDetailsLabel.textAlignment = .center
         receivingDetailsLabel.font = UIFont.systemFont(ofSize: 20)
@@ -148,7 +136,7 @@ final class ItemDetailsViewController: UIViewController {
         
         view.addSubview(receivingDetailsLabel)
         receivingDetailsLabel.snp.makeConstraints {
-            $0.top.equalTo(usageTypeLabel.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(categoryLabel.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p20)
         }
     }
@@ -189,6 +177,19 @@ final class ItemDetailsViewController: UIViewController {
         }
     }
     
+    private func setupImageView() {
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = item.image
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.top.equalTo(endDateLabel.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p40)
+            $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.height.equalTo(130)
+        }
+    }
+    
     private func setupRentButton() {
         rentButton.setTitle("Rent", for: .normal)
         rentButton.backgroundColor = .orange
@@ -197,7 +198,7 @@ final class ItemDetailsViewController: UIViewController {
         
         view.addSubview(rentButton)
         rentButton.snp.makeConstraints {
-            $0.top.equalTo(endDateLabel.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(imageView.snp.bottom).offset(Padding.p20)
             $0.width.equalTo(Height.h300)
             $0.centerX.equalToSuperview()
         }

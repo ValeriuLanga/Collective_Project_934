@@ -67,10 +67,10 @@ final class ItemsViewModel {
             return
         }
         
+        var itemCounter = 0
         itemsData.forEach { item in
             guard let category = item["category"] as? String,
                 let title = item["title"] as? String,
-                let usageType = item["usage_type"] as? String,
                 let id = item["id"] as? Int,
                     let receivingDetails = item["receiving_details"] as? String,
                     let itemDescription = item["item_description"] as? String,
@@ -82,19 +82,20 @@ final class ItemsViewModel {
                 return
             }
     
-            var rentableItem = RentableItem(id: id, title: title, category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: ownerName, startDate: startDate, endDate: endDate, rented: rented)
+            var rentableItem = RentableItem(id: id, title: title, category: category, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: ownerName, startDate: startDate, endDate: endDate, rented: rented)
         
-//            photosManager.getImage(for: id) { (image) in
-//                rentableItem.image = image
-//            }
-            
-            if !rented {
-                self.items.append(rentableItem)
-            } else {
-                self.rentedItems.append(rentableItem)
+            photosManager.getImage(for: id) { (image) in
+                rentableItem.image = image
+                if !rented {
+                    self.items.append(rentableItem)
+                } else {
+                    self.rentedItems.append(rentableItem)
+                }
+                itemCounter = itemCounter + 1
+                if itemCounter == itemsData.count {
+                    self.delegate?.didUpdateItems()
+                }
             }
         }
-        
-        self.delegate?.didUpdateItems()
     }
 }

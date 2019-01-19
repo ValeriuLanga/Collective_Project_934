@@ -39,6 +39,7 @@
 		FB0FB52A21F11FAF00969F7E /* CameraPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52921F11FAF00969F7E /* CameraPresenter.swift */; };
 		FB0FB52C21F1B73E00969F7E /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52B21F1B73E00969F7E /* RequestError.swift */; };
 		FB0FB52E21F1BD8200969F7E /* NSMutableData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52D21F1BD8200969F7E /* NSMutableData+Extensions.swift */; };
+		FB0FB53021F27F4600969F7E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52F21F27F4600969F7E /* UIView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		FB0FB52921F11FAF00969F7E /* CameraPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPresenter.swift; sourceTree = "<group>"; };
 		FB0FB52B21F1B73E00969F7E /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		FB0FB52D21F1BD8200969F7E /* NSMutableData+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableData+Extensions.swift"; sourceTree = "<group>"; };
+		FB0FB52F21F27F4600969F7E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +249,7 @@
 			children = (
 				A1C9225A21E0E07300B05352 /* UIViewController+Extensions.swift */,
 				FB0FB52D21F1BD8200969F7E /* NSMutableData+Extensions.swift */,
+				FB0FB52F21F27F4600969F7E /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				A1C9224621D4F88400B05352 /* UserManager.swift in Sources */,
 				A1C9225D21E4F3A800B05352 /* ReviewsViewModel.swift in Sources */,
 				A1C9226221E50D5900B05352 /* ReviewCollectionViewCell.swift in Sources */,
+				FB0FB53021F27F4600969F7E /* UIView+Extensions.swift in Sources */,
 				FB0FB52C21F1B73E00969F7E /* RequestError.swift in Sources */,
 				A1C9223021D4E50E00B05352 /* ItemsCollectionViewCell.swift in Sources */,
 				A1C9223A21D4E7F400B05352 /* Location.swift in Sources */,

@@ -23,12 +23,12 @@ final class AddItemViewController: UIViewController {
     
     private let titleTextfield = UITextField()
     private let categoryTextfield = UITextField()
-    private let usageTypeTextfield = UITextField()
     private let receivingDetailsTextfield = UITextField()
     private let itemDescriptionTextfield = UITextField()
     private let priceTextfield = UITextField()
-    private let startDateTextfield = UITextField()
-    private let endDateTextfield = UITextField()
+    private let timeLabel = UILabel()
+    private let startDatePicker = UIDatePicker()
+    private let endDatePicker = UIDatePicker()
     private let imageView = UIButton()
     private let addButton = UIButton()
     
@@ -63,10 +63,10 @@ final class AddItemViewController: UIViewController {
         
         setupTitleTextfield()
         setupCategoryTextfield()
-        setupUsageTypeTextfield()
         setupReceivingDetailsTextfield()
         setupItemDescriptionTextfield()
         setupPriceTextfield()
+        setupTimeLabel()
         setupStartDateTextfield()
         setupEndDateTextfield()
         setupImageView()
@@ -97,25 +97,13 @@ final class AddItemViewController: UIViewController {
         }
     }
     
-    private func setupUsageTypeTextfield() {
-        usageTypeTextfield.borderStyle = .roundedRect
-        usageTypeTextfield.placeholder = "Usage Type"
-        
-        view.addSubview(usageTypeTextfield)
-        usageTypeTextfield.snp.makeConstraints {
-            $0.top.equalTo(categoryTextfield.snp.bottom).offset(Padding.p10)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
-        }
-    }
-    
     private func setupReceivingDetailsTextfield() {
         receivingDetailsTextfield.borderStyle = .roundedRect
         receivingDetailsTextfield.placeholder = "Receiving Details"
         
         view.addSubview(receivingDetailsTextfield)
         receivingDetailsTextfield.snp.makeConstraints {
-            $0.top.equalTo(usageTypeTextfield.snp.bottom).offset(Padding.p10)
+            $0.top.equalTo(categoryTextfield.snp.bottom).offset(Padding.p10)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
         }
@@ -145,42 +133,53 @@ final class AddItemViewController: UIViewController {
         }
     }
     
+    private func setupTimeLabel() {
+        timeLabel.text = "Availability (start and end date)"
+        view.addSubview(timeLabel)
+        timeLabel.snp.makeConstraints {
+            $0.top.equalTo(priceTextfield.snp.bottom).offset(Padding.p20)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
     private func setupStartDateTextfield() {
-        startDateTextfield.borderStyle = .roundedRect
-        startDateTextfield.placeholder = "Aug 12 2013 4:20PM"
-        
-        view.addSubview(startDateTextfield)
-        startDateTextfield.snp.makeConstraints {
-            $0.top.equalTo(priceTextfield.snp.bottom).offset(Padding.p10)
+        startDatePicker.datePickerMode = .date
+        view.addSubview(startDatePicker)
+        startDatePicker.snp.makeConstraints {
+            $0.top.equalTo(timeLabel.snp.bottom).offset(Padding.p10)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.height.equalTo(50)
         }
     }
     
     private func setupEndDateTextfield() {
-        endDateTextfield.borderStyle = .roundedRect
-        endDateTextfield.placeholder = "Aug 12 2013 4:20PM"
-        
-        view.addSubview(endDateTextfield)
-        endDateTextfield.snp.makeConstraints {
-            $0.top.equalTo(startDateTextfield.snp.bottom).offset(Padding.p10)
+        endDatePicker.datePickerMode = .date
+        view.addSubview(endDatePicker)
+        endDatePicker.snp.makeConstraints {
+            $0.top.equalTo(startDatePicker.snp.bottom).offset(Padding.p10)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.height.equalTo(50)
         }
     }
     
     private func setupImageView() {
         imageView.addTarget(self, action: #selector(selectPhoto), for: .touchUpInside)
         imageView.imageView?.contentMode = .scaleAspectFit
-        imageView.setImage(UIImage(named: "plus"), for: .normal)
+        imageView.layer.borderColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0).cgColor
+        imageView.layer.borderWidth = 1.0
+        imageView.layer.cornerRadius = 5
+        imageView.setTitle("Tap to choose an image", for: .normal)
+        imageView.setTitleColor(.black, for: .normal)
         imageView.adjustsImageWhenHighlighted = false
         
         view.addSubview(imageView)
         imageView.snp.makeConstraints {
-            $0.top.equalTo(endDateTextfield.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(endDatePicker.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
-            $0.height.equalTo(120)
+            $0.height.equalTo(100)
         }
     }
     
@@ -203,23 +202,17 @@ final class AddItemViewController: UIViewController {
     @objc private func addButtonTapped() {        
         guard let title = titleTextfield.text,
                 let category = categoryTextfield.text,
-                let usageType = usageTypeTextfield.text,
                 let receivingDetails = receivingDetailsTextfield.text,
                 let itemDescription = itemDescriptionTextfield.text,
-                let priceString = priceTextfield.text,
-                let startDate = startDateTextfield.text,
-                let endDate = endDateTextfield.text else {
+                let priceString = priceTextfield.text else {
                     return
         }
 
         guard title != "",
                 category != "",
-                usageType != "",
                 receivingDetails != "",
                 itemDescription != "",
-                let price = Int(priceString),
-                startDate != "",
-                endDate != "" else {
+                let price = Int(priceString) else {
                 presentAlert(message: "All fields must be completed!")
                 return
         }
@@ -232,7 +225,7 @@ final class AddItemViewController: UIViewController {
         guard let userName = UserDefaults.standard.string(forKey: "user") else {
             return
         }
-        let item = RentableItem(title: title, category: category, usageType: usageType, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: userName, startDate: startDate, endDate: endDate, rented: false)
+        let item = RentableItem(title: title, category: category, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: userName, startDate: startDatePicker.date.description, endDate: endDatePicker.date.description, rented: false)
         
         manager.addItem(item: item) { [weak self] (data, error) in
             guard let self = self else { return }
@@ -324,6 +317,7 @@ extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationCo
             dismiss(animated: true)
             return
         }
+        imageView.layer.borderWidth = 0
         imageView.setImage(photo, for: .normal)
         image = photo
         
