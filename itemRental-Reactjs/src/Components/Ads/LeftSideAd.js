@@ -48,13 +48,6 @@ class LeftSideAdPage extends React.Component {
                 <Typography variant="body1" color="textSecondary" gutterBottom paragraph>
                     {category}
                 </Typography>
-
-                 <Typography variant="subtitle2" gutterBottom>
-                    Usage Type
-                </Typography>
-                <Typography variant="body1" color="textSecondary" gutterBottom paragraph>
-                    {usage_type}
-                </Typography>
             </div>
         )
     }

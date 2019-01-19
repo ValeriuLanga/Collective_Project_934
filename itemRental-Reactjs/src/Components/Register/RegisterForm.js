@@ -79,7 +79,7 @@ class InputAdornments extends React.Component {
                 }
             };
             let url = URL_SERVER + "/users/";
-            console.log(data, url);
+
             fetch(url, {
                 method: "POST", // or 'PUT'
                 body: JSON.stringify(data), // data can be `string` or {object}!
@@ -125,6 +125,7 @@ class InputAdornments extends React.Component {
                                         type="email"
                                         value={this.state.email}
                                         onChange={this.handleChange("email")}
+                                        autocomplete="email"
                                     />
                                 </FormControl>
                                 <FormControl fullWidth className={classes.margin}>
@@ -164,6 +165,7 @@ class InputAdornments extends React.Component {
                                         type={this.state.showPassword ? "text" : "password"}
                                         value={this.state.password}
                                         onChange={this.handleChange("password")}
+                                        autocomplete="new-password"
                                     />
                                 </FormControl>
                                 <FormControl
@@ -179,6 +181,7 @@ class InputAdornments extends React.Component {
                                         error={this.state.error ? true : false}
                                         value={this.state.password2}
                                         onChange={this.handleChange("password2")}
+                                        autocomplete="new-password"
                                     />
                                 </FormControl>
                                 <Button

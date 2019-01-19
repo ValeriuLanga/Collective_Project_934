@@ -52,7 +52,7 @@ class InputAdornments extends React.Component {
         e.preventDefault();
         if (!this.state.name || !this.state.password) {
             this.setState({
-                error: "Please fill all the feilds correctly"
+                error: "Please fill all the field correctly"
             });
         } else {
             let data = {
@@ -60,7 +60,6 @@ class InputAdornments extends React.Component {
                 password: this.state.password
             };
             this.props.onSubmit(data);
-            console.log(data);
         }
     };
 

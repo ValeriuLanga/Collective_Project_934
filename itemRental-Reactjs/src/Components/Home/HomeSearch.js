@@ -273,7 +273,6 @@ class TextFieldMargins extends React.Component {
           ads: adList
         });
       }
-      console.log(this.state);
     }, 2000);
   };
 

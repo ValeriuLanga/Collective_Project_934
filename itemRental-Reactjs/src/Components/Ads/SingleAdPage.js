@@ -6,15 +6,16 @@ import { Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
-import {getAd, getReviewsAdd} from "../../actions/ads";
+import Modal from '@material-ui/core/Modal';
+import { getAd, getReviewsAdd } from "../../actions/ads";
 import orange from '@material-ui/core/colors/orange';
 
 import LeftSideAdPage from "./LeftSideAd";
 import RightSideAdPage from "./RightSideAd";
 import ReviewsAd from "./ReviewsAd";
+import RatingModalContent from "./RatingModalContent";
 import Header from "../Header/MainHeader";
 import Footer from "../Footer/Footer";
-
 
 const styles = theme => ({
   container: {
@@ -33,11 +34,17 @@ const styles = theme => ({
   textField: {
     flexBasis: 200
   },
-  paper: {
-    /*padding: "20px 10px 35px 10px",
-    margin: "20px auto 20px"*/
-    padding: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2,
+  cardPaper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    //padding: theme.spacing.unit * 2,
+    outline: 'none',
+    margin:'0 auto',
+    top: '50%',
+    left: '50%',
+    transform: 'translateY(-50%) translateX(-50%)',
   },
   responsiveimg: {
     maxWidth: "100%"
@@ -73,20 +80,41 @@ const styles = theme => ({
   noDisplayDivider: {
     backgroundColor: "white",
   },
+  orangeCardHeader: {
+    backgroundColor: orange[200],
+  },
+  "@media only screen and (max-width: 960px)": {
+    container: {
+      zIndex: 0,
+      width: "100%",
+    },
+  },
 });
 
 class AdPage extends React.Component {
+  state = {
+    open: false,
+  };
+
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.dispatch(getAd(id));
     this.props.dispatch(getReviewsAdd(id));
   }
 
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     const { classes, user, ads } = this.props;
     const item = ads.ad;
     const reviews = ads.reviews;
-    console.log(reviews);
+
     return (
       <div>
         <Header />
@@ -112,7 +140,20 @@ class AdPage extends React.Component {
               Reviews for the product
             </Typography>
             <ReviewsAd id={item.id} reviews={reviews}/>
-            <Button className={classes.button}>Add Review</Button>
+            <Button className={classes.button} onClick={this.handleOpen}>Add Review</Button>
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={this.state.open}
+              onClose={this.handleClose}
+              style={{alignItems:'center',justifyContent:'center'}}
+            >
+              <RatingModalContent 
+                id={item.id}
+                title={item.title}
+                author={item.owner_name}
+              />
+            </Modal>
           </Grid>
           <Grid item md={6} sm={12}>
             <RightSideAdPage 

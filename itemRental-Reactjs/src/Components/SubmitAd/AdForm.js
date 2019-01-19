@@ -136,10 +136,7 @@ class InputAdornments extends React.Component {
             let formData = new FormData();
             formData.append("pic", state.files);
 
-            console.log(this.state.files)
-
             this.props.onSubmit(data, formData);
-            console.log(data);
         }
     };
 

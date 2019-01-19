@@ -47,11 +47,11 @@ const styles = theme => ({
 
 class ReviewsAd extends React.Component {
     render() {
-        const { classes, reviews  } = this.props;
+        const { classes, reviews } = this.props;
         return (
             <List className={classes.root}>
                 {reviews.map(review => (
-                    <ListItem alignItems="flex-start" className={classes.listItem} divider>
+                    <ListItem alignItems="flex-start" className={classes.listItem} divider key={review.id}>
                         <ListItemAvatar>
                             <Avatar className={classes.orangeAvatar}>{getInitials(review.owner_name)}</Avatar>
                         </ListItemAvatar>

@@ -76,13 +76,13 @@ function FullWidthGrid(props) {
           </Typography>
         </Grid>
         {categories.map(category => (
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={6} sm={4} key={category.caturl}>
             <CategoryItem
               url={category.url}
               width={category.width}
               title={category.title}
               caturl={category.caturl}
-              key={category.title}
+              key={category.caturl}
             />
           </Grid>
         ))}
