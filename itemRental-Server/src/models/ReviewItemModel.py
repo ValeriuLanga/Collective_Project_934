@@ -9,7 +9,7 @@ class ReviewItemModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String)
-    rating = db.Column(db.Float)
+    rating = db.Column(db.Integer)
     posted_date = db.Column(db.DateTime)
     owner = db.relationship("UserModel", back_populates="reviews")
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))

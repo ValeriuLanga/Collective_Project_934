@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2249c4a0d342
+Revision ID: ffe06f85363a
 Revises: 
-Create Date: 2018-12-23 19:50:27.765170
+Create Date: 2019-01-18 21:36:58.249363
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2249c4a0d342'
+revision = 'ffe06f85363a'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,13 +40,16 @@ def upgrade():
     )
     op.create_table('rentableitem',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('category', sa.String(), nullable=True),
-    sa.Column('usage_type', sa.String(), nullable=True),
-    sa.Column('start_date', sa.DateTime(), nullable=True),
-    sa.Column('end_date', sa.DateTime(), nullable=True),
+    sa.Column('category', sa.Enum('Film & Photography', 'Projectors and Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical', name='types'), nullable=True),
+    sa.Column('title', sa.String(), nullable=True),
+    sa.Column('available_start_date', sa.Date(), nullable=True),
+    sa.Column('available_end_date', sa.Date(), nullable=True),
     sa.Column('receiving_details', sa.String(), nullable=True),
+    sa.Column('price', sa.Integer(), nullable=True),
     sa.Column('item_description', sa.String(), nullable=True),
     sa.Column('owner_name', sa.String(), nullable=True),
+    sa.Column('photo_name', sa.String(), nullable=True),
+    sa.Column('rented', sa.Boolean(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -54,7 +57,7 @@ def upgrade():
     op.create_table('review',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('text', sa.String(), nullable=True),
-    sa.Column('rating', sa.Float(), nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('posted_date', sa.DateTime(), nullable=True),
     sa.Column('owner_id', sa.Integer(), nullable=True),
     sa.Column('owner_name', sa.String(), nullable=True),
