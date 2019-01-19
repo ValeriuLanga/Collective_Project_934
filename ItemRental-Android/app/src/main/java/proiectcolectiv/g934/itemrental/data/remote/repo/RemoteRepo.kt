@@ -10,6 +10,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import proiectcolectiv.g934.itemrental.data.remote.ApiErrorConverter
 import proiectcolectiv.g934.itemrental.data.remote.ApiService
+import proiectcolectiv.g934.itemrental.data.remote.model.RentPeriodModel
 import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
 import java.io.File
 import java.io.FileOutputStream
@@ -88,4 +89,9 @@ class RemoteRepo @Inject constructor() {
                     .flatMap { downloadImageForItem(it) }
                     .toList()
                     .toFlowable()
+
+    fun rentItem(rentPeriod: RentPeriodModel, rentableItemId: Int): Flowable<String> =
+            apiService.postRentItem(rentableItemId, rentPeriod)
+                    .subscribeOn(Schedulers.io())
+                    .flatMap(ApiErrorConverter())
 }

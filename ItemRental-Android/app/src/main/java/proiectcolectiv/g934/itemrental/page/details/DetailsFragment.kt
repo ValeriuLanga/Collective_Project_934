@@ -13,15 +13,23 @@ import proiectcolectiv.g934.itemrental.R
 import proiectcolectiv.g934.itemrental.base.BaseFragment
 import proiectcolectiv.g934.itemrental.data.remote.ApiErrorThrowable
 import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
+import proiectcolectiv.g934.itemrental.page.dialogs.RentDialogFragment
+import proiectcolectiv.g934.itemrental.page.dialogs.RentDialogListener
 import proiectcolectiv.g934.itemrental.utils.Outcome
+import proiectcolectiv.g934.itemrental.utils.multipleLet
 import proiectcolectiv.g934.itemrental.utils.observeNonNull
+import proiectcolectiv.g934.itemrental.utils.showToast
+import java.text.SimpleDateFormat
+import java.util.*
 
-class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>(), DetailsAdapter.RentableItemClickedListener {
+class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>(),
+        DetailsAdapter.RentableItemClickedListener, RentDialogListener {
 
     override fun getViewModelClass() = DetailsViewModel::class.java
 
     private var rentalItem: RentableItemModel? = null
     private lateinit var adapter: DetailsAdapter
+    private lateinit var rentDialogFragment: RentDialogFragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_details, container, false)
@@ -55,8 +63,7 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
                     .load(activity.getDrawable(R.mipmap.ic_logo_foreground))
                     .into(detailsImage)
             detailsImage.isClickable = false
-        }
-        else Glide.with(this@DetailsFragment).load(imagePath).into(detailsImage)
+        } else Glide.with(this@DetailsFragment).load(imagePath).into(detailsImage)
         itemTitle.text = title
         itemCategoryTextView.text = category
         itemPrice.text = getString(R.string.price_lei, price)
@@ -73,6 +80,12 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
             ImageViewer.Builder(activity, listOf(rentalItem?.imagePath))
                     .setFormatter { path -> "file://$path" }
                     .show()
+        }
+        rentButton.setOnClickListener {
+            multipleLet(fragmentManager, rentalItem) { fm, rental ->
+                rentDialogFragment = RentDialogFragment.createRentDialogFragment(
+                        fm, this, rental.rentPeriods, rental.startDate, rental.endDate)
+            }
         }
     }
 
@@ -92,6 +105,29 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
                     else showError(it.error.localizedMessage)
                 }
             }
+        }
+        viewModel.rentItemLiveData.observeNonNull(this) {
+            when (it) {
+                is Outcome.Progress -> rentDialogFragment.startLoading()
+                is Outcome.Success -> {
+                    rentDialogFragment.dismiss()
+                    navController.navigateUp()
+                    activity.showToast(getString(R.string.item_rented_sucessfully))
+                }
+                is Outcome.Failure -> {
+                    rentDialogFragment.dismiss()
+                    activity.showToast(getString(R.string.item_rented_failed))
+                }
+            }
+        }
+    }
+
+    override fun rentItem(startDate: Date, endDate: Date) {
+        rentalItem?.let {
+            val sdf = SimpleDateFormat("MMM dd yyyy", Locale.getDefault())
+            val startDateString = sdf.format(startDate)
+            val endDateString = sdf.format(endDate)
+            viewModel.rentItem(startDateString, endDateString, it.itemId)
         }
     }
 

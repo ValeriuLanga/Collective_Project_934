@@ -17,6 +17,7 @@ object ApiConstants {
 
     object RentableItems {
         const val RENTABLEITEMS = "rentableitems/"
+        const val RENTABLEITEMS_RENT = "rentableitems/rent"
         const val RENTABLEITEMS_REVIEWS = "rentableitems/reviews"
         const val RENTABLEITEMS_UPLOADIMAGE = "rentableitems/uploadimage"
         const val RENTABLEITEMS_DOWNLOADIMAGE = "rentableitems/downloadimage"

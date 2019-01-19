@@ -2,13 +2,10 @@ package proiectcolectiv.g934.itemrental.utils
 
 import android.util.Patterns
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.*
-import kotlin.reflect.KClass
-
-fun <T : ViewModel> Fragment.getActivityViewModel(viewModelClass: KClass<T>) =
-        activity?.let { ViewModelProviders.of(it).get(viewModelClass.java) }
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 
 fun <T> LiveData<T>.observeNonNull(lifecycleOwner: LifecycleOwner, action: (T) -> Unit) =
         observe(lifecycleOwner, Observer { it?.let(action) })

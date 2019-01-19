@@ -5,6 +5,7 @@ import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.RentableItems.RENTABLEITEMS
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.RentableItems.RENTABLEITEMS_DOWNLOADIMAGE
+import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.RentableItems.RENTABLEITEMS_RENT
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.RentableItems.RENTABLEITEMS_REVIEWS
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.RentableItems.RENTABLEITEMS_UPLOADIMAGE
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.Reviews.REVIEWS
@@ -12,10 +13,7 @@ import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.Users.USERS
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.Users.USERS_LOGIN
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.Users.USERS_RENTABLE
 import proiectcolectiv.g934.itemrental.data.remote.ApiConstants.Users.USERS_REVIEWS
-import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
-import proiectcolectiv.g934.itemrental.data.remote.model.ReviewModel
-import proiectcolectiv.g934.itemrental.data.remote.model.UserLoginModel
-import proiectcolectiv.g934.itemrental.data.remote.model.UserModel
+import proiectcolectiv.g934.itemrental.data.remote.model.*
 import proiectcolectiv.g934.itemrental.data.remote.response.RentableItemsResponse
 import proiectcolectiv.g934.itemrental.data.remote.response.ReviewsResponse
 import retrofit2.Response
@@ -57,4 +55,10 @@ interface ApiService {
     @Streaming
     @GET("$RENTABLEITEMS_DOWNLOADIMAGE/{rentableitem_id}")
     fun getRentableItemImage(@Path("rentableitem_id") itemId: Int): Flowable<Response<ResponseBody>>
+
+    @PUT("$RENTABLEITEMS_RENT/{rentableitem_id}")
+    fun postRentItem(
+        @Path("rentableitem_id") itemId: Int,
+        @Body rentPeriodModel: RentPeriodModel
+    ): Flowable<Response<String>>
 }
