@@ -18,7 +18,7 @@ const styles = theme => ({
 
 class LeftSideAdPage extends React.Component {
     render() {
-        const { classes, id, description, details, category, usage_type } = this.props;
+        const { classes, id, description, details, category } = this.props;
         return (
             <div>
                 <img
@@ -47,13 +47,6 @@ class LeftSideAdPage extends React.Component {
                 </Typography>
                 <Typography variant="body1" color="textSecondary" gutterBottom paragraph>
                     {category}
-                </Typography>
-
-                 <Typography variant="subtitle2" gutterBottom>
-                    Usage Type
-                </Typography>
-                <Typography variant="body1" color="textSecondary" gutterBottom paragraph>
-                    {usage_type}
                 </Typography>
             </div>
         )

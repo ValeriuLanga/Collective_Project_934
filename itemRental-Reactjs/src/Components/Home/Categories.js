@@ -25,7 +25,7 @@ const styles = theme => ({
 });
 
 // Film & Photography, Projectors and Screens, Drones, DJ Equipment, Sports, Musical Instruments
-const categories = [
+export const categories = [
   {
     url: '/images/categories/film_photography.jpg',
     title: 'Film & Photography',
@@ -36,31 +36,31 @@ const categories = [
     url: '/images/categories/screen_projectors.jpg',
     title: 'Projectors & Screens',
     width: '100%',
-    caturl: '/category/Projectors%20and%20Screens',
+    caturl: '/category/Projectors%20%26%20Screens',
   },
   {
     url: '/images/categories/drones.jpg',
     title: 'Drones',
     width: '100%',
-    caturl: '/category/drones',
+    caturl: '/category/Drones',
   },
   {
     url: '/images/categories/dj_equipment.jpg',
     title: 'DJ Equipment',
     width: '100%',
-    caturl: '/category/dj%20equipment',
+    caturl: '/category/DJ%20Equipment',
   },
   {
     url: '/images/categories/sport.jpg',
     title: 'Sports',
     width: '100%',
-    caturl: '/category/sports',
+    caturl: '/category/Sports',
   },
   {
     url: '/images/categories/musical_instruments.jpg',
     title: 'Musical Instruments',
     width: '100%',
-    caturl: '/category/musical%20instruments',
+    caturl: '/category/Musical',
   },
 ]
 
