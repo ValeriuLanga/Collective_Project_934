@@ -93,7 +93,12 @@ const styles = theme => ({
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
-  }
+  },
+  "@media only screen and (max-width: 960px)": {
+    container: {
+      maxHeight: 300,
+    },
+  },
 });
 
 function NoOptionsMessage(props) {

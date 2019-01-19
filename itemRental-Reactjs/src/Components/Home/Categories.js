@@ -21,7 +21,7 @@ const styles = theme => ({
   },
   container: {
     zIndex: 0
-  }
+  },
 });
 
 // Film & Photography, Projectors and Screens, Drones, DJ Equipment, Sports, Musical Instruments

@@ -28,28 +28,28 @@ const drawerWidth = 250;
 const styles = theme => ({
   link: {
     textDecoration: "none",
-    color: "#000"
+    color: "#000",
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   leftIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
   },
   iconSmall: {
-    fontSize: 20
+    fontSize: 20,
   },
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   container: {
     maxWidth: 1080,
     display: "flex",
     justifyContent: "center",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   appFrame: {
     height: 100,
@@ -57,45 +57,45 @@ const styles = theme => ({
     overflow: "hidden",
     position: "relative",
     display: "flex",
-    width: "100%"
+    width: "100%",
   },
   appBar: {
     position: "absolute",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
-    })
+    }),
   },
   "appBarShift-left": {
-    marginLeft: drawerWidth
+    marginLeft: drawerWidth,
   },
   "appBarShift-right": {
-    marginRight: drawerWidth
+    marginRight: drawerWidth,
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 20
+    marginRight: 20,
   },
   hide: {
-    display: "none"
+    display: "none",
   },
   drawerPaper: {
     position: "relative",
-    width: drawerWidth
+    width: drawerWidth,
   },
   drawerHeader: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
@@ -104,51 +104,57 @@ const styles = theme => ({
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
   },
   "content-left": {
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
   },
   "content-right": {
-    marginRight: -drawerWidth
+    marginRight: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
-    })
+    }),
   },
   "contentShift-left": {
-    marginLeft: 0
+    marginLeft: 0,
   },
   "contentShift-right": {
-    marginRight: 0
+    marginRight: 0,
   },
   tagline: {
     color: "black",
     fontSize: "1.5rem",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   "@media only screen and (min-width: 680px)": {
     mobileOnly: {
       display: "none",
-      color: "#000"
+      color: "#000",
     },
     drawerHeader: {
       display: "none",
-      color: "#000 !important"
+      color: "#000 !important",
     },
     appFrame: {
-      height: "100px"
-    }
+      height: "100px",
+    },
   },
   "@media only screen and (max-width: 680px)": {
     button: {
-      display: "none"
+      display: "none",
+    },
+    postAdButton: {
+      display: "none",
+    },
+    dashboardButton: {
+      display: "none",
     },
     tagline: {
-      fontSize: "1rem"
-    }
+      fontSize: "1rem",
+    },
   },
   postAdButton: {
     margin: theme.spacing.unit,

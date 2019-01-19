@@ -46,7 +46,13 @@ const styles = theme => ({
     color: "#ff7700",
     fontWeight: "700",
     padding: "3px"
-  }
+  },
+  "@media only screen and (max-width: 960px)": {
+    container: {
+      zIndex: 0,
+      width: "100%",
+    },
+  },
 });
 
 class MostRecent extends React.Component {
