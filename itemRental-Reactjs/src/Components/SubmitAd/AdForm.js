@@ -14,7 +14,7 @@ import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
 import orange from '@material-ui/core/colors/orange';
 
-import {MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker} from 'material-ui-pickers';
+import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from 'material-ui-pickers';
 import ReactDropzone from "react-dropzone";
 import DateFnsUtils from '@date-io/date-fns';
 
@@ -117,8 +117,8 @@ class InputAdornments extends React.Component {
             this.setState({
                 error: ""
             });
-            const start_date = moment(state.start_date).format('MMM DD YYYY h:mma');
-            const end_date = moment(state.end_date).format('MMM DD YYYY h:mma');
+            const start_date = moment(state.start_date).format('MMM DD YYYY');
+            const end_date = moment(state.end_date).format('MMM DD YYYY');
 
             let data = {
                 category: state.category,
@@ -228,11 +228,12 @@ class InputAdornments extends React.Component {
                                         className={classNames(classes.margin, classes.textField)}
                                     >
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                            <DateTimePicker
+                                            <DatePicker
                                                 margin="normal"
                                                 label="Start Date"
                                                 value={this.state.start_date}
                                                 onChange={this.handleChangePickers("start_date")}
+                                                disablePast
                                             />
                                         </MuiPickersUtilsProvider>
                                     </FormControl>
@@ -243,11 +244,13 @@ class InputAdornments extends React.Component {
                                         className={classNames(classes.margin, classes.textField)}
                                     >
                                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                            <DateTimePicker
+                                            <DatePicker
                                                 margin="normal"
                                                 label="End Date"
                                                 value={this.state.end_date}
                                                 onChange={this.handleChangePickers("end_date")}
+                                                disablePast
+                                                minDate={this.state.start_date}
                                             />
                                         </MuiPickersUtilsProvider>
                                     </FormControl>

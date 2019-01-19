@@ -49,7 +49,6 @@ export default (state = initialState, action) => {
         isLoading: false,
         reviews: action.payload
       };
-
     case GET_AD:
       return {
         ...state,

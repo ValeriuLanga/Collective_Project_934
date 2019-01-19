@@ -126,7 +126,7 @@ class AdsCategory extends React.Component {
               <Grid container spacing={24} className={classes.container}>
                   {postContent}
               </Grid>
-              <Footer/>
+              {/* <Footer/> */}
           </div>
       );
   }

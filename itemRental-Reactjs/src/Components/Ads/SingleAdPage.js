@@ -169,6 +169,9 @@ class AdPage extends React.Component {
                 title={item.title}
                 price={item.price}
                 author={item.owner_name}
+                available_start_date={item.available_start_date}
+                available_end_date={item.available_end_date}
+                rent_periods={item.rent_periods}
               />
             </Grid>
           </Grid>

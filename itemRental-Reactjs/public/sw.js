@@ -12,7 +12,7 @@ const filesToCache = [
   "/sw.js",
 ];
 
-self.addEventListener("install", e => {
+/*self.addEventListener("install", e => {
   console.log("SW Registered!");
   e.waitUntil(
     caches.open(static_cache).then(cache => {
@@ -68,3 +68,4 @@ self.addEventListener("fetch", e => {
       })
   );
 });
+*/
