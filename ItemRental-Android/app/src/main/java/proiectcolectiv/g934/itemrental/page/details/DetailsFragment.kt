@@ -48,6 +48,8 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
         super.onResume()
         rentalItem?.let {
             viewModel.getUserRentableItems(it.ownerName)
+            if (viewModel.getLoggedUserName() == it.ownerName)
+                rentButton.visibility = View.GONE
         }
     }
 
@@ -94,10 +96,12 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
             when (it) {
                 is Outcome.Progress -> if (it.loading) showLoading() else hideLoading()
                 is Outcome.Success -> {
-                    adapter.setItems(it.data.filter { item -> item.itemId != rentalItem!!.itemId })
-                    if (adapter.itemCount == 0) {
-                        showEmpty()
-                    }
+                    adapter.setItems(it.data.filter { item -> item.itemId != rentalItem!!.itemId }
+                            .also { filteredList ->
+                                if (filteredList.isEmpty()) {
+                                    showEmpty()
+                                }
+                            })
                     hideLoading()
                 }
                 is Outcome.Failure -> {

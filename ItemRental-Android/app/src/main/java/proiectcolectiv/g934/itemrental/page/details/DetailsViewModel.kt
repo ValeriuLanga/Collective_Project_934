@@ -18,6 +18,8 @@ class DetailsViewModel(private val remoteRepo: RemoteRepo,
     val userRentableItemsLiveData: MutableLiveData<Outcome<List<RentableItemModel>>> = MutableLiveData()
     val rentItemLiveData: MutableLiveData<Outcome<String>> = MutableLiveData()
 
+    fun getLoggedUserName() = gson.fromJson(userPref.get(), UserModel::class.java).userName
+
     fun getUserRentableItems(userName: String) {
         userRentableItemsLiveData.value = Outcome.loading(true)
         addDisposable(
@@ -33,7 +35,7 @@ class DetailsViewModel(private val remoteRepo: RemoteRepo,
 
     fun rentItem(startDate: String, endDate: String, itemId: Int) {
         rentItemLiveData.value = Outcome.loading(true)
-        val rentModel = RentPeriodModel(startDate, endDate, gson.fromJson(userPref.get(), UserModel::class.java).userName)
+        val rentModel = RentPeriodModel(startDate, endDate, getLoggedUserName())
         addDisposable(
                 remoteRepo.rentItem(rentModel, itemId)
                         .observeOn(AndroidSchedulers.mainThread())
