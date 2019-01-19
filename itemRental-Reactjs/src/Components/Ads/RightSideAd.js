@@ -241,7 +241,7 @@ class RightSideAdPage extends React.Component {
           return;
         }
     
-        this.setState({ open: false });
+        this.setState({ snackOpen: false });
     };
 
     render() {
@@ -390,7 +390,7 @@ class RightSideAdPage extends React.Component {
                         variant="success"
                         message="Item rented!"
                     />
-                    </Snackbar>
+                </Snackbar>
             </div>
         )
     }
