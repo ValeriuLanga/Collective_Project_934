@@ -10,7 +10,7 @@ class AdItem extends React.Component {
       <div>
         <Header />
         <AdItemForm
-          onSubmit={ (ad, file) => {
+          onSubmit={(ad, file) => {
             this.props.dispatch(postAd(ad, this.props.history, file));
           }}
         />

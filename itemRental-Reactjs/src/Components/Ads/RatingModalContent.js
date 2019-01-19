@@ -67,8 +67,8 @@ class RatingModalContent extends React.Component {
     };
 
     render() {
-        const { classes, id, author, title } = this.props;
-        const { value, multiline } = this.state;
+        const { classes, id, author, title, value, multiline } = this.props;
+
         return (
             <Card className={classes.cardPaper}>
                 <CardHeader

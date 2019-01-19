@@ -7,14 +7,18 @@ import {
   GET_OWN_ADS,
   UPDATE_AD,
   DELETE_AD,
-  GET_AD, GET_OWN_REVIEWS, GET_REVIEWS_ADD
+  GET_AD, 
+  GET_OWN_REVIEWS, 
+  GET_REVIEWS_ADD,
+  RENT_AD,
+  POST_REVIEW
 } from "./types";
 
-import {URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, REVIEWS, CATEGORY} from "../utils/constants";
+import { URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, REVIEWS, CATEGORY, RENT } from "../utils/constants";
+
 // Register User
 export const postAd = (formData, history, file) => dispatch => {
-
-  fetch(URL_SERVER + "/" + RENTABLE_ITEMS + "/", {
+  fetch(`${URL_SERVER}/${RENTABLE_ITEMS}/`, {
     method: "POST",
     body: JSON.stringify(formData),
       headers: {
@@ -245,6 +249,43 @@ export const getAd = (adId) => dispatch => {
       }
     });
 };
+
+export const rentAd = (adId, startDate, endDate, user) => dispatch => {
+  console.log(data);
+  fetch(`${URL_SERVER}/${RENTABLE_ITEMS}/${RENT}/${adId}`, {
+    method: "PUT",
+    body: JSON.stringify(data), // data can be `string` or {object}!
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => {
+      dispatch({
+        type: RENT_AD,
+        payload: response,
+        _id
+      });
+      if (response.favorite === true && response.fEmail === fEmail) {
+        caches.open(`${response._id}`).then(cache => {
+          return cache.addAll([
+            `/listings/${response._id}`,
+            `${URL_SERVER}/${response.file}`,
+            `${avatar}`
+          ]);
+        });
+      }
+    })
+    .catch(error => {
+      console.log(error);
+      if (error) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: error
+        });
+      }
+    });
+}
 
 
 // If Loading ads

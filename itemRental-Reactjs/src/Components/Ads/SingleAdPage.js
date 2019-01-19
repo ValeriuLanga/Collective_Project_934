@@ -110,10 +110,22 @@ class AdPage extends React.Component {
     this.setState({ open: false });
   };
 
+  
+  isEmpty = (obj) =>  {
+    for(let prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+  }
+
   render() {
     const { classes, user, ads } = this.props;
     const item = ads.ad;
     const reviews = ads.reviews;
+
+    const emptyUser = this.isEmpty(user);
 
     let postContent;
     if (ads.isLoading) {
@@ -148,7 +160,17 @@ class AdPage extends React.Component {
                 Reviews for the product
               </Typography>
               <ReviewsAd id={item.id} reviews={reviews}/>
-              <Button className={classes.button} onClick={this.handleOpen}>Add Review</Button>
+              
+              { !emptyUser ? (
+                <Button className={classes.button} onClick={this.handleOpen}>
+                  Add Review
+                </Button>
+              ) : (
+                <Button className={classes.button} disabled>
+                  Login to add reviews
+                </Button>
+              )}
+
               <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"

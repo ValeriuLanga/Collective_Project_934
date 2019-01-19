@@ -94,7 +94,6 @@ class InputAdornments extends React.Component {
         const {name} = JSON.parse(localStorage.user);
         e.preventDefault();
 
-
         const state = this.state;
         if (!state.title ||
             !state.description ||
@@ -262,20 +261,16 @@ class InputAdornments extends React.Component {
                                             fullWidth
                                             className={classNames(classes.margin, classes.textField)}
                                         >
-                                        <ReactDropzone accept="image/*" onDrop={this.onPreviewDrop}>
-                                            Drop an image!
-                                        </ReactDropzone>
-
-                            </FormControl>
-
-                        </Grid>
+                                            <ReactDropzone accept="image/*" onDrop={this.onPreviewDrop}>
+                                                Drop an image!
+                                            </ReactDropzone>
+                                        </FormControl>
+                                    </Grid>
                                     <Grid item md={6}>
                                         <FormControl
                                             fullWidth
                                             className={classNames(classes.margin, classes.textField)}
                                         >
-
-                                        {/*{this.state.files !== "" && <h4>Preview</h4>}*/}
                                         {this.state.files !== ""  &&
                                         <img
                                             src={this.state.files.preview}

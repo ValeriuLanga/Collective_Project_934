@@ -204,10 +204,19 @@ class RightSideAdPage extends React.Component {
         }
     }
 
+    isEmpty = (obj) =>  {
+        for(let prop in obj) {
+            if(obj.hasOwnProperty(prop))
+                return false;
+        }
+
+        return true;
+    }
 
     render() {
-        const { classes, id, author, price, title, } = this.props;
+        const { classes, id, author, price, title, user } = this.props;
 
+        const emptyUser = this.isEmpty(user);
 
         return (
             <div>
@@ -279,15 +288,24 @@ class RightSideAdPage extends React.Component {
                      : null
                     }
                     
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        type="submit"
-                        onClick={this.handleClickOpen}
-                        >
-                        REQUEST TO RENT
-                    </Button>
+                    { !emptyUser ? 
+                        (<Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            type="submit"
+                            onClick={this.handleClickOpen}
+                            >
+                            REQUEST TO RENT
+                        </Button>) : (<Button
+                            variant="contained"
+                            color="primary"
+                            className={classes.button}
+                            disabled
+                            >
+                            LOGIN TO PROCEEED
+                        </Button>)
+                    }
                 </Paper>
                 <Grid container justify="flex-start" alignItems="center">
                     <Grid item md={4} sm={12}> 

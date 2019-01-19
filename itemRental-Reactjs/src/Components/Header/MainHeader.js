@@ -15,6 +15,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import orange from '@material-ui/core/colors/orange';
 import indigo from '@material-ui/core/colors/indigo';
+import red from '@material-ui/core/colors/red';
 
 import { DashboardOutlined as Dashboard } from "@material-ui/icons";
 
@@ -154,6 +155,9 @@ const styles = theme => ({
     dashboardButton: {
       display: "none",
     },
+    logoutButton: {
+      display: "none",
+    },
     tagline: {
       fontSize: "1rem",
     },
@@ -165,13 +169,13 @@ const styles = theme => ({
       backgroundColor: orange[700],
     },
   },
-    logOffButton: {
-        margin: theme.spacing.unit,
-        backgroundColor: orange[500],
-        '&:hover': {
-            backgroundColor: orange[700],
-        },
+  logOffButton: {
+    margin: theme.spacing.unit,
+    color: red[500],
+    '&:hover': {
+      backgroundColor: red[50],
     },
+  },
   dashboardButton: {
     margin: theme.spacing.unit,
     color: indigo[500],
@@ -196,18 +200,19 @@ class PersistentDrawer extends React.Component {
     this.setState({ open: false });
   };
 
-    logOff = () => {
-        this.props.dispatch(logoutUser());
-    };
+  logOff = () => {
+      this.props.dispatch(logoutUser());
+  };
 
-     isEmpty = (obj) =>  {
-        for(let prop in obj) {
-            if(obj.hasOwnProperty(prop))
-                return false;
-        }
-
-        return true;
+  isEmpty = (obj) =>  {
+    for(let prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
     }
+
+    return true;
+  }
+
   render() {
     const { classes, theme, user } = this.props;
     const { anchor, open } = this.state;
@@ -352,11 +357,9 @@ class PersistentDrawer extends React.Component {
                     <CloudUploadIcon className={classes.rightIcon} />
                   </Button>
                     {!emptyUser && <Button
-                        variant="contained"
-                        color="primary"
                         className={classes.logOffButton}
                         onClick={this.logOff}
-                    >
+                        >
                         Log out
                     </Button>}
                 </div>
