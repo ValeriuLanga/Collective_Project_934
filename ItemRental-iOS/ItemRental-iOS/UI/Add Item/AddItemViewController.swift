@@ -22,7 +22,7 @@ final class AddItemViewController: UIViewController {
     private let presenter: CameraPresenter
     
     private let titleTextfield = UITextField()
-    private let categoryTextfield = UITextField()
+    private let categoryPicker = UIPickerView()
     private let receivingDetailsTextfield = UITextField()
     private let itemDescriptionTextfield = UITextField()
     private let priceTextfield = UITextField()
@@ -34,6 +34,13 @@ final class AddItemViewController: UIViewController {
     
     private let imagePicker = UIImagePickerController()
     private var image: UIImage?
+    
+    private let categories = ["Film and Photography",
+                      "Projectors and Screens",
+                      "Drones",
+                      "DJ Equipment",
+                      "Sports",
+                      "Musical"]
     
     // MARK: - Init
     
@@ -62,7 +69,7 @@ final class AddItemViewController: UIViewController {
         view.backgroundColor = .white
         
         setupTitleTextfield()
-        setupCategoryTextfield()
+        setupCategoryPicker()
         setupReceivingDetailsTextfield()
         setupItemDescriptionTextfield()
         setupPriceTextfield()
@@ -85,16 +92,17 @@ final class AddItemViewController: UIViewController {
         }
     }
     
-    private func setupCategoryTextfield() {
-        categoryTextfield.borderStyle = .roundedRect
-        categoryTextfield.placeholder = "Category"
+    private func setupCategoryPicker() {
+        categoryPicker.delegate = self
+        categoryPicker.dataSource = self
         
-        view.addSubview(categoryTextfield)
-        categoryTextfield.snp.makeConstraints {
-            $0.top.equalTo(titleTextfield.snp.bottom).offset(Padding.p10)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
-        }
+//        view.addSubview(categoryPicker)
+//        categoryPicker.snp.makeConstraints {
+//            $0.top.equalTo(titleTextfield.snp.bottom).offset(Padding.p10)
+//            $0.leading.equalToSuperview().offset(Padding.p40)
+//            $0.trailing.equalToSuperview().offset(-Padding.p40)
+//        }
+        print("bla")
     }
     
     private func setupReceivingDetailsTextfield() {
@@ -103,7 +111,7 @@ final class AddItemViewController: UIViewController {
         
         view.addSubview(receivingDetailsTextfield)
         receivingDetailsTextfield.snp.makeConstraints {
-            $0.top.equalTo(categoryTextfield.snp.bottom).offset(Padding.p10)
+            $0.top.equalTo(categoryPicker.snp.bottom).offset(Padding.p10)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
         }
@@ -200,13 +208,15 @@ final class AddItemViewController: UIViewController {
     
     @objc private func addButtonTapped() {        
         guard let title = titleTextfield.text,
-                let category = categoryTextfield.text,
                 let receivingDetails = receivingDetailsTextfield.text,
                 let itemDescription = itemDescriptionTextfield.text,
                 let priceString = priceTextfield.text else {
                     return
         }
 
+        let categoryIndex = categoryPicker.selectedRow(inComponent: 0)
+        let category = categories[categoryIndex]
+        
         guard title != "",
                 category != "",
                 receivingDetails != "",
@@ -369,4 +379,25 @@ extension AddItemViewController: GalleryViewProtocol {
     }
 }
 
+// MARK: - UIPickerViewDelegate
+
+extension AddItemViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return categories[row]
+    }
+}
+
+// MARK: - UIPickerViewDataSource
+
+extension AddItemViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 0
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
+    }
+    
+    
+}
 
