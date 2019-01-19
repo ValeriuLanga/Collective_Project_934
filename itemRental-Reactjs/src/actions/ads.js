@@ -11,7 +11,7 @@ import {
   GET_OWN_REVIEWS, 
   GET_REVIEWS_ADD,
   RENT_AD,
-  POST_REVIEW
+  POST_REVIEW,
 } from "./types";
 
 import { URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, REVIEWS, CATEGORY, RENT } from "../utils/constants";
@@ -251,10 +251,13 @@ export const getAd = (adId) => dispatch => {
 };
 
 export const rentAd = (adId, startDate, endDate, user) => dispatch => {
-  console.log(data);
   fetch(`${URL_SERVER}/${RENTABLE_ITEMS}/${RENT}/${adId}`, {
     method: "PUT",
-    body: JSON.stringify(data), // data can be `string` or {object}!
+    body: JSON.stringify({
+      "start_date": startDate,
+      "end_date": endDate,
+      "user_name": user,
+    }), // data can be `string` or {object}!
     headers: {
       "Content-Type": "application/json"
     }
@@ -264,17 +267,7 @@ export const rentAd = (adId, startDate, endDate, user) => dispatch => {
       dispatch({
         type: RENT_AD,
         payload: response,
-        _id
       });
-      if (response.favorite === true && response.fEmail === fEmail) {
-        caches.open(`${response._id}`).then(cache => {
-          return cache.addAll([
-            `/listings/${response._id}`,
-            `${URL_SERVER}/${response.file}`,
-            `${avatar}`
-          ]);
-        });
-      }
     })
     .catch(error => {
       console.log(error);
@@ -287,6 +280,36 @@ export const rentAd = (adId, startDate, endDate, user) => dispatch => {
     });
 }
 
+export const postReview = (adId, rating, content, user) => dispatch => {
+  fetch(`${URL_SERVER}/${REVIEWS}/`, {
+    method: "PUT",
+    body: JSON.stringify({
+      "text": content,
+      "rating": rating,
+      "owner_name": user,
+      "rentableitem_id": adId,
+    }), // data can be `string` or {object}!
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(response => {
+      dispatch({
+        type: POST_REVIEW,
+        payload: response,
+      });
+    })
+    .catch(error => {
+      console.log(error);
+      if (error) {
+        dispatch({
+          type: GET_ERRORS,
+          payload: error
+        });
+      }
+    });
+}
 
 // If Loading ads
 export const isLoading = () => {

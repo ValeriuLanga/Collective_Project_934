@@ -110,7 +110,6 @@ class AdPage extends React.Component {
     this.setState({ open: false });
   };
 
-  
   isEmpty = (obj) =>  {
     for(let prop in obj) {
         if(obj.hasOwnProperty(prop))

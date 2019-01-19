@@ -19,12 +19,17 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import Snackbar from '@material-ui/core/Snackbar';
+
+import MySnackbarContentWrapper from './MySnackbarContentWrapper';
+
 import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers';
-
-import getInitials from "../../utils/getInitials";
-
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment'
+
+import { rentAd } from "../../actions/ads";
+
+import getInitials from "../../utils/getInitials";
 
 const styles = theme => ({
   margin: {
@@ -108,6 +113,9 @@ const styles = theme => ({
         width: '95%'
     },
   },
+  success: {
+    backgroundColor: green[600],
+  },
 });
 
 
@@ -120,6 +128,7 @@ class RightSideAdPage extends React.Component {
         converted_end_date: null,
         selected_days: 0,
         open: false,
+        snackOpen: false,
     }
       
     handleChangePickers = prop => event => {
@@ -162,7 +171,16 @@ class RightSideAdPage extends React.Component {
     };
 
     rentProduct = () => {
+        const { id, user } = this.props;
+        const { start_date, end_date } = this.state;
 
+        let startDate = moment(start_date).format('MMM DD YYYY');
+        let endDate = moment(end_date).format('MMM DD YYYY');
+        if (endDate < startDate)
+            return;
+        
+        this.props.dispatch(rentAd(id, startDate, endDate, user));
+        this.setState({ snackOpen: true });
     }
 
     handleClickOpen = () => {
@@ -176,7 +194,7 @@ class RightSideAdPage extends React.Component {
     };
 
     componentDidMount() {
-        const { available_start_date, available_end_date, rent_periods } = this.props;
+        const { id, available_start_date, available_end_date, rent_periods } = this.props;
 
         if (available_start_date) {
             let start_date_temp = this.convertDate(available_start_date);
@@ -217,6 +235,14 @@ class RightSideAdPage extends React.Component {
 
         return true;
     }
+
+    handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        this.setState({ open: false });
+    };
 
     render() {
         const { classes, id, author, price, title, user } = this.props;
@@ -350,6 +376,21 @@ class RightSideAdPage extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={this.state.snackOpen}
+                    autoHideDuration={6000}
+                    onClose={this.handleCloseSnack}
+                    >
+                    <MySnackbarContentWrapper
+                        onClose={this.handleCloseSnack}
+                        variant="success"
+                        message="Item rented!"
+                    />
+                    </Snackbar>
             </div>
         )
     }

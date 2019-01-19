@@ -7,15 +7,17 @@ import {
   GET_OWN_ADS,
   GET_AD,
   GET_OWN_REVIEWS,
-  GET_REVIEWS_ADD
+  GET_REVIEWS_ADD,
+  RENT_AD,
+  POST_REVIEW,
 } from "../actions/types";
 
 // Ads Reducer
 const initialState = {
   ads: [],
   ad: {},
-    reviews: [],
-  isLoading: false
+  reviews: [],
+  isLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -43,11 +45,11 @@ export default (state = initialState, action) => {
         isLoading: false,
         reviews: action.payload
       };
-       case GET_REVIEWS_ADD:
-       return {
-        ...state,
-        isLoading: false,
-        reviews: action.payload
+    case GET_REVIEWS_ADD:
+      return {
+      ...state,
+      isLoading: false,
+      reviews: action.payload
       };
     case GET_AD:
       return {
@@ -78,6 +80,17 @@ export default (state = initialState, action) => {
         ...state,
         ads
       };
+    case RENT_AD:
+      return {
+        ...state,
+        isLoading: false,
+      }
+    case POST_REVIEW:
+      return {
+        ...state,
+        isLoading: false,
+        reviews: [action.payload, ...state.reviews]
+      }
     default:
       return state;
   }
