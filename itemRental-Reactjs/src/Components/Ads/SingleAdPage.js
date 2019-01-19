@@ -111,7 +111,7 @@ class AdPage extends React.Component {
             <Typography style={{ textAlign: "left"}} variant="h6" gutterBottom>
               Reviews for the product
             </Typography>
-            <ReviewsAd id={item.id} />
+            <ReviewsAd id={item.id} reviews={reviews}/>
             <Button className={classes.button}>Add Review</Button>
           </Grid>
           <Grid item md={6} sm={12}>
