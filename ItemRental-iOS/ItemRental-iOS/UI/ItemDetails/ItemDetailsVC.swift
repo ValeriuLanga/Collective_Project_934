@@ -22,19 +22,21 @@ final class ItemDetailsVC: UIViewController {
     private let upwardArrow = UIImageView()
     private let downwardArrow = UIImageView()
     private let line = UIView()
+    private let rentButton = UIButton()
+    private let reviewButton = UIButton()
     
     private let item: RentableItem
     private let viewModel: ItemsViewModel
     private let manager = ItemManager()
-    
     private let cellId = "cellId"
+    
+    weak var delegate: ItemDetailsDelegate?
     
     // MARK: - Init
     
     init(item: RentableItem) {
         self.item = item
         viewModel = ItemsViewModel(user: item.ownerName, photosManager: PhotosManager(cameraPlugin: CameraPlugin()))
-        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -65,6 +67,8 @@ final class ItemDetailsVC: UIViewController {
         setupEndDateLabel()
         setupDownwardArrow()
         setupLine()
+        setupRentButton()
+        setupReviewButton()
     }
     
     private func setupImageView() {
@@ -193,9 +197,53 @@ final class ItemDetailsVC: UIViewController {
         
         view.addSubview(line)
         line.snp.makeConstraints {
-            $0.top.equalTo(startDateLabel.snp.bottom).inset(-5)
+            $0.top.equalTo(startDateLabel.snp.bottom).inset(-Padding.p10)
             $0.height.equalTo(1)
             $0.leading.trailing.equalToSuperview()
         }
+    }
+    
+    private func setupRentButton() {
+        rentButton.setTitle("RENT", for: .normal)
+        rentButton.backgroundColor = .orange
+        rentButton.layer.cornerRadius = 10
+        rentButton.addTarget(self, action: #selector(rentButtonTapped), for: .touchUpInside)
+        rentButton.applyShadow()
+        
+        view.addSubview(rentButton)
+        rentButton.snp.makeConstraints {
+            $0.top.equalTo(line.snp.bottom).offset(Padding.p30)
+            $0.height.equalTo(50)
+            $0.width.equalTo(100)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    private func setupReviewButton() {
+        reviewButton.setTitle("SEE REVIEWS", for: .normal)
+        reviewButton.setTitleColor(.orange, for: .normal)
+        reviewButton.addTarget(self, action: #selector(reviewButtonTapped), for: .touchUpInside)
+        
+        view.addSubview(reviewButton)
+        reviewButton.snp.makeConstraints {
+            $0.top.equalTo(rentButton.snp.bottom).offset(Padding.p20)
+            $0.width.equalTo(Height.h300)
+            $0.centerX.equalToSuperview()
+        }
+    }
+    
+    @objc private func rentButtonTapped() {
+        let rentVC = RentViewController(manager: manager, item: item)
+        rentVC.delegate = delegate
+        navigationController?.pushViewController(rentVC, animated: true)
+    }
+    
+    @objc private func reviewButtonTapped() {
+        guard let itemId = item.id else {
+            return
+        }
+        let viewModel = ReviewsViewModel(itemId: itemId)
+        let reviewsViewController = ReviewsViewController(item: item, viewModel: viewModel)
+        navigationController?.pushViewController(reviewsViewController, animated: true)
     }
 }

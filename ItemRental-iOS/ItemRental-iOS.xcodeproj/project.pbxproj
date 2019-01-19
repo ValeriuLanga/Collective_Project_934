@@ -41,6 +41,7 @@
 		FB0FB52E21F1BD8200969F7E /* NSMutableData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52D21F1BD8200969F7E /* NSMutableData+Extensions.swift */; };
 		FB0FB53021F27F4600969F7E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52F21F27F4600969F7E /* UIView+Extensions.swift */; };
 		FB0FB53221F3A71200969F7E /* ItemDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB53121F3A71200969F7E /* ItemDetailsVC.swift */; };
+		FB0FB53521F3D7C600969F7E /* RentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB53421F3D7C600969F7E /* RentViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		FB0FB52D21F1BD8200969F7E /* NSMutableData+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableData+Extensions.swift"; sourceTree = "<group>"; };
 		FB0FB52F21F27F4600969F7E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		FB0FB53121F3A71200969F7E /* ItemDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
+		FB0FB53421F3D7C600969F7E /* RentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 		A11DDA7F21BF007700FEC9F5 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				FB0FB53321F3D79600969F7E /* Rent */,
 				A1C9225621E0DA4800B05352 /* Add Item */,
 				A1C9225121E0249500B05352 /* Reviews */,
 				A1C9224E21D52F7600B05352 /* Register */,
@@ -276,6 +279,14 @@
 			path = Camera;
 			sourceTree = "<group>";
 		};
+		FB0FB53321F3D79600969F7E /* Rent */ = {
+			isa = PBXGroup;
+			children = (
+				FB0FB53421F3D7C600969F7E /* RentViewController.swift */,
+			);
+			path = Rent;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -406,6 +417,7 @@
 				A11DDA6E21BEFAB800FEC9F5 /* AppDelegate.swift in Sources */,
 				A1C9224621D4F88400B05352 /* UserManager.swift in Sources */,
 				A1C9225D21E4F3A800B05352 /* ReviewsViewModel.swift in Sources */,
+				FB0FB53521F3D7C600969F7E /* RentViewController.swift in Sources */,
 				A1C9226221E50D5900B05352 /* ReviewCollectionViewCell.swift in Sources */,
 				FB0FB53021F27F4600969F7E /* UIView+Extensions.swift in Sources */,
 				FB0FB52C21F1B73E00969F7E /* RequestError.swift in Sources */,

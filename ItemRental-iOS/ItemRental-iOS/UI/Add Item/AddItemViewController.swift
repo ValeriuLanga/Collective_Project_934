@@ -86,23 +86,30 @@ final class AddItemViewController: UIViewController {
         
         view.addSubview(titleTextfield)
         titleTextfield.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p40)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
         }
     }
     
     private func setupCategoryPicker() {
+        let categoryLabel = UILabel()
+        categoryLabel.text = "Categories"
+        view.addSubview(categoryLabel)
+        categoryLabel.snp.makeConstraints {
+            $0.top.equalTo(titleTextfield.snp.bottom).offset(Padding.p20)
+            $0.centerX.equalToSuperview()
+        }
+        
         categoryPicker.delegate = self
         categoryPicker.dataSource = self
         
-//        view.addSubview(categoryPicker)
-//        categoryPicker.snp.makeConstraints {
-//            $0.top.equalTo(titleTextfield.snp.bottom).offset(Padding.p10)
-//            $0.leading.equalToSuperview().offset(Padding.p40)
-//            $0.trailing.equalToSuperview().offset(-Padding.p40)
-//        }
-        print("bla")
+        view.addSubview(categoryPicker)
+        categoryPicker.snp.makeConstraints {
+            $0.top.equalTo(categoryLabel.snp.bottom).inset(5)
+            $0.leading.trailing.equalToSuperview().inset(Padding.p40)
+            $0.height.equalTo(50)
+        }
     }
     
     private func setupReceivingDetailsTextfield() {
@@ -154,7 +161,7 @@ final class AddItemViewController: UIViewController {
         startDatePicker.datePickerMode = .date
         view.addSubview(startDatePicker)
         startDatePicker.snp.makeConstraints {
-            $0.top.equalTo(timeLabel.snp.bottom).offset(Padding.p10)
+            $0.top.equalTo(timeLabel.snp.bottom)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
             $0.height.equalTo(50)
@@ -202,7 +209,7 @@ final class AddItemViewController: UIViewController {
             $0.top.equalTo(imageView.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
-            $0.bottom.lessThanOrEqualToSuperview().inset(Padding.p40)
+            $0.bottom.lessThanOrEqualToSuperview().inset(Padding.p20)
         }
     }
     
@@ -391,13 +398,11 @@ extension AddItemViewController: UIPickerViewDelegate {
 
 extension AddItemViewController: UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 0
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return categories.count
     }
-    
-    
 }
 

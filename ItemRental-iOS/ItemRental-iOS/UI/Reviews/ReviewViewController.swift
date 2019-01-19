@@ -47,7 +47,6 @@ final class ReviewViewController: UIViewController {
     // MARK: - Private functions
     
     private func setupUI() {
-//        view.backgroundColor = .gray
         view.backgroundColor = .white
         
         setupReviewSection()
@@ -97,7 +96,7 @@ final class ReviewViewController: UIViewController {
         
         let review = Review(text: text, rating: 0, ownerName: UserDefaults.standard.string(forKey: "user")!, rentableItemId: item.id!)
         
-        manager.createReview(review: review){ [weak self](data, error) in
+        manager.createReview(review: review) { [weak self](data, error) in
             guard data != nil else {
                 DispatchQueue.main.async {
                     self?.presentAlert(message: "Review could not be posted!")

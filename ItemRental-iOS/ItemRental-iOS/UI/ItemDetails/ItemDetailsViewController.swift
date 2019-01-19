@@ -250,19 +250,19 @@ final class ItemDetailsViewController: UIViewController {
     }
     
     @objc private func rentButtonTapped() {
-        guard let itemId = item.id else {
-            return
-        }
-        manager.rent(itemId: itemId) { (data, error) in
-            guard let _ = data else {
-                return
-            }
-            DispatchQueue.main.async {
-                self.delegate?.didRent()
-                self.navigationController?.popViewController(animated: true)
-            }
-        }
-        print("rent")
+//        guard let itemId = item.id else {
+//            return
+//        }
+//        manager.rent(itemId: itemId) { (data, error) in
+//            guard let _ = data else {
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                self.delegate?.didRent()
+//                self.navigationController?.popViewController(animated: true)
+//            }
+//        }
+//        print("rent")
     }
     
     @objc private func reviewButtonTapped() {

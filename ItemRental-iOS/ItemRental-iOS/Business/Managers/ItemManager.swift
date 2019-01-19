@@ -15,11 +15,18 @@ struct ItemManager {
     
     // MARK: - Functions
     
-    func rent(itemId: Int, completion: @escaping RequestDataCompletion) {
+    func rent(itemId: Int, startDate: String, endDate: String, username: String, completion: @escaping RequestDataCompletion) {
+        let json: [String: Any] = ["start_date": startDate,
+                                   "end_date": endDate,
+                                   "user_name": username]
+        let jsonData = try? JSONSerialization.data(withJSONObject: json)
+        
         let url = URL(string: apiURL + "rent/\(itemId)")!
         let request = NSMutableURLRequest(url: url)
         request.httpMethod = "PUT"
-        
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.httpBody = jsonData
+
         process(request: request, completion: completion)
     }
     
