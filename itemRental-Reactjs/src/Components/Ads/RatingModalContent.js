@@ -51,7 +51,7 @@ const styles = theme => ({
 
 class RatingModalContent extends React.Component {
     state = {
-        value: 1,
+        value: 0,
         multiline: '',
     }
 
@@ -67,7 +67,8 @@ class RatingModalContent extends React.Component {
     };
 
     render() {
-        const { classes, id, author, title, value, multiline } = this.props;
+        const { classes, id, author, title } = this.props;
+        const { value, multiline } = this.state;
 
         return (
             <Card className={classes.cardPaper}>
