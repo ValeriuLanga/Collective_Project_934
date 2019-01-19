@@ -16,6 +16,10 @@ def create():
 
     review = ReviewItemModel(data)
 
+    if not (1 <= review.rating <= 5):
+        message = {'error': 'Rating must be between 1 and 5'}
+        return custom_response(message, 400)
+
     user_in_db = UserModel.get_user_by_name(data.get('owner_name'))
     rentableitem_in_db = RentableItemModel.get_rentableitem_by_id(data.get('rentableitem_id'))
 
