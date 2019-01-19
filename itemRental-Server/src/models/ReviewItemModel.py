@@ -36,6 +36,7 @@ class ReviewItemModel(db.Model):
 
 
 class ReviewItemSchema(Schema):
+    id = fields.Integer()
     text = fields.Str()
     rating = fields.Integer()
     owner_name = fields.Str()
