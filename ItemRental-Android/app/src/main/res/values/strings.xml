@@ -33,7 +33,7 @@
     <!-- Rentable Item List -->
     <string name="category_separation">%s » %s</string>
 
-    <!-- Add -->
+    <!-- Add Rentable Item -->
     <string name="title">Title</string>
     <string name="category">Category : </string>
     <string name="usage_type">Usage Type</string>
@@ -55,10 +55,15 @@
     <string name="button_see_reviews">See reviews</string>
     <string name="other_items_message">Other items from this user:</string>
     <string name="price_lei">%d Lei</string>
-    <string name="no_other_items">This use has no other items available for rent</string>
+    <string name="no_other_items">This user has no other items available for rent</string>
     <string name="choose_rent_period">Choose a rental period that does not contain unavailable dates</string>
     <string name="incorrect_range">Incorrect date range</string>
     <string name="no_range_selected">No range selected</string>
     <string name="item_rented_sucessfully">Item rented successfully</string>
     <string name="item_rented_failed">Failed renting item</string>
+
+    <!-- Add Review -->
+    <string name="add_review">Add your review</string>
+    <string name="no_reviews">This item has no reviews yet</string>
+
 </resources>

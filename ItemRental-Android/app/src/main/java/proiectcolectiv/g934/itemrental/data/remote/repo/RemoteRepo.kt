@@ -12,6 +12,7 @@ import proiectcolectiv.g934.itemrental.data.remote.ApiErrorConverter
 import proiectcolectiv.g934.itemrental.data.remote.ApiService
 import proiectcolectiv.g934.itemrental.data.remote.model.RentPeriodModel
 import proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel
+import proiectcolectiv.g934.itemrental.data.remote.model.ReviewModel
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
@@ -94,4 +95,10 @@ class RemoteRepo @Inject constructor() {
             apiService.postRentItem(rentableItemId, rentPeriod)
                     .subscribeOn(Schedulers.io())
                     .flatMap(ApiErrorConverter())
+
+    fun getItemReviews(itemId: Int): Flowable<List<ReviewModel>> =
+            apiService.getRentableItemReviews(itemId)
+                    .subscribeOn(Schedulers.io())
+                    .flatMap(ApiErrorConverter())
+                    .map { it -> it.reviewItems }
 }

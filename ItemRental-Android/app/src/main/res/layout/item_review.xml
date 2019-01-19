@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/reviewOwnerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Stefan" />
+
+        <ImageView
+            android:id="@+id/reviewRatingStarIcon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_star"
+            android:tint="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="@id/reviewOwnerName"
+            app:layout_constraintEnd_toStartOf="@id/reviewRatingTextView"
+            tools:ignore="ContentDescription"
+            tools:layout_editor_absoluteY="204dp" />
+
+        <TextView
+            android:id="@+id/reviewRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/reviewTextTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="@string/description"
+            android:maxLength="300"
+            android:maxLines="10"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/reviewOwnerName"
+            app:layout_constraintTop_toBottomOf="@id/reviewOwnerName"
+            tools:text="It is a broom for outside use; a horticultural implement consisting of a toothed bar fixed transversely to a handle, or tines fixed to a handle, and used to collect leaves, hay, grass, etc., and in gardening, for loosening the soil, light weeding and levelling, removing dead grass from lawns, and generally for purposes performed in agriculture by the harrow." />
+
+        <ImageView
+            android:id="@+id/clockIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_clock"
+            android:tint="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="@id/reviewOwnerName"
+            app:layout_constraintTop_toBottomOf="@id/reviewTextTextView"
+            tools:ignore="ContentDescription"
+            tools:layout_editor_absoluteY="204dp" />
+
+        <TextView
+            android:id="@+id/reviewPostedTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            app:layout_constraintStart_toEndOf="@id/clockIcon"
+            app:layout_constraintTop_toTopOf="@id/clockIcon"
+            tools:text="Aug 13, 2019 11:00AM" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

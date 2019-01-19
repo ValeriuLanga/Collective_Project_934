@@ -13,6 +13,8 @@ import proiectcolectiv.g934.itemrental.page.login.LoginFragment
 import proiectcolectiv.g934.itemrental.page.login.LoginModule
 import proiectcolectiv.g934.itemrental.page.register.RegisterFragment
 import proiectcolectiv.g934.itemrental.page.register.RegisterModule
+import proiectcolectiv.g934.itemrental.page.reviews.ReviewsFragment
+import proiectcolectiv.g934.itemrental.page.reviews.ReviewsModule
 import proiectcolectiv.g934.itemrental.page.splash.SplashFragment
 
 @Module
@@ -41,4 +43,8 @@ abstract class MainFragmentProvider {
     @FragmentScope
     @ContributesAndroidInjector(modules = [DetailsModule::class])
     abstract fun provideDetailsFragment(): DetailsFragment
+
+    @FragmentScope
+    @ContributesAndroidInjector(modules = [ReviewsModule::class])
+    abstract fun provideReviewsFragment(): ReviewsFragment
 }

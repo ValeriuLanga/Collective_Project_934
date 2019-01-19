@@ -89,6 +89,14 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
                         fm, this, rental.rentPeriods, rental.startDate, rental.endDate)
             }
         }
+        seeReviewsButton.setOnClickListener {
+            rentalItem?.let { item ->
+                navController.navigate(R.id.action_detailsFragment_to_reviewsFragment, Bundle().also { bundle ->
+                    bundle.putInt("rentableItemId", item.itemId)
+                    bundle.putString("ownerName", item.ownerName)
+                })
+            }
+        }
     }
 
     private fun setupObservers() {
@@ -100,9 +108,10 @@ class DetailsFragment : BaseFragment<DetailsViewModel, DetailsViewModelProvider>
                             .also { filteredList ->
                                 if (filteredList.isEmpty()) {
                                     showEmpty()
+                                } else {
+                                    hideLoading()
                                 }
                             })
-                    hideLoading()
                 }
                 is Outcome.Failure -> {
                     if (it.error is ApiErrorThrowable) showError(it.error.errorResponse.error)

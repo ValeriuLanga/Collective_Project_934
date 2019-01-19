@@ -27,7 +27,6 @@ class EmptyLayout @JvmOverloads constructor(
 
     fun showEmpty(emptyText: String) {
         emptyLayoutProgressBar.visibility = View.GONE
-        emptyLayoutTryAgainLayout.visibility = View.GONE
         emptyLayoutEmptyTextView.text = emptyText
         emptyLayoutEmptyTextView.visibility = View.VISIBLE
     }

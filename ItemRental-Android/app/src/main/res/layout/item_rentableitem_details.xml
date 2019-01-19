@@ -56,7 +56,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_user"
-            android:tint="@color/colorPrimaryDark"
+            android:tint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/userTextView"
             app:layout_constraintHorizontal_chainStyle="packed"

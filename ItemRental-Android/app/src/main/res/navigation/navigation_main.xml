@@ -64,5 +64,20 @@
         <action
             android:id="@+id/action_detailsFragment_self"
             app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_detailsFragment_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="proiectcolectiv.g934.itemrental.page.reviews.ReviewsFragment"
+        android:label="ReviewsFragment" >
+        <argument
+            android:name="rentableItemId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="ownerName"
+            app:argType="string" />
     </fragment>
 </navigation>
