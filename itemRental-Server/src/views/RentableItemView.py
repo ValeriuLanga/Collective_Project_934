@@ -4,9 +4,9 @@ import marshmallow
 from flask import request, json, Response, Blueprint, send_file
 
 from src.models import UserModel, db
+from src.models.RentPeriodModel import RentPeriodSchema, RentPeriodModel
 from src.models.RentableItemModel import RentableItemSchema, RentableItemModel, RentableItems, RentableItemsSchema
 from src.models.ReviewItemModel import ReviewItems, ReviewItemsSchema, ReviewItemModel
-from src.models.RentPeriodModel import RentPeriodSchema, RentPeriodModel
 
 rentableitem_api = Blueprint('rentableitem', __name__)
 rentableitem_schema = RentableItemSchema()
@@ -47,7 +47,6 @@ def create():
 
 @rentableitem_api.route('/delete/<int:rentableitem_id>', methods=['DELETE'])
 def delete(rentableitem_id):
-
     rentableitem = RentableItemModel.get_rentableitem_by_id(rentableitem_id)
     if not rentableitem:
         return custom_response({'error': 'rentable item not found'}, 404)
@@ -60,7 +59,6 @@ def delete(rentableitem_id):
 
 @rentableitem_api.route('/rent/<int:rentableitem_id>', methods=['PUT'])
 def rent_item(rentableitem_id):
-
     req_data = request.get_json()
     data = rentperiod_schema.load(req_data)
     start_date = data.get("start_date")
@@ -79,7 +77,7 @@ def rent_item(rentableitem_id):
 
     periods_of_rental_of_current_item = RentPeriodModel.get_all_rent_periods_with_rentableitem_id(rentableitem.id)
     for period_of_rental in periods_of_rental_of_current_item:
-        if not start_date >= period_of_rental.end_date:
+        if start_date < period_of_rental.end_date and end_date > period_of_rental.start_date:
             return custom_response({'error': 'the item is already rented in that period'}, 404)
 
     if not (start_date >= rentableitem.available_start_date and end_date <= rentableitem.available_end_date):
@@ -162,7 +160,6 @@ def get_all():
 
 @rentableitem_api.route('/category/<string:category>', methods=['GET'])
 def get_all_by_category(category):
-
     if category not in RentableItemModel.categoryTypes:
         message = {'error': 'Category does not exists exist, please supply another category'}
         return custom_response(message, 400)
@@ -176,7 +173,6 @@ def get_all_by_category(category):
 
 @rentableitem_api.route('/<string:name>', methods=['GET'])
 def get_all_like_name(name):
-
     rentableitems = RentableItemModel.get_all_like_name(name)
     ri = RentableItems(rentableitems)
     ser_rentableitems = rentableitems_schema.dump(ri)
