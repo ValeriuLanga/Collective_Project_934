@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import orange from '@material-ui/core/colors/orange';
 import indigo from '@material-ui/core/colors/indigo';
 import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
 
 import { DashboardOutlined as Dashboard } from "@material-ui/icons";
 
@@ -158,6 +159,9 @@ const styles = theme => ({
     logoutButton: {
       display: "none",
     },
+    logInButton: {
+      display: "none",
+    },
     tagline: {
       fontSize: "1rem",
     },
@@ -176,6 +180,13 @@ const styles = theme => ({
       backgroundColor: red[50],
     },
   },
+  logInButton: {
+    margin: theme.spacing.unit,
+    color: green[500],
+    '&:hover': {
+      backgroundColor: green[50],
+    },
+  },
   dashboardButton: {
     margin: theme.spacing.unit,
     color: indigo[500],
@@ -183,7 +194,10 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: indigo[100],
     },
-  }
+  },
+  logoAndTagline: {
+    paddingRight: "0px !IMPORTANT",
+  },
 });
 
 class PersistentDrawer extends React.Component {
@@ -227,21 +241,17 @@ class PersistentDrawer extends React.Component {
               Dashboard
             </Link>
           </MenuItem>
-          <MenuItem>
-            <Link to="/dashboard" className={classes.link}>
-              Messages
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/dashboard" className={classes.link}>
-              Favorites
-            </Link>
-          </MenuItem>
-          <MenuItem>
+          { emptyUser ? (<MenuItem>
             <Link to="/login" className={classes.link}>
               Login
             </Link>
-          </MenuItem>
+          </MenuItem>) : (
+            <MenuItem>
+              <Link to="/" onClick={this.logOff} className={classes.link}>
+                Logout
+              </Link>
+            </MenuItem>
+          )}
           <MenuItem>
             <Link to="/register" className={classes.link}>
               Register
@@ -356,12 +366,20 @@ class PersistentDrawer extends React.Component {
                     Post Ad
                     <CloudUploadIcon className={classes.rightIcon} />
                   </Button>
-                    {!emptyUser && <Button
+                    {!emptyUser ? (<Button
                         className={classes.logOffButton}
                         onClick={this.logOff}
                         >
-                        Log out
-                    </Button>}
+                        Logout
+                    </Button>) : (
+                      <Button
+                        className={classes.logInButton}
+                        component={Link}
+                        to="/login"
+                      >
+                      Login
+                     </Button>
+                    )}
                 </div>
               </Toolbar>
             </AppBar>
