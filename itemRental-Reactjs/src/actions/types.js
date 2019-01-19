@@ -13,3 +13,4 @@ export const DELETE_AD = "DELETE_AD";
 export const UPDATE_AD = "UPDATE_AD";
 export const GET_OWN_ADS = "GET_OWN_ADS";
 export const GET_OWN_REVIEWS = "GET_OWN_REVIEWS";
+export const GET_REVIEWS_ADD = "GET_REVIEWS_ADD";
