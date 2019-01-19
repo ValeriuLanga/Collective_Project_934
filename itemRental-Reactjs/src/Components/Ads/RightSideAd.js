@@ -103,6 +103,11 @@ const styles = theme => ({
     color: orange[500],
     padding: theme.spacing.unit,
   },
+  "@media only screen and (max-width: 960px)": {
+    datePicker: {
+        width: '95%'
+    },
+  },
 });
 
 
@@ -258,6 +263,7 @@ class RightSideAdPage extends React.Component {
                                 shouldDisableDate={
                                     (date) => !!this.state.invalid_dates.find(item => {return item.getTime() == date.getTime()})
                                 }
+                                className={classes.datePicker}
                             />
                             </MuiPickersUtilsProvider>
                         </Grid>
@@ -274,6 +280,7 @@ class RightSideAdPage extends React.Component {
                                 shouldDisableDate={
                                     (date) => !!this.state.invalid_dates.find(item => {return item.getTime() == date.getTime()})
                                 }
+                                className={classes.datePicker}
                             />
                             </MuiPickersUtilsProvider>
                         </Grid>
