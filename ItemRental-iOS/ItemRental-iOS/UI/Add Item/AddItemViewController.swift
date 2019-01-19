@@ -195,7 +195,6 @@ final class AddItemViewController: UIViewController {
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
             $0.bottom.lessThanOrEqualToSuperview().inset(Padding.p40)
-//            $0.height.equalTo(titleTextfield)
         }
     }
     
@@ -225,7 +224,13 @@ final class AddItemViewController: UIViewController {
         guard let userName = UserDefaults.standard.string(forKey: "user") else {
             return
         }
-        let item = RentableItem(title: title, category: category, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: userName, startDate: startDatePicker.date.description, endDate: endDatePicker.date.description, rented: false)
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd YYYY"
+        let startDate = dateFormatter.string(from: startDatePicker.date)
+        let endDate = dateFormatter.string(from: endDatePicker.date)
+        
+        let item = RentableItem(title: title, category: category, receivingDetails: receivingDetails, itemDescription: itemDescription, price: price, ownerName: userName, startDate: startDate, endDate: endDate, rented: false)
         
         manager.addItem(item: item) { [weak self] (data, error) in
             guard let self = self else { return }

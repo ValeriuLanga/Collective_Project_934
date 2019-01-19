@@ -144,8 +144,8 @@ extension ItemsViewController: UICollectionViewDataSource {
 extension ItemsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.items[indexPath.item]
-        let itemDetailsViewController = ItemDetailsViewController(item: item)
-        itemDetailsViewController.delegate = self
+        let itemDetailsViewController = ItemDetailsVC(item: item)
+//        itemDetailsViewController.delegate = self
         
         navigationController?.pushViewController(itemDetailsViewController, animated: true)
     }

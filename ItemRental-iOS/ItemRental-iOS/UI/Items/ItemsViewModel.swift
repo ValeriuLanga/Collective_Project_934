@@ -77,8 +77,8 @@ final class ItemsViewModel {
                     let price = item["price"] as? Int,
                     let ownerName = item["owner_name"] as? String,
                     let rented = item["rented"] as? Bool,
-                    let startDate = item["start_date"] as? String,
-                    let endDate = item["end_date"] as? String else {
+                    let startDate = item["available_start_date"] as? String,
+                    let endDate = item["available_end_date"] as? String else {
                 return
             }
     

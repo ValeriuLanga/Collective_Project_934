@@ -54,8 +54,8 @@ struct ItemManager {
                                    "price": item.price,
                                    "item_description": item.itemDescription,
                                    "owner_name": item.ownerName,
-                                   "start_date": item.startDate,
-                                   "end_date": item.endDate]
+                                   "available_start_date": item.startDate,
+                                   "available_end_date": item.endDate]
         let jsonData = try? JSONSerialization.data(withJSONObject: json)
         
 //        let url = URL(string: apiURL + "/")!

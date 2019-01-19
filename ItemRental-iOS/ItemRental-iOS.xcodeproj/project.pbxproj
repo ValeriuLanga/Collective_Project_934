@@ -40,6 +40,7 @@
 		FB0FB52C21F1B73E00969F7E /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52B21F1B73E00969F7E /* RequestError.swift */; };
 		FB0FB52E21F1BD8200969F7E /* NSMutableData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52D21F1BD8200969F7E /* NSMutableData+Extensions.swift */; };
 		FB0FB53021F27F4600969F7E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB52F21F27F4600969F7E /* UIView+Extensions.swift */; };
+		FB0FB53221F3A71200969F7E /* ItemDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB0FB53121F3A71200969F7E /* ItemDetailsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		FB0FB52B21F1B73E00969F7E /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		FB0FB52D21F1BD8200969F7E /* NSMutableData+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableData+Extensions.swift"; sourceTree = "<group>"; };
 		FB0FB52F21F27F4600969F7E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		FB0FB53121F3A71200969F7E /* ItemDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDetailsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				A1C9223421D4E6FD00B05352 /* ItemDetailsViewController.swift */,
+				FB0FB53121F3A71200969F7E /* ItemDetailsVC.swift */,
 			);
 			path = ItemDetails;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				A1C9223821D4E7A800B05352 /* User.swift in Sources */,
 				FB0FB52821F11CDE00969F7E /* PhotosManager.swift in Sources */,
 				A11DDA8421BF054A00FEC9F5 /* Padding.swift in Sources */,
+				FB0FB53221F3A71200969F7E /* ItemDetailsVC.swift in Sources */,
 				FB0FB52E21F1BD8200969F7E /* NSMutableData+Extensions.swift in Sources */,
 				A1C9225521E0328E00B05352 /* ReviewManager.swift in Sources */,
 				A1C9224B21D52B7A00B05352 /* Height.swift in Sources */,

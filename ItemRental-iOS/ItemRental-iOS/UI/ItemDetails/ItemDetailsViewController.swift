@@ -78,6 +78,7 @@ final class ItemDetailsViewController: UIViewController {
 //        view.backgroundColor = .gray
         view.backgroundColor = .white
         
+        setupImageView()
         setupOwnerLabel()
         setupTitleLabel()
         setupCategoryLabel()
@@ -85,13 +86,27 @@ final class ItemDetailsViewController: UIViewController {
         setupItemDescriptionLabel()
         setupStartDateLabel()
         setupEndDateLabel()
-        setupImageView()
         
         setupRentButton()
         setupReviewButton()
 //        setupOtherItemsLabel()
 //        setupCollectionView()
     }
+    
+    
+    private func setupImageView() {
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = item.image
+        
+        view.addSubview(imageView)
+        imageView.snp.makeConstraints {
+            $0.top.equalTo(endDateLabel.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p40)
+            $0.trailing.equalToSuperview().offset(-Padding.p40)
+            $0.height.equalTo(130)
+        }
+    }
+
     
     private func setupOwnerLabel() {
         ownerLabel.textAlignment = .center
@@ -174,19 +189,6 @@ final class ItemDetailsViewController: UIViewController {
         endDateLabel.snp.makeConstraints {
             $0.top.equalTo(startDateLabel.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p20)
-        }
-    }
-    
-    private func setupImageView() {
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = item.image
-        
-        view.addSubview(imageView)
-        imageView.snp.makeConstraints {
-            $0.top.equalTo(endDateLabel.snp.bottom).offset(Padding.p20)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
-            $0.height.equalTo(130)
         }
     }
     
