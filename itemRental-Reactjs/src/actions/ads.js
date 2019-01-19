@@ -281,13 +281,15 @@ export const rentAd = (adId, startDate, endDate, user) => dispatch => {
 }
 
 export const postReview = (adId, rating, content, user) => dispatch => {
+  console.log("Posting review with", {adId, rating, content,user});
+
   fetch(`${URL_SERVER}/${REVIEWS}/`, {
-    method: "PUT",
+    method: "POST",
     body: JSON.stringify({
       "text": content,
       "rating": rating,
       "owner_name": user,
-      "rentableitem_id": adId,
+      "rentableitem_id": adId.toString(),
     }), // data can be `string` or {object}!
     headers: {
       "Content-Type": "application/json"

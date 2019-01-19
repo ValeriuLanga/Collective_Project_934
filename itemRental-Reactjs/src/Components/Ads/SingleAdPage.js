@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
-import { getAd, getReviewsAdd } from "../../actions/ads";
+import { getAd, getReviewsAdd, postReview } from "../../actions/ads";
 import orange from '@material-ui/core/colors/orange';
 
 import LeftSideAdPage from "./LeftSideAd";
@@ -56,6 +56,7 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: orange[50],
     },
+    marginBottom: 50
   },
   orangeAvatar: {
     margin: 10,
@@ -127,6 +128,28 @@ class AdPage extends React.Component {
     const emptyUser = this.isEmpty(user);
 
     let postContent;
+    let reviewButton;
+
+    if (!emptyUser && item.owner_name == user) {
+      reviewButton = (
+        <Button disabled className={classes.button}>
+          You can't review your own item
+        </Button>
+      );
+    } else if (!emptyUser) {
+      reviewButton = (
+        <Button className={classes.button} onClick={this.handleOpen}>
+          Add Review
+        </Button>
+      );
+    } else {
+      reviewButton = (
+        <Button className={classes.button} disabled>
+          Login to add reviews
+        </Button>
+      );
+    }
+
     if (ads.isLoading) {
       postContent = (
           <div className={classes.root}>
@@ -159,17 +182,7 @@ class AdPage extends React.Component {
                 Reviews for the product
               </Typography>
               <ReviewsAd id={item.id} reviews={reviews}/>
-              
-              { !emptyUser ? (
-                <Button className={classes.button} onClick={this.handleOpen}>
-                  Add Review
-                </Button>
-              ) : (
-                <Button className={classes.button} disabled>
-                  Login to add reviews
-                </Button>
-              )}
-
+              {reviewButton}
               <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
@@ -181,6 +194,11 @@ class AdPage extends React.Component {
                   id={item.id}
                   title={item.title}
                   author={item.owner_name}
+                  onSubmit={(rating, content) => {
+                    // (adId, rating, content, user)
+                    this.props.dispatch(postReview(item.id, rating, content, user));
+                    this.handleClose();
+                  }}
                 />
               </Modal>
             </Grid>
@@ -212,7 +230,8 @@ const mapStateToProps = state => {
     return {
         user: state.auth.user,
         ads: state.ads,
-        ad: state.ad
+        ad: state.ad,
+        reviews: state.reviews
     };
 };
 

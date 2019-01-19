@@ -13,6 +13,7 @@ import Paper from "@material-ui/core/Paper";
 import Select from "@material-ui/core/Select";
 import Typography from "@material-ui/core/Typography";
 import orange from '@material-ui/core/colors/orange';
+import red from '@material-ui/core/colors/red';
 
 import { MuiPickersUtilsProvider, TimePicker, DatePicker, DateTimePicker } from 'material-ui-pickers';
 import ReactDropzone from "react-dropzone";
@@ -60,6 +61,9 @@ const styles = theme => ({
             backgroundColor: orange[700],
         },
     },
+    errorText: {
+        color: red[900],
+    },
 });
 
 class InputAdornments extends React.Component {
@@ -102,7 +106,7 @@ class InputAdornments extends React.Component {
             !state.category
         ) {
             this.setState({
-                error: "Please fill all the feilds!"
+                error: "Please fill all the fields!"
             });
         } else if (!moment(state.end_date).isAfter(state.start_date)) {
             this.setState({
@@ -126,8 +130,8 @@ class InputAdornments extends React.Component {
                 owner_name: name,
                 title: state.title,
                 price: parseInt(state.price),
-                start_date: start_date,
-                end_date: end_date,
+                available_start_date: start_date,
+                available_end_date: end_date,
             };
             let formData = new FormData();
             formData.append("pic", state.files);
@@ -284,7 +288,17 @@ class InputAdornments extends React.Component {
                                 </Grid>
 
 
-                            {this.state.error && <p>{this.state.error}</p>}
+                            { this.state.error &&  
+                                <Typography 
+                                    variant="body1" 
+                                    gutterBottom 
+                                    align="left" 
+                                    style={{ width: "100%" }} 
+                                    className={classes.errorText}
+                                >
+                                    {this.state.error}
+                                </Typography>
+                            }
                             <FormControl
                                 fullWidth
                                 className={classNames(classes.margin, classes.textField)}

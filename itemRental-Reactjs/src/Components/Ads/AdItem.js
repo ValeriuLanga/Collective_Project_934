@@ -59,6 +59,18 @@ class AdItem extends React.Component {
     favorite: true
   };
 
+  beautifyText = (text, cutOff) => {
+    cutOff = cutOff || 80;
+
+    if (!text)
+      return "";
+
+    if (text.length < cutOff)
+      return text;
+
+    return text.substring(0, cutOff) + "...";
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -75,10 +87,10 @@ class AdItem extends React.Component {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {this.props.title}
+              {this.beautifyText(this.props.title, 50)}
             </Typography>
-            <Typography variant="overline" gutterBottom>
-              {this.props.description}
+            <Typography variant="overline" gutterBottom style={{ whiteSpace: 'pre-wrap', wordWrap: 'break-word' }}>
+              {this.beautifyText(this.props.description)}
             </Typography>
           </CardContent>
         </CardActionArea>

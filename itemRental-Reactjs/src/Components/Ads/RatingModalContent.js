@@ -53,6 +53,19 @@ class RatingModalContent extends React.Component {
     state = {
         value: 0,
         multiline: '',
+        error: false
+    }
+
+    postReview = e => {
+        e.preventDefault();
+        const { value, multiline } = this.state;
+
+        if (value < 1 || value > 5 || !multiline || multiline.length === 0 || multiline.trim() === '') {
+            this.setState({ error: true });
+            return;
+        }
+
+        this.props.onSubmit(value, multiline);
     }
 
     handleChange = name => event => {
@@ -93,10 +106,11 @@ class RatingModalContent extends React.Component {
                         onChange={this.handleChange('multiline')}
                         className={classes.textField}
                         margin="normal"
+                        error={this.state.error}
                     />
                 </CardContent>
                 <CardActions>
-                    <Button className={classes.button} size="small" color="primary">
+                    <Button onClick={this.postReview} className={classes.button} size="small" color="primary">
                         Post Review
                     </Button>
                 </CardActions>

@@ -5,11 +5,15 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
+import CardActionArea from '@material-ui/core/CardActionArea';
+
 import StarRate from "@material-ui/icons/StarRate";
 import StarBorder from '@material-ui/icons/StarBorder'
 
 import orange from "@material-ui/core/colors/orange";
 import grey from "@material-ui/core/colors/grey";
+
+import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 
@@ -25,7 +29,8 @@ const styles = theme => ({
         flex: "1 0 auto"
     },
     cover: {
-        width: 250
+        width: 250,
+        cursor: 'pointer',
     },
     controls: {
         display: "flex",
@@ -47,14 +52,16 @@ const styles = theme => ({
 
 class ReviewItem extends React.Component {
     render() {
-        const { classes, posted_date, text, rating } = this.props;
+        const { classes, posted_date, text, rating, rentableitem_id } = this.props;
         return (
 
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.cover}
                     image={this.props.file}
-                        title="Live from space album cover"
+                    title="Review Image"
+                    component={Link} 
+                    to={`/listings/${rentableitem_id}`}
                 />
                 <div className={classes.details}>
                     <CardContent className={classes.content}>

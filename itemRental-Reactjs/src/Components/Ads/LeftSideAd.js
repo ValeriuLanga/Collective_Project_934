@@ -9,10 +9,15 @@ import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils
 
 const styles = theme => ({
   responsiveimg: {
-    maxWidth: "100%"
+    maxWidth: '100%'
   },
   noDisplayDivider: {
     backgroundColor: 0
+  },
+  description: {
+    whiteSpace: 'pre-wrap',
+    lineHeight: '2em',
+    wordWrap: 'break-word',
   },
 });
 
@@ -31,11 +36,11 @@ class LeftSideAdPage extends React.Component {
                 <Typography style={{ textAlign: "left"}} variant="h6" gutterBottom>
                     What's the item?
                 </Typography>
-                <Typography variant="body1" color="textSecondary" gutterBottom paragraph>
+                <Typography className={classes.description} variant="body1" color="textSecondary" gutterBottom paragraph>
                     {description}
                 </Typography>
 
-                <Typography variant="subtitle2" gutterBottom>
+                <Typography className={classes.description} variant="subtitle2" gutterBottom>
                     Additional Details
                 </Typography>
                 <Typography variant="body1" color="textSecondary" gutterBottom paragraph>

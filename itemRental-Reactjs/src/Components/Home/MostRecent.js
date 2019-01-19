@@ -73,7 +73,7 @@ class MostRecent extends React.Component {
         </div>
       );
     } else {
-      postContent = ads.ads.slice(0, 3).map(item => {
+      postContent = ads.ads.slice(0, 6).map(item => {
         return (
           <Grid item md={4} key={item.id}>
             <AdItem

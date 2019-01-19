@@ -74,9 +74,9 @@ class DashboardReview extends React.Component {
                             file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.rentableitem_id}`}
                             rating={item.rating}
                             key={item.posted_date}
-                            to={"asd"}
                             posted_date={item.posted_date}
                             text={item.text}
+                            rentableitem_id={item.rentableitem_id}
                         />
                     </Grid>
                 );
