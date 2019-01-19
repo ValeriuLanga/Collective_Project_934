@@ -18,7 +18,7 @@ const styles = theme => ({
 
 class LeftSideAdPage extends React.Component {
     render() {
-        const { classes, id, description, details, category, usage_type } = this.props;
+        const { classes, id, description, details, category } = this.props;
         return (
             <div>
                 <img

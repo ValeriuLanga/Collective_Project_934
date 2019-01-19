@@ -2,7 +2,7 @@ import React from "react";
 
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { CircularProgress, Grid } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
@@ -115,69 +115,81 @@ class AdPage extends React.Component {
     const item = ads.ad;
     const reviews = ads.reviews;
 
-    return (
-      <div>
-        <Header />
-        <Grid
-          className={classes.container}
-          container
-          spacing={24}
-          key={item.id}
-        >
-          <Grid item md={6} sm={12}>
-            <LeftSideAdPage 
-              id={item.id}
-              title={item.title}
-              description={item.item_description}
-              city={item.city}
-              address={item.address}
-              details={item.receiving_details}
-              category={item.category}
-              usage_type={item.usage_type}
-            />
-            <Divider style={{ marginTop: 20, marginBottom: 20 }} className={classes.noDisplayDivider}/>
-            <Typography style={{ textAlign: "left"}} variant="h6" gutterBottom>
-              Reviews for the product
-            </Typography>
-            <ReviewsAd id={item.id} reviews={reviews}/>
-            <Button className={classes.button} onClick={this.handleOpen}>Add Review</Button>
-            <Modal
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
-              open={this.state.open}
-              onClose={this.handleClose}
-              style={{alignItems:'center',justifyContent:'center'}}
-            >
-              <RatingModalContent 
+    let postContent;
+    if (ads.isLoading) {
+      postContent = (
+          <div className={classes.root}>
+              <CircularProgress/>
+          </div>
+      )
+    } else {
+        postContent = (
+        <div>
+          <Header />
+          <Grid
+            className={classes.container}
+            container
+            spacing={24}
+            key={item.id}
+          >
+            <Grid item md={6} sm={12}>
+              <LeftSideAdPage 
                 id={item.id}
                 title={item.title}
+                description={item.item_description}
+                city={item.city}
+                address={item.address}
+                details={item.receiving_details}
+                category={item.category}
+                usage_type={item.usage_type}
+              />
+              <Divider style={{ marginTop: 20, marginBottom: 20 }} className={classes.noDisplayDivider}/>
+              <Typography style={{ textAlign: "left"}} variant="h6" gutterBottom>
+                Reviews for the product
+              </Typography>
+              <ReviewsAd id={item.id} reviews={reviews}/>
+              <Button className={classes.button} onClick={this.handleOpen}>Add Review</Button>
+              <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={this.state.open}
+                onClose={this.handleClose}
+                style={{alignItems:'center',justifyContent:'center'}}
+              >
+                <RatingModalContent 
+                  id={item.id}
+                  title={item.title}
+                  author={item.owner_name}
+                />
+              </Modal>
+            </Grid>
+            <Grid item md={6} sm={12}>
+              <RightSideAdPage 
+                id={item.id}
+                title={item.title}
+                price={item.price}
                 author={item.owner_name}
               />
-            </Modal>
+            </Grid>
           </Grid>
-          <Grid item md={6} sm={12}>
-            <RightSideAdPage 
-              id={item.id}
-              title={item.title}
-              price={item.price}
-              author={item.owner_name}
-            />
-          </Grid>
-        </Grid>
-        <Footer />
-        </div>
-    );
+          <Footer />
+          </div>
+      );
+    }
+    return (
+      <div>
+          {postContent}
+      </div>
+    )
   }
 }
 
-
-// <h3 style={{ marginLeft: "1rem" }}>{item.owner_name}</h3>
 const mapStateToProps = state => {
-  return {
-    user: state.auth.user,
-    ads: state.ads,
-    ad: state.ad
-  };
+    return {
+        user: state.auth.user,
+        ads: state.ads,
+        ad: state.ad
+    };
 };
 
 export default connect(mapStateToProps)(withStyles(styles)(AdPage));

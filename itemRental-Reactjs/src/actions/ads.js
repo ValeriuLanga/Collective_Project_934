@@ -10,7 +10,7 @@ import {
   GET_AD, GET_OWN_REVIEWS, GET_REVIEWS_ADD
 } from "./types";
 
-import { URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, REVIEWS } from "../utils/constants";
+import {URL_SERVER, USERS, RENTABLE_ITEMS, RENTABLE_UPLOAD_IMAGE, REVIEWS, CATEGORY} from "../utils/constants";
 // Register User
 export const postAd = (formData, history, file) => dispatch => {
 
@@ -74,6 +74,27 @@ export const getAds = () => dispatch => {
         });
       }
     });
+};
+
+export const getAdsCategory = (category) => dispatch => {
+    dispatch(isLoading());
+    var url = `${URL_SERVER}/${RENTABLE_ITEMS}/${CATEGORY}/${category}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(response => {
+            dispatch({
+                type: GET_ADS,
+                payload: response.rentableitems
+            });
+        })
+        .catch(error => {
+            if (error) {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: error
+                });
+            }
+        });
 };
 
 export const getOwnAds = (uname) => dispatch => {

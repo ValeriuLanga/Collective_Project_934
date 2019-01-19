@@ -67,7 +67,6 @@ class InputAdornments extends React.Component {
         title: "",
         receiving_details: "",
         category: "",
-        usage_type: "",
         description: "",
         price: 0,
         start_date: moment(new Date()).format('LLL'),
@@ -101,8 +100,7 @@ class InputAdornments extends React.Component {
             !state.description ||
             !state.price ||
             !state.receiving_details ||
-            !state.category ||
-            !state.usage_type
+            !state.category
         ) {
             this.setState({
                 error: "Please fill all the feilds!"
@@ -124,7 +122,6 @@ class InputAdornments extends React.Component {
 
             let data = {
                 category: state.category,
-                usage_type: state.usage_type,
                 receiving_details: state.receiving_details,
                 item_description: state.description,
                 owner_name: name,
@@ -170,7 +167,7 @@ class InputAdornments extends React.Component {
                                 />
                             </FormControl>
                             <Grid container spacing={24}>
-                                <Grid item md={6}>
+                                <Grid item md={12}>
                                     <FormControl className={classes.formControl}>
                                         <InputLabel htmlFor="demo-controlled-open-select">
                                             Category
@@ -186,43 +183,12 @@ class InputAdornments extends React.Component {
                                             <MenuItem value="">
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value={"Film and Photography"}>Film & Photography</MenuItem>
-                                            <MenuItem value={"Projectors and Screens"}>Projectors & Screens</MenuItem>
+                                            <MenuItem value={"Film & Photography"}>Film & Photography</MenuItem>
+                                            <MenuItem value={"Projectors & Screens"}>Projectors & Screens</MenuItem>
                                             <MenuItem value={"Drones"}>Drones</MenuItem>
                                             <MenuItem value={"DJ Equipment"}>DJ Equipment</MenuItem>
                                             <MenuItem value={"Sports"}>Sports</MenuItem>
-                                            <MenuItem value={"Musical Instruments"}>Musical Instruments</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item md={6}>
-                                    <FormControl className={classes.formControl}>
-                                        <InputLabel htmlFor="demo-controlled-open-select">
-                                            Usage type
-                                        </InputLabel>
-                                        <Select
-                                            value={this.state.usage_type}
-                                            onChange={this.handleChange("usage_type")}
-                                            inputProps={{
-                                                name: "usage_type",
-                                                id: "demo-controlled-open-select-1"
-                                            }}
-                                        >
-                                            <MenuItem value="">
-                                                <em>None</em>
-                                            </MenuItem>
-                                            <MenuItem value={"pets"}>Pets</MenuItem>
-                                            <MenuItem value={"cars"}>Cars</MenuItem>
-                                            <MenuItem value={"property"}>Property</MenuItem>
-                                            <MenuItem value={"bikes"}>Bikes</MenuItem>
-                                            <MenuItem value={"electronics"}>Electronics</MenuItem>
-                                            <MenuItem value={"mobiles"}>Mobiles</MenuItem>
-                                            <MenuItem value={"furniture"}>Furniture</MenuItem>
-                                            <MenuItem value={"books"}>Books</MenuItem>
-                                            <MenuItem value={"services"}>Services</MenuItem>
-                                            <MenuItem value={"fashion"}>Fashion</MenuItem>
-                                            <MenuItem value={"agriculture"}>Agriculture</MenuItem>
-                                            <MenuItem value={"sports"}>Sports</MenuItem>
+                                            <MenuItem value={"Musical"}>Musical Instruments</MenuItem>
                                         </Select>
                                     </FormControl>
                                 </Grid>

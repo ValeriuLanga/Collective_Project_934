@@ -22,6 +22,8 @@ import { CloudUploadOutlined as CloudUploadIcon } from "@material-ui/icons";
 
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
+import {logoutUser} from "../../actions/authActions";
+import {connect} from "react-redux";
 
 const drawerWidth = 250;
 
@@ -163,6 +165,13 @@ const styles = theme => ({
       backgroundColor: orange[700],
     },
   },
+    logOffButton: {
+        margin: theme.spacing.unit,
+        backgroundColor: orange[500],
+        '&:hover': {
+            backgroundColor: orange[700],
+        },
+    },
   dashboardButton: {
     margin: theme.spacing.unit,
     color: indigo[500],
@@ -187,9 +196,23 @@ class PersistentDrawer extends React.Component {
     this.setState({ open: false });
   };
 
+    logOff = () => {
+        this.props.dispatch(logoutUser());
+    };
+
+     isEmpty = (obj) =>  {
+        for(let prop in obj) {
+            if(obj.hasOwnProperty(prop))
+                return false;
+        }
+
+        return true;
+    }
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, user } = this.props;
     const { anchor, open } = this.state;
+
+    const emptyUser = this.isEmpty(user);
 
     const drawer = (
       <div>
@@ -328,6 +351,14 @@ class PersistentDrawer extends React.Component {
                     Post Ad
                     <CloudUploadIcon className={classes.rightIcon} />
                   </Button>
+                    {!emptyUser && <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.logOffButton}
+                        onClick={this.logOff}
+                    >
+                        Log out
+                    </Button>}
                 </div>
               </Toolbar>
             </AppBar>
@@ -343,4 +374,11 @@ PersistentDrawer.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user,
+        ads: state.ads
+    };
+};
+
+export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(PersistentDrawer));
