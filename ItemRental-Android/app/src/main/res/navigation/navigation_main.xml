@@ -14,6 +14,8 @@
         <action
             android:id="@+id/action_splashFragment_to_listFragment"
             app:destination="@id/listFragment"
+            app:enterAnim="@anim/fragment_enter_transition"
+            app:exitAnim="@anim/fragment_exit_transition"
             app:launchSingleTop="true"
             app:popUpTo="@+id/navigation_main"
             app:popUpToInclusive="true" />
@@ -26,6 +28,8 @@
         <action
             android:id="@+id/action_loginFragment_to_listFragment"
             app:destination="@id/listFragment"
+            app:enterAnim="@anim/fragment_enter_transition"
+            app:exitAnim="@anim/fragment_exit_transition"
             app:launchSingleTop="true"
             app:popUpTo="@+id/navigation_main"
             app:popUpToInclusive="true" />
@@ -40,15 +44,25 @@
         <action
             android:id="@+id/action_listFragment_to_splashFragment"
             app:destination="@id/splashFragment"
+            app:enterAnim="@anim/fragment_pop_enter_transition"
+            app:exitAnim="@anim/fragment_pop_exit_transition"
             app:launchSingleTop="true"
             app:popUpTo="@+id/navigation_main"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_listFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            app:destination="@id/addFragment"
+            app:enterAnim="@anim/fragment_enter_transition"
+            app:exitAnim="@anim/fragment_exit_transition"
+            app:popEnterAnim="@anim/fragment_pop_enter_transition"
+            app:popExitAnim="@anim/fragment_pop_exit_transition" />
         <action
             android:id="@+id/action_listFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/fragment_enter_transition"
+            app:exitAnim="@anim/fragment_exit_transition"
+            app:popEnterAnim="@anim/fragment_pop_enter_transition"
+            app:popExitAnim="@anim/fragment_pop_exit_transition" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -63,10 +77,18 @@
             app:argType="proiectcolectiv.g934.itemrental.data.remote.model.RentableItemModel" />
         <action
             android:id="@+id/action_detailsFragment_self"
-            app:destination="@id/detailsFragment" />
+            app:destination="@id/detailsFragment"
+            app:enterAnim="@anim/fragment_enter_transition"
+            app:exitAnim="@anim/fragment_exit_transition"
+            app:popEnterAnim="@anim/fragment_pop_enter_transition"
+            app:popExitAnim="@anim/fragment_pop_exit_transition" />
         <action
             android:id="@+id/action_detailsFragment_to_reviewsFragment"
-            app:destination="@id/reviewsFragment" />
+            app:destination="@id/reviewsFragment"
+            app:enterAnim="@anim/fragment_enter_transition"
+            app:exitAnim="@anim/fragment_exit_transition"
+            app:popEnterAnim="@anim/fragment_pop_enter_transition"
+            app:popExitAnim="@anim/fragment_pop_exit_transition" />
     </fragment>
     <fragment
         android:id="@+id/reviewsFragment"
