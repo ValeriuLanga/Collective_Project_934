@@ -77,7 +77,7 @@ def rent_item(rentableitem_id):
 
     periods_of_rental_of_current_item = RentPeriodModel.get_all_rent_periods_with_rentableitem_id(rentableitem.id)
     for period_of_rental in periods_of_rental_of_current_item:
-        if start_date >= period_of_rental.start_date and end_date <= period_of_rental.end_date:
+        if start_date < period_of_rental.end_date and end_date > period_of_rental.start_date:
             return custom_response({'error': 'the item is already rented in that period'}, 404)
 
     if not (start_date >= rentableitem.available_start_date and end_date <= rentableitem.available_end_date):

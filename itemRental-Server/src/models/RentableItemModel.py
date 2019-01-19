@@ -9,7 +9,7 @@ class RentableItemModel(db.Model):
     categoryTypes = ['Film & Photography', 'Projectors & Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical']
 
     id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.Enum('Film & Photography', 'Projectors and Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical', name='types'))
+    category = db.Column(db.Enum('Film & Photography', 'Projectors & Screens', 'Drones', 'DJ Equipment', 'Sports', 'Musical', name='types'))
     title = db.Column(db.String)
     available_start_date = db.Column(db.Date)
     available_end_date = db.Column(db.Date)
