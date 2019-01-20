@@ -112,7 +112,7 @@
                     android:layout_width="256dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/description"
-                    android:inputType="textCapSentences"
+                    android:inputType="textCapSentences|textMultiLine"
                     android:maxLength="200"
                     android:maxLines="10" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -140,20 +140,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textSize="16sp"
                 android:paddingStart="5dp"
                 android:text="@string/rental_period"
-                app:layout_constraintTop_toBottomOf="@id/addPriceInput"
-                app:layout_constraintStart_toStartOf="@id/addPriceInput"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/addPriceInput"
+                app:layout_constraintStart_toStartOf="@id/addPriceInput"
+                app:layout_constraintTop_toBottomOf="@id/addPriceInput"
                 tools:ignore="RtlSymmetry" />
 
             <com.savvi.rangedatepicker.CalendarPickerView
                 android:id="@+id/addCalendarPickerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="true"
                 android:layout_marginTop="5dp"
+                android:nestedScrollingEnabled="true"
                 app:layout_constraintEnd_toEndOf="@id/addRentalPeriodText"
                 app:layout_constraintStart_toStartOf="@id/addRentalPeriodText"
                 app:layout_constraintTop_toBottomOf="@id/addRentalPeriodText" />

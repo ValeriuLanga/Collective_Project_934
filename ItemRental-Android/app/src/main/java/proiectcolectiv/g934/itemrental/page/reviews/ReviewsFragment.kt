@@ -9,16 +9,19 @@ import kotlinx.android.synthetic.main.fragment_reviews.*
 import proiectcolectiv.g934.itemrental.R
 import proiectcolectiv.g934.itemrental.base.BaseFragment
 import proiectcolectiv.g934.itemrental.data.remote.ApiErrorThrowable
+import proiectcolectiv.g934.itemrental.page.dialogs.ReviewDialogFragment
+import proiectcolectiv.g934.itemrental.page.dialogs.ReviewDialogListener
 import proiectcolectiv.g934.itemrental.utils.Outcome
 import proiectcolectiv.g934.itemrental.utils.observeNonNull
 
-class ReviewsFragment : BaseFragment<ReviewsViewModel, ReviewsViewModelFactory>() {
+class ReviewsFragment : BaseFragment<ReviewsViewModel, ReviewsViewModelFactory>(), ReviewDialogListener {
 
     override fun getViewModelClass() = ReviewsViewModel::class.java
 
     private lateinit var adapter: ReviewsAdapter
     private var itemId = 0
     private var ownerName: String? = null
+    private lateinit var reviewDialogFragment: ReviewDialogFragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_reviews, container, false)
@@ -41,6 +44,11 @@ class ReviewsFragment : BaseFragment<ReviewsViewModel, ReviewsViewModelFactory>(
     private fun setListeners() {
         reviewsBackButton.setOnClickListener {
             navController.navigateUp()
+        }
+        reviewsAddButton.setOnClickListener {
+            fragmentManager?.let { fm ->
+                reviewDialogFragment = ReviewDialogFragment.createReviewDialogFragment(fm, this)
+            }
         }
     }
 
@@ -72,6 +80,23 @@ class ReviewsFragment : BaseFragment<ReviewsViewModel, ReviewsViewModelFactory>(
                 }
             }
         }
+        viewModel.addReviewLiveData.observeNonNull(this) {
+            when (it) {
+                is Outcome.Progress -> reviewDialogFragment.showLoading()
+                is Outcome.Success -> {
+                    reviewDialogFragment.dismiss()
+                    viewModel.getItemReviews(itemId)
+                }
+                is Outcome.Failure -> {
+                    if (it.error is ApiErrorThrowable) reviewDialogFragment.showError(it.error.errorResponse.error)
+                    else reviewDialogFragment.showError(it.error.localizedMessage)
+                }
+            }
+        }
+    }
+
+    override fun addReview(rating: Int, comment: String) {
+        viewModel.addItemReview(rating, comment, itemId)
     }
 
     private fun showLoading() {

@@ -15,6 +15,7 @@ class ReviewsViewModel(private val remoteRepo: RemoteRepo,
                        private val gson: Gson) : BaseViewModel() {
 
     val reviewsLiveData: MutableLiveData<Outcome<List<ReviewModel>>> = MutableLiveData()
+    val addReviewLiveData: MutableLiveData<Outcome<ReviewModel>> = MutableLiveData()
 
     fun getCurrentUserName() = gson.fromJson(userPref.get(), UserModel::class.java).userName
 
@@ -27,6 +28,20 @@ class ReviewsViewModel(private val remoteRepo: RemoteRepo,
                             reviewsLiveData.value = Outcome.success(it)
                         }, {
                             reviewsLiveData.value = Outcome.failure(it)
+                        })
+        )
+    }
+
+    fun addItemReview(rating: Int, comment: String, itemId: Int) {
+        addReviewLiveData.value = Outcome.loading(true)
+        val reviewModel = ReviewModel(rating = rating, text = comment, rentableItemId = itemId.toString(), ownerName = getCurrentUserName())
+        addDisposable(
+                remoteRepo.postItemReview(reviewModel)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            addReviewLiveData.value = Outcome.success(it)
+                        }, {
+                            addReviewLiveData.value = Outcome.failure(it)
                         })
         )
     }

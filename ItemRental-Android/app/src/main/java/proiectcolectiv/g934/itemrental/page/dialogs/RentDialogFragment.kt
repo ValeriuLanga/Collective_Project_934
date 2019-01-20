@@ -23,10 +23,10 @@ class RentDialogFragment : DialogFragment() {
         private lateinit var rentStartTime: String
         private lateinit var rentEndTime: String
         fun createRentDialogFragment(
-            fm: FragmentManager, rentDialogListener: RentDialogListener,
-            ignoredPeriods: List<RentPeriodModel>,
-            rentStartTime: String,
-            rentEndTime: String
+                fm: FragmentManager, rentDialogListener: RentDialogListener,
+                ignoredPeriods: List<RentPeriodModel>,
+                rentStartTime: String,
+                rentEndTime: String
         ): RentDialogFragment {
             this.rentDialogListener = rentDialogListener
             this.ignoredRentalPeriods = ignoredPeriods
@@ -87,7 +87,7 @@ class RentDialogFragment : DialogFragment() {
         }
         deactivatedDates = generateDateRanges(sdf)
         dialogRentCalendar.init(startDate, endDate).inMode(CalendarPickerView.SelectionMode.RANGE)
-            .withHighlightedDates(deactivatedDates)
+                .withHighlightedDates(deactivatedDates)
     }
 
     private fun generateDateRangeFromDates(startDate: Date, endDate: Date): List<Date> {

@@ -65,5 +65,6 @@
     <!-- Add Review -->
     <string name="add_review">Add your review</string>
     <string name="no_reviews">This item has no reviews yet</string>
-
+    <string name="rating">Rating</string>
+    <string name="review">Review</string>
 </resources>

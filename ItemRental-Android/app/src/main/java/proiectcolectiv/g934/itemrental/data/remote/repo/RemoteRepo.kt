@@ -101,4 +101,9 @@ class RemoteRepo @Inject constructor() {
                     .subscribeOn(Schedulers.io())
                     .flatMap(ApiErrorConverter())
                     .map { it -> it.reviewItems }
+
+    fun postItemReview(reviewModel: ReviewModel): Flowable<ReviewModel> =
+            apiService.postReview(reviewModel)
+                    .subscribeOn(Schedulers.io())
+                    .flatMap(ApiErrorConverter())
 }
