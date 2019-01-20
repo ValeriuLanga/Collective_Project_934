@@ -248,6 +248,43 @@ class RightSideAdPage extends React.Component {
         const { classes, id, author, price, title, user } = this.props;
 
         const emptyUser = this.isEmpty(user);
+        let rentButton;
+
+        if (!emptyUser && author == user) {
+            rentButton = (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    disabled
+                >
+                    YOU CAN'T RENT YOUR OWN ITEM
+                </Button>
+            );
+          } else if (!emptyUser) {
+            rentButton = (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    type="submit"
+                    onClick={this.handleClickOpen}
+                >
+                    REQUEST TO RENT
+                </Button>
+            );
+          } else {
+            rentButton = (
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    disabled
+                >
+                    LOGIN TO PROCEEED
+                </Button>
+            );
+          }
 
         return (
             <div>
@@ -320,25 +357,7 @@ class RightSideAdPage extends React.Component {
                         </div>
                      : null
                     }
-                    
-                    { !emptyUser ? 
-                        (<Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                            type="submit"
-                            onClick={this.handleClickOpen}
-                            >
-                            REQUEST TO RENT
-                        </Button>) : (<Button
-                            variant="contained"
-                            color="primary"
-                            className={classes.button}
-                            disabled
-                            >
-                            LOGIN TO PROCEEED
-                        </Button>)
-                    }
+                    {rentButton}
                 </Paper>
                 <Grid container justify="flex-start" alignItems="center">
                     <Grid item md={4} sm={12}> 
