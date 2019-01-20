@@ -75,7 +75,7 @@ final class ItemsViewController: UIViewController {
         view.backgroundColor = .white
         
         setupNavigationBar()
-//        setupCollectionView()
+        setupCollectionView()
         setupAddButton()
         setupLogoutButton()
     }
@@ -115,7 +115,14 @@ final class ItemsViewController: UIViewController {
     }
     
     @objc private func logoutButtonTapped() {
-        dismiss(animated: true, completion: nil)
+        let userDefault = UserDefaults.standard
+        userDefault.set(false, forKey: "isLoggedIn")
+        userDefault.synchronize()
+        
+        DispatchQueue.main.async {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.goToLogin()
+        }
     }
 }
 
@@ -145,7 +152,7 @@ extension ItemsViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = viewModel.items[indexPath.item]
         let itemDetailsViewController = ItemDetailsVC(item: item)
-//        itemDetailsViewController.delegate = self
+        itemDetailsViewController.delegate = self
         
         navigationController?.pushViewController(itemDetailsViewController, animated: true)
     }
@@ -163,6 +170,7 @@ extension ItemsViewController: UICollectionViewDelegateFlowLayout {
 
 extension ItemsViewController: AddItemDelegate {
     func didAddItem() {
+        displaySpinner()
         viewModel.fetchItems()
     }
 }
@@ -171,14 +179,16 @@ extension ItemsViewController: AddItemDelegate {
 
 extension ItemsViewController: ItemsViewDelegate {
     func didUpdateItems() {
-        setupCollectionView()
-        collectionView.reloadData()
-        removeSpinner()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.removeSpinner()
+        }
     }
 }
 
 extension ItemsViewController: ItemDetailsDelegate {
     func didRent() {
+        displaySpinner()
         viewModel.fetchItems()
     }
 }

@@ -32,7 +32,8 @@ final class ReviewCollectionViewCell: UICollectionViewCell {
     // MARK: - Private Functions
     
     private func setupUI() {
-        backgroundColor = .gray
+        let blue = UIColor(red: 55/255, green: 101/255, blue: 184/255, alpha: 1)
+        backgroundColor = blue
         layer.cornerRadius = 10
         
         setupOwnerName()

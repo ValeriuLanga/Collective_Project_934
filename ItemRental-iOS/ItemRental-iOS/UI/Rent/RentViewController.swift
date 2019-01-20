@@ -46,16 +46,18 @@ final class RentViewController: UIViewController {
         view.backgroundColor = .white
         
         setupTimeLabel()
-//        setupStartDatePicker()
-//        setupEndDatePicker()
-//        setupDoneButton()
+        setupStartDatePicker()
+        setupEndDatePicker()
+        setupDoneButton()
     }
     
     private func setupTimeLabel() {
-        timeLabel.text = "Please choose a valid date between: " + item.startDate + " - " + item.endDate
+        timeLabel.text = "Please choose a valid date between:\n" + item.startDate + " - " + item.endDate
+        timeLabel.numberOfLines = 2
+        timeLabel.textAlignment = .center
         view.addSubview(timeLabel)
         timeLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(Padding.p20)
             $0.centerX.equalToSuperview()
         }
     }
@@ -66,7 +68,7 @@ final class RentViewController: UIViewController {
         startDatePicker.snp.makeConstraints {
             $0.top.equalTo(timeLabel.snp.bottom).inset(-Padding.p40)
             $0.leading.trailing.equalToSuperview().inset(Padding.p40)
-            $0.height.equalTo(70)
+            $0.height.equalTo(50)
         }
     }
     
@@ -76,7 +78,7 @@ final class RentViewController: UIViewController {
         endDatePicker.snp.makeConstraints {
             $0.top.equalTo(startDatePicker.snp.bottom).offset(Padding.p20)
             $0.leading.trailing.equalToSuperview().inset(Padding.p40)
-            $0.height.equalTo(70)
+            $0.height.equalTo(50)
         }
     }
     
@@ -89,9 +91,7 @@ final class RentViewController: UIViewController {
         view.addSubview(chooseButton)
         chooseButton.snp.makeConstraints {
             $0.top.equalTo(endDatePicker.snp.bottom).offset(Padding.p40)
-            $0.height.equalTo(50)
-            $0.width.equalTo(100)
-//            $0.bottom.lessThanOrEqualToSuperview().inset(Padding.p20)
+            $0.leading.trailing.equalToSuperview().inset(Padding.p40)
         }
     }
     
@@ -100,7 +100,19 @@ final class RentViewController: UIViewController {
             return
         }
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd YYYY"
+        dateFormatter.dateFormat = "MMM dd yyyy"
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        
+        guard let availableStartingDate = dateFormatter.date(from: item.startDate), let availableEndingDate = dateFormatter.date(from: item.endDate) else {
+            print("Invalid initial dates")
+            return
+        }
+        
+        guard startDatePicker.date >= availableStartingDate, endDatePicker.date <= availableEndingDate else {
+            presentAlert(message: "Please choose a valid period in the available time frame!")
+            return
+        }
+        
         let startDate = dateFormatter.string(from: startDatePicker.date)
         let endDate = dateFormatter.string(from: endDatePicker.date)
         
@@ -109,8 +121,9 @@ final class RentViewController: UIViewController {
                 return
             }
             DispatchQueue.main.async {
+                let viewControllers: [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3], animated: true)
                 self.delegate?.didRent()
-                self.navigationController?.popViewController(animated: true)
             }
         }
     }

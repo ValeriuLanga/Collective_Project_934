@@ -234,7 +234,7 @@ final class ItemDetailsVC: UIViewController {
     
     @objc private func rentButtonTapped() {
         let rentVC = RentViewController(manager: manager, item: item)
-        rentVC.delegate = delegate
+        rentVC.delegate = self
         navigationController?.pushViewController(rentVC, animated: true)
     }
     
@@ -245,5 +245,11 @@ final class ItemDetailsVC: UIViewController {
         let viewModel = ReviewsViewModel(itemId: itemId)
         let reviewsViewController = ReviewsViewController(item: item, viewModel: viewModel)
         navigationController?.pushViewController(reviewsViewController, animated: true)
+    }
+}
+
+extension ItemDetailsVC: ItemDetailsDelegate {
+    func didRent() {
+        delegate?.didRent()
     }
 }

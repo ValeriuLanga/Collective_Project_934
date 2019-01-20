@@ -18,13 +18,9 @@ final class RegisterViewController: UIViewController {
     private let nameTextfield = UITextField()
     private let passwordTextfield = UITextField()
     private let emailTextfield = UITextField()
-    private let ratingTextfield = UITextField()
     private let phoneTextfield = UITextField()
-
     private let cityTextfield = UITextField()
     private let streetTextfield = UITextField()
-    private let latitudeTextfield = UITextField()
-    private let longitudeTextfield = UITextField()
     
     private let registerButton = UIButton()
     private let cancelButton = UIButton()
@@ -40,18 +36,14 @@ final class RegisterViewController: UIViewController {
     // MARK: - Private Functions
     
     private func setupUI() {
-//        view.backgroundColor = .gray
         view.backgroundColor = .white
         
         setupNameTextfield()
         setupPasswordTextfield()
         setupEmailTextfield()
-        setupRatingTextfield()
         setupPhoneTextfield()
         setupCityTextfield()
         setupStreetTextfield()
-        setupLatitudeTextfield()
-        setupLongitudeTextfield()
         setupRegisterButton()
         setupCancelButton()
     }
@@ -99,20 +91,6 @@ final class RegisterViewController: UIViewController {
         }
     }
     
-    private func setupRatingTextfield() {
-        ratingTextfield.placeholder = "Rating"
-        ratingTextfield.textAlignment = .center
-        ratingTextfield.borderStyle = .roundedRect
-        
-        view.addSubview(ratingTextfield)
-        ratingTextfield.snp.makeConstraints {
-            $0.top.equalTo(emailTextfield.snp.bottom).offset(Padding.p10)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
-            $0.height.equalTo(Height.h40)
-        }
-    }
-    
     private func setupPhoneTextfield() {
         phoneTextfield.placeholder = "Phone number"
         phoneTextfield.textAlignment = .center
@@ -120,7 +98,7 @@ final class RegisterViewController: UIViewController {
         
         view.addSubview(phoneTextfield)
         phoneTextfield.snp.makeConstraints {
-            $0.top.equalTo(ratingTextfield.snp.bottom).offset(Padding.p10)
+            $0.top.equalTo(emailTextfield.snp.bottom).offset(Padding.p10)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
             $0.height.equalTo(Height.h40)
@@ -155,34 +133,6 @@ final class RegisterViewController: UIViewController {
         }
     }
     
-    private func setupLatitudeTextfield() {
-        latitudeTextfield.placeholder = "Latitude"
-        latitudeTextfield.textAlignment = .center
-        latitudeTextfield.borderStyle = .roundedRect
-        
-        view.addSubview(latitudeTextfield)
-        latitudeTextfield.snp.makeConstraints {
-            $0.top.equalTo(streetTextfield.snp.bottom).offset(Padding.p10)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
-            $0.height.equalTo(Height.h40)
-        }
-    }
-    
-    private func setupLongitudeTextfield() {
-        longitudeTextfield.placeholder = "Latitude"
-        longitudeTextfield.textAlignment = .center
-        longitudeTextfield.borderStyle = .roundedRect
-        
-        view.addSubview(longitudeTextfield)
-        longitudeTextfield.snp.makeConstraints {
-            $0.top.equalTo(latitudeTextfield.snp.bottom).offset(Padding.p10)
-            $0.leading.equalToSuperview().offset(Padding.p40)
-            $0.trailing.equalToSuperview().offset(-Padding.p40)
-            $0.height.equalTo(Height.h40)
-        }
-    }
-    
     private func setupRegisterButton() {
         registerButton.setTitle("Register", for: .normal)
         registerButton.addTarget(self, action: #selector(registerButtonTapped), for: .touchUpInside)
@@ -191,7 +141,7 @@ final class RegisterViewController: UIViewController {
         
         view.addSubview(registerButton)
         registerButton.snp.makeConstraints {
-            $0.top.equalTo(longitudeTextfield.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(streetTextfield.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p40)
             $0.trailing.equalToSuperview().offset(-Padding.p40)
         }
@@ -218,11 +168,6 @@ final class RegisterViewController: UIViewController {
         let phone = phoneTextfield.text!
         let city = cityTextfield.text!
         let street = streetTextfield.text!
-        guard let latitude = Double(latitudeTextfield.text!),
-            let longitude = Double(longitudeTextfield.text!),
-            let rating = Int(ratingTextfield.text!) else {
-                return
-        }
         
         
         guard name != "",
@@ -235,8 +180,8 @@ final class RegisterViewController: UIViewController {
                 return
         }
     
-        let location = Location(city: city, street: street, latitude: Double(latitude), longitude: Double(longitude))
-        let user = User(name: name, password: password, email: email, rating: rating, phone: phone, location: location)
+        let location = Location(city: city, street: street, latitude: 0.0, longitude: 0.0)
+        let user = User(name: name, password: password, email: email, rating: 0, phone: phone, location: location)
         
         userManager.register(user: user) { [weak self](data, error) in
             guard data != nil else {

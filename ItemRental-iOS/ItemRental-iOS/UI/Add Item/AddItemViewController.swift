@@ -35,12 +35,14 @@ final class AddItemViewController: UIViewController {
     private let imagePicker = UIImagePickerController()
     private var image: UIImage?
     
-    private let categories = ["Film and Photography",
-                      "Projectors and Screens",
-                      "Drones",
-                      "DJ Equipment",
-                      "Sports",
-                      "Musical"]
+    private let categories = [
+        "Film & Photography",
+        "Projectors & Screens",
+        "Drones",
+        "DJ Equipment",
+        "Sports",
+        "Musical"
+    ]
     
     // MARK: - Init
     
@@ -243,7 +245,9 @@ final class AddItemViewController: UIViewController {
         }
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM dd YYYY"
+        dateFormatter.dateFormat = "MMM dd yyyy"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.timeZone = TimeZone.current
         let startDate = dateFormatter.string(from: startDatePicker.date)
         let endDate = dateFormatter.string(from: endDatePicker.date)
         
@@ -274,17 +278,18 @@ final class AddItemViewController: UIViewController {
                 return
             }
             
-            self.photosManager.upload(image: image, id: id) { (data, error) in
+            self.photosManager.upload(image: image, id: id) { [weak self] (data, error) in
                 guard error == nil else {
                     DispatchQueue.main.async {
-                        self.presentAlert(message: "Photo could not be uploaded!")
+                        self?.presentAlert(message: "Photo could not be uploaded!")
                     }
                     return
                 }
+            
+                self?.delegate?.didAddItem()
             }
             
             DispatchQueue.main.async {
-                self.delegate?.didAddItem()
                 self.navigationController?.popViewController(animated: true)
             }
         }

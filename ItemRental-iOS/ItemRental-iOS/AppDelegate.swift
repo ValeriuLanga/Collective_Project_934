@@ -23,11 +23,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let vc = ItemsViewController(viewModel: viewModel)
 //        window?.rootViewController = UINavigationController(rootViewController: vc)
         
-        let vc = LoginViewController()
-        window?.rootViewController = vc
+        let userDefault = UserDefaults.standard
+        
+        let savedData = userDefault.bool(forKey: "isLoggedIn")
+        if savedData {
+            goToItems()
+        } else {
+            goToLogin()
+        }
         
         return true
     }
+    
+    func goToLogin() {
+        let vc = LoginViewController()
+        window?.rootViewController = vc
+    }
+    
+    func goToItems() {
+        let viewModel = ItemsViewModel(photosManager: PhotosManager(cameraPlugin: CameraPlugin()))
+        let itemsViewController = ItemsViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: itemsViewController)
+        window?.rootViewController = navigationController
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

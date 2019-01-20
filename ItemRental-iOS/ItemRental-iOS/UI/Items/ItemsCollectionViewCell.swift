@@ -61,7 +61,7 @@ final class ItemsCollectionViewCell: UICollectionViewCell {
         container.addSubview(titleLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(Padding.p20)
-            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(5)
         }
     }
     

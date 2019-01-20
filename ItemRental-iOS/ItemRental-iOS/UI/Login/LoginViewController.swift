@@ -111,12 +111,21 @@ final class LoginViewController: UIViewController {
     private func didLogin(user: String) {
         UserDefaults.standard.set(user, forKey: "user")
         
-        let viewModel = ItemsViewModel(photosManager: PhotosManager(cameraPlugin: CameraPlugin()))
-        let itemsViewController = ItemsViewController(viewModel: viewModel)
-        let navigationController = UINavigationController(rootViewController: itemsViewController)
+        let userDefault = UserDefaults.standard
+        userDefault.set(true, forKey: "isLoggedIn")
+        userDefault.synchronize()
+        
         DispatchQueue.main.async {
-            self.present(navigationController, animated: true)
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.goToItems()
         }
+        
+//        let viewModel = ItemsViewModel(photosManager: PhotosManager(cameraPlugin: CameraPlugin()))
+//        let itemsViewController = ItemsViewController(viewModel: viewModel)
+//        let navigationController = UINavigationController(rootViewController: itemsViewController)
+//        DispatchQueue.main.async {
+//            self.present(navigationController, animated: true)
+//        }
     }
     
     @objc private func loginButtonTapped() {

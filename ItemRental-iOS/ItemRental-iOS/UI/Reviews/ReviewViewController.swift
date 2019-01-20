@@ -22,6 +22,7 @@ final class ReviewViewController: UIViewController {
     private let manager = ReviewManager()
     
     private let reviewSection = UITextView()
+    private let rating = UITextField()
     private let postButton = UIButton()
     
     // MARK: - Init
@@ -70,6 +71,16 @@ final class ReviewViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-Padding.p20)
             $0.height.equalTo(Height.h100)
         }
+        
+        rating.borderStyle = .roundedRect
+        rating.placeholder = "Rating (must be between 1-5)"
+        
+        view.addSubview(rating)
+        rating.snp.makeConstraints {
+            $0.top.equalTo(reviewSection.snp.bottom).offset(Padding.p20)
+            $0.leading.equalToSuperview().offset(Padding.p20)
+            $0.trailing.equalToSuperview().offset(-Padding.p20)
+        }
     }
     
     private func setupPostButton() {
@@ -80,7 +91,7 @@ final class ReviewViewController: UIViewController {
         
         view.addSubview(postButton)
         postButton.snp.makeConstraints {
-            $0.top.equalTo(reviewSection.snp.bottom).offset(Padding.p20)
+            $0.top.equalTo(rating.snp.bottom).offset(Padding.p20)
             $0.leading.equalToSuperview().offset(Padding.p20)
             $0.trailing.equalToSuperview().offset(-Padding.p20)
         }
@@ -94,7 +105,12 @@ final class ReviewViewController: UIViewController {
             return
         }
         
-        let review = Review(text: text, rating: 0, ownerName: UserDefaults.standard.string(forKey: "user")!, rentableItemId: item.id!)
+        guard let gradeString = rating.text, let grade = Int(gradeString), grade > 0, grade < 6 else {
+            presentAlert(message: "Please give a valid grade!")
+            return
+        }
+        
+        let review = Review(text: text, rating: grade, ownerName: UserDefaults.standard.string(forKey: "user")!, rentableItemId: item.id!)
         
         manager.createReview(review: review) { [weak self](data, error) in
             guard data != nil else {

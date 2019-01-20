@@ -20,7 +20,7 @@ enum Category {
         case .filmAndPhotography:
             return "Film & Photography"
         case .projectorsAndScreens:
-            return "Projectors and Screens"
+            return "Projectors & Screens"
         case .drones:
             return "Drones"
         case .djEquipment:

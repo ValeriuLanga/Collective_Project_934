@@ -42,21 +42,15 @@ final class PhotosManager {
                 return
             }
             
-            // You can print out response object
-            print("******* response = \(String(describing: response))")
+//            // Print out reponse body
+//            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//            print("****** response data = \(responseString!)")
             
-            // Print out reponse body
-            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print("****** response data = \(responseString!)")
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-                
-                print(json ?? "No json to show")
-            
-            } catch {
-                print(error)
-            }
+//            do {
+//                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
+//            } catch {
+//                print(error)
+//            }
         }
         task.resume()
     }
