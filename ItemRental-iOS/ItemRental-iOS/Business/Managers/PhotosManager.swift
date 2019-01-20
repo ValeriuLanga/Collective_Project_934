@@ -34,25 +34,27 @@ final class PhotosManager {
         
         request.httpBody = createBodyWithParameters(parameters: nil, filePathKey: "pic", imageDataKey: imageData!, boundary: boundary)
         
-        let task = URLSession.shared.dataTask(with: request as URLRequest) {
-            data, response, error in
-            
-            if error != nil {
-                print("error=\(String(describing: error))")
-                return
-            }
-            
-//            // Print out reponse body
-//            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-//            print("****** response data = \(responseString!)")
-            
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-//            } catch {
-//                print(error)
+        process(request: request, completion: completion)
+        
+//        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+//            data, response, error in
+//            
+//            if error != nil {
+//                print("error=\(String(describing: error))")
+//                return
 //            }
-        }
-        task.resume()
+//            
+////            // Print out reponse body
+////            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+////            print("****** response data = \(responseString!)")
+//            
+////            do {
+////                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
+////            } catch {
+////                print(error)
+////            }
+//        }
+//        task.resume()
     }
     
     func getImage(for id: Int, completion: @escaping ImageCompletion) {

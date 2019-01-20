@@ -278,19 +278,18 @@ final class AddItemViewController: UIViewController {
                 return
             }
             
-            self.photosManager.upload(image: image, id: id) { [weak self] (data, error) in
+            self.photosManager.upload(image: image, id: id) { (data, error) in
                 guard error == nil else {
                     DispatchQueue.main.async {
-                        self?.presentAlert(message: "Photo could not be uploaded!")
+                        self.presentAlert(message: "Photo could not be uploaded!")
                     }
                     return
                 }
             
-                self?.delegate?.didAddItem()
-            }
-            
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+                DispatchQueue.main.async {
+                    self.delegate?.didAddItem()
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
