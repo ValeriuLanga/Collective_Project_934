@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Photos
 
 protocol AddItemDelegate: class {
     func didAddItem()
@@ -34,6 +35,7 @@ final class AddItemViewController: UIViewController {
     
     private let imagePicker = UIImagePickerController()
     private var image: UIImage?
+    private var filename: String?
     
     private let categories = [
         "Film & Photography",
@@ -278,7 +280,7 @@ final class AddItemViewController: UIViewController {
                 return
             }
             
-            self.photosManager.upload(image: image, id: id) { (data, error) in
+            self.photosManager.upload(image: image, id: id, filename: self.filename) { (data, error) in
                 guard error == nil else {
                     DispatchQueue.main.async {
                         self.presentAlert(message: "Photo could not be uploaded!")
@@ -346,6 +348,12 @@ extension AddItemViewController: UIImagePickerControllerDelegate, UINavigationCo
         imageView.layer.borderWidth = 0
         imageView.setImage(photo, for: .normal)
         image = photo
+        
+        if let imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL {
+            let result = PHAsset.fetchAssets(withALAssetURLs: [imageURL], options: nil)
+            let asset = result.firstObject
+            filename = asset?.value(forKey: "filename") as? String
+        }
         
         dismiss(animated: true)
     }

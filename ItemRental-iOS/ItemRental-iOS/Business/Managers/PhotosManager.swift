@@ -19,7 +19,7 @@ final class PhotosManager {
     
     private let apiURL = "http://127.0.0.1:5000/api/v1/rentableitems"
     
-    func upload(image: UIImage, id: Int, completion: @escaping RequestDataCompletion) {
+    func upload(image: UIImage, id: Int, filename: String?, completion: @escaping RequestDataCompletion) {
         let url = URL(string: apiURL + "/uploadimage/\(id)")!
         let boundary = "Boundary-\(UUID().uuidString)"
         
@@ -32,29 +32,9 @@ final class PhotosManager {
         
         if imageData == nil  { return }
         
-        request.httpBody = createBodyWithParameters(parameters: nil, filePathKey: "pic", imageDataKey: imageData!, boundary: boundary)
+        request.httpBody = createBodyWithParameters(parameters: nil, filePathKey: "pic", imageDataKey: imageData!, boundary: boundary, filename: filename)
         
         process(request: request, completion: completion)
-        
-//        let task = URLSession.shared.dataTask(with: request as URLRequest) {
-//            data, response, error in
-//            
-//            if error != nil {
-//                print("error=\(String(describing: error))")
-//                return
-//            }
-//            
-////            // Print out reponse body
-////            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-////            print("****** response data = \(responseString!)")
-//            
-////            do {
-////                let json = try JSONSerialization.jsonObject(with: data!, options: []) as? NSDictionary
-////            } catch {
-////                print(error)
-////            }
-//        }
-//        task.resume()
     }
     
     func getImage(for id: Int, completion: @escaping ImageCompletion) {
@@ -69,7 +49,7 @@ final class PhotosManager {
         }.resume()
     }
     
-    func createBodyWithParameters(parameters: [String: String]?, filePathKey: String?, imageDataKey: Data, boundary: String) -> Data {
+    func createBodyWithParameters(parameters: [String: String]?, filePathKey: String?, imageDataKey: Data, boundary: String, filename: String?) -> Data {
         let body = NSMutableData()
         
         if parameters != nil {
@@ -80,7 +60,7 @@ final class PhotosManager {
             }
         }
         
-        let filename = "user-profile.jpg"
+        let filename = filename ?? "user-profile.jpg"
         let mimetype = "image/jpg"
         
         body.appendString("--\(boundary)\r\n")
