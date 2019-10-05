@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/LoginPage";
 import Register from "./Components/Register/RegisterPage";
-import SignleAdPage from "./Components/Ads/SignleAdPage";
+import SingleAdPage from "./Components/Ads/SingleAdPage";
 import SubmitAd from "./Components/SubmitAd/SubmitAdPage";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Category from "./Components/Category/Category";
@@ -20,7 +20,7 @@ class App extends Component {
             <Route path="/" exact component={Home} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
-            <Route path="/listings/:id" exact component={SignleAdPage} />
+            <Route path="/listings/:id" exact component={SingleAdPage} />
             <PrivateRoute path="/submitad" component={SubmitAd} />
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <Route path="/category/:category" component={Category} />

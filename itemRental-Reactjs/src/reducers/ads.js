@@ -3,14 +3,21 @@ import {
   GET_ADS,
   IS_LOADING,
   UPDATE_AD,
-  DELETE_AD
+  DELETE_AD,
+  GET_OWN_ADS,
+  GET_AD,
+  GET_OWN_REVIEWS,
+  GET_REVIEWS_ADD,
+  RENT_AD,
+  POST_REVIEW,
 } from "../actions/types";
 
 // Ads Reducer
 const initialState = {
   ads: [],
   ad: {},
-  isLoading: false
+  reviews: [],
+  isLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -26,7 +33,30 @@ export default (state = initialState, action) => {
         isLoading: false,
         ads: action.payload
       };
-
+    case GET_OWN_ADS:
+      return {
+        ...state,
+        isLoading: false,
+        ads: action.payload
+      };
+    case GET_OWN_REVIEWS:
+       return {
+        ...state,
+        isLoading: false,
+        reviews: action.payload
+      };
+    case GET_REVIEWS_ADD:
+      return {
+      ...state,
+      isLoading: false,
+      reviews: action.payload
+      };
+    case GET_AD:
+      return {
+        ...state,
+        isLoading: false,
+        ad: action.payload
+      };
     case POST_AD:
       return {
         ...state,
@@ -50,6 +80,17 @@ export default (state = initialState, action) => {
         ...state,
         ads
       };
+    case RENT_AD:
+      return {
+        ...state,
+        isLoading: false,
+      }
+    case POST_REVIEW:
+      return {
+        ...state,
+        isLoading: false,
+        reviews: [action.payload, ...state.reviews]
+      }
     default:
       return state;
   }

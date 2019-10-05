@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Header from "../Header/MainHeader.js";
-import Tabs from "./DashboardTabs";
 import { withStyles } from "@material-ui/core/styles";
-import { getAds } from "../../actions/ads";
+import Tabs from "./DashboardTabs";
 
 const styles = theme => ({
   container: {
-    display: "flex",
     justifyContent: "center",
     maxWidth: "1080px",
     margin: "0 auto"
@@ -19,8 +17,8 @@ const styles = theme => ({
 });
 
 class Dashboard extends Component {
-  componentDidMount() {
-    this.props.dispatch(getAds());
+  componentDidMount(){
+
   }
 
   render() {
@@ -30,8 +28,7 @@ class Dashboard extends Component {
       <div>
         <Header />
         <div className={classes.container}>
-          <br />
-          <Tabs />
+            <Tabs />
         </div>
       </div>
     );

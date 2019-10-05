@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 import CategoryItem from "./CategoryItem";
 
@@ -17,64 +18,74 @@ const styles = theme => ({
     padding: theme.spacing.unit * 2,
     textAlign: "center",
     color: theme.palette.text.secondary
-  }
+  },
+  container: {
+    zIndex: 0
+  },
 });
+
+// Film & Photography, Projectors and Screens, Drones, DJ Equipment, Sports, Musical Instruments
+export const categories = [
+  {
+    url: '/images/categories/film_photography.jpg',
+    title: 'Film & Photography',
+    width: '100%',
+    caturl: '/category/Film%20%26%20Photography',
+  },
+  {
+    url: '/images/categories/screen_projectors.jpg',
+    title: 'Projectors & Screens',
+    width: '100%',
+    caturl: '/category/Projectors%20%26%20Screens',
+  },
+  {
+    url: '/images/categories/drones.jpg',
+    title: 'Drones',
+    width: '100%',
+    caturl: '/category/Drones',
+  },
+  {
+    url: '/images/categories/dj_equipment.jpg',
+    title: 'DJ Equipment',
+    width: '100%',
+    caturl: '/category/DJ%20Equipment',
+  },
+  {
+    url: '/images/categories/sport.jpg',
+    title: 'Sports',
+    width: '100%',
+    caturl: '/category/Sports',
+  },
+  {
+    url: '/images/categories/musical_instruments.jpg',
+    title: 'Musical Instruments',
+    width: '100%',
+    caturl: '/category/Musical',
+  },
+]
 
 function FullWidthGrid(props) {
   const { classes } = props;
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={24}>
+      <Grid container spacing={24} className={classes.container}>
         <Grid xs={12} item>
-          <h1 style={{ textAlign: "center" }}>Listing Categories</h1>
+          <Typography style={{ textAlign: "center" }} variant="h4" gutterBottom>
+            Categories
+          </Typography>
         </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem
-            linkTitle={"Pets"}
-            to={"/category/pets"}
-            style={{ backgroundColor: "#eee" }}
-          />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Cars"} to={"/category/cars"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Property"} to={"/category/property"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Bikes"} to={"/category/bikes"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem
-            linkTitle={"Electronics"}
-            to={"/category/electronics"}
-          />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Mobiles"} to={"/category/mobiles"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Furniture"} to={"/category/furniture"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Books"} to={"/category/books"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Services"} to={"/category/services"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Fashion"} to={"/category/fashion"} />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem
-            linkTitle={"Agriculture"}
-            to={"/category/agriculture"}
-          />
-        </Grid>
-        <Grid item xs={6} sm={2}>
-          <CategoryItem linkTitle={"Sports"} to={"/category/sports"} />
-        </Grid>
+        {categories.map(category => (
+          <Grid item xs={6} sm={4} key={category.caturl}>
+            <CategoryItem
+              url={category.url}
+              width={category.width}
+              title={category.title}
+              caturl={category.caturl}
+              key={category.caturl}
+            />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );

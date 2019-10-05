@@ -1,13 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 import { CircularProgress } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-import AddItem from "../Ads/AddItem";
+import AdItem from "../Ads/AdItem";
 import Header from "../Header/MainHeader";
-import { getAds } from "../../actions/ads";
+import {getAds, getAdsCategory} from "../../actions/ads";
+import {RENTABLE_DOWNLOAD_IMAGE, RENTABLE_ITEMS, URL_SERVER} from "../../utils/constants";
+import Footer from "../Footer/Footer";
 
 const styles = theme => ({
   root: {
@@ -51,64 +55,80 @@ class AdsCategory extends React.Component {
     favorite: true
   };
   componentDidMount() {
-    this.props.dispatch(getAds());
+    const { category } = this.props.match.params;
+    this.props.dispatch(getAdsCategory(category));
   }
+
+  goHome = () => this.props.location.pathname = "/";
 
   render() {
     const { ads, classes, user } = this.props;
-    const { category } = this.props.match.params;
-    let filteredAds = ads.ads.filter(item => {
-      return category === item.category;
-    });
+
+    let filteredAds = ads.ads;
     let postContent;
-    if (ads.isLoading) {
-      postContent = (
-        <div className={classes.root}>
-          <CircularProgress />
-        </div>
+      if (ads.isLoading) {
+          postContent = (
+              <div className={classes.root}>
+                  <CircularProgress />
+              </div>
+          );
+      } else {
+          postContent = filteredAds.map(item => {
+              return (
+                  <Grid item md={4} key={item.id}>
+                      <AdItem
+                          file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
+                          title={item.title}
+                          price={item.price}
+                          key={item.id}
+                          to={item.id}
+                          name={item.owner_name}
+                          rating={item.rating}
+                          category={item.category}
+                          description={item.item_description}
+                      />
+                  </Grid>
+              );
+          });
+      }
+      if (!ads.isLoading && filteredAds.length === 0) {
+          postContent = (
+              <div className={classes.root}>
+                  <Grid container spacing={8} className={classes.container}>
+                      <Grid item xs={12}>
+                          <h2>
+                              <em>
+                                  <Typography color="primary">
+                                     There are no ads published!
+                                  </Typography>
+                              </em>
+                          </h2>
+                      </Grid>
+                      <Grid item xs={12}>
+                          <Button
+                              variant="contained"
+                              size="large"
+                              color="primary"
+                              className={classes.button}
+                              component={Link}
+                              to="/">
+                              BACK TO HOME
+                          </Button>
+                      </Grid>
+                  </Grid>
+              </div>
+          );
+      }
+      return (
+          <div>
+              <Header />
+
+              <Grid container spacing={24} className={classes.container}>
+                  {postContent}
+              </Grid>
+              {/* <Footer/> */}
+          </div>
       );
-    } else {
-      postContent = filteredAds.map(item => {
-        return (
-          <Grid item md={4} key={item._id}>
-            <AddItem
-              file={`https://olx-backend.herokuapp.com/${item.file}`}
-              title={item.title}
-              price={item.price}
-              key={item._id}
-              to={item._id}
-              avatar={user.avatar}
-              favorite={item.favorite}
-            />
-          </Grid>
-        );
-      });
-    }
-    if (!ads.isLoading && filteredAds.length === 0) {
-      postContent = (
-        <div className={classes.root}>
-          <h2>
-            <em>
-              "No Ads related to this category. Please check something else"{" "}
-            </em>
-            <br />
-            <Link to="/">Go to Home Page</Link>
-            <br />
-            <Link to="/submitad">Create New Ad</Link>
-          </h2>
-        </div>
-      );
-    }
-    return (
-      <div>
-        <Header />
-        <div>
-          <Grid container spacing={8} className={classes.container}>
-            {postContent}
-          </Grid>
-        </div>
-      </div>
-    );
   }
 }
 

@@ -4,11 +4,13 @@ import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import logo from "../../logo.svg";
 
 const styles = {
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginTop: 50
   },
   container: {
     maxWidth: "1080px",
@@ -16,7 +18,10 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center"
-  }
+  },
+  madeBy: {
+    fontSize: "24px"
+  },
 };
 
 function SimpleAppBar(props) {
@@ -27,17 +32,12 @@ function SimpleAppBar(props) {
         <Toolbar>
           <Grid container className={classes.container}>
             <Grid item>
-              <img src={logo} className="App-logo" alt="logo" />
+              <img src="/images/icons/icon-72x72.png" className="App-logo" alt="logo" />
             </Grid>
             <Grid item>
-              <p className="contact">080010101</p>
-              <span>(9:30am to 6:30pm)</span>
-              <p>
-                <a href="mailto:help@olx.com.pk">help@olx.com.pk</a>
-              </p>
             </Grid>
             <Grid item>
-              <span>Developed by Mohsin Latif!</span>
+              <span className={classes.madeBy}>Made with <FavoriteIcon /> by H.U.H. team</span>
             </Grid>
           </Grid>
         </Toolbar>

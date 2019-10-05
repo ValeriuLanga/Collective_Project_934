@@ -12,40 +12,48 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import orange from '@material-ui/core/colors/orange';
+import indigo from '@material-ui/core/colors/indigo';
+import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
+
 import { DashboardOutlined as Dashboard } from "@material-ui/icons";
 
 import { CloudUploadOutlined as CloudUploadIcon } from "@material-ui/icons";
 
 import { Link } from "react-router-dom";
 import logo from "../../logo.svg";
+import {logoutUser} from "../../actions/authActions";
+import {connect} from "react-redux";
 
 const drawerWidth = 250;
 
 const styles = theme => ({
   link: {
     textDecoration: "none",
-    color: "#000"
+    color: "#000",
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   leftIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing.unit,
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
   },
   iconSmall: {
-    fontSize: 20
+    fontSize: 20,
   },
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   container: {
     maxWidth: 1080,
     display: "flex",
     justifyContent: "center",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   appFrame: {
     height: 100,
@@ -53,46 +61,45 @@ const styles = theme => ({
     overflow: "hidden",
     position: "relative",
     display: "flex",
-    width: "100%"
+    width: "100%",
   },
-
   appBar: {
     position: "absolute",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
-    })
+    }),
   },
   "appBarShift-left": {
-    marginLeft: drawerWidth
+    marginLeft: drawerWidth,
   },
   "appBarShift-right": {
-    marginRight: drawerWidth
+    marginRight: drawerWidth,
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 20
+    marginRight: 20,
   },
   hide: {
-    display: "none"
+    display: "none",
   },
   drawerPaper: {
     position: "relative",
-    width: drawerWidth
+    width: drawerWidth,
   },
   drawerHeader: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
     padding: "0 8px",
-    ...theme.mixins.toolbar
+    ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
@@ -101,52 +108,96 @@ const styles = theme => ({
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
   },
   "content-left": {
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
   },
   "content-right": {
-    marginRight: -drawerWidth
+    marginRight: -drawerWidth,
   },
   contentShift: {
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen
-    })
+    }),
   },
   "contentShift-left": {
-    marginLeft: 0
+    marginLeft: 0,
   },
   "contentShift-right": {
-    marginRight: 0
+    marginRight: 0,
   },
   tagline: {
     color: "black",
     fontSize: "1.5rem",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   "@media only screen and (min-width: 680px)": {
     mobileOnly: {
       display: "none",
-      color: "#000"
+      color: "#000",
     },
     drawerHeader: {
       display: "none",
-      color: "#000 !important"
+      color: "#000 !important",
     },
     appFrame: {
-      height: "100px"
-    }
+      height: "100px",
+    },
   },
   "@media only screen and (max-width: 680px)": {
     button: {
-      display: "none"
+      display: "none",
+    },
+    postAdButton: {
+      display: "none",
+    },
+    dashboardButton: {
+      display: "none",
+    },
+    logoutButton: {
+      display: "none",
+    },
+    logInButton: {
+      display: "none",
     },
     tagline: {
-      fontSize: "1rem"
-    }
-  }
+      fontSize: "1rem",
+    },
+  },
+  postAdButton: {
+    margin: theme.spacing.unit,
+    backgroundColor: orange[500],
+    '&:hover': {
+      backgroundColor: orange[700],
+    },
+  },
+  logOffButton: {
+    margin: theme.spacing.unit,
+    color: red[500],
+    '&:hover': {
+      backgroundColor: red[50],
+    },
+  },
+  logInButton: {
+    margin: theme.spacing.unit,
+    color: green[500],
+    '&:hover': {
+      backgroundColor: green[50],
+    },
+  },
+  dashboardButton: {
+    margin: theme.spacing.unit,
+    color: indigo[500],
+    backgroundColor: indigo[50],
+    '&:hover': {
+      backgroundColor: indigo[100],
+    },
+  },
+  logoAndTagline: {
+    paddingRight: "0px !IMPORTANT",
+  },
 });
 
 class PersistentDrawer extends React.Component {
@@ -163,9 +214,24 @@ class PersistentDrawer extends React.Component {
     this.setState({ open: false });
   };
 
+  logOff = () => {
+      this.props.dispatch(logoutUser());
+  };
+
+  isEmpty = (obj) =>  {
+    for(let prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+
+    return true;
+  }
+
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, user } = this.props;
     const { anchor, open } = this.state;
+
+    const emptyUser = this.isEmpty(user);
 
     const drawer = (
       <div>
@@ -175,21 +241,17 @@ class PersistentDrawer extends React.Component {
               Dashboard
             </Link>
           </MenuItem>
-          <MenuItem>
-            <Link to="/dashboard" className={classes.link}>
-              Messages
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/dashboard" className={classes.link}>
-              Favorites
-            </Link>
-          </MenuItem>
-          <MenuItem>
+          { emptyUser ? (<MenuItem>
             <Link to="/login" className={classes.link}>
               Login
             </Link>
-          </MenuItem>
+          </MenuItem>) : (
+            <MenuItem>
+              <Link to="/" onClick={this.logOff} className={classes.link}>
+                Logout
+              </Link>
+            </MenuItem>
+          )}
           <MenuItem>
             <Link to="/register" className={classes.link}>
               Register
@@ -216,12 +278,14 @@ class PersistentDrawer extends React.Component {
                 [classes.appBarShift]: open,
                 [classes[`appBarShift-${anchor}`]]: open
               })}
+              color="default"
+              style={{ boxShadow: 'none' }}
             >
               <Toolbar
                 disableGutters={!open}
                 style={{
                   justifyContent: "space-between",
-                  backgroundColor: "white"
+                  backgroundColor: "white",
                 }}
               >
                 <div className={classes.mobileOnly}>
@@ -253,6 +317,7 @@ class PersistentDrawer extends React.Component {
                     </div>
                   </Drawer>
                 </div>
+
                 <header className={classes.logoAndTagline}>
                   <div
                     style={{
@@ -261,14 +326,14 @@ class PersistentDrawer extends React.Component {
                       float: "left"
                     }}
                   >
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <span className={classes.tagline}>
+                    <img src="/images/icons/icon-72x72.png" className="App-logo" alt="logo" style={{ marginTop: 5 }} />
+                    <span className={classes.tagline} style={{ paddingLeft: 20 }}>
                       <Link
                         to="/"
                         style={{ textDecoration: "none", color: "#000" }}
                       >
                         {" "}
-                        Pakistan's Largest Marketplace
+                        RentX
                       </Link>
                     </span>
                   </div>
@@ -284,25 +349,37 @@ class PersistentDrawer extends React.Component {
                   <Button
                     variant="contained"
                     color="default"
-                    style={{ color: "#2965BE" }}
-                    className={classes.button}
+                    className={classes.dashboardButton}
                     component={Link}
                     to={"/dashboard"}
                   >
-                    My Account
+                    Dashboard
                     <Dashboard className={classes.rightIcon} />
                   </Button>
                   <Button
                     variant="contained"
                     color="primary"
-                    className={classes.button}
+                    className={classes.postAdButton}
                     component={Link}
                     to={"/submitad"}
-                    style={{ backgroundColor: "#FF7700" }}
                   >
-                    Post a Free Ad
+                    Post Ad
                     <CloudUploadIcon className={classes.rightIcon} />
                   </Button>
+                    {!emptyUser ? (<Button
+                        className={classes.logOffButton}
+                        onClick={this.logOff}
+                        >
+                        Logout
+                    </Button>) : (
+                      <Button
+                        className={classes.logInButton}
+                        component={Link}
+                        to="/login"
+                      >
+                      Login
+                     </Button>
+                    )}
                 </div>
               </Toolbar>
             </AppBar>
@@ -318,4 +395,11 @@ PersistentDrawer.propTypes = {
   theme: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+const mapStateToProps = state => {
+    return {
+        user: state.auth.user,
+        ads: state.ads
+    };
+};
+
+export default connect(mapStateToProps)(withStyles(styles, { withTheme: true })(PersistentDrawer));

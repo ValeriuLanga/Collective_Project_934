@@ -3,9 +3,10 @@ import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER, CLEAR_CURRENT_PROFILE } from "./types";
+import { URL_SERVER } from "../utils/constants";
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-  var url = "https://olx-backend.herokuapp.com/users/register";
+  var url = URL_SERVER + "/users";
 
   fetch(url, {
     method: "POST",
@@ -26,7 +27,7 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
-  var url = "https://olx-backend.herokuapp.com/users/login";
+  var url = URL_SERVER + "/users/login"; // URL
   fetch(url, {
     method: "POST",
     body: JSON.stringify(userData),
@@ -36,18 +37,10 @@ export const loginUser = userData => dispatch => {
   })
     .then(res => res.json())
     .then(response => {
-      // Save to localStorage
-      const { token } = response;
-      // Set token to ls
-      if (token) {
-        localStorage.setItem("jwtToken", token);
-        // Set token to Auth header
-        setAuthToken(token);
-        // Decode token to get user data
-        const decoded = jwt_decode(token);
-        // Set current user
-        dispatch(setCurrentUser(decoded));
-      }
+        const { password, name } = response;
+        localStorage.setItem("user", JSON.stringify(response));
+        setAuthToken(password);
+        dispatch(setCurrentUser(name))
     })
     .catch(err => {
       dispatch({
@@ -68,7 +61,7 @@ export const setCurrentUser = decoded => {
 // Log user out
 export const logoutUser = () => dispatch => {
   // Remove token from localStorage
-  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("user");
   // Remove auth header for future requests
   setAuthToken(false);
   // Set current user to {} which will set isAuthenticated to false

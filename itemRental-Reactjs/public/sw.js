@@ -1,4 +1,3 @@
-importScripts("/firebase-messaging-sw.js");
 const static_cache = "static-cache-01";
 const dynaimcCache = "dynamic-cache-01";
 const filesToCache = [
@@ -11,10 +10,9 @@ const filesToCache = [
   "078e4099958ec114547bd5e5cd28ee7f.png",
   "/images/favicon.png",
   "/sw.js",
-  "https://olx-backend.herokuapp.com/ads"
 ];
 
-self.addEventListener("install", e => {
+/*self.addEventListener("install", e => {
   console.log("SW Registered!");
   e.waitUntil(
     caches.open(static_cache).then(cache => {
@@ -44,7 +42,7 @@ self.addEventListener("fetch", e => {
       .then(response => {
         const clonedResponse = response.clone();
         if (
-          e.request.url.indexOf("https://olx-backend.herokuapp.com/ads") !== -1
+          e.request.url.indexOf("/rentableitems") !== -1
         ) {
           caches.open(dynaimcCache).then(cache => {
             cache.put(e.request, clonedResponse);
@@ -70,3 +68,4 @@ self.addEventListener("fetch", e => {
       })
   );
 });
+*/

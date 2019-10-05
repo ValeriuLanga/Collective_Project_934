@@ -4,10 +4,12 @@ import Grid from "@material-ui/core/Grid";
 import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
 
-import AddItem from "../Ads/AddItem";
-import Header from "../Header/MainHeader";
+import AdItem from "../Ads/AdItem";
 import { getAds } from "../../actions/ads";
+
+import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
 
 const styles = theme => ({
   root: {
@@ -27,7 +29,8 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "center",
     maxWidth: "1080px",
-    margin: "0 auto"
+    margin: "0 auto",
+    paddingBottom: 50
   },
   paper: {
     padding: "20px 10px 35px 10px",
@@ -43,7 +46,13 @@ const styles = theme => ({
     color: "#ff7700",
     fontWeight: "700",
     padding: "3px"
-  }
+  },
+  "@media only screen and (max-width: 960px)": {
+    container: {
+      zIndex: 0,
+      width: "100%",
+    },
+  },
 });
 
 class MostRecent extends React.Component {
@@ -64,17 +73,19 @@ class MostRecent extends React.Component {
         </div>
       );
     } else {
-      postContent = ads.ads.slice(0, 11).map(item => {
+      postContent = ads.ads.slice(0, 6).map(item => {
         return (
-          <Grid item md={4} key={item._id}>
-            <AddItem
-              file={`https://olx-backend.herokuapp.com/${item.file}`}
+          <Grid item md={4} key={item.id}>
+            <AdItem
+              file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
               title={item.title}
               price={item.price}
-              key={item._id}
-              to={item._id}
-              avatar={user.avatar}
-              favorite={item.favorite}
+              key={item.id}
+              to={item.id}
+              name={item.owner_name}
+              rating={item.rating}
+              category={item.category}
+              description={item.item_description}
             />
           </Grid>
         );
@@ -93,8 +104,12 @@ class MostRecent extends React.Component {
     }
     return (
       <div>
-        <h1 style={{ textAlign: "center" }}>Most Recent Ads</h1>
-        <Grid container spacing={8} className={classes.container}>
+        <Grid container spacing={24} className={classes.container}>
+          <Grid xs={12} item>
+            <Typography style={{ textAlign: "center" }} variant="h4" gutterBottom>
+              Recent Ads
+            </Typography>
+          </Grid>
           {postContent}
         </Grid>
       </div>

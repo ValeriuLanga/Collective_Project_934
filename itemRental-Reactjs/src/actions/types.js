@@ -11,3 +11,11 @@ export const GET_AD = "GET_AD";
 export const POST_AD = "POST_AD";
 export const DELETE_AD = "DELETE_AD";
 export const UPDATE_AD = "UPDATE_AD";
+export const GET_OWN_ADS = "GET_OWN_ADS";
+export const GET_OWN_REVIEWS = "GET_OWN_REVIEWS";
+
+export const GET_REVIEWS_ADD = "GET_REVIEWS_ADD";
+
+export const RENT_AD = "RENT_AD";
+export const POST_REVIEW = "POST_REVIEW";
+

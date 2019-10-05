@@ -14,9 +14,13 @@ import NoSsr from "@material-ui/core/NoSsr";
 import Paper from "@material-ui/core/Paper";
 import Chip from "@material-ui/core/Chip";
 import MenuItem from "@material-ui/core/MenuItem";
+import Grid from "@material-ui/core/Grid";
+import orange from '@material-ui/core/colors/orange';
+
 import { emphasize } from "@material-ui/core/styles/colorManipulator";
 
 import { getAds } from "../../actions/ads";
+import {URL_SERVER} from "../../utils/constants";
 
 const styles = theme => ({
   root: {
@@ -31,7 +35,8 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap",
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+    zIndex: 100
   },
   chip: {
     margin: `${theme.spacing.unit / 2}px ${theme.spacing.unit / 4}px`
@@ -62,28 +67,38 @@ const styles = theme => ({
     height: theme.spacing.unit * 2
   },
   container: {
-    display: "flex",
     flexWrap: "wrap",
     maxWidth: 1080,
     justifyContent: "center",
     margin: "0 auto",
-    backgroundColor: "#B0CFDa"
+    maxHeight: 93,
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     paddingTop: 20,
-    width: "100%"
+    width: "100%",
+    zIndex: 100
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    marginTop: "25px",
+    backgroundColor: orange[500], 
+    '&:hover': {
+      backgroundColor: orange[700],
+    },
   },
   leftIcon: {
-    marginRight: theme.spacing.unit
+    marginLeft: theme.spacing.unit
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
-  }
+  },
+  "@media only screen and (max-width: 960px)": {
+    container: {
+      maxHeight: 300,
+    },
+  },
 });
 
 function NoOptionsMessage(props) {
@@ -209,7 +224,6 @@ const components = {
 class TextFieldMargins extends React.Component {
   componentDidMount() {
     this.props.dispatch(getAds());
-
     setTimeout(() => {
       if (this.props.ads.ads.length >= 1) {
         this.props.ads.ads.map(item => {
@@ -217,7 +231,7 @@ class TextFieldMargins extends React.Component {
             caches.open(`${item._id}`).then(cache => {
               return cache.addAll([
                 `/listings/${item._id}`,
-                `https://olx-backend.herokuapp.com/${item.file}`,
+                `${URL_SERVER}/${item.file}`,
                 `${this.props.user.avatar}`
               ]);
             });
@@ -259,7 +273,6 @@ class TextFieldMargins extends React.Component {
           ads: adList
         });
       }
-      console.log(this.state);
     }, 2000);
   };
 
@@ -286,40 +299,47 @@ class TextFieldMargins extends React.Component {
       <div className={classes.container}>
         <div className="searchContainer">
           <form onSubmit={this._handleSubmit}>
-            <NoSsr>
-              <Select
-                classes={classes}
-                styles={selectStyles}
-                options={citylist}
-                components={components}
-                value={this.state.single}
-                className={classes.textField}
-                onChange={this.handleCityChange("single")}
-                placeholder="Search a city"
-              />
-            </NoSsr>
-            <NoSsr>
-              <Select
-                classes={classes}
-                styles={selectStyles}
-                options={this.state.ads && this.state.ads}
-                components={components}
-                value={this.state.ad}
-                className={classes.textField}
-                onChange={this.handleChange("ad")}
-                placeholder="Search an Ad"
-              />
-            </NoSsr>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              style={{ backgroundColor: "#FF7700" }}
-              type="submit"
-            >
-              Search
-              <Search className={classes.leftIcon} />
-            </Button>
+          <Grid container spacing={24}>
+            <Grid item md xs={12}>
+              <NoSsr>
+                <Select
+                  classes={classes}
+                  styles={selectStyles}
+                  options={citylist}
+                  components={components}
+                  value={this.state.single}
+                  className={classes.textField}
+                  onChange={this.handleCityChange("single")}
+                  placeholder="Search a county"
+                />
+              </NoSsr>
+              </Grid>
+              <Grid item md xs={12}>
+                <NoSsr>
+                  <Select
+                    classes={classes}
+                    styles={selectStyles}
+                    options={this.state.ads && this.state.ads}
+                    components={components}
+                    value={this.state.ad}
+                    className={classes.textField}
+                    onChange={this.handleChange("ad")}
+                    placeholder="Search an Ad"
+                  />
+                </NoSsr>
+              </Grid>
+              <Grid item md={2} xs={12}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.button}
+                  type="submit"
+                >
+                  Search
+                  <Search className={classes.leftIcon} />
+                </Button>
+              </Grid>
+            </Grid>
           </form>
         </div>
       </div>

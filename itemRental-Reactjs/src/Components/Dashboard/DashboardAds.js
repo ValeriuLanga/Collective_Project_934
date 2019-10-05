@@ -1,12 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-import AddItem from "../Ads/AddItem";
-import { getAds } from "../../actions/ads";
+import { URL_SERVER, RENTABLE_ITEMS, RENTABLE_DOWNLOAD_IMAGE } from "../../utils/constants";
+
+import AdItem from "../Ads/AdItem";
+import { getOwnAds } from "../../actions/ads";
 
 const styles = theme => ({
   root: {
@@ -47,14 +51,13 @@ const styles = theme => ({
 
 class AdsCategory extends React.Component {
   componentDidMount() {
-    this.props.dispatch(getAds());
+    const { user } = this.props;
+    this.props.dispatch(getOwnAds(user));
   }
 
   render() {
     const { ads, classes, user } = this.props;
-    let filteredAds = ads.ads.filter(item => {
-      return user.email === item.email;
-    });
+    let filteredAds = ads.ads;
     let postContent;
     if (ads.isLoading) {
       postContent = (
@@ -65,15 +68,17 @@ class AdsCategory extends React.Component {
     } else {
       postContent = filteredAds.map(item => {
         return (
-          <Grid item md={4} key={item._id}>
-            <AddItem
-              file={`https://olx-backend.herokuapp.com/${item.file}`}
+          <Grid item md={4} key={item.id}>
+            <AdItem
+              file={`${URL_SERVER}/${RENTABLE_ITEMS}/${RENTABLE_DOWNLOAD_IMAGE}/${item.id}`}
               title={item.title}
               price={item.price}
-              key={item._id}
-              to={item._id}
-              avatar={user.avatar}
-              favorite={item.favorite}
+              key={item.id}
+              to={item.id}
+              name={item.owner_name}
+              rating={item.rating}
+              category={item.category}
+              description={item.item_description}
             />
           </Grid>
         );
@@ -82,20 +87,36 @@ class AdsCategory extends React.Component {
     if (filteredAds.length === 0) {
       postContent = (
         <div className={classes.root}>
-          <h2>
-            <em>
-              "No Ads related to this category. Please check something else"{" "}
-            </em>
-            <br />
-            <Link to="/">Go to Home Page</Link>
-            <br />
-            <Link to="/submitad">Create New Ad</Link>
-          </h2>
+          <Grid container spacing={8} className={classes.container}>
+          <Grid item xs={12}>
+            <h2>
+              <em>
+                <Typography color="primary">
+                You have no ads published!
+                </Typography>
+              </em>
+            </h2>
+          </Grid>
+          <Grid item xs={12}>
+            <Button 
+              variant="contained" 
+              size="large" 
+              color="primary" 
+              className={classes.button} 
+              component={Link}
+              to="/">
+                BACK TO HOME
+            </Button>
+          </Grid>
+        </Grid>
         </div>
       );
     }
     return (
       <div>
+        <Typography variant="h4" gutterBottom align="center" style={{width: "100%"}}>
+          Your Posts
+        </Typography>
         <div>
           <Grid container spacing={8} className={classes.container}>
             {postContent}

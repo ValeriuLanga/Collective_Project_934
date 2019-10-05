@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>OLX</title>
+  <title>RentX</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="icon" type="image/png" href="/images/icons/icon-72x72.png" />
@@ -14,7 +14,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="OLX">
-  <meta name="msapplication-TileImage" content="/src/images/icons/icon-144x144.png">
+  <meta name="msapplication-TileImage" content="/images/icons/icon-144x144.png">
   <meta name="msapplication-TileColor" content="#fff">
   <meta name="theme-color" content="#3f51b5">
   <style>
@@ -24,9 +24,9 @@
 
     .App-logo {
       animation: App-logo-spin infinite 20s linear;
-      height: 80px;
+      height: 48px;
     }
-
+    
     .App-header {
       background-color: #222;
       height: 150px;
@@ -56,43 +56,6 @@
 <body>
   <div id="app"></div>
   <script src="/bundle.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyB5NABy3RXBOf14ZJpngxx7CfhZF3EEvKE",
-      authDomain: "olxapp-1e846.firebaseapp.com",
-      databaseURL: "https://olxapp-1e846.firebaseio.com",
-      projectId: "olxapp-1e846",
-      storageBucket: "",
-      messagingSenderId: "552385731622"
-    };
-    firebase.initializeApp(config);
-
-    let messaging = firebase.messaging();
-
-    // Add the public key generated from the console here.
-    messaging.usePublicVapidKey("BEDz0g6bQEEvbHqcP9sWZlOnc-2CXg-EtIUOFo8_GXLboGmPiG0xkQcMC1A-QIZHAWUCzl3PcgTKOX2S4LkyWSE");
-
-    messaging
-      .requestPermission()
-      .then(function () {
-        console.log("Notification permission granted.");
-        // Retrieve an Instance ID token for use with FCM.
-        return messaging.getToken();
-      }).then(function (token) {
-        // Displaying user token
-        console.log('token >>>> ', token);
-      })
-      .catch(function (err) {
-        console.log("Unable to get permission to notify.", err);
-      });
-
-
-    messaging.onMessage(function (payload) {
-      console.log('onMessage', payload);
-    });
-  </script>
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js')
@@ -119,8 +82,6 @@
       e.preventDefault();
       // Stash the event so it can be triggered later.
       deferredPrompt = e;
-
-      showAddToHomeScreen();
 
     });
     function addToHomeScreen() {
@@ -150,5 +111,4 @@
     }
   </script>
 </body>
-
 </html>
